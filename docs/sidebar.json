@@ -1,6 +1,7 @@
 {
   "bfh_mt_hs2020_sec_data": {
     "Overview": "/",
-    "module name here": "/core"
+    "Core": "/core",
+    "Title": "/PrepareWholeSet"
   }
 }

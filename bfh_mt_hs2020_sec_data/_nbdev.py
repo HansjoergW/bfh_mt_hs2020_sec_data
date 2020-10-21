@@ -2,9 +2,11 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"get_spark_session": "00_core.ipynb",
+         "get_directory_size": "00_core.ipynb",
+         "get_size_format": "00_core.ipynb"}
 
-modules = []
+modules = ["core.py"]
 
 doc_url = "https://HansjoergW.github.io/bfh_mt_hs2020_sec_data/"
 

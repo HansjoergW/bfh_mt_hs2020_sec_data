@@ -10,8 +10,11 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
+      title: Core
       url: /core
+    - output: web,pdf
+      title: Title
+      url: /PrepareWholeSet
     output: web
     title: bfh_mt_hs2020_sec_data
   output: web
