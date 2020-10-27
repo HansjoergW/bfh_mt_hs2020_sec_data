@@ -13,8 +13,11 @@ entries:
       title: Core
       url: /core
     - output: web,pdf
-      title: Title
+      title: Prepare_Whole_Dataset
       url: /PrepareWholeSet
+    - output: web,pdf
+      title: filter_and_partition
+      url: /FilterAndPartition
     output: web
     title: bfh_mt_hs2020_sec_data
   output: web

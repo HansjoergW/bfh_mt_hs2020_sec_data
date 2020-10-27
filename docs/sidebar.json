@@ -2,6 +2,7 @@
   "bfh_mt_hs2020_sec_data": {
     "Overview": "/",
     "Core": "/core",
-    "Title": "/PrepareWholeSet"
+    "Prepare_Whole_Dataset": "/PrepareWholeSet",
+    "filter_and_partition": "/FilterAndPartition"
   }
 }

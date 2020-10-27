@@ -1,6 +1,6 @@
 ---
 
-title: Title
+title: Prepare_Whole_Dataset
 
 keywords: fastai
 sidebar: home_sidebar
@@ -41,14 +41,18 @@ sidebar: home_sidebar
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># imports</span>
-<span class="kn">from</span> <span class="nn">bfh_mt_hs2020_sec_data.core</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># initialze spark</span>
+<span class="kn">from</span> <span class="nn">bfh_mt_hs2020_sec_data.core</span> <span class="kn">import</span> <span class="n">get_spark_session</span> <span class="c1"># initialze spark</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Set</span>
 <span class="kn">import</span> <span class="nn">urllib.request</span>  <span class="c1"># used to download resources from the web </span>
 <span class="kn">import</span> <span class="nn">shutil</span>          <span class="c1"># provides high level file operations</span>
 <span class="kn">import</span> <span class="nn">time</span>            <span class="c1"># used to measure execution time</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
 
-<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">StringType</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">udf</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">StructType</span><span class="p">,</span><span class="n">StructField</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">,</span> <span class="n">DateType</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">,</span> <span class="n">BooleanType</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">udf</span><span class="p">,</span> <span class="n">col</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.dataframe</span> <span class="kn">import</span> <span class="n">DataFrame</span>
 </pre></div>
 
     </div>
@@ -66,7 +70,10 @@ sidebar: home_sidebar
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Basic Definitions</span>
-<span class="n">download_output_path</span> <span class="o">=</span> <span class="s2">&quot;d:/data/sec_zips&quot;</span>
+<span class="n">all_zip_folder</span> <span class="o">=</span> <span class="s2">&quot;d:/data/sec_zips/&quot;</span>
+<span class="n">target_csv_folder</span> <span class="o">=</span> <span class="s2">&quot;d:/data/zip_joined/&quot;</span>
+<span class="n">extract_temp_folder</span> <span class="o">=</span> <span class="s2">&quot;d:/data/tmp/&quot;</span>
+<span class="n">all_parquet_folder</span> <span class="o">=</span> <span class="s2">&quot;d:/data/parquet/&quot;</span>
 </pre></div>
 
     </div>
@@ -83,9 +90,9 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-
-<span class="n">Path</span><span class="p">(</span><span class="n">download_output_path</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># create directory if necessary</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Path</span><span class="p">(</span><span class="n">all_zip_folder</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Path</span><span class="p">(</span><span class="n">target_csv_folder</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Path</span><span class="p">(</span><span class="n">extract_temp_folder</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -116,17 +123,31 @@ sidebar: home_sidebar
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-7-6174a0f27226&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">      1</span> <span class="ansi-red-intense-fg ansi-bold"># init Spark</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>spark <span class="ansi-yellow-intense-fg ansi-bold">=</span> get_spark_session<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-red-intense-fg ansi-bold"># Session anlegen</span>
-<span class="ansi-green-fg">      3</span> spark <span class="ansi-red-intense-fg ansi-bold"># display the moste important information of the session</span>
 
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;get_spark_session&#39; is not defined</pre>
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+            <div>
+                <p><b>SparkSession - in-memory</b></p>
+                
+        <div>
+            <p><b>SparkContext</b></p>
+
+            <p><a href="http://192.168.0.163:4041">Spark UI</a></p>
+
+            <dl>
+              <dt>Version</dt>
+                <dd><code>v2.4.5</code></dd>
+              <dt>Master</dt>
+                <dd><code>local[*]</code></dd>
+              <dt>AppName</dt>
+                <dd><code>default</code></dd>
+            </dl>
+        </div>
+        
+            </div>
+        
 </div>
+
 </div>
 
 </div>
@@ -175,46 +196,21 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create list with all download links</span>
-<span class="n">download_urls</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">quarter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
-        <span class="n">download_urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sec_base_path</span> <span class="o">+</span> <span class="n">format_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_download_urls_df</span><span class="p">():</span>
     
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://www.sec.gov/files/node/add/data_distribution/2020q1.zip&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
+    <span class="c1"># create list with all download links</span>
+    <span class="n">download_urls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">quarter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">download_urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sec_base_path</span> <span class="o">+</span> <span class="n">format_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">))</span>
+            
+    <span class="n">download_urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;https://www.sec.gov/files/node/add/data_distribution/2020q1.zip&quot;</span><span class="p">)</span>
     
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_urls_df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">download_urls</span><span class="p">,</span> <span class="n">StringType</span><span class="p">())</span>
-<span class="n">download_urls_df</span> <span class="o">=</span> <span class="n">download_urls_df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
+    <span class="n">download_urls_df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">download_urls</span><span class="p">,</span> <span class="n">StringType</span><span class="p">())</span>
+    
+    <span class="n">download_urls_df</span> <span class="o">=</span> <span class="n">download_urls_df</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span><span class="s2">&quot;url&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">download_urls_df</span>
 </pre></div>
 
     </div>
@@ -243,7 +239,7 @@ sidebar: home_sidebar
   
     <span class="c1"># From URL construct the destination path and filename.</span>
     <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">download_output_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span> 
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">all_zip_folder</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span> 
 
     <span class="c1"># Check if the file has already been downloaded.</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
@@ -290,10 +286,40 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">result_df</span> <span class="o">=</span>  <span class="n">download_urls_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="n">downloader_udf</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-<span class="n">execution_time</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;execution time:      &quot;</span><span class="p">,</span> <span class="n">execution_time</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">download_zip_files</span><span class="p">():</span>
+    <span class="n">download_urls_df</span> <span class="o">=</span> <span class="n">create_download_urls_df</span><span class="p">()</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">result_df</span> <span class="o">=</span>  <span class="n">download_urls_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="n">downloader_udf</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+    <span class="n">execution_time</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;execution time:      &quot;</span><span class="p">,</span> <span class="n">execution_time</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result_df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="02_join-sec-data">02_join sec data<a class="anchor-link" href="#02_join-sec-data"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define constants for the names of the filese inside the zip file</span>
+<span class="n">SUB_TXT</span> <span class="o">=</span> <span class="s2">&quot;sub.txt&quot;</span>
+<span class="n">PRE_TXT</span> <span class="o">=</span> <span class="s2">&quot;pre.txt&quot;</span>
+<span class="n">NUM_TXT</span> <span class="o">=</span> <span class="s2">&quot;num.txt&quot;</span>
+<span class="n">TAG_TXT</span> <span class="o">=</span> <span class="s2">&quot;tag.txt&quot;</span>
 </pre></div>
 
     </div>
@@ -310,7 +336,418 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result_df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a list with paths to all the zip files</span>
+<span class="n">all_zip_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">all_zip_folder</span><span class="p">)</span>
+<span class="n">zip_files</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">all_zip_path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.zip&quot;</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_csv_in_zip_into_df_extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">       Extracts the data from zipfile and stores it on disk. </span>
+<span class="sd">       Uses spark.csv.read to read the data into the df</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">container_zip</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">container_zip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">data_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="c1"># create a unique tempfile to extract the data</span>
+            <span class="n">tempfile</span> <span class="o">=</span> <span class="n">extract_temp_folder</span> <span class="o">+</span><span class="n">Path</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.zip&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">data_file</span>
+            
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tempfile</span><span class="p">,</span> <span class="s2">&quot;wb+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_temp</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">f_temp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">f_temp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">f_temp_dbfs</span>  <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/dbfs&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+         
+                <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">f_temp_dbfs</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">join_files</span><span class="p">(</span><span class="n">zip_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Joins the content of the 3 csv files that are contained in the provided zip_file and </span>
+<span class="sd">        create on csv file containing all relevant columns inside target_folder.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">target_path</span> <span class="o">=</span> <span class="n">target_folder</span> <span class="o">+</span> <span class="n">Path</span><span class="p">(</span><span class="n">zip_file</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.zip&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">target_path</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">zip_file</span> <span class="o">+</span> <span class="s2">&quot; : &quot;</span> <span class="o">+</span> <span class="s2">&quot; already Joined&quot;</span>
+    
+    <span class="n">df_sub</span> <span class="o">=</span> <span class="n">read_csv_in_zip_into_df_extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="n">SUB_TXT</span><span class="p">)</span>
+    <span class="n">df_pre</span> <span class="o">=</span> <span class="n">read_csv_in_zip_into_df_extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="n">PRE_TXT</span><span class="p">)</span>
+    <span class="n">df_num</span> <span class="o">=</span> <span class="n">read_csv_in_zip_into_df_extract</span><span class="p">(</span><span class="n">zip_file</span><span class="p">,</span> <span class="n">NUM_TXT</span><span class="p">)</span>
+    
+    <span class="n">df_joined</span> <span class="o">=</span> <span class="n">df_num</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_sub</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;adsh&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_pre</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span><span class="s2">&quot;version&quot;</span><span class="p">],</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+    
+    <span class="n">target_path</span>  <span class="o">=</span> <span class="n">target_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/dbfs&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">df_joined</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">target_path</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;gzip&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">target_path</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">join_zip_content</span><span class="p">():</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">zip_files</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="n">join_files</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">target_csv_folder</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;failed: &quot;</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;duration: &quot;</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="03_Merge-to-single-Parquet">03_Merge to single Parquet<a class="anchor-link" href="#03_Merge-to-single-Parquet"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">all_csv_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">target_csv_folder</span><span class="p">)</span>
+<span class="n">all_csv_path_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_csv_path</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span>  <span class="c1"># num.txt  \</span>
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;adsh&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> 	 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;coreg&quot;</span><span class="p">,</span> 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;ddate&quot;</span><span class="p">,</span> 	 <span class="n">DateType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="c1"># date \ </span>
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;qtrs&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;uom&quot;</span><span class="p">,</span> 	 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> 	 <span class="n">DoubleType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;footnote&quot;</span><span class="p">,</span>  <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                      <span class="c1"># sub.txt \ </span>
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span> 	 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;sic&quot;</span><span class="p">,</span> 	 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;countryba&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;stprba&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;cityba&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;zipba&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;bas1&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;bas2&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;baph&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;countryma&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;stprma&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;cityma&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;zipma&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;mas1&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;mas2&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;countryinc&quot;</span><span class="p">,</span><span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;stprinc&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;ein&quot;</span><span class="p">,</span> 	 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;former&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;changed&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;afs&quot;</span><span class="p">,</span> 	 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;wksi&quot;</span><span class="p">,</span> 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;fye&quot;</span><span class="p">,</span> 	     <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> 	 <span class="n">DateType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>  <span class="c1"># date \</span>
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;fy&quot;</span><span class="p">,</span> 	 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span> 	 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;filed&quot;</span><span class="p">,</span> 	 <span class="n">DateType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="c1"># date \</span>
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;accepted&quot;</span><span class="p">,</span>  <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="c1"># datetime \</span>
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;prevrpt&quot;</span><span class="p">,</span> 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;detail&quot;</span><span class="p">,</span> 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;instance&quot;</span><span class="p">,</span>  <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;nciks&quot;</span><span class="p">,</span> 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;aciks&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                      <span class="c1"># pre.txt \</span>
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;report&quot;</span><span class="p">,</span> 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;line&quot;</span><span class="p">,</span> 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;stmt&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;inpth&quot;</span><span class="p">,</span> 	 <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;rfile&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;plabel&quot;</span><span class="p">,</span> 	 <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> \
+                <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;negating&quot;</span><span class="p">,</span>  <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span> \
+<span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">merge_to_single_parquet</span><span class="p">():</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">df_all</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">target_csv_folder</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dateFormat</span><span class="o">=</span><span class="s2">&quot;yyyyMMdd&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+    
+    <span class="c1"># prepare cik_ticker data</span>
+    <span class="n">df_cik_ticker</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;./data/cik_ticker.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)[[</span><span class="s1">&#39;CIK&#39;</span><span class="p">,</span><span class="s1">&#39;Ticker&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span><span class="s1">&#39;Exchange&#39;</span><span class="p">]]</span>
+    <span class="n">df_cik_ticker</span> <span class="o">=</span> <span class="n">df_cik_ticker</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s2">&quot;name_cik_tic&quot;</span><span class="p">)</span> \
+                                <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">&#39;Ticker&#39;</span><span class="p">,</span> <span class="s2">&quot;ticker&quot;</span><span class="p">)</span> \
+                                <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">&#39;Exchange&#39;</span><span class="p">,</span> <span class="s2">&quot;exchange&quot;</span><span class="p">)</span> \
+                                <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;CIK&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">()))</span>
+    
+    <span class="n">df_all_join</span> <span class="o">=</span> <span class="n">df_all</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_cik_ticker</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;cik&quot;</span><span class="p">],</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+    
+    <span class="n">df_all_join</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">all_parquet_folder</span><span class="p">)</span>
+    
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;duration: &quot;</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="99_Execution">99_Execution<a class="anchor-link" href="#99_Execution"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_result</span> <span class="o">=</span> <span class="n">download_zip_files</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">download_result</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>execution time:       11.214993715286255
+[Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2009q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2009q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2009q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2009q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2010q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2011q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2012q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2013q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2015q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2016q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2017q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2018q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2019q4.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q1.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q2.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q3.zip&#39;, result=&#39;already downloaded&#39;), Row(url=&#39;https://www.sec.gov/files/dera/data/financial-statement-data-sets/2020q4.zip&#39;, result=&#39;failed: HTTP Error 404: Not Found&#39;), Row(url=&#39;https://www.sec.gov/files/node/add/data_distribution/2020q1.zip&#39;, result=&#39;already downloaded&#39;)]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">join_zip_content</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>d:\data\sec_zips\2009q1.zip :  already Joined
+d:\data\sec_zips\2009q2.zip :  already Joined
+d:\data\sec_zips\2009q3.zip :  already Joined
+d:\data\sec_zips\2009q4.zip :  already Joined
+d:\data\sec_zips\2010q1.zip :  already Joined
+d:\data\sec_zips\2010q2.zip :  already Joined
+d:\data\sec_zips\2010q3.zip :  already Joined
+d:\data\sec_zips\2010q4.zip :  already Joined
+d:\data\sec_zips\2011q1.zip :  already Joined
+d:\data\sec_zips\2011q2.zip :  already Joined
+d:\data\sec_zips\2011q3.zip :  already Joined
+d:\data\sec_zips\2011q4.zip :  already Joined
+d:\data\sec_zips\2012q1.zip :  already Joined
+d:\data\sec_zips\2012q2.zip :  already Joined
+d:\data\sec_zips\2012q3.zip :  already Joined
+d:\data\sec_zips\2012q4.zip :  already Joined
+d:\data\sec_zips\2013q1.zip :  already Joined
+d:\data\sec_zips\2013q2.zip :  already Joined
+d:\data\sec_zips\2013q3.zip :  already Joined
+d:\data\sec_zips\2013q4.zip :  already Joined
+d:\data\sec_zips\2014q1.zip :  already Joined
+d:\data\sec_zips\2014q2.zip :  already Joined
+d:\data\sec_zips\2014q3.zip :  already Joined
+d:\data\sec_zips\2014q4.zip :  already Joined
+d:\data\sec_zips\2015q1.zip :  already Joined
+d:\data\sec_zips\2015q2.zip :  already Joined
+d:\data\sec_zips\2015q3.zip :  already Joined
+d:\data\sec_zips\2015q4.zip :  already Joined
+d:\data\sec_zips\2016q1.zip :  already Joined
+d:\data\sec_zips\2016q2.zip :  already Joined
+d:\data\sec_zips\2016q3.zip :  already Joined
+d:\data\sec_zips\2016q4.zip :  already Joined
+d:\data\sec_zips\2017q1.zip :  already Joined
+d:\data\sec_zips\2017q2.zip :  already Joined
+d:\data\sec_zips\2017q3.zip :  already Joined
+d:\data\sec_zips\2017q4.zip :  already Joined
+d:\data\sec_zips\2018q1.zip :  already Joined
+d:\data\sec_zips\2018q2.zip :  already Joined
+d:\data\sec_zips\2018q3.zip :  already Joined
+d:\data\sec_zips\2018q4.zip :  already Joined
+d:\data\sec_zips\2019q1.zip :  already Joined
+d:\data\sec_zips\2019q2.zip :  already Joined
+d:\data\sec_zips\2019q3.zip :  already Joined
+d:\data\sec_zips\2019q4.zip :  already Joined
+d:\data\sec_zips\2020q1.zip :  already Joined
+d:\data\sec_zips\2020q2.zip :  already Joined
+d:\data\sec_zips\2020q3.zip :  already Joined
+duration:  0.01799941062927246
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Helper Code to clear the extract_temp_folder</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">extract_temp_folder</span><span class="p">)</span>
+<span class="n">Path</span><span class="p">(</span><span class="n">extract_temp_folder</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># create directory after it was deleted</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">all_parquet_folder</span><span class="p">,</span>  <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># make sure the target folder is empty</span>
+<span class="n">merge_to_single_parquet</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>duration:  981.0835425853729
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </pre></div>
 
     </div>
