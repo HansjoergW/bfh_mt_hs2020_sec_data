@@ -3,6 +3,7 @@
     "Overview": "/",
     "Core": "/core",
     "Prepare_Whole_Dataset": "/PrepareWholeSet",
-    "filter_and_partition": "/FilterAndPartition"
+    "filter_and_partition": "/FilterAndPartition",
+    "pivoting": "/Pivoting"
   }
 }

@@ -96,6 +96,41 @@ sidebar: home_sidebar
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+            <div>
+                <p><b>SparkSession - in-memory</b></p>
+                
+        <div>
+            <p><b>SparkContext</b></p>
+
+            <p><a href="http://192.168.0.163:4041">Spark UI</a></p>
+
+            <dl>
+              <dt>Version</dt>
+                <dd><code>v2.4.5</code></dd>
+              <dt>Master</dt>
+                <dd><code>local[*]</code></dd>
+              <dt>AppName</dt>
+                <dd><code>default</code></dd>
+            </dl>
+        </div>
+        
+            </div>
+        
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -143,12 +178,19 @@ sidebar: home_sidebar
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">filter_whole_ds</span><span class="p">(</span><span class="n">df_all</span><span class="p">):</span>    
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
+    <span class="c1"># only primary financial statement information: stmt is not null</span>
+    <span class="c1"># no custom tags: version NOT LIKE &#39;00%&#39;</span>
+    <span class="c1"># only yearly and quarterly reports: form in (&#39;10-K&#39;, &#39;10-Q&#39;)</span>
     <span class="n">filter_string</span> <span class="o">=</span> <span class="s2">&quot;stmt is not null and version NOT LIKE &#39;00%&#39; and form in (&#39;10-K&#39;, &#39;10-Q&#39;)&quot;</span>
     <span class="n">df_all_filtered</span> <span class="o">=</span> <span class="n">df_all</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">filter_string</span><span class="p">)</span>
 
+    <span class="c1"># only information of companies, that are traded at NASDAQ, NYSE</span>
     <span class="n">df_all_cik_exchange</span> <span class="o">=</span> <span class="n">df_all_filtered</span><span class="p">[[</span><span class="s1">&#39;cik&#39;</span><span class="p">,</span><span class="s1">&#39;exchange&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span> \
         <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;exchange in (&#39;NASDAQ&#39;,&#39;NYSE&#39;,&#39;NYSE ARCA&#39;,&#39;NYSE MKT&#39;) &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span> <span class="s2">&quot;1 as cik_select&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
     <span class="n">df_all_filter_complete</span> <span class="o">=</span> <span class="n">df_all_filtered</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_all_cik_exchange</span><span class="p">,</span> <span class="s1">&#39;cik&#39;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;cik_select == 1&quot;</span><span class="p">)</span>
+
+    <span class="c1"># only data for the current period</span>
+    <span class="n">df_all_filter_complete</span> <span class="o">=</span> <span class="n">df_all_filter_complete</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;period == ddate&quot;</span><span class="p">)</span>
 
     <span class="n">df_all_partioned</span> <span class="o">=</span> <span class="n">df_all_filter_complete</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;cik&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;stmt&quot;</span><span class="p">))</span>
 
@@ -199,6 +241,21 @@ sidebar: home_sidebar
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>duration:  3.696655035018921
+duration:  850.8133742809296
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
