@@ -29,31 +29,8 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Um was gehts</p>
-<ul>
-<li>Wie sollen die Daten aufbereitet werden, so dass wir möglichst gut ergänzen können?</li>
-<li>möghlichst wenig daten?</li>
-<li>möglichst alle notwendigen Informationen</li>
-<li>möglichst ideal gruppiert</li>
-</ul>
-<p>Idee:
-mehrere pivotierte Tabellen (immer pro Statement typ)</p>
-<ul>
-<li><ol>
-<li>mit Werten</li>
-</ol>
-</li>
-<li><ol>
-<li>mit Statement</li>
-</ol>
-</li>
-<li><ol>
-<li>mit Zeile im Statement</li>
-</ol>
-</li>
-</ul>
-<p>Alle Sätze separat ablegen.. 
-vorerst alle Attribute mitnehmen, die existieren</p>
+<p>In order to create uniform datasets for the different primary financial statements (Income Statement, CaschFlow, BalanceSheet, ..) it is easier if the data is converted from its vertical for to a horizontal form. This means that we pivot the values based on the tag.</p>
+<p>Therfore, for every primary financial statement a separate dataset is created.</p>
 <p>Statement types</p>
 <ul>
 <li>IS: IncomeStatement</li>
@@ -63,16 +40,6 @@ vorerst alle Attribute mitnehmen, die existieren</p>
 <li>EQ: Equity</li>
 <li>CP: CoverPage</li>
 <li>UN: Unclassifiable Statement</li>
-</ul>
-<p>Erwartete  Grössen:</p>
-<ul>
-<li>IS   4559669</li>
-<li>CF   4435322</li>
-<li>BS   4821120</li>
-<li>CI    850503</li>
-<li>EQ    899115</li>
-<li>CP     13408</li>
-<li>UN     71711</li>
 </ul>
 
 </div>
@@ -120,9 +87,9 @@ vorerst alle Attribute mitnehmen, die existieren</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">all_filtered_folder</span>        <span class="o">=</span> <span class="s2">&quot;D:/data/parq_filtered&quot;</span>
-<span class="n">all_pivot_selected_folder</span>  <span class="o">=</span> <span class="s2">&quot;D:/data/parq_pivot_select&quot;</span>
-<span class="n">all_pivoted_folder</span>         <span class="o">=</span> <span class="s2">&quot;D:/data/parq_pivot_split&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">all_filtered_folder</span>        <span class="o">=</span> <span class="s2">&quot;D:/data/parq_filtered&quot;</span>      <span class="c1"># source folder with the prepared parquet file</span>
+<span class="n">all_pivot_selected_folder</span>  <span class="o">=</span> <span class="s2">&quot;D:/data/parq_pivot_select&quot;</span>  <span class="c1"># target folder which will contain only the needed subset of columns</span>
+<span class="n">all_pivoted_folder</span>         <span class="o">=</span> <span class="s2">&quot;D:/data/parq_pivot_split&quot;</span>   <span class="c1"># target folder for the different pivoted and separated datasets</span>
 </pre></div>
 
     </div>
@@ -162,7 +129,7 @@ vorerst alle Attribute mitnehmen, die existieren</p>
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://192.168.0.163:4040">Spark UI</a></p>
+            <p><a href="http://192.168.0.163:4041">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -195,6 +162,7 @@ vorerst alle Attribute mitnehmen, die existieren</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>only execute if necessary</strong></p>
+<p>Loads the and filtered data with all columns</p>
 
 </div>
 </div>
@@ -256,46 +224,6 @@ duration:  96.77243518829346
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p_df_prim_fin_rep_count</span> <span class="o">=</span> <span class="n">df_all</span><span class="o">.</span><span class="n">cube</span><span class="p">(</span><span class="s1">&#39;stmt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">p_df_prim_fin_rep_count</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>   stmt     count
-0    IS   4559669
-1  None  15650848
-2    UN     71711
-3    CF   4435322
-4    CP     13408
-5    BS   4821120
-6    CI    850503
-7    EQ    899115
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="02_Select">02_Select<a class="anchor-link" href="#02_Select"> </a></h2>
@@ -304,14 +232,8 @@ duration:  96.77243518829346
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>only keep relevant columns</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>only execute if necessary</strong></p>
+<p>Creates a new dataset containing only  the columns that are needed during the next steps.</p>
 
 </div>
 </div>
@@ -342,24 +264,6 @@ duration:  96.77243518829346
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">all_pivot_selected_folder</span><span class="p">,</span>  <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">df_all_selected</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">all_pivot_selected_folder</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># produziert 1.5 GB CSV Datei unkomprimiert</span>
-<span class="c1"># df_all_selected.toPandas().to_csv(&quot;./data/pivot_select.csv&quot;,index=False,header=True)</span>
 </pre></div>
 
     </div>
@@ -421,7 +325,7 @@ duration:  96.77243518829346
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Entries:  15_650_848
-duration:  12.336964130401611
+duration:  16.718958616256714
 </pre>
 </div>
 </div>
@@ -439,20 +343,25 @@ duration:  12.336964130401611
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pivot_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;report&#39;</span><span class="p">,</span> <span class="s1">&#39;line&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pivot_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="c1"># column that contains the value which has to be pivoted</span>
 
 <span class="k">def</span> <span class="nf">pivot_statement</span><span class="p">(</span><span class="n">all_data_df</span><span class="p">,</span> <span class="n">statement</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
-    <span class="n">all_stmt_data</span> <span class="o">=</span> <span class="n">all_data_df</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;stmt == &#39;&quot;</span> <span class="o">+</span> <span class="n">statement</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+    <span class="n">all_stmt_data</span> <span class="o">=</span> <span class="n">all_data_df</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;stmt == &#39;&quot;</span> <span class="o">+</span> <span class="n">statement</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
     
-    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">all_pivoted_folder</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">stmt</span><span class="p">,</span>  <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">all_pivoted_folder</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">statement</span><span class="p">,</span>  <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
-    <span class="n">grouped_df</span> <span class="o">=</span> <span class="n">all_stmt_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span><span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+    <span class="n">grouped_df</span> <span class="o">=</span> <span class="n">all_stmt_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span><span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">])</span>
     
     <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">pivot_attrs</span><span class="p">:</span>
-        <span class="n">pivoted_df</span> <span class="o">=</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
-        <span class="n">pivoted_df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">all_pivoted_folder</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">stmt</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="p">)</span>
         
-    <span class="n">grouped_df</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+        <span class="c1"># using max() is not the best approach. generally, a tag is only contained once in a report, but there are excptions</span>
+        <span class="c1"># like the CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents in the CF statement.</span>
+        <span class="n">pivoted_df</span> <span class="o">=</span> <span class="n">grouped_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+        
+        <span class="c1"># repartition(1), so that only one file is created</span>
+        <span class="n">pivoted_df</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">all_pivoted_folder</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">statement</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="p">)</span> 
+        
+    <span class="n">all_stmt_data</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -472,7 +381,7 @@ duration:  12.336964130401611
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pivot_statements</span><span class="p">(</span><span class="n">all_data_df</span><span class="p">,</span> <span class="n">statements</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">stmt</span> <span class="ow">in</span> <span class="n">statements</span><span class="p">:</span>
         <span class="nb">print</span> <span class="p">(</span><span class="n">stmt</span><span class="p">)</span>
-        <span class="n">pivot_statement</span><span class="p">(</span><span class="n">all_data_df</span><span class="p">,</span> <span class="n">stmt</span><span class="p">)</span>
+        <span class="n">pivot_statement</span><span class="p">(</span><span class="n">all_data_df</span><span class="p">,</span> <span class="n">statement</span><span class="o">=</span><span class="n">stmt</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -496,25 +405,11 @@ duration:  12.336964130401611
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#statements = [&#39;IS&#39;,&#39;CF&#39;,&#39;CP&#39;,&#39;BS&#39;,&#39;CI&#39;,&#39;EQ&#39;,&#39;UN&#39;]</span>
-<span class="n">statements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
+<span class="c1">#statements = [&#39;UN&#39;]</span>
 <span class="n">pivot_statements</span><span class="p">(</span><span class="n">df_all_selected</span><span class="p">,</span> <span class="n">statements</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
