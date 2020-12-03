@@ -4,7 +4,16 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"get_spark_session": "00_core.ipynb",
          "get_directory_size": "00_core.ipynb",
-         "get_size_format": "00_core.ipynb"}
+         "get_size_format": "00_core.ipynb",
+         "load_data": "00_core.ipynb",
+         "spark_shape": "00_core.ipynb",
+         "complete_addition": "00_core.ipynb",
+         "copy_if_not_empty": "00_core.ipynb",
+         "sum_into_empty_target": "00_core.ipynb",
+         "sum_cols_into_new_target": "00_core.ipynb",
+         "copy_if_not_empty_for_ticker": "00_core.ipynb",
+         "set_to_zero_if_null": "00_core.ipynb",
+         "print_null_count": "00_core.ipynb"}
 
 modules = ["core.py"]
 

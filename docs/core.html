@@ -51,7 +51,7 @@ description: "API details."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_spark_session" class="doc_header"><code>get_spark_session</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L8" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_spark_session</code>(<strong><code>appname</code></strong>=<em><code>'default'</code></em>)</p>
+<h4 id="get_spark_session" class="doc_header"><code>get_spark_session</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L10" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_spark_session</code>(<strong><code>appname</code></strong>=<em><code>'default'</code></em>)</p>
 </blockquote>
 <p>Initialises a spark session.
 Parameters:
@@ -91,7 +91,7 @@ appname - default is "default"</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_directory_size" class="doc_header"><code>get_directory_size</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_directory_size</code>(<strong><code>directory</code></strong>)</p>
+<h4 id="get_directory_size" class="doc_header"><code>get_directory_size</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_directory_size</code>(<strong><code>directory</code></strong>)</p>
 </blockquote>
 <p>Returns the <code>directory</code> size in bytes.
 code copied from <a href="https://www.thepythoncode.com/article/get-directory-size-in-bytes-using-python">https://www.thepythoncode.com/article/get-directory-size-in-bytes-using-python</a></p>
@@ -124,13 +124,337 @@ code copied from <a href="https://www.thepythoncode.com/article/get-directory-si
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_size_format" class="doc_header"><code>get_size_format</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_size_format</code>(<strong><code>b</code></strong>, <strong><code>factor</code></strong>=<em><code>1024</code></em>, <strong><code>suffix</code></strong>=<em><code>'B'</code></em>)</p>
+<h4 id="get_size_format" class="doc_header"><code>get_size_format</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_size_format</code>(<strong><code>b</code></strong>, <strong><code>factor</code></strong>=<em><code>1024</code></em>, <strong><code>suffix</code></strong>=<em><code>'B'</code></em>)</p>
 </blockquote>
 <p>Scale bytes to its proper byte format
 e.g:
     1253656 =&gt; '1.20MB'
     1253656678 =&gt; '1.17GB'
 code copied from <a href="https://www.thepythoncode.com/article/get-directory-size-in-bytes-using-python">https://www.thepythoncode.com/article/get-directory-size-in-bytes-using-python</a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Statement-Processing-Functions">Statement Processing Functions<a class="anchor-link" href="#Statement-Processing-Functions"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These are different helper methods which make transformation of the data easier</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="load_data" class="doc_header"><code>load_data</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_data</code>(<strong><code>stmt</code></strong>:<code>str</code>, <strong><code>attr</code></strong>:<code>str</code>)</p>
+</blockquote>
+<p>Loads the pivoted data into a spark dataframe.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="spark_shape" class="doc_header"><code>spark_shape</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L70" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>spark_shape</code>()</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Get count of both null and missing values in pyspark</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">isnan</span><span class="p">,</span> <span class="n">when</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">col</span>
+<span class="k">def</span> <span class="nf">get_empty_count</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">count</span><span class="p">(</span><span class="n">when</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">(),</span> <span class="n">c</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="complete_addition" class="doc_header"><code>complete_addition</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L74" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>complete_addition</code>(<strong><code>df</code></strong>, <strong><code>sumcol</code></strong>, <strong><code>addcol1</code></strong>, <strong><code>addcol2</code></strong>)</p>
+</blockquote>
+<p>If there are columns that share the relation sumcol = addcol1 + addcol2
+this function ensures that a missing value is calculated based on the other two</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="copy_if_not_empty" class="doc_header"><code>copy_if_not_empty</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L89" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>copy_if_not_empty</code>(<strong><code>df</code></strong>, <strong><code>sourcecol</code></strong>, <strong><code>targetcol</code></strong>, <strong><code>to_zero_col</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>copies the value from the sourceol to the targetcol if the sourcecol is not empty and the targetcol is empty.
+As a third parameter, a column can be provided that has to be set to 0.0 in the rows where the values are copied</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="sum_into_empty_target" class="doc_header"><code>sum_into_empty_target</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L100" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sum_into_empty_target</code>(<strong><code>df</code></strong>, <strong><code>add1col</code></strong>, <strong><code>add2col</code></strong>, <strong><code>targetcol</code></strong>)</p>
+</blockquote>
+<p>adds the value of two not empty columns and stores the result in the empty targetcol</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="sum_cols_into_new_target" class="doc_header"><code>sum_cols_into_new_target</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L108" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sum_cols_into_new_target</code>(<strong><code>df</code></strong>, <strong><code>targetcol</code></strong>, <strong><code>sumcolslist</code></strong>)</p>
+</blockquote>
+<p>sums up the value  of several columns and stores the result in the targetcol.
+the columns that contain values to sum up may not be empty.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="copy_if_not_empty_for_ticker" class="doc_header"><code>copy_if_not_empty_for_ticker</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>copy_if_not_empty_for_ticker</code>(<strong><code>df</code></strong>, <strong><code>ticker</code></strong>, <strong><code>sourcecol</code></strong>, <strong><code>targetcol</code></strong>, <strong><code>to_zero_col</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>copy the not empty sourcecol to the empty targetcol of a certain ticker.
+if provided, set the to_zero_col for the affected rows to zero.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="set_to_zero_if_null" class="doc_header"><code>set_to_zero_if_null</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L130" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>set_to_zero_if_null</code>(<strong><code>df</code></strong>, <strong><code>col</code></strong>)</p>
+</blockquote>
+<p>set null values of a column to 0.0</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="print_null_count" class="doc_header"><code>print_null_count</code><a href="https://github.com/HansjoergW/bfh_mt_hs2020_sec_data/tree/master/bfh_mt_hs2020_sec_data/core.py#L137" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>print_null_count</code>(<strong><code>df</code></strong>, <strong><code>cols</code></strong>)</p>
+</blockquote>
+<p>print out howmany null values the provided cols contain</p>
 
 </div>
 

@@ -5,6 +5,7 @@
     "Prepare_Whole_Dataset": "/PrepareWholeSet",
     "filter_and_partition": "/FilterAndPartition",
     "pivoting": "/Pivoting",
-    "uniform and complete": "/UniformAndCompleteData"
+    "todos": "/UniformAndCompleteData",
+    "Title": "/Untitled"
   }
 }

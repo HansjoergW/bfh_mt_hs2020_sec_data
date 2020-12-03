@@ -1,6 +1,6 @@
 ---
 
-title: uniform and complete
+title: todos
 
 keywords: fastai
 sidebar: home_sidebar
@@ -27,6 +27,12 @@ sidebar: home_sidebar
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="uniform-and-complete">uniform and complete<a class="anchor-link" href="#uniform-and-complete"> </a></h1>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Once the data is pivoted, we want to create a dataset that contains only columns which appear in every report.</p>
@@ -82,7 +88,8 @@ sidebar: home_sidebar
 <span class="n">all_pivoted_folder</span> <span class="o">=</span> <span class="s2">&quot;D:/data/parq_pivot_split&quot;</span>
 <span class="n">all_processed_folder</span> <span class="o">=</span> <span class="s2">&quot;D:/data/parq_processed/&quot;</span>
 
-<span class="n">col_list</span> <span class="o">=</span>    <span class="p">[</span><span class="s2">&quot;stmt&quot;</span><span class="p">,</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">,</span><span class="s2">&quot;report&quot;</span><span class="p">,</span> <span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="s2">&quot;fp&quot;</span><span class="p">,</span> <span class="s2">&quot;uom&quot;</span><span class="p">]</span>
+<span class="n">col_list</span> <span class="o">=</span>    <span class="p">[</span><span class="s2">&quot;stmt&quot;</span><span class="p">,</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;filed&quot;</span><span class="p">,</span> <span class="s2">&quot;form&quot;</span><span class="p">,</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">,</span><span class="s2">&quot;report&quot;</span><span class="p">,</span> <span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="s2">&quot;fp&quot;</span><span class="p">,</span> <span class="s2">&quot;uom&quot;</span><span class="p">]</span>
+<span class="n">pivot_group</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span><span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span> <span class="s2">&quot;qtrs&quot;</span><span class="p">]</span>
 <span class="n">pivot_attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;report&#39;</span><span class="p">,</span> <span class="s1">&#39;line&#39;</span><span class="p">]</span>
 <span class="n">statements</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;IS&#39;</span><span class="p">,</span><span class="s1">&#39;CF&#39;</span><span class="p">,</span><span class="s1">&#39;CP&#39;</span><span class="p">,</span><span class="s1">&#39;BS&#39;</span><span class="p">,</span><span class="s1">&#39;CI&#39;</span><span class="p">,</span><span class="s1">&#39;EQ&#39;</span><span class="p">,</span><span class="s1">&#39;UN&#39;</span><span class="p">]</span>
 </pre></div>
@@ -310,6 +317,7 @@ sidebar: home_sidebar
     <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">sumcolslist</span><span class="p">:</span>
         <span class="n">set_to_zero_if_null</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
         <span class="n">df</span><span class="p">[</span><span class="n">targetcol</span><span class="p">]</span> <span class="o">+=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
     </div>
@@ -399,7 +407,8 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_all_selected</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">all_pivot_selected_folder</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># loading the complete unpivoted dataset - if it is needed for debbuging</span>
+<span class="n">df_all_selected</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="n">all_pivot_selected_folder</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -416,7 +425,7 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># it happens sometimes, that the data can not be associated with a right sheet (bs, is, cf, ..). in this cases, the data can appea under &quot;UN&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># it happens sometimes, that the data could not be associated with a right sheet (bs, is, cf, ..). in this cases, the data can appea under &quot;UN&quot;</span>
 <span class="c1"># so if expected information cannot be found in the appropriate statement, we have to look in the un statement</span>
 <span class="n">un_pivot_value</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;UN&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
 <span class="n">un_pivot_pd</span> <span class="o">=</span> <span class="n">un_pivot_value</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
@@ -451,11 +460,36 @@ sidebar: home_sidebar
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(4074, 1958)</pre>
+<pre>(5989, 1774)</pre>
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">prepare_un_values</span><span class="p">(</span><span class="n">df_to_merge_into</span><span class="p">,</span> <span class="n">attr_list</span><span class="p">):</span>
+    <span class="c1"># add possible columns from un set to  cf data with prefix cpy_</span>
+    <span class="n">attributes</span> <span class="o">=</span> <span class="n">pivot_group</span><span class="p">[:]</span> <span class="c1"># create copy</span>
+    <span class="n">attributes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">attr_list</span><span class="p">)</span>
+
+    <span class="n">un_prepared</span> <span class="o">=</span> <span class="n">un_pivot_pd</span><span class="p">[</span><span class="n">attributes</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">un_prepared</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>  <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pivot_group</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;cpy_&quot;</span> <span class="o">+</span> <span class="n">x</span><span class="p">),</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_to_merge_into</span><span class="p">,</span> <span class="n">un_prepared</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="n">pivot_group</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
@@ -491,7 +525,7 @@ sidebar: home_sidebar
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(133872, 2342)</pre>
+<pre>(117868, 2243)</pre>
 </div>
 
 </div>
@@ -562,9 +596,9 @@ sidebar: home_sidebar
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Assets   579
-AssetsNoncurrent   127026
-AssetsCurrent   30421
+<pre>Assets   1801
+AssetsNoncurrent   111944
+AssetsCurrent   28053
 </pre>
 </div>
 </div>
@@ -625,9 +659,9 @@ AssetsCurrent   30421
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Assets   419
-AssetsNoncurrent   419
-AssetsCurrent   419
+<pre>Assets   1675
+AssetsNoncurrent   1675
+AssetsCurrent   1675
 </pre>
 </div>
 </div>
@@ -664,9 +698,9 @@ AssetsCurrent   419
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Liabilities   34118
-LiabilitiesNoncurrent   117766
-LiabilitiesCurrent   30837
+<pre>Liabilities   1983
+LiabilitiesNoncurrent   1982
+LiabilitiesCurrent   1983
 </pre>
 </div>
 </div>
@@ -720,9 +754,9 @@ LiabilitiesCurrent   30837
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Liabilities   783
-LiabilitiesNoncurrent   781
-LiabilitiesCurrent   783
+<pre>Liabilities   1983
+LiabilitiesNoncurrent   1982
+LiabilitiesCurrent   1983
 </pre>
 </div>
 </div>
@@ -760,9 +794,8 @@ LiabilitiesCurrent   783
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>StockholdersEquity   12883
-RetainedEarningsAccumulatedDeficit   10583
-LiabilitiesAndStockholdersEquity   710
+<pre>StockholdersEquity   11898
+RetainedEarningsAccumulatedDeficit   10396
 </pre>
 </div>
 </div>
@@ -821,13 +854,39 @@ LiabilitiesAndStockholdersEquity   710
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>StockholdersEquity   1277
+<pre>StockholdersEquity   2423
 RetainedEarningsAccumulatedDeficit   0
-LiabilitiesAndStockholdersEquity   409
 </pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Save">Save<a class="anchor-link" href="#Save"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs_pivot_pd_copy</span><span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;filed&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span>
+                 <span class="s1">&#39;Assets&#39;</span><span class="p">,</span><span class="s1">&#39;AssetsNoncurrent&#39;</span><span class="p">,</span> <span class="s1">&#39;AssetsCurrent&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;Liabilities&#39;</span><span class="p">,</span><span class="s1">&#39;LiabilitiesNoncurrent&#39;</span><span class="p">,</span><span class="s1">&#39;LiabilitiesCurrent&#39;</span><span class="p">,</span> 
+                 <span class="s1">&#39;StockholdersEquity&#39;</span><span class="p">,</span><span class="s1">&#39;RetainedEarningsAccumulatedDeficit&#39;</span><span class="p">]]</span> \
+        <span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_processed_folder</span> <span class="o">+</span> <span class="s2">&quot;bs_not_cleaned.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 
@@ -847,7 +906,7 @@ LiabilitiesAndStockholdersEquity   409
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs_cols_selected</span> <span class="o">=</span> <span class="n">bs_pivot_pd_copy</span><span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs_cols_selected</span> <span class="o">=</span> <span class="n">bs_pivot_pd_copy</span><span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span>
                                      <span class="s1">&#39;Assets&#39;</span><span class="p">,</span><span class="s1">&#39;AssetsNoncurrent&#39;</span><span class="p">,</span> <span class="s1">&#39;AssetsCurrent&#39;</span><span class="p">,</span> 
                                      <span class="s1">&#39;Liabilities&#39;</span><span class="p">,</span><span class="s1">&#39;LiabilitiesNoncurrent&#39;</span><span class="p">,</span><span class="s1">&#39;LiabilitiesCurrent&#39;</span><span class="p">,</span> 
                                      <span class="s1">&#39;StockholdersEquity&#39;</span><span class="p">,</span><span class="s1">&#39;RetainedEarningsAccumulatedDeficit&#39;</span><span class="p">]]</span>
@@ -960,12 +1019,6 @@ LiabilitiesAndStockholdersEquity   409
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Save">Save<a class="anchor-link" href="#Save"> </a></h3>
-</div>
-</div>
-</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -985,7 +1038,7 @@ LiabilitiesAndStockholdersEquity   409
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="CashFlow">CashFlow<a class="anchor-link" href="#CashFlow"> </a></h2>
+<h2 id="02_CashFlow">02_CashFlow<a class="anchor-link" href="#02_CashFlow"> </a></h2>
 </div>
 </div>
 </div>
@@ -1038,7 +1091,7 @@ LiabilitiesAndStockholdersEquity   409
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(133811, 3052)</pre>
+<pre>(305903, 2909)</pre>
 </div>
 
 </div>
@@ -1056,7 +1109,7 @@ LiabilitiesAndStockholdersEquity   409
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cf_empty_count</span> <span class="o">=</span> <span class="n">get_empty_count</span><span class="p">(</span><span class="n">cf_pivot_value</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#cf_empty_count = get_empty_count(cf_pivot_value)</span>
 </pre></div>
 
     </div>
@@ -1122,7 +1175,7 @@ LiabilitiesAndStockholdersEquity   409
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(133811, 3052)</pre>
+<pre>(305903, 2909)</pre>
 </div>
 
 </div>
@@ -1168,7 +1221,7 @@ LiabilitiesAndStockholdersEquity   409
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CashAndCashEquivalentsPeriodIncreaseDecrease   30244
+<pre>CashAndCashEquivalentsPeriodIncreaseDecrease   217223
 </pre>
 </div>
 </div>
@@ -1186,34 +1239,12 @@ LiabilitiesAndStockholdersEquity   409
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># add possible columns from un set to  cf data with prefix cpy_</span>
-<span class="n">un_cash_incdec</span> <span class="o">=</span> <span class="n">un_pivot_pd</span><span class="p">[[</span><span class="s2">&quot;adsh&quot;</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># merge relevant columns from the UN dataset</span>
+<span class="n">cf_pivot_pd_copy</span> <span class="o">=</span> <span class="n">prepare_un_values</span><span class="p">(</span><span class="n">cf_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span>
     <span class="s1">&#39;CashAndCashEquivalentsPeriodIncreaseDecrease&#39;</span><span class="p">,</span>
     <span class="s1">&#39;CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseExcludingExchangeRateEffect&#39;</span><span class="p">,</span>
-<span class="c1">#    &#39;CashPeriodIncreaseDecrease&#39;,</span>
-<span class="c1">#    &#39;CashAndCashEquivalentsPeriodIncreaseDecreaseExcludingExchangeRateEffect&#39;,</span>
-<span class="c1">#    &#39;CashPeriodIncreaseDecreaseExcludingExchangeRateEffect&#39; </span>
-<span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">un_cash_incdec</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;cpy_&quot;</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">un_cash_incdec</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;cpy_adsh&#39;</span><span class="p">:</span><span class="s1">&#39;adsh&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cf_pivot_pd_copy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">cf_pivot_pd_copy</span><span class="p">,</span> <span class="n">un_cash_incdec</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;adsh&#39;</span><span class="p">])</span>
+    <span class="s1">&#39;CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseExcludingExchangeRateEffect&#39;</span>
+<span class="p">])</span>
 <span class="n">cf_pivot_pd_copy</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 
@@ -1229,7 +1260,7 @@ LiabilitiesAndStockholdersEquity   409
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(133811, 3055)</pre>
+<pre>(305903, 2912)</pre>
 </div>
 
 </div>
@@ -1300,7 +1331,7 @@ LiabilitiesAndStockholdersEquity   409
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CashAndCashEquivalentsPeriodIncreaseDecrease   1563
+<pre>CashAndCashEquivalentsPeriodIncreaseDecrease   188780
 </pre>
 </div>
 </div>
@@ -1341,9 +1372,9 @@ LiabilitiesAndStockholdersEquity   409
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>NetIncomeLoss   58102
-ProfitLoss   84716
-NetCashProvidedByUsedInOperatingActivities   32125
+<pre>NetIncomeLoss   195814
+ProfitLoss   240347
+NetCashProvidedByUsedInOperatingActivities   218636
 </pre>
 </div>
 </div>
@@ -1401,9 +1432,9 @@ NetCashProvidedByUsedInOperatingActivities   32125
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>NetIncomeLoss   230
-ProfitLoss   230
-NetCashProvidedByUsedInOperatingActivities   501
+<pre>NetIncomeLoss   119998
+ProfitLoss   119998
+NetCashProvidedByUsedInOperatingActivities   187825
 </pre>
 </div>
 </div>
@@ -1443,9 +1474,7 @@ NetCashProvidedByUsedInOperatingActivities   501
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>NetCashProvidedByUsedInInvestingActivities   33018
-NetCashProvidedByUsedInInvestingActivitiesContinuingOperations   98645
-CashProvidedByUsedInInvestingActivitiesDiscontinuedOperations   128368
+<pre>NetCashProvidedByUsedInInvestingActivities   219410
 </pre>
 </div>
 </div>
@@ -1502,8 +1531,6 @@ CashProvidedByUsedInInvestingActivitiesDiscontinuedOperations   128368
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>NetCashProvidedByUsedInInvestingActivities   0
-NetCashProvidedByUsedInInvestingActivitiesContinuingOperations   98645
-CashProvidedByUsedInInvestingActivitiesDiscontinuedOperations   128368
 </pre>
 </div>
 </div>
@@ -1555,9 +1582,7 @@ CashProvidedByUsedInInvestingActivitiesDiscontinuedOperations   128368
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>NetCashProvidedByUsedInFinancingActivities   33202
-NetCashProvidedByUsedInFinancingActivitiesContinuingOperations   100132
-CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
+<pre>NetCashProvidedByUsedInFinancingActivities   219518
 </pre>
 </div>
 </div>
@@ -1643,7 +1668,7 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sum_cols_into_new_target</span><span class="p">(</span><span class="n">cf_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;PaymentsOfDividendsTotal&#39;</span><span class="p">,</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cf_pivot_pd_copy</span> <span class="o">=</span> <span class="n">sum_cols_into_new_target</span><span class="p">(</span><span class="n">cf_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;PaymentsOfDividendsTotal&#39;</span><span class="p">,</span> 
                                  <span class="p">[</span><span class="s1">&#39;PaymentsOfDividends&#39;</span><span class="p">,</span>
                                  <span class="s1">&#39;PaymentsOfDividendsCommonStock&#39;</span><span class="p">,</span>
                                  <span class="s1">&#39;PaymentsOfDividendsMinorityInterest&#39;</span><span class="p">,</span>
@@ -1677,13 +1702,45 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sum_cols_into_new_target</span><span class="p">(</span><span class="n">cf_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;PaymentsForRepurchaseOfStockTotal&#39;</span><span class="p">,</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cf_pivot_pd_copy</span> <span class="o">=</span> <span class="n">sum_cols_into_new_target</span><span class="p">(</span><span class="n">cf_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;PaymentsForRepurchaseOfStockTotal&#39;</span><span class="p">,</span> 
                                  <span class="p">[</span><span class="s1">&#39;PaymentsForRepurchaseOfCommonStock&#39;</span><span class="p">,</span>
                                      <span class="s1">&#39;PaymentsForRepurchaseOfCommonStockForEmployeeTaxWithholdingObligations&#39;</span><span class="p">,</span>
                                      <span class="s1">&#39;PaymentsForRepurchaseOfConvertiblePreferredStock&#39;</span><span class="p">,</span>
                                      <span class="s1">&#39;PaymentsForRepurchaseOfPreferredStockAndPreferenceStock&#39;</span><span class="p">,</span>
                                      <span class="s1">&#39;PaymentsForRepurchaseOfRedeemableConvertiblePreferredStock&#39;</span><span class="p">,</span>
                                      <span class="s1">&#39;PaymentsForRepurchaseOfRedeemablePreferredStock&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Save">Save<a class="anchor-link" href="#Save"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cf_pivot_pd_copy</span><span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span>
+                                     <span class="s1">&#39;CashAndCashEquivalentsPeriodIncreaseDecrease&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> 
+                                     <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">,</span> 
+                                     <span class="s1">&#39;NetCashProvidedByUsedInOperatingActivities&#39;</span><span class="p">,</span> 
+                                     <span class="s1">&#39;NetCashProvidedByUsedInInvestingActivities&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;NetCashProvidedByUsedInFinancingActivities&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;PaymentsOfDividendsTotal&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;PaymentsForRepurchaseOfStockTotal&#39;</span><span class="p">]]</span> \
+                  <span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_processed_folder</span> <span class="o">+</span> <span class="s2">&quot;cf_not_cleaned.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1711,7 +1768,9 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
                                      <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">,</span> 
                                      <span class="s1">&#39;NetCashProvidedByUsedInOperatingActivities&#39;</span><span class="p">,</span> 
                                      <span class="s1">&#39;NetCashProvidedByUsedInInvestingActivities&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;NetCashProvidedByUsedInFinancingActivities&#39;</span><span class="p">]]</span>
+                                     <span class="s1">&#39;NetCashProvidedByUsedInFinancingActivities&#39;</span><span class="o">.</span>
+                                     <span class="s1">&#39;PaymentsOfDividendsTotal&#39;</span>
+                                     <span class="s1">&#39;PaymentsForRepurchaseOfStockTotal&#39;</span><span class="p">]]</span>
 </pre></div>
 
     </div>
@@ -1854,9 +1913,63 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cf_cols_cleaned</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_processed_folder</span> <span class="o">+</span> <span class="s2">&quot;cf.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Save">Save<a class="anchor-link" href="#Save"> </a></h3>
+<h2 id="03_IncomeStatement">03_IncomeStatement<a class="anchor-link" href="#03_IncomeStatement"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Gross Margin</p>
+<ul>
+<li>Net Sales</li>
+<li>Cost of Sales</li>
+<li>Gross Margin -&gt; NetSales - CostOfSales</li>
+</ul>
+<p>Operating Expenses</p>
+<ul>
+<li>R&amp;D</li>
+<li>Selling, general and admin</li>
+<li><p>Total op expenses = R&amp;D + Selling, general and admin</p>
+</li>
+<li><p>Operating Income = Gross Margin - Total op expenses      -&gt; OperatingIncomeLoss</p>
+</li>
+<li>other income</li>
+<li><p>Income before provision for income taxes = operating income + other income</p>
+</li>
+<li><p>Provision for income taxes</p>
+</li>
+<li>Net income = Income before taxes -taxes                   -&gt; NetIncomeLoss -&gt; also available in CF(!)</li>
+</ul>
+<p>Earning per share</p>
+<ul>
+<li>Basic</li>
+<li>Diluted</li>
+</ul>
+<p>Shares used in computing earnings per share:</p>
+<ul>
+<li>basic</li>
+<li>diluted</li>
+</ul>
+
 </div>
 </div>
 </div>
@@ -1867,7 +1980,888 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cf_cols_cleaned</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_processed_folder</span> <span class="o">+</span> <span class="s2">&quot;cf.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_value</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;IS&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">spark_shape</span><span class="p">(</span><span class="n">is_pivot_value</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(116298, 1927)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># is_empty_count = get_empty_count(is_pivot_value)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd</span> <span class="o">=</span> <span class="n">is_pivot_value</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd</span><span class="p">[</span><span class="s1">&#39;value_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_pivot_pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">pivot_group</span><span class="p">)</span> <span class="c1"># create a column that countains the number of not null values of the row</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(116298, 1928)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span> <span class="o">=</span> <span class="n">is_pivot_pd</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># merge relevant columns from the UN dataset</span>
+<span class="n">is_pivot_pd_copy</span> <span class="o">=</span> <span class="n">prepare_un_values</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NetIncomeLossAllocatedToLimitedPartners&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;CostOfGoodsAndServicesSold&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfServices&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;OperatingIncomeLoss&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">,</span>
+    
+    <span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span>
+<span class="p">])</span>
+<span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(116298, 1945)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># if there are less than 5 columns with values it is likely that this is not a complete statement</span>
+<span class="c1"># often this indicates, that the real information is inside the ComprehensiveIncome Statement and not in an IncomeStatement</span>
+<span class="n">is_pivot_pd_copy</span> <span class="o">=</span> <span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;value_count&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">]</span> 
+<span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(115899, 1945)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="shares">shares<a class="anchor-link" href="#shares"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;EarningsPerShareBasic&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;EarningsPerShareBasicAndDiluted&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;EarningsPerShareDiluted&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;EarningsPerShareBasicDistributed&#39;</span><span class="p">,</span>   
+ <span class="s1">&#39;EarningsPerShareDilutedDistributed&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>EarningsPerShareBasic   28706
+EarningsPerShareBasicAndDiluted   94567
+EarningsPerShareDiluted   29540
+EarningsPerShareBasicDistributed   115882
+EarningsPerShareDilutedDistributed   115882
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareBasicAndDiluted&#39;</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareBasicDistributed&#39;</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareDiluted&#39;</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span> 
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareDilutedDistributed&#39;</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>EarningsPerShare_hj   7138
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;WeightedAverageNumberOfSharesOutstandingBasic&#39;</span><span class="p">,</span><span class="s1">&#39;WeightedAverageNumberOfDilutedSharesOutstanding&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>WeightedAverageNumberOfSharesOutstandingBasic   42151
+WeightedAverageNumberOfDilutedSharesOutstanding   42378
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;WeightedAverageNumberOfSharesOutstandingBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;WeightedAverageNumberOfDilutedSharesOutstanding&#39;</span><span class="p">,</span> <span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>SharesOutstanding_hj   40947
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="NetIncome">NetIncome<a class="anchor-link" href="#NetIncome"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>NetIncomeLoss   15045
+NetIncomeLossAvailableToCommonStockholdersBasic   91896
+ProfitLoss   76463
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_NetIncomeLossAllocatedToLimitedPartners&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAllocatedToLimitedPartners&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_ProfitLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">)</span>
+
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAllocatedToLimitedPartners&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>NetIncomeLoss_hj   621
+NetIncomeLoss   15026
+ProfitLoss   76441
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="NetSales-/-Revenues">NetSales / Revenues<a class="anchor-link" href="#NetSales-/-Revenues"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> 
+    <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="c1"># Sales</span>
+    <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="c1"># Sales</span>
+<span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Revenues   72861
+SalesRevenueNet   85708
+RevenueFromContractWithCustomerExcludingAssessedTax   105818
+RevenueFromContractWithCustomerIncludingAssessedTax   112696
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;Revenues_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_Revenues&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_SalesRevenueNet&#39;</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">)</span>
+<span class="c1">#copy_if_not_empty(is_pivot_pd_copy, &#39;cpy_RevenuesExcludingInterestAndDividends&#39;, &#39;RevenuesExcludingInterestAndDividends&#39;)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenuesExcludingInterestAndDividends&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RegulatedAndUnregulatedOperatingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># some companies provide NonInterestIncome and InterestAndDividendIncomeOperating instead of a Revenue</span>
+<span class="n">sum_into_empty_target</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span>  
+                      <span class="s1">&#39;InterestAndDividendIncomeOperating&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;NoninterestIncome&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+
+<span class="n">sum_into_empty_target</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span>  
+                      <span class="s1">&#39;InterestIncomeExpenseNet&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;NoninterestIncome&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Revenues_hj   19673
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="CostOfSales">CostOfSales<a class="anchor-link" href="#CostOfSales"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> 
+    <span class="s1">&#39;CostOfGoodsAndServicesSold&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfServices&#39;</span><span class="p">,</span>
+<span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CostOfGoodsAndServicesSold   92834
+CostOfGoodsSold   92088
+CostOfRevenue   97276
+CostOfServices   106588
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostOfGoodsAndServicesSold&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfGoodsAndServicesSold&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostOfGoodsSold&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostOfRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostOfServices&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfServices&#39;</span><span class="p">)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;CostOfGoodsAndServicesSold&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+
+<span class="n">sum_into_empty_target</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span>  
+                      <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;CostOfServices&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;CostOfServices&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CostOfRevenue_hj   52385
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="OperatingIncomeLoss">OperatingIncomeLoss<a class="anchor-link" href="#OperatingIncomeLoss"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;OperatingIncomeLoss&#39;</span><span class="p">,</span>
+                                   <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">,</span>
+                                   <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>OperatingIncomeLoss   28924
+IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments   59817
+IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest   70434
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_OperatingIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">,</span> <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">,</span> <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>OperatingIncomeLoss_hj   4073
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Other">Other<a class="anchor-link" href="#Other"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostsAndExpenses&#39;</span><span class="p">,</span> <span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Save">Save<a class="anchor-link" href="#Save"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span>
+                    <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;EarningsPerShare_hj&#39;</span>
+                 <span class="p">]]</span> \
+                  <span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_processed_folder</span> <span class="o">+</span> <span class="s2">&quot;is_not_cleaned.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1890,27 +2884,22 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cf_pivot_pd_copy</span><span class="p">[(</span><span class="n">cf_pivot_pd_copy</span><span class="o">.</span><span class="n">StockholdersEquity</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>  <span class="p">][[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="s2">&quot;StockholdersEquityBeforeTreasuryStock&quot;</span><span class="p">,</span> <span class="s2">&quot;LiabilitiesAndStockholdersEquity&quot;</span><span class="p">,</span> <span class="s2">&quot;RetainedEarningsAccumulatedDeficit&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">])</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># index = is_pivot_pd_copy.form == &#39;10-K&#39;</span>
+<span class="c1"># print(&#39;10-Ks&#39;, len(pd.unique(is_pivot_pd_copy[index].adsh))) # 32283</span>
 
-    </div>
-</div>
-</div>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; (is_pivot_pd_copy.fp == &#39;FY&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;4&#39;)].count() # 32188</span>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; (is_pivot_pd_copy.fp == &#39;FY&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;0&#39;)].count() # 96</span>
 
-</div>
-    {% endraw %}
+<span class="c1"># len(pd.unique(is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; </span>
+<span class="c1">#                                (is_pivot_pd_copy.fp == &#39;FY&#39;) &amp; </span>
+<span class="c1">#                                (is_pivot_pd_copy.qtrs.isin([&#39;0&#39;,&#39;4&#39;]) )].adsh) )# 32207</span>
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">selected</span> <span class="o">=</span> <span class="n">bs_piivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;FXE&#39;</span>
-<span class="n">sel_df</span> <span class="o">=</span> <span class="n">bs_piivot_pd_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">selected</span><span class="p">]</span>
-<span class="n">do_copy</span> <span class="o">=</span> <span class="p">(</span><span class="n">sel_df</span><span class="p">[</span><span class="s1">&#39;AssetsCurrent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">())</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">sel_df</span><span class="p">[</span><span class="s1">&#39;Assets&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>
-<span class="n">do_copy</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="c1"># index = is_pivot_pd_copy.form == &#39;10-Q&#39;</span>
+<span class="c1"># print(&#39;10-Qs&#39;, len(pd.unique(is_pivot_pd_copy[index].adsh))) # 101521</span>
+<span class="c1"># is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-Q&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;1&#39;)].count() # 101378</span>
+<span class="c1"># is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-Q&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;2&#39;)].count() # 101378</span>
+<span class="c1"># is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-Q&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;3&#39;)].count() # 101378</span>
+<span class="n">is_pivot_pd_copy</span><span class="p">[(</span><span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">form</span> <span class="o">==</span> <span class="s1">&#39;10-Q&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">qtrs</span> <span class="o">==</span> <span class="s1">&#39;4&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="c1"># 101378</span>
 </pre></div>
 
     </div>
@@ -1925,7 +2914,18 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>34</pre>
+<pre>cik                                                                        200
+ticker                                                                     200
+adsh                                                                       200
+form                                                                       200
+period                                                                     200
+                                                                          ... 
+WeightedAverageNumberOfSharesRestrictedStock                                 0
+WeightedAverageNumberOfSharesTreasuryStock                                   0
+WeightedAverageNumerDilutedLimitedPartnershipUnitsOutstandingAdjustment      0
+WellServiceExpense                                                           0
+WriteOffOfDeferredDebtIssuanceCost                                           0
+Length: 2328, dtype: int64</pre>
 </div>
 
 </div>
@@ -1944,19 +2944,66 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
-<span class="n">cf_pivot_pd_copy</span><span class="p">[(</span><span class="n">cf_pivot_pd_copy</span><span class="o">.</span><span class="n">Dividends</span><span class="o">.</span><span class="n">notnull</span><span class="p">())</span>  \
-<span class="c1">#              &amp;(cf_pivot_pd_copy.PaymentsOfDividendsCommonStock.notnull())  \</span>
-<span class="c1">#                &amp;(cf_pivot_pd_copy.CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations.notnull()) </span>
-                <span class="p">]</span> \
-  <span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> 
-<span class="s1">&#39;Dividends&#39;</span><span class="p">,</span>
-<span class="s1">&#39;PaymentsOfDividends&#39;</span><span class="p">,</span>
- <span class="s1">&#39;PaymentsOfDividendsCommonStock&#39;</span><span class="p">,</span>
- <span class="s1">&#39;PaymentsOfDividendsMinorityInterest&#39;</span><span class="p">,</span>
- <span class="s1">&#39;PaymentsOfDividendsPreferredStockAndPreferenceStock&#39;</span><span class="p">,</span>
- <span class="s1">&#39;PaymentsOfOrdinaryDividends&#39;</span>
+<span class="n">is_pivot_pd_copy</span><span class="p">[</span>\
+                 
+                 <span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>  
+                 <span class="o">&amp;</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>
+            
+<span class="c1">#                 &amp;(is_pivot_pd_copy.CostsAndExpenses.notnull())</span>
+<span class="c1">#                 &amp;(is_pivot_pd_copy.CostOfGoodsAndServicesSold.isnull()) </span>
+<span class="c1">#                  &amp;(is_pivot_pd_copy.CostOfGoodsSold.isnull()) </span>
+<span class="c1">#                  &amp;(is_pivot_pd_copy.CostOfRevenue.isnull()) </span>
+<span class="c1">#                  &amp;(is_pivot_pd_copy.CostOfServices.isnull())   </span>
+                 
+ <span class="c1">#                (is_pivot_pd_copy.EarningsPerShareBasic.isnull())</span>
+<span class="c1">#                   &#39;, &#39;WeightedAverageNumberOfSharesOutstandingBasic&#39;      </span>
 
-    <span class="p">]]</span> \
+<span class="c1">#                      (is_pivot_pd_copy.NetIncomeLoss.notnull())  \</span>
+<span class="c1">#                    &amp; (is_pivot_pd_copy.ProfitLoss.notnull())  \</span>
+<span class="c1">#                  &amp; (is_pivot_pd_copy.NetIncomeLossAvailableToCommonStockholdersBasic.notnull()) \</span>
+<span class="c1">#                 (is_pivot_pd_copy.Revenues.isnull())  \</span>
+<span class="c1">#                 &amp;(is_pivot_pd_copy.SalesRevenueNet.isnull())  \</span>
+<span class="c1">#                 &amp;(is_pivot_pd_copy.RevenueFromContractWithCustomerExcludingAssessedTax.isnull())   \</span>
+<span class="c1">#                 &amp;(is_pivot_pd_copy.RevenueFromContractWithCustomerIncludingAssessedTax.isnull())   \</span>
+<span class="c1">#                 &amp;(is_pivot_pd_copy.InterestAndDividendIncomeOperating.isnull())   \</span>
+<span class="c1">#                 &amp;(is_pivot_pd_copy.NoninterestIncome.isnull())   \</span>
+<span class="c1">#                &amp;(is_pivot_pd_copy.RevenuesExcludingInterestAndDividends.isnull())   \</span>
+<span class="c1">#                  &amp;(is_pivot_pd_copy.RegulatedAndUnregulatedOperatingRevenue.isnull())  \</span>
+<span class="c1">#                 &amp;(is_pivot_pd_copy.SalesRevenueNet.isnull())  \</span>
+                <span class="p">]</span> \
+  <span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="s2">&quot;form&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span><span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;value_count&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;OperatingIncomeLoss&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">,</span>
+<span class="c1">#     &#39;CostOfGoodsAndServicesSold&#39;,</span>
+<span class="c1">#     &#39;CostOfGoodsSold&#39;,</span>
+<span class="c1">#     &#39;CostOfRevenue&#39;,</span>
+<span class="c1">#     &#39;CostOfServices&#39;,</span>
+<span class="c1">#     &#39;NetIncomeLoss&#39;, &#39;ProfitLoss&#39;,&#39;NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span>
+<span class="c1">#     &#39;Revenues&#39;,</span>
+<span class="c1">#     &#39;SalesRevenueNet&#39;, </span>
+<span class="c1">#      &#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;, # Sales</span>
+<span class="c1">#      &#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;, # Sales</span>
+<span class="c1">#     &#39;InterestAndDividendIncomeOperating&#39;,</span>
+<span class="c1">#     &#39;NoninterestIncome&#39;,</span>
+<span class="c1">#     &#39;RevenuesExcludingInterestAndDividends&#39;</span>
+    
+<span class="c1">#  &#39;Revenues&#39;,</span>
+<span class="c1">#  &#39;SalesRevenueNet&#39;,</span>
+<span class="c1">#  &#39;OperatingLeasesIncomeStatementLeaseRevenue&#39;,</span>
+
+
+<span class="c1">#  &#39;RevenueFromCollaborativeArrangementExcludingRevenueFromContractWithCustomer&#39;,</span>
+<span class="c1">#  &#39;RevenueNotFromContractWithCustomer&#39;,</span>
+<span class="c1">#  &#39;RevenueNotFromContractWithCustomerExcludingInterestIncome&#39;,</span>
+<span class="c1">#  &#39;RevenueNotFromContractWithCustomerOther&#39;,</span>
+<span class="c1">#  &#39;RevenuesFromExternalCustomers&#39;,    </span>
+<span class="c1"># &#39;CostOfGoodsAndServicesSold&#39;,</span>
+<span class="c1">#  &#39;GrossProfit&#39;</span>
+   
+   
+   
+   <span class="p">]]</span> \
     <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">])</span>
 </pre></div>
 
@@ -1993,79 +3040,85 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
       <th>ticker</th>
       <th>adsh</th>
       <th>period</th>
-      <th>Dividends</th>
-      <th>PaymentsOfDividends</th>
-      <th>PaymentsOfDividendsCommonStock</th>
-      <th>PaymentsOfDividendsMinorityInterest</th>
-      <th>PaymentsOfDividendsPreferredStockAndPreferenceStock</th>
-      <th>PaymentsOfOrdinaryDividends</th>
+      <th>form</th>
+      <th>fp</th>
+      <th>qtrs</th>
+      <th>value_count</th>
+      <th>OperatingIncomeLoss</th>
+      <th>IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments</th>
+      <th>CostsAndExpenses</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>65024</th>
-      <td>91576</td>
-      <td>KEY</td>
-      <td>0000950123-10-018789</td>
-      <td>2009-12-31</td>
-      <td>0.0</td>
-      <td>213000000.0</td>
+      <th>31205</th>
+      <td>798359</td>
+      <td>IRET</td>
+      <td>0000798359-12-000015</td>
+      <td>2012-01-31</td>
+      <td>10-Q</td>
+      <td>Q3</td>
+      <td>1</td>
+      <td>27</td>
       <td>NaN</td>
+      <td>NaN</td>
+      <td>4.226400e+07</td>
+    </tr>
+    <tr>
+      <th>74534</th>
+      <td>65172</td>
+      <td>MSB</td>
+      <td>0001104659-12-025296</td>
+      <td>2012-01-31</td>
+      <td>10-K</td>
+      <td>FY</td>
+      <td>4</td>
+      <td>8</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>88525</th>
-      <td>813920</td>
-      <td>CEC</td>
-      <td>0001140361-11-025400</td>
-      <td>2011-03-31</td>
-      <td>-4001000.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>131975</th>
-      <td>892482</td>
-      <td>QUMU</td>
-      <td>0000897101-11-001346</td>
-      <td>2011-06-30</td>
-      <td>-950000.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <th>58282</th>
+      <td>1328598</td>
+      <td>FXE</td>
+      <td>0001193125-12-110009</td>
+      <td>2012-01-31</td>
+      <td>10-Q</td>
+      <td>Q1</td>
+      <td>1</td>
+      <td>8</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>63359</th>
-      <td>1401521</td>
-      <td>UIHC</td>
-      <td>0001401521-11-000020</td>
-      <td>2011-06-30</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <th>71016</th>
+      <td>14177</td>
+      <td>BRID</td>
+      <td>0001437749-12-001969</td>
+      <td>2012-01-31</td>
+      <td>10-Q</td>
+      <td>Q1</td>
+      <td>1</td>
+      <td>8</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>102842</th>
-      <td>1273801</td>
-      <td>NRF</td>
-      <td>0001047469-11-007027</td>
-      <td>2011-06-30</td>
-      <td>-27860000.0</td>
+      <th>58391</th>
+      <td>799850</td>
+      <td>CRMT</td>
+      <td>0001171843-12-000715</td>
+      <td>2012-01-31</td>
+      <td>10-Q</td>
+      <td>Q3</td>
+      <td>1</td>
+      <td>18</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>18336000.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>9.362500e+07</td>
     </tr>
     <tr>
       <th>...</th>
@@ -2079,75 +3132,81 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>104588</th>
-      <td>912593</td>
-      <td>SUI</td>
-      <td>0000912593-20-000137</td>
-      <td>2020-06-30</td>
-      <td>7781000.0</td>
+      <th>49394</th>
+      <td>799850</td>
+      <td>CRMT</td>
+      <td>0001171843-20-006280</td>
+      <td>2020-07-31</td>
+      <td>10-Q</td>
+      <td>Q1</td>
+      <td>1</td>
+      <td>19</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>1.623720e+08</td>
     </tr>
     <tr>
-      <th>18311</th>
-      <td>928340</td>
-      <td>CWCO</td>
-      <td>0001558370-20-010684</td>
-      <td>2020-06-30</td>
-      <td>1288154.0</td>
-      <td>NaN</td>
-      <td>2564980.0</td>
-      <td>NaN</td>
-      <td>5738.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>99044</th>
-      <td>906345</td>
-      <td>CPT</td>
-      <td>0000906345-20-000052</td>
-      <td>2020-06-30</td>
-      <td>84138000.0</td>
-      <td>165085000.0</td>
-      <td>NaN</td>
+      <th>81583</th>
+      <td>65172</td>
+      <td>MSB</td>
+      <td>0001558370-20-011056</td>
+      <td>2020-07-31</td>
+      <td>10-Q</td>
+      <td>Q2</td>
+      <td>1</td>
+      <td>7</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>83351</th>
-      <td>706863</td>
-      <td>UNB</td>
-      <td>0000706863-20-000091</td>
-      <td>2020-06-30</td>
-      <td>2863000.0</td>
+      <th>88069</th>
+      <td>808450</td>
+      <td>NAV</td>
+      <td>0000808450-20-000098</td>
+      <td>2020-07-31</td>
+      <td>10-Q</td>
+      <td>Q3</td>
+      <td>1</td>
+      <td>19</td>
       <td>NaN</td>
-      <td>2844000.0</td>
+      <td>NaN</td>
+      <td>1.703000e+09</td>
+    </tr>
+    <tr>
+      <th>100464</th>
+      <td>72333</td>
+      <td>JWN</td>
+      <td>0000072333-20-000195</td>
+      <td>2020-07-31</td>
+      <td>10-Q</td>
+      <td>Q2</td>
+      <td>1</td>
+      <td>9</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>59095</th>
-      <td>1442145</td>
-      <td>VRSK</td>
-      <td>0001437749-20-016475</td>
-      <td>2020-06-30</td>
-      <td>400000.0</td>
-      <td>87900000.0</td>
+      <th>57671</th>
+      <td>1750</td>
+      <td>AIR</td>
+      <td>0001104659-20-108360</td>
+      <td>2020-08-31</td>
+      <td>10-Q</td>
+      <td>Q1</td>
+      <td>1</td>
+      <td>18</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>3.975000e+08</td>
     </tr>
   </tbody>
 </table>
-<p>270 rows × 10 columns</p>
+<p>4073 rows × 11 columns</p>
 </div>
 </div>
 
@@ -2166,10 +3225,71 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs_pivot_liabilities_copy</span><span class="p">[(</span><span class="n">bs_pivot_liabilities_copy</span><span class="o">.</span><span class="n">StockholdersEquity</span><span class="o">.</span><span class="n">isnull</span><span class="p">())][[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="s2">&quot;Assets&quot;</span><span class="p">,</span> <span class="s2">&quot;StockholdersEquity&quot;</span><span class="p">,</span> <span class="s2">&quot;LiabilitiesAndStockholdersEquity&quot;</span><span class="p">,</span> <span class="s2">&quot;RetainedEarningsAccumulatedDeficit&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">adsh</span><span class="o">==</span><span class="s2">&quot;0000082166-20-000130&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cik</th>
+      <th>ticker</th>
+      <th>adsh</th>
+      <th>form</th>
+      <th>period</th>
+      <th>fp</th>
+      <th>qtrs</th>
+      <th>AntidilutiveSecuritiesExcludedFromComputationOfEarningsPerShareAmount</th>
+      <th>NetIncomeLoss</th>
+      <th>cpy_NetIncomeLoss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>19921</th>
+      <td>82166</td>
+      <td>RAVN</td>
+      <td>0000082166-20-000130</td>
+      <td>10-Q</td>
+      <td>2020-07-31</td>
+      <td>Q2</td>
+      <td>1</td>
+      <td>321613.0</td>
+      <td>5819000.0</td>
+      <td>5819000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -2183,10 +3303,115 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs_pivot_liabilities_copy</span><span class="p">[(</span><span class="n">bs_pivot_liabilities_copy</span><span class="o">.</span><span class="n">adsh</span> <span class="o">==</span> <span class="s1">&#39;0001104659-09-029605&#39;</span><span class="p">)][[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;report&quot;</span><span class="p">,</span> <span class="s2">&quot;line&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;period&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.qtrs == &#39;4&#39;) &amp; (is_pivot_pd_copy.fp != &#39;FY&#39;)]</span>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; (is_pivot_pd_copy.fp == &#39;FY&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;4&#39;)].count() # 32188</span>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; (is_pivot_pd_copy.fp == &#39;FY&#39;)].count() #54080</span>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) ].count() #54100</span>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; (is_pivot_pd_copy.fp != &#39;FY&#39;)].count() #20</span>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; (is_pivot_pd_copy.fp == &#39;FY&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;0&#39;)].count() # 96</span>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; (is_pivot_pd_copy.fp == &#39;FY&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;1&#39;)].count() # 21363</span>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; (is_pivot_pd_copy.fp == &#39;FY&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;2&#39;)].count() # 69</span>
+<span class="c1">#is_pivot_pd_copy[(is_pivot_pd_copy.form == &#39;10-K&#39;) &amp; (is_pivot_pd_copy.fp == &#39;FY&#39;) &amp; (is_pivot_pd_copy.qtrs == &#39;3&#39;)].count() # 56</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>cik                                                                        21363
+ticker                                                                     21363
+adsh                                                                       21363
+form                                                                       21363
+period                                                                     21363
+                                                                           ...  
+WeightedAverageNumberOfSharesRestrictedStock                                   0
+WeightedAverageNumberOfSharesTreasuryStock                                     0
+WeightedAverageNumerDilutedLimitedPartnershipUnitsOutstandingAdjustment        0
+WellServiceExpense                                                             1
+WriteOffOfDeferredDebtIssuanceCost                                            13
+Length: 2328, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">adsh</span> <span class="o">==</span> <span class="s1">&#39;0001401521-20-000018&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">pivot_group</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>128918    7
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#is_pivot_pd_copy[is_pivot_pd_copy.adsh == &#39;0001401521-20-000018&#39;].isnull().sum(axis=1)</span>
+<span class="n">selection</span> <span class="o">=</span> <span class="n">is_pivot_pd_copy</span><span class="p">[(</span><span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">qtrs</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">qtrs</span> <span class="o">&gt;</span> <span class="s1">&#39;4&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span> <span class="o">==</span> <span class="mi">2320</span> <span class="c1"># shape[1]-8</span>
+<span class="n">selection</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1556</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -2473,7 +3698,9 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd_frame</span> <span class="o">=</span> <span class="n">df_all_selected</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;adsh == &#39;0000906345-20-000052&#39; and stmt == &#39;CF&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd_frame</span> <span class="o">=</span> <span class="n">df_all_selected</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;adsh == &#39;0001564590-20-043606&#39; and stmt == &#39;IS&#39; and qtrs==&#39;1&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+<span class="c1">#pd_frame = df_all_selected.where(&quot;adsh == &#39;0001628279-20-000210&#39;&quot;).toPandas()</span>
+<span class="c1">#pd_frame = df_all_selected.where(&quot;adsh == &#39;0001193125-20-213555&#39;&quot;).toPandas()</span>
 <span class="c1">#print(pd_frame.sort_values([&#39;report&#39;, &#39;line&#39;]))</span>
 </pre></div>
 
@@ -2492,7 +3719,7 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="n">pd_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">pd_frame</span><span class="p">[[</span><span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;stmt&#39;</span><span class="p">,</span> <span class="s1">&#39;report&#39;</span><span class="p">,</span> <span class="s1">&#39;line&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;report&#39;</span><span class="p">,</span> <span class="s1">&#39;line&#39;</span><span class="p">])</span>
+<span class="n">pd_frame</span><span class="p">[[</span><span class="s1">&#39;fp&#39;</span><span class="p">,</span><span class="s1">&#39;cik&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;stmt&#39;</span><span class="p">,</span> <span class="s1">&#39;report&#39;</span><span class="p">,</span> <span class="s1">&#39;line&#39;</span><span class="p">,</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="s1">&#39;qtrs&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;report&#39;</span><span class="p">,</span><span class="s1">&#39;qtrs&#39;</span><span class="p">,</span> <span class="s1">&#39;line&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -2524,293 +3751,233 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>fp</th>
+      <th>cik</th>
       <th>tag</th>
       <th>value</th>
       <th>stmt</th>
       <th>report</th>
       <th>line</th>
+      <th>period</th>
+      <th>qtrs</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>12</th>
-      <td>ProfitLoss</td>
-      <td>61978000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>ProfitLoss</td>
-      <td>17511000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>DepreciationDepletionAndAmortization</td>
-      <td>184662000.0</td>
-      <td>CF</td>
-      <td>6</td>
+      <th>14</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>RevenueFromContractWithCustomerExcludingAssess...</td>
+      <td>1.932100e+10</td>
+      <td>IS</td>
       <td>4</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>GainLossOnDispositionOfAssets1</td>
-      <td>382000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>EquityMethodInvestmentDividendsOrDistributions</td>
-      <td>4039000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>IncomeLossFromEquityMethodInvestments</td>
-      <td>3755000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>IncomeLossFromEquityMethodInvestments</td>
-      <td>1600000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>7</td>
+      <td>1</td>
+      <td>2020-08-31</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>ShareBasedCompensation</td>
-      <td>7046000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>OtherOperatingActivitiesCashFlowStatement</td>
-      <td>-3414000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>NetCashProvidedByUsedInOperatingActivities</td>
-      <td>250174000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>PaymentsToDevelopRealEstateAssets</td>
-      <td>199598000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>PaymentsToAcquireRealEstate</td>
-      <td>0.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>14</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>PaymentsToAcquireOtherPropertyPlantAndEquipment</td>
-      <td>4871000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>PaymentsForProceedsFromOtherInvestingActivities</td>
-      <td>1920000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>NetCashProvidedByUsedInInvestingActivities</td>
-      <td>-205636000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>18</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>ProceedsFromLinesOfCredit</td>
-      <td>358000000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>RepaymentsOfLinesOfCredit</td>
-      <td>402000000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>RepaymentsOfNotesPayable</td>
-      <td>0.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>22</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>ProceedsFromNotesPayable</td>
-      <td>743103000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>23</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>PaymentsOfDividends</td>
-      <td>165085000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>24</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>ProceedsFromIssuanceOfCommonStock</td>
-      <td>0.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>25</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>PaymentsOfFinancingCosts</td>
-      <td>686000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>26</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>ProceedsFromPaymentsForOtherFinancingActivities</td>
-      <td>308000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>27</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>NetCashProvidedByUsedInFinancingActivities</td>
-      <td>533640000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>28</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>CashCashEquivalentsRestrictedCashAndRestricted...</td>
-      <td>578178000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>29</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>CashCashEquivalentsRestrictedCashAndRestricted...</td>
-      <td>605677000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>CashCashEquivalentsRestrictedCashAndRestricted...</td>
-      <td>605677000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>31</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>CashAndCashEquivalentsAtCarryingValue</td>
-      <td>601584000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>33</td>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>LaborAndRelatedExpense</td>
+      <td>6.852000e+09</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>3</td>
+      <td>2020-08-31</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>RestrictedCashAndCashEquivalents</td>
-      <td>4093000.0</td>
-      <td>CF</td>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>DepreciationDepletionAndAmortization</td>
+      <td>9.260000e+08</td>
+      <td>IS</td>
+      <td>4</td>
       <td>6</td>
-      <td>34</td>
+      <td>2020-08-31</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>20</th>
-      <td>CashCashEquivalentsRestrictedCashAndRestricted...</td>
-      <td>605677000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>35</td>
+      <th>9</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>FuelCosts</td>
+      <td>5.650000e+08</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>7</td>
+      <td>2020-08-31</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>30</th>
-      <td>InterestPaidNet</td>
-      <td>40551000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>37</td>
+      <th>15</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>CostOfPropertyRepairsAndMaintenance</td>
+      <td>8.060000e+08</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>8</td>
+      <td>2020-08-31</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>34</th>
-      <td>IncomeTaxesPaid</td>
-      <td>146000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>38</td>
+      <th>4</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>OtherCostAndExpenseOperating</td>
+      <td>2.669000e+09</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>9</td>
+      <td>2020-08-31</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>10</th>
-      <td>Dividends</td>
-      <td>84138000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>40</td>
+      <th>1</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>CostsAndExpenses</td>
+      <td>1.773100e+10</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>10</td>
+      <td>2020-08-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>OperatingIncomeLoss</td>
+      <td>1.590000e+09</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>11</td>
+      <td>2020-08-31</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>ProceedsFromIssuanceOfSharesUnderIncentiveAndS...</td>
-      <td>20117000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>41</td>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>InterestIncomeExpenseNonoperatingNet</td>
+      <td>-1.840000e+08</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>13</td>
+      <td>2020-08-31</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>18</th>
-      <td>RightOfUseAssetObtainedInExchangeForOperatingL...</td>
-      <td>69000.0</td>
-      <td>CF</td>
-      <td>6</td>
-      <td>43</td>
+      <th>6</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>NetPeriodicDefinedBenefitsExpenseReversalOfExp...</td>
+      <td>-2.010000e+08</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>14</td>
+      <td>2020-08-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>OtherNonoperatingIncomeExpense</td>
+      <td>-1.000000e+06</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>15</td>
+      <td>2020-08-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>NonoperatingIncomeExpense</td>
+      <td>1.600000e+07</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>16</td>
+      <td>2020-08-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>IncomeLossFromContinuingOperationsBeforeIncome...</td>
+      <td>1.606000e+09</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>17</td>
+      <td>2020-08-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>IncomeTaxExpenseBenefit</td>
+      <td>3.610000e+08</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>18</td>
+      <td>2020-08-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>NetIncomeLoss</td>
+      <td>1.245000e+09</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>19</td>
+      <td>2020-08-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>EarningsPerShareBasic</td>
+      <td>4.750000e+00</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>21</td>
+      <td>2020-08-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>EarningsPerShareDiluted</td>
+      <td>4.720000e+00</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>22</td>
+      <td>2020-08-31</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Q1</td>
+      <td>1048911</td>
+      <td>CommonStockDividendsPerShareDeclared</td>
+      <td>1.300000e+00</td>
+      <td>IS</td>
+      <td>4</td>
+      <td>23</td>
+      <td>2020-08-31</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -2974,6 +4141,9 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cf_pivot_pd_copy</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">CostOfGoodsSold</span>
+<span class="n">CostOfRevenue</span>
+<span class="n">CostOfServices</span>
 </pre></div>
 
     </div>
@@ -2990,8 +4160,8 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#[x for x in cf_pivot_pd_copy.columns.values if (&#39;Dividends&#39; in x)]</span>
-<span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cf_pivot_pd_copy</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;Repurchase&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s1">&#39;Stock&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;CostOf&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)]</span>
+<span class="c1">#[x for x in is_pivot_pd_copy.columns.values if (&#39;Revenue&#39; in x) and (&#39;Customer&#39; in x)]</span>
 </pre></div>
 
     </div>
@@ -3006,21 +4176,78 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;EmployeeStockOwnershipPlanESOPRepurchaseObligationAmount&#39;,
- &#39;PaymentsForRepurchaseOfCommonStock&#39;,
- &#39;PaymentsForRepurchaseOfCommonStockForEmployeeTaxWithholdingObligations&#39;,
- &#39;PaymentsForRepurchaseOfConvertiblePreferredStock&#39;,
- &#39;PaymentsForRepurchaseOfPreferredStockAndPreferenceStock&#39;,
- &#39;PaymentsForRepurchaseOfRedeemableConvertiblePreferredStock&#39;,
- &#39;PaymentsForRepurchaseOfRedeemablePreferredStock&#39;,
- &#39;ProceedsFromRepurchaseOfRedeemablePreferredStock&#39;,
- &#39;StockRepurchaseProgramRemainingAuthorizedRepurchaseAmount&#39;,
- &#39;StockRepurchasedAndRetiredDuringPeriodShares&#39;,
- &#39;StockRepurchasedAndRetiredDuringPeriodValue&#39;,
- &#39;StockRepurchasedDuringPeriodShares&#39;,
- &#39;StockRepurchasedDuringPeriodValue&#39;,
- &#39;TreasuryStockReissuedAtLowerThanRepurchasePrice&#39;,
- &#39;WeightedAverageNumberOfSharesCommonStockSubjectToRepurchaseOrCancellation&#39;]</pre>
+<pre>[&#39;CompensationExpenseExcludingCostOfGoodAndServiceSold&#39;,
+ &#39;CostOfChemicals&#39;,
+ &#39;CostOfCoalProductsAndServices&#39;,
+ &#39;CostOfDomesticRegulatedElectric&#39;,
+ &#39;CostOfDomesticRegulatedGasRevenue&#39;,
+ &#39;CostOfGoldProductsAndServices&#39;,
+ &#39;CostOfGoodsAndServiceExcludingDepreciationDepletionAndAmortization&#39;,
+ &#39;CostOfGoodsAndServicesEnergyCommoditiesAndServices&#39;,
+ &#39;CostOfGoodsAndServicesSold&#39;,
+ &#39;CostOfGoodsAndServicesSoldAmortization&#39;,
+ &#39;CostOfGoodsAndServicesSoldDepreciation&#39;,
+ &#39;CostOfGoodsAndServicesSoldDepreciationAndAmortization&#39;,
+ &#39;CostOfGoodsAndServicesSoldOverhead&#39;,
+ &#39;CostOfGoodsSold&#39;,
+ &#39;CostOfGoodsSoldAmortization&#39;,
+ &#39;CostOfGoodsSoldDepreciation&#39;,
+ &#39;CostOfGoodsSoldDepreciationAndAmortization&#39;,
+ &#39;CostOfGoodsSoldDepreciationDepletionAndAmortization&#39;,
+ &#39;CostOfGoodsSoldDirectLabor&#39;,
+ &#39;CostOfGoodsSoldDirectMaterials&#39;,
+ &#39;CostOfGoodsSoldElectric&#39;,
+ &#39;CostOfGoodsSoldExcludingDepreciationDepletionAndAmortization&#39;,
+ &#39;CostOfGoodsSoldOilAndGas&#39;,
+ &#39;CostOfGoodsSoldOverhead&#39;,
+ &#39;CostOfGoodsSoldSalesTypeLease&#39;,
+ &#39;CostOfGoodsSoldSubscription&#39;,
+ &#39;CostOfMerchandiseSalesBuyingAndOccupancyCosts&#39;,
+ &#39;CostOfNaturalGasPurchases&#39;,
+ &#39;CostOfOtherAlternativeEnergy&#39;,
+ &#39;CostOfOtherManufacturedProducts&#39;,
+ &#39;CostOfOtherPropertyOperatingExpense&#39;,
+ &#39;CostOfPropertyRepairsAndMaintenance&#39;,
+ &#39;CostOfPurchasedOilAndGas&#39;,
+ &#39;CostOfPurchasedPower&#39;,
+ &#39;CostOfPurchasedWater&#39;,
+ &#39;CostOfRealEstateRevenue&#39;,
+ &#39;CostOfRealEstateSales&#39;,
+ &#39;CostOfRealEstateSalesExcludingInterest&#39;,
+ &#39;CostOfRealEstateSalesInterest&#39;,
+ &#39;CostOfReimbursableExpense&#39;,
+ &#39;CostOfRevenue&#39;,
+ &#39;CostOfSecondaryProcessing&#39;,
+ &#39;CostOfServices&#39;,
+ &#39;CostOfServicesAmortization&#39;,
+ &#39;CostOfServicesCatering&#39;,
+ &#39;CostOfServicesDepreciation&#39;,
+ &#39;CostOfServicesDepreciationAndAmortization&#39;,
+ &#39;CostOfServicesDirectLabor&#39;,
+ &#39;CostOfServicesDirectMaterials&#39;,
+ &#39;CostOfServicesDirectTaxesAndLicensesCosts&#39;,
+ &#39;CostOfServicesEnergyServices&#39;,
+ &#39;CostOfServicesEnvironmentalRemediation&#39;,
+ &#39;CostOfServicesExcludingDepreciationDepletionAndAmortization&#39;,
+ &#39;CostOfServicesLicensesAndMaintenanceAgreements&#39;,
+ &#39;CostOfServicesLicensesAndServices&#39;,
+ &#39;CostOfServicesMaintenanceCosts&#39;,
+ &#39;CostOfServicesOilAndGas&#39;,
+ &#39;CostOfServicesOverhead&#39;,
+ &#39;CostOfTransmission&#39;,
+ &#39;CostOfTransmissionOther&#39;,
+ &#39;CostOfUtilities&#39;,
+ &#39;CostOfWorldwideUnregulatedElectric&#39;,
+ &#39;DefinedBenefitPlanCostOfProvidingSpecialOrContractualTerminationBenefitRecognizedDuringPeriod&#39;,
+ &#39;DerivativeCostOfHedge&#39;,
+ &#39;FoodAndBeverageCostOfSales&#39;,
+ &#39;OtherCostOfOperatingRevenue&#39;,
+ &#39;OtherCostOfServices&#39;,
+ &#39;PublicUtilitiesAllowanceForFundsUsedDuringConstructionCapitalizedCostOfEquity&#39;,
+ &#39;RealEstateCostOfRealEstateSold&#39;,
+ &#39;RealEstateInvestmentPartnershipCostOfSales&#39;,
+ &#39;RelatedPartiesAmountInCostOfSales&#39;,
+ &#39;RetailLandSalesInstallmentMethodTotalCostOfSale&#39;]</pre>
 </div>
 
 </div>
@@ -3065,6 +4292,23 @@ CashProvidedByUsedInFinancingActivitiesDiscontinuedOperations   130954
 
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 

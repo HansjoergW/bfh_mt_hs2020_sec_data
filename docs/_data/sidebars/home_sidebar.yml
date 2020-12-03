@@ -22,8 +22,11 @@ entries:
       title: pivoting
       url: /Pivoting
     - output: web,pdf
-      title: uniform and complete
+      title: todos
       url: /UniformAndCompleteData
+    - output: web,pdf
+      title: Title
+      url: /Untitled
     output: web
     title: bfh_mt_hs2020_sec_data
   output: web
