@@ -61,10 +61,10 @@ def get_size_format(b, factor=1024, suffix="B"):
     return f"{b:.2f}Y{suffix}"
 
 # Cell
-def load_data(stmt:str, attr:str):
+def load_data(folder, spark, stmt:str, attr:str):
     """ Loads the pivoted data into a spark dataframe.
     """
-    return spark.read.parquet(all_pivoted_folder + "/" + stmt + "/" + attr).cache()
+    return spark.read.parquet(folder + "/" + stmt + "/" + attr).cache()
 
 # Cell
 def spark_shape(self):

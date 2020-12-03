@@ -22,8 +22,14 @@ entries:
       title: pivoting
       url: /Pivoting
     - output: web,pdf
+      title: uniform BS
+      url: /01_Uniform_BS
+    - output: web,pdf
       title: todos
       url: /UniformAndCompleteData
+    - output: web,pdf
+      title: Uniform IS
+      url: /03_Uniform_IS
     - output: web,pdf
       title: Title
       url: /Untitled

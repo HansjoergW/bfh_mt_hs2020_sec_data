@@ -5,7 +5,9 @@
     "Prepare_Whole_Dataset": "/PrepareWholeSet",
     "filter_and_partition": "/FilterAndPartition",
     "pivoting": "/Pivoting",
+    "uniform BS": "/01_Uniform_BS",
     "todos": "/UniformAndCompleteData",
+    "Uniform IS": "/03_Uniform_IS",
     "Title": "/Untitled"
   }
 }
