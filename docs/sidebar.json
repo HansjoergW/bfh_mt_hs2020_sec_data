@@ -6,8 +6,9 @@
     "filter_and_partition": "/FilterAndPartition",
     "pivoting": "/Pivoting",
     "uniform BS": "/01_Uniform_BS",
-    "todos": "/UniformAndCompleteData",
+    "uniform CF": "/02_Uniform_CF",
     "Uniform IS": "/03_Uniform_IS",
+    "todos": "/Uniform_Archive",
     "Title": "/Untitled"
   }
 }

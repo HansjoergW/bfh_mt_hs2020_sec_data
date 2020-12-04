@@ -171,7 +171,7 @@ sidebar: home_sidebar
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># it happens sometimes, that the data could not be associated with a right sheet (bs, is, cf, ..). in this cases, the data can appea under &quot;UN&quot;</span>
 <span class="c1"># so if expected information cannot be found in the appropriate statement, we have to look in the un statement</span>
-<span class="n">un_pivot_value</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;UN&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">un_pivot_value</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">all_pivoted_folder</span><span class="p">,</span> <span class="n">spark</span><span class="p">,</span> <span class="s2">&quot;UN&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
 <span class="n">un_pivot_pd</span> <span class="o">=</span> <span class="n">un_pivot_value</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
 </pre></div>
 
@@ -204,7 +204,7 @@ sidebar: home_sidebar
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(5989, 1774)</pre>
+<pre>(5989, 1775)</pre>
 </div>
 
 </div>
@@ -240,6 +240,932 @@ sidebar: home_sidebar
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="01_IncomeStatement">01_IncomeStatement<a class="anchor-link" href="#01_IncomeStatement"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Gross Margin</p>
+<ul>
+<li>Net Sales</li>
+<li>Cost of Sales</li>
+<li>Gross Margin -&gt; NetSales - CostOfSales</li>
+</ul>
+<p>Operating Expenses</p>
+<ul>
+<li>R&amp;D</li>
+<li>Selling, general and admin</li>
+<li><p>Total op expenses = R&amp;D + Selling, general and admin</p>
+</li>
+<li><p>Operating Income = Gross Margin - Total op expenses      -&gt; OperatingIncomeLoss</p>
+</li>
+<li>other income</li>
+<li><p>Income before provision for income taxes = operating income + other income</p>
+</li>
+<li><p>Provision for income taxes</p>
+</li>
+<li>Net income = Income before taxes -taxes                   -&gt; NetIncomeLoss -&gt; also available in CF(!)</li>
+</ul>
+<p>Earning per share</p>
+<ul>
+<li>Basic</li>
+<li>Diluted</li>
+</ul>
+<p>Shares used in computing earnings per share:</p>
+<ul>
+<li>basic</li>
+<li>diluted</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_value</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">all_pivoted_folder</span><span class="p">,</span> <span class="n">spark</span><span class="p">,</span> <span class="s2">&quot;IS&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">spark_shape</span><span class="p">(</span><span class="n">is_pivot_value</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(116298, 1928)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd</span> <span class="o">=</span> <span class="n">is_pivot_value</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd</span><span class="p">[</span><span class="s1">&#39;value_count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_pivot_pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">pivot_group</span><span class="p">)</span> <span class="c1"># create a column that countains the number of not null values of the row</span>
+<span class="c1"># if there are less than 5 columns with values it is likely that this is not a complete statement</span>
+<span class="c1"># often this indicates, that the real information is inside the ComprehensiveIncome Statement and not in an IncomeStatement</span>
+<span class="n">is_pivot_pd</span> <span class="o">=</span> <span class="n">is_pivot_pd</span><span class="p">[</span><span class="n">is_pivot_pd</span><span class="p">[</span><span class="s1">&#39;value_count&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">]</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span> <span class="o">=</span> <span class="n">is_pivot_pd</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(115948, 1929)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Merge-Data-from-&quot;unknown&quot;-statement">Merge Data from "unknown" statement<a class="anchor-link" href="#Merge-Data-from-&quot;unknown&quot;-statement"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># merge relevant columns from the UN dataset</span>
+<span class="n">is_pivot_pd_copy</span> <span class="o">=</span> <span class="n">prepare_un_values</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;EarningsPerShareBasic&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;EarningsPerShareBasicAndDiluted&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;EarningsPerShareDiluted&#39;</span><span class="p">,</span>
+    <span class="c1">#&#39;EarningsPerShareBasicDistributed&#39;,   </span>
+    <span class="c1">#&#39;EarningsPerShareDilutedDistributed&#39;,</span>
+    
+    <span class="s1">&#39;WeightedAverageNumberOfSharesOutstandingBasic&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;WeightedAverageNumberOfDilutedSharesOutstanding&#39;</span><span class="p">,</span>
+    
+    <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NetIncomeLossAllocatedToLimitedPartners&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">,</span>
+    
+    <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;CostOfGoodsAndServicesSold&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfServices&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;OperatingIncomeLoss&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">,</span>
+    
+    <span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span>
+<span class="p">])</span>
+<span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(115948, 1951)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Shares">Shares<a class="anchor-link" href="#Shares"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> 
+ <span class="s1">&#39;EarningsPerShareBasic&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;EarningsPerShareBasicAndDiluted&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;EarningsPerShareDiluted&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;EarningsPerShareBasicDistributed&#39;</span><span class="p">,</span>   
+ <span class="s1">&#39;EarningsPerShareDilutedDistributed&#39;</span><span class="p">,</span>
+<span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>EarningsPerShareBasic   28747
+EarningsPerShareBasicAndDiluted   94600
+EarningsPerShareDiluted   29583
+EarningsPerShareBasicDistributed   115931
+EarningsPerShareDilutedDistributed   115931
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_EarningsPerShareBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareBasic&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_EarningsPerShareBasicAndDiluted&#39;</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareBasicAndDiluted&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_EarningsPerShareDiluted&#39;</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareDiluted&#39;</span><span class="p">,)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareBasic&#39;</span><span class="p">,</span>              <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareBasicAndDiluted&#39;</span><span class="p">,</span>    <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareBasicDistributed&#39;</span><span class="p">,</span>   <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareDiluted&#39;</span><span class="p">,</span>            <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span> 
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShareDilutedDistributed&#39;</span><span class="p">,</span> <span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">)</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;EarningsPerShare_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>EarningsPerShare_hj   7118
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;WeightedAverageNumberOfSharesOutstandingBasic&#39;</span><span class="p">,</span><span class="s1">&#39;WeightedAverageNumberOfDilutedSharesOutstanding&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>WeightedAverageNumberOfSharesOutstandingBasic   42196
+WeightedAverageNumberOfDilutedSharesOutstanding   42425
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;WeightedAverageNumberOfSharesOutstandingBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;WeightedAverageNumberOfSharesOutstandingBasic&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;WeightedAverageNumberOfDilutedSharesOutstanding&#39;</span><span class="p">,</span> <span class="s1">&#39;WeightedAverageNumberOfDilutedSharesOutstanding&#39;</span><span class="p">)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;WeightedAverageNumberOfSharesOutstandingBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;WeightedAverageNumberOfDilutedSharesOutstanding&#39;</span><span class="p">,</span> <span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>SharesOutstanding_hj   40992
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="NetIncome">NetIncome<a class="anchor-link" href="#NetIncome"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>NetIncomeLoss   15061
+NetIncomeLossAvailableToCommonStockholdersBasic   91942
+ProfitLoss   76502
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_NetIncomeLossAllocatedToLimitedPartners&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAllocatedToLimitedPartners&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_ProfitLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">)</span>
+
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAvailableToCommonStockholdersBasic&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLossAllocatedToLimitedPartners&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>NetIncomeLoss_hj   629
+NetIncomeLoss   15040
+ProfitLoss   76479
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="NetSales-/-Revenues">NetSales / Revenues<a class="anchor-link" href="#NetSales-/-Revenues"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> 
+    <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="c1"># Sales</span>
+    <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="c1"># Sales</span>
+<span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Revenues   72902
+SalesRevenueNet   85755
+RevenueFromContractWithCustomerExcludingAssessedTax   105867
+RevenueFromContractWithCustomerIncludingAssessedTax   112745
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;Revenues_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_Revenues&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_SalesRevenueNet&#39;</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">)</span>
+<span class="c1">#copy_if_not_empty(is_pivot_pd_copy, &#39;cpy_RevenuesExcludingInterestAndDividends&#39;, &#39;RevenuesExcludingInterestAndDividends&#39;)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenuesExcludingInterestAndDividends&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RegulatedAndUnregulatedOperatingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># some companies provide NonInterestIncome and InterestAndDividendIncomeOperating instead of a Revenue</span>
+<span class="n">sum_into_empty_target</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span>  
+                      <span class="s1">&#39;InterestAndDividendIncomeOperating&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;NoninterestIncome&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+
+<span class="n">sum_into_empty_target</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span>  
+                      <span class="s1">&#39;InterestIncomeExpenseNet&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;NoninterestIncome&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Revenues_hj   19707
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="CostOfSales">CostOfSales<a class="anchor-link" href="#CostOfSales"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> 
+    <span class="s1">&#39;CostOfGoodsAndServicesSold&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfServices&#39;</span><span class="p">,</span>
+<span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CostOfGoodsAndServicesSold   92883
+CostOfGoodsSold   92137
+CostOfRevenue   97325
+CostOfServices   106637
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostOfGoodsAndServicesSold&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfGoodsAndServicesSold&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostOfGoodsSold&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostOfRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostOfServices&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfServices&#39;</span><span class="p">)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;CostOfGoodsAndServicesSold&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+
+<span class="n">sum_into_empty_target</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span>  
+                      <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;CostOfServices&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;CostOfGoodsSold&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;CostOfServices&#39;</span><span class="p">,</span> <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CostOfRevenue_hj   52428
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="OperatingIncomeLoss">OperatingIncomeLoss<a class="anchor-link" href="#OperatingIncomeLoss"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;OperatingIncomeLoss&#39;</span><span class="p">,</span>
+                                   <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">,</span>
+                                   <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>OperatingIncomeLoss   28969
+IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments   59865
+IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest   70481
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_OperatingIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">,</span> <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">,</span> <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>OperatingIncomeLoss_hj   4110
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Other">Other<a class="anchor-link" href="#Other"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostsAndExpenses&#39;</span><span class="p">,</span> <span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_GrossProfit&#39;</span><span class="p">,</span> <span class="s1">&#39;GrossProfit&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Save">Save<a class="anchor-link" href="#Save"> </a></h4>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span>
+                    <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;SharesOutstanding_hj&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;EarningsPerShare_hj&#39;</span>
+                 <span class="p">]]</span> \
+                  <span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_processed_folder</span> <span class="o">+</span> <span class="s2">&quot;is_not_cleaned.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="XX_Trials">XX_Trials<a class="anchor-link" href="#XX_Trials"> </a></h2>
+</div>
+</div>
+</div>
 </div>
  
 

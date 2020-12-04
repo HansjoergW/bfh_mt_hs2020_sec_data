@@ -64,7 +64,7 @@ def get_size_format(b, factor=1024, suffix="B"):
 def load_data(folder, spark, stmt:str, attr:str):
     """ Loads the pivoted data into a spark dataframe.
     """
-    return spark.read.parquet(folder + "/" + stmt + "/" + attr).cache()
+    return spark.read.parquet(folder + "/" + stmt + "/" + attr)
 
 # Cell
 def spark_shape(self):

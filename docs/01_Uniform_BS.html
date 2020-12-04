@@ -171,7 +171,7 @@ sidebar: home_sidebar
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># it happens sometimes, that the data could not be associated with a right sheet (bs, is, cf, ..). in this cases, the data can appea under &quot;UN&quot;</span>
 <span class="c1"># so if expected information cannot be found in the appropriate statement, we have to look in the un statement</span>
-<span class="n">un_pivot_value</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;UN&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">un_pivot_value</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">all_pivoted_folder</span><span class="p">,</span> <span class="n">spark</span><span class="p">,</span> <span class="s2">&quot;UN&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
 <span class="n">un_pivot_pd</span> <span class="o">=</span> <span class="n">un_pivot_value</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
 </pre></div>
 
@@ -204,7 +204,7 @@ sidebar: home_sidebar
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(5989, 1774)</pre>
+<pre>(5989, 1775)</pre>
 </div>
 
 </div>
@@ -253,7 +253,7 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs_pivot_value</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;BS&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs_pivot_value</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">all_pivoted_folder</span><span class="p">,</span> <span class="n">spark</span><span class="p">,</span> <span class="s2">&quot;BS&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
 <span class="n">spark_shape</span><span class="p">(</span><span class="n">bs_pivot_value</span><span class="p">)</span>
 </pre></div>
 
@@ -269,7 +269,7 @@ sidebar: home_sidebar
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(117868, 2243)</pre>
+<pre>(117868, 2244)</pre>
 </div>
 
 </div>
@@ -316,7 +316,7 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Merge-Data-from-&quot;unknown&quot;-statement">Merge Data from "unknown" statement<a class="anchor-link" href="#Merge-Data-from-&quot;unknown&quot;-statement"> </a></h2>
+<h3 id="Merge-Data-from-&quot;unknown&quot;-statement">Merge Data from "unknown" statement<a class="anchor-link" href="#Merge-Data-from-&quot;unknown&quot;-statement"> </a></h3>
 </div>
 </div>
 </div>
@@ -346,6 +346,22 @@ sidebar: home_sidebar
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(117868, 2256)</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -398,7 +414,14 @@ AssetsCurrent   28053
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Sometimes AssetsNet is present instead of Assets, copy its content to Assets</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># if present, copy data from UN dataset</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_AssetsNet&#39;</span><span class="p">,</span> <span class="s1">&#39;AssetsNet&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_Assets&#39;</span><span class="p">,</span> <span class="s1">&#39;Assets&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_AssetsNoncurrent&#39;</span><span class="p">,</span> <span class="s1">&#39;AssetsNoncurrent&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_AssetsCurrent&#39;</span><span class="p">,</span> <span class="s1">&#39;AssetsCurrent&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Sometimes AssetsNet is present instead of Assets, copy its content to Assets</span>
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;AssetsNet&#39;</span><span class="p">,</span> <span class="s1">&#39;Assets&#39;</span><span class="p">)</span>
 
 <span class="c1"># if one of the three provided columns is missing, calculate its content based on Assets = AssetsCurrent + AssetsNoncurrent</span>
@@ -441,9 +464,9 @@ AssetsCurrent   28053
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Assets   1675
-AssetsNoncurrent   1675
-AssetsCurrent   1675
+<pre>Assets   1592
+AssetsNoncurrent   1592
+AssetsCurrent   1592
 </pre>
 </div>
 </div>
@@ -480,9 +503,9 @@ AssetsCurrent   1675
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Liabilities   1983
-LiabilitiesNoncurrent   1982
-LiabilitiesCurrent   1983
+<pre>Liabilities   29982
+LiabilitiesNoncurrent   103819
+LiabilitiesCurrent   28416
 </pre>
 </div>
 </div>
@@ -500,7 +523,10 @@ LiabilitiesCurrent   1983
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Completing the Liabilities columns follows the same logic as for the Assets columns</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># if present, copy data from UN dataset</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_Liabilities&#39;</span><span class="p">,</span> <span class="s1">&#39;Liabilities&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_LiabilitiesNoncurrent&#39;</span><span class="p">,</span> <span class="s1">&#39;LiabilitiesNoncurrent&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_LiabilitiesCurrent&#39;</span><span class="p">,</span> <span class="s1">&#39;LiabilitiesCurrent&#39;</span><span class="p">)</span>
 
 <span class="n">complete_addition</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;Liabilities&#39;</span><span class="p">,</span> <span class="s1">&#39;LiabilitiesCurrent&#39;</span><span class="p">,</span> <span class="s1">&#39;LiabilitiesNoncurrent&#39;</span><span class="p">)</span>
 
@@ -536,9 +562,9 @@ LiabilitiesCurrent   1983
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Liabilities   1983
-LiabilitiesNoncurrent   1982
-LiabilitiesCurrent   1983
+<pre>Liabilities   1900
+LiabilitiesNoncurrent   1899
+LiabilitiesCurrent   1900
 </pre>
 </div>
 </div>
@@ -595,11 +621,20 @@ RetainedEarningsAccumulatedDeficit   10396
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># if there is partner capital but no StockholdersEquite, we consider it the same as stockholder equity</span>
-<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;PartnersCapital&#39;</span><span class="p">,</span> <span class="s1">&#39;StockholdersEquity&#39;</span><span class="p">)</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs_pivot_pd_copy</span><span class="p">[</span><span class="s1">&#39;Equity_hj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_PartnersCapital&#39;</span><span class="p">,</span> <span class="s1">&#39;PartnersCapital&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_StockholdersEquity&#39;</span><span class="p">,</span> <span class="s1">&#39;StockholdersEquity&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest&#39;</span><span class="p">,</span> <span class="s1">&#39;StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_RetainedEarningsAccumulatedDeficit&#39;</span><span class="p">,</span> <span class="s1">&#39;RetainedEarningsAccumulatedDeficit&#39;</span><span class="p">)</span>
+
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;StockholdersEquity&#39;</span><span class="p">,</span> <span class="s1">&#39;Equity_hj&#39;</span><span class="p">)</span> 
+
+<span class="c1"># if there is partner capital but no StockholdersEquite, we consider it the same as stockholder equity</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;PartnersCapital&#39;</span><span class="p">,</span> <span class="s1">&#39;Equity_hj&#39;</span><span class="p">)</span> 
 
 <span class="c1"># if there is StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest instead of StockholdersEquity, we use this as StocholdersEquity</span>
-<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest&#39;</span><span class="p">,</span> <span class="s1">&#39;StockholdersEquity&#39;</span><span class="p">)</span> 
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest&#39;</span><span class="p">,</span> <span class="s1">&#39;Equity_hj&#39;</span><span class="p">)</span> 
 
 <span class="c1"># if RetainedEarnings has no value, we set it to zero</span>
 <span class="n">set_to_zero_if_null</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RetainedEarningsAccumulatedDeficit&#39;</span><span class="p">)</span>
@@ -619,7 +654,7 @@ RetainedEarningsAccumulatedDeficit   10396
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;StockholdersEquity&#39;</span><span class="p">,</span><span class="s1">&#39;RetainedEarningsAccumulatedDeficit&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">bs_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Equity_hj&#39;</span><span class="p">,</span><span class="s1">&#39;RetainedEarningsAccumulatedDeficit&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -632,7 +667,7 @@ RetainedEarningsAccumulatedDeficit   10396
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>StockholdersEquity   2423
+<pre>Equity_hj   2336
 RetainedEarningsAccumulatedDeficit   0
 </pre>
 </div>
@@ -660,7 +695,7 @@ RetainedEarningsAccumulatedDeficit   0
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs_pivot_pd_copy</span><span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;filed&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span>
                  <span class="s1">&#39;Assets&#39;</span><span class="p">,</span><span class="s1">&#39;AssetsNoncurrent&#39;</span><span class="p">,</span> <span class="s1">&#39;AssetsCurrent&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;Liabilities&#39;</span><span class="p">,</span><span class="s1">&#39;LiabilitiesNoncurrent&#39;</span><span class="p">,</span><span class="s1">&#39;LiabilitiesCurrent&#39;</span><span class="p">,</span> 
-                 <span class="s1">&#39;StockholdersEquity&#39;</span><span class="p">,</span><span class="s1">&#39;RetainedEarningsAccumulatedDeficit&#39;</span><span class="p">]]</span> \
+                 <span class="s1">&#39;Equity_hj&#39;</span><span class="p">,</span><span class="s1">&#39;RetainedEarningsAccumulatedDeficit&#39;</span><span class="p">]]</span> \
         <span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_processed_folder</span> <span class="o">+</span> <span class="s2">&quot;bs_not_cleaned.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
@@ -671,16 +706,23 @@ RetainedEarningsAccumulatedDeficit   0
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Checks:</p>
-<ul>
-<li>Assets = Liabilities + Equity</li>
-</ul>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
-</div>
-</div>
+    {% endraw %}
+
 </div>
  
 
