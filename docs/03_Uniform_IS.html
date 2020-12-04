@@ -393,7 +393,7 @@ sidebar: home_sidebar
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(115948, 1929)</pre>
+<pre>(115899, 1929)</pre>
 </div>
 
 </div>
@@ -435,6 +435,8 @@ sidebar: home_sidebar
     
     <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span>
     <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueGoodsNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueServicesNet&#39;</span><span class="p">,</span>
     <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;CostOfGoodsAndServicesSold&#39;</span><span class="p">,</span>
@@ -447,6 +449,7 @@ sidebar: home_sidebar
     <span class="s1">&#39;IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest&#39;</span><span class="p">,</span>
     
     <span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;OperatingExpenses&#39;</span><span class="p">,</span>
 <span class="p">])</span>
 <span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
@@ -463,7 +466,7 @@ sidebar: home_sidebar
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(115948, 1951)</pre>
+<pre>(115899, 1954)</pre>
 </div>
 
 </div>
@@ -506,11 +509,11 @@ sidebar: home_sidebar
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>EarningsPerShareBasic   28747
-EarningsPerShareBasicAndDiluted   94600
-EarningsPerShareDiluted   29583
-EarningsPerShareBasicDistributed   115931
-EarningsPerShareDilutedDistributed   115931
+<pre>EarningsPerShareBasic   28706
+EarningsPerShareBasicAndDiluted   94567
+EarningsPerShareDiluted   29540
+EarningsPerShareBasicDistributed   115882
+EarningsPerShareDilutedDistributed   115882
 </pre>
 </div>
 </div>
@@ -568,7 +571,7 @@ EarningsPerShareDilutedDistributed   115931
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>EarningsPerShare_hj   7118
+<pre>EarningsPerShare_hj   7099
 </pre>
 </div>
 </div>
@@ -599,8 +602,8 @@ EarningsPerShareDilutedDistributed   115931
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>WeightedAverageNumberOfSharesOutstandingBasic   42196
-WeightedAverageNumberOfDilutedSharesOutstanding   42425
+<pre>WeightedAverageNumberOfSharesOutstandingBasic   42151
+WeightedAverageNumberOfDilutedSharesOutstanding   42378
 </pre>
 </div>
 </div>
@@ -654,7 +657,7 @@ WeightedAverageNumberOfDilutedSharesOutstanding   42425
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>SharesOutstanding_hj   40992
+<pre>SharesOutstanding_hj   40947
 </pre>
 </div>
 </div>
@@ -691,9 +694,9 @@ WeightedAverageNumberOfDilutedSharesOutstanding   42425
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>NetIncomeLoss   15061
-NetIncomeLossAvailableToCommonStockholdersBasic   91942
-ProfitLoss   76502
+<pre>NetIncomeLoss   15045
+NetIncomeLossAvailableToCommonStockholdersBasic   91896
+ProfitLoss   76463
 </pre>
 </div>
 </div>
@@ -752,9 +755,9 @@ ProfitLoss   76502
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>NetIncomeLoss_hj   629
-NetIncomeLoss   15040
-ProfitLoss   76479
+<pre>NetIncomeLoss_hj   621
+NetIncomeLoss   15026
+ProfitLoss   76441
 </pre>
 </div>
 </div>
@@ -781,8 +784,18 @@ ProfitLoss   76479
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> 
     <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span>
     <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueGoodsNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueServicesNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueGoodsGross&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ContractsRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RevenueOilAndGasServices&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HealthCareOrganizationPatientServiceRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HealthCareOrganizationRevenue&#39;</span><span class="p">,</span>
     <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="c1"># Sales</span>
     <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="c1"># Sales</span>
+    <span class="s1">&#39;RevenueMineralSales&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueEnergyServices&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RealEstateRevenueNet&#39;</span><span class="p">,</span>
 <span class="p">])</span>
 </pre></div>
 
@@ -796,10 +809,20 @@ ProfitLoss   76479
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Revenues   72902
-SalesRevenueNet   85755
-RevenueFromContractWithCustomerExcludingAssessedTax   105867
-RevenueFromContractWithCustomerIncludingAssessedTax   112745
+<pre>Revenues   72861
+SalesRevenueNet   85708
+SalesRevenueGoodsNet   97922
+SalesRevenueServicesNet   105277
+SalesRevenueGoodsGross   115402
+ContractsRevenue   114250
+RevenueOilAndGasServices   115414
+HealthCareOrganizationPatientServiceRevenue   115600
+HealthCareOrganizationRevenue   115463
+RevenueFromContractWithCustomerExcludingAssessedTax   105818
+RevenueFromContractWithCustomerIncludingAssessedTax   112696
+RevenueMineralSales   115631
+SalesRevenueEnergyServices   115758
+RealEstateRevenueNet   113737
 </pre>
 </div>
 </div>
@@ -821,16 +844,34 @@ RevenueFromContractWithCustomerIncludingAssessedTax   112745
 
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_Revenues&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues&#39;</span><span class="p">)</span>
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_SalesRevenueNet&#39;</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_SalesRevenueGoodsNet&#39;</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueGoodsNet&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_SalesRevenueServicesNet&#39;</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueServicesNet&#39;</span><span class="p">)</span>
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">)</span>
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">)</span>
 <span class="c1">#copy_if_not_empty(is_pivot_pd_copy, &#39;cpy_RevenuesExcludingInterestAndDividends&#39;, &#39;RevenuesExcludingInterestAndDividends&#39;)</span>
 
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+
+<span class="n">sum_into_empty_target</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span>  
+                      <span class="s1">&#39;SalesRevenueGoodsNet&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;SalesRevenueServicesNet&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">)</span>
+
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueGoodsNet&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueServicesNet&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenuesExcludingInterestAndDividends&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RegulatedAndUnregulatedOperatingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;HealthCareOrganizationPatientServiceRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueGoodsGross&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;ContractsRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenueOilAndGasServices&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;HealthCareOrganizationRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RevenueMineralSales&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;SalesRevenueEnergyServices&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;RealEstateRevenueNet&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -873,6 +914,55 @@ RevenueFromContractWithCustomerIncludingAssessedTax   112745
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># other revenue types, ordered frequency of usage</span>
+<span class="n">other_revenue_types</span> <span class="o">=</span> \
+<span class="p">[</span><span class="s1">&#39;OtherSalesRevenueNet&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingLeasesIncomeStatementLeaseRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;LicensesRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenueFromRelatedParties&#39;</span><span class="p">,</span>
+<span class="s1">&#39;BrokerageCommissionsRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;RoyaltyRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;OilAndGasSalesRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;OilAndGasRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;OtherRealEstateRevenue&#39;</span><span class="p">,</span>
+<span class="s1">&#39;TechnologyServicesRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;ManagementFeesRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;ReimbursementRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingLeasesIncomeStatementMinimumLeaseRevenue&#39;</span><span class="p">,</span>
+<span class="s1">&#39;FoodAndBeverageRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;MaintenanceRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;LicenseAndServicesRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;FranchiseRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;SubscriptionRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;FinancialServicesRevenue&#39;</span><span class="p">,</span>
+<span class="s1">&#39;RevenueFromGrants&#39;</span><span class="p">,</span> <span class="s1">&#39;GasGatheringTransportationMarketingAndProcessingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;OccupancyRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;NaturalGasProductionRevenue&#39;</span><span class="p">,</span>
+<span class="s1">&#39;SalesRevenueServicesGross&#39;</span><span class="p">,</span> <span class="s1">&#39;InvestmentBankingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;AdvertisingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenueOtherFinancialServices&#39;</span><span class="p">,</span>
+<span class="s1">&#39;OilAndCondensateRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenueFromLeasedAndOwnedHotels&#39;</span><span class="p">,</span> <span class="s1">&#39;RevenuesNetOfInterestExpense&#39;</span><span class="p">,</span> <span class="s1">&#39;RegulatedAndUnregulatedOperatingRevenue&#39;</span><span class="p">,</span>
+<span class="s1">&#39;UnregulatedOperatingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;ElectricUtilityRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;CargoAndFreightRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;OtherHotelOperatingRevenue&#39;</span><span class="p">,</span>
+<span class="s1">&#39;CasinoRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;RefiningAndMarketingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;PrincipalTransactionsRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;InterestRevenueExpenseNet&#39;</span><span class="p">,</span>
+<span class="s1">&#39;HomeBuildingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;OtherRevenueExpenseFromRealEstateOperations&#39;</span><span class="p">,</span> <span class="s1">&#39;GasDomesticRegulatedRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;LicenseAndMaintenanceRevenue&#39;</span><span class="p">,</span>
+<span class="s1">&#39;RegulatedOperatingRevenue&#39;</span><span class="p">,</span> <span class="s1">&#39;AdmissionsRevenue&#39;</span><span class="p">,</span><span class="s1">&#39;PassengerRevenue&#39;</span><span class="p">,]</span>
+
+<span class="k">for</span> <span class="n">revenue</span> <span class="ow">in</span> <span class="n">other_revenue_types</span><span class="p">:</span> 
+    <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="n">revenue</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">set_to_zero_if_null</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">print_null_count</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="p">[</span> <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">])</span>
 </pre></div>
 
@@ -886,7 +976,7 @@ RevenueFromContractWithCustomerIncludingAssessedTax   112745
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Revenues_hj   19707
+<pre>Revenues_hj   0
 </pre>
 </div>
 </div>
@@ -928,10 +1018,10 @@ RevenueFromContractWithCustomerIncludingAssessedTax   112745
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CostOfGoodsAndServicesSold   92883
-CostOfGoodsSold   92137
-CostOfRevenue   97325
-CostOfServices   106637
+<pre>CostOfGoodsAndServicesSold   92834
+CostOfGoodsSold   92088
+CostOfRevenue   97276
+CostOfServices   106588
 </pre>
 </div>
 </div>
@@ -995,7 +1085,7 @@ CostOfServices   106637
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CostOfRevenue_hj   52428
+<pre>CostOfRevenue_hj   52385
 </pre>
 </div>
 </div>
@@ -1034,9 +1124,9 @@ CostOfServices   106637
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>OperatingIncomeLoss   28969
-IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments   59865
-IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest   70481
+<pre>OperatingIncomeLoss   28924
+IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments   59817
+IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest   70434
 </pre>
 </div>
 </div>
@@ -1092,7 +1182,7 @@ IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontroll
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>OperatingIncomeLoss_hj   4110
+<pre>OperatingIncomeLoss_hj   4073
 </pre>
 </div>
 </div>
@@ -1118,6 +1208,7 @@ IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontroll
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_CostsAndExpenses&#39;</span><span class="p">,</span> <span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">)</span>
 <span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_GrossProfit&#39;</span><span class="p">,</span> <span class="s1">&#39;GrossProfit&#39;</span><span class="p">)</span>
+<span class="n">copy_if_not_empty</span><span class="p">(</span><span class="n">is_pivot_pd_copy</span><span class="p">,</span> <span class="s1">&#39;cpy_OperatingExpenses&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingExpenses&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1140,10 +1231,11 @@ IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontroll
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_pivot_pd_copy</span><span class="p">[[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span> <span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;filed&quot;</span><span class="p">,</span> <span class="s2">&quot;form&quot;</span><span class="p">,</span> <span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">,</span>
                     <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;OperatingExpenses&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss&#39;</span><span class="p">,</span> <span class="s1">&#39;ProfitLoss&#39;</span><span class="p">,</span>
@@ -1166,6 +1258,146 @@ IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontroll
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">list_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;OperatingExpenses&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)]</span>
+<span class="n">list_cols</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;OperatingExpenses&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">list_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">is_pivot_pd_copy</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;Revenue&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)]</span>
+<span class="c1">#[x for x in is_pivot_pd_copy.columns.values if (&#39;Revenue&#39; in x) and (&#39;Customer&#39; in x)]</span>
+
+<span class="n">selected_cols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">list_cols</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span>
+    <span class="s1">&#39;Revenues_hj&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CostOfRevenue_hj&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;costOfRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Revenues&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueGoodsNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueServicesNet&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueGoodsGross&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ContractsRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RevenueOilAndGasServices&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HealthCareOrganizationPatientServiceRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HealthCareOrganizationRevenue&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RevenueFromContractWithCustomerExcludingAssessedTax&#39;</span><span class="p">,</span> <span class="c1"># Sales</span>
+    <span class="s1">&#39;RevenueFromContractWithCustomerIncludingAssessedTax&#39;</span><span class="p">,</span> <span class="c1"># Sales</span>
+    <span class="s1">&#39;RevenueMineralSales&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;SalesRevenueEnergyServices&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RealEstateRevenueNet&#39;</span><span class="p">,])</span>
+
+<span class="n">is_pivot_pd_copy</span><span class="p">[</span><span class="n">selected_cols</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()[:</span><span class="mi">50</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>CostOfRevenue                                               97275
+OtherSalesRevenueNet                                       110435
+OperatingLeasesIncomeStatementLeaseRevenue                 112498
+LicensesRevenue                                            113529
+RevenueFromRelatedParties                                  114129
+BrokerageCommissionsRevenue                                114288
+RoyaltyRevenue                                             114314
+OilAndGasSalesRevenue                                      114320
+OilAndGasRevenue                                           114473
+OtherCostOfOperatingRevenue                                114586
+OtherRealEstateRevenue                                     114673
+TechnologyServicesRevenue                                  114754
+ManagementFeesRevenue                                      114849
+ReimbursementRevenue                                       114882
+OperatingLeasesIncomeStatementMinimumLeaseRevenue          114929
+FoodAndBeverageRevenue                                     114939
+MaintenanceRevenue                                         115026
+LicenseAndServicesRevenue                                  115053
+FranchiseRevenue                                           115054
+SubscriptionRevenue                                        115090
+FinancialServicesRevenue                                   115101
+ContractRevenueCost                                        115104
+RevenueFromGrants                                          115164
+GasGatheringTransportationMarketingAndProcessingRevenue    115177
+CostOfRealEstateRevenue                                    115180
+OccupancyRevenue                                           115214
+NaturalGasProductionRevenue                                115216
+SalesRevenueServicesGross                                  115229
+InvestmentBankingRevenue                                   115258
+AdvertisingRevenue                                         115291
+RevenueOtherFinancialServices                              115338
+OilAndCondensateRevenue                                    115378
+RevenueFromLeasedAndOwnedHotels                            115389
+RevenuesNetOfInterestExpense                               115401
+RegulatedAndUnregulatedOperatingRevenue                    115405
+UnregulatedOperatingRevenue                                115407
+ElectricUtilityRevenue                                     115440
+CargoAndFreightRevenue                                     115445
+OtherHotelOperatingRevenue                                 115449
+CasinoRevenue                                              115464
+RefiningAndMarketingRevenue                                115515
+PrincipalTransactionsRevenue                               115518
+InterestRevenueExpenseNet                                  115535
+HomeBuildingRevenue                                        115548
+OtherRevenueExpenseFromRealEstateOperations                115555
+GasDomesticRegulatedRevenue                                115590
+LicenseAndMaintenanceRevenue                               115595
+RegulatedOperatingRevenue                                  115597
+AdmissionsRevenue                                          115598
+PassengerRevenue                                           115618
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 </div>
  
 

@@ -34,8 +34,8 @@ entries:
       title: todos
       url: /Uniform_Archive
     - output: web,pdf
-      title: Title
-      url: /Untitled
+      title: Complete and Combine
+      url: /CompleteAndCombine
     output: web
     title: bfh_mt_hs2020_sec_data
   output: web

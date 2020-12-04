@@ -129,7 +129,7 @@ sidebar: home_sidebar
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://192.168.0.163:4040">Spark UI</a></p>
+            <p><a href="http://192.168.0.163:4041">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -363,7 +363,7 @@ duration:  90.72703671455383
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Entries:  13_713_772
-duration:  16.742000818252563
+duration:  22.049649000167847
 </pre>
 </div>
 </div>
@@ -476,11 +476,13 @@ duration:  16.742000818252563
 <span class="c1"># #in case of the IS statement, we are only interested in the qtrs=4 for a 10Ks and qtrs=1 for a 10Qs</span>
 <span class="c1"># #in case of the CF statement, the relevant information is in qtrs 4 for the 10K or in the appropriate qrtr for every period Q1..Q4</span>
 <span class="c1"># #  qrtr 0 seems to contain only cash at carrying value at the end of the period</span>
+<span class="c1"># # in case of the BS, qtrs == 0</span>
+
 <span class="c1"># filters = [</span>
 <span class="c1">#         &quot; and ((form == &#39;10-K&#39; and qtrs == &#39;4&#39;) or (form == &#39;10-Q&#39; and qtrs == &#39;1&#39;))&quot;,</span>
 <span class="c1">#         &quot; and ((form == &#39;10-K&#39; and qtrs == &#39;4&#39;) or (form == &#39;10-Q&#39; and ((fp  == &#39;Q1&#39; and qtrs == &#39;1&#39;) or (fp  == &#39;Q2&#39; and qtrs == &#39;2&#39;) or (fp  == &#39;Q3&#39; and qtrs == &#39;3&#39;) or (fp  == &#39;Q4&#39; and qtrs == &#39;4&#39;))))&quot;,</span>
 <span class="c1">#         &quot;&quot;,</span>
-<span class="c1">#         &quot;&quot;,</span>
+<span class="c1">#         &quot; and qtrs==&#39;0&#39; &quot;,</span>
 <span class="c1">#         &quot;&quot;,</span>
 <span class="c1">#         &quot;&quot;,</span>
 <span class="c1">#         &quot;&quot;,</span>
@@ -491,9 +493,14 @@ duration:  16.742000818252563
 <span class="c1">#         &quot; and ((form == &#39;10-K&#39; and qtrs == &#39;4&#39;) or (form == &#39;10-Q&#39; and qtrs == &#39;1&#39;))&quot;</span>
 <span class="c1"># ]</span>
 
-<span class="n">statements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CF&#39;</span><span class="p">]</span>
+<span class="c1"># statements = [&#39;CF&#39;]</span>
+<span class="c1"># filters = [</span>
+<span class="c1">#        &quot; and ((form == &#39;10-K&#39; and qtrs == &#39;4&#39;) or (form == &#39;10-Q&#39; and ((fp  == &#39;Q1&#39; and qtrs == &#39;1&#39;) or (fp  == &#39;Q2&#39; and qtrs == &#39;2&#39;) or (fp  == &#39;Q3&#39; and qtrs == &#39;3&#39;) or (fp  == &#39;Q4&#39; and qtrs == &#39;4&#39;))))&quot;,</span>
+<span class="c1"># ]</span>
+
+<span class="n">statements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BS&#39;</span><span class="p">]</span>
 <span class="n">filters</span> <span class="o">=</span> <span class="p">[</span>
-       <span class="s2">&quot; and ((form == &#39;10-K&#39; and qtrs == &#39;4&#39;) or (form == &#39;10-Q&#39; and ((fp  == &#39;Q1&#39; and qtrs == &#39;1&#39;) or (fp  == &#39;Q2&#39; and qtrs == &#39;2&#39;) or (fp  == &#39;Q3&#39; and qtrs == &#39;3&#39;) or (fp  == &#39;Q4&#39; and qtrs == &#39;4&#39;))))&quot;</span><span class="p">,</span>
+       <span class="s2">&quot; and qtrs == &#39;0&#39;&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -510,8 +517,8 @@ duration:  16.742000818252563
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CF:  150.02622866630554
-duration:  150.06924057006836
+<pre>BS:  133.64339542388916
+duration:  133.64637684822083
 </pre>
 </div>
 </div>
@@ -553,7 +560,7 @@ duration:  150.06924057006836
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">just_selected</span> <span class="o">=</span> <span class="n">df_all_selected</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;adsh = &#39;0001558370-20-011113&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
-<span class="n">just_selected</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">just_selected</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
