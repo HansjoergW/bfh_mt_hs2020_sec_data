@@ -75,7 +75,7 @@ sidebar: home_sidebar
 <span class="n">all_processed_folder</span> <span class="o">=</span> <span class="s2">&quot;D:/data/parq_processed/&quot;</span>
 
 <span class="n">pivot_group</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span><span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;filed&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span><span class="s2">&quot;qtrs&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">]</span>
-<span class="n">analyze_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;value_count&quot;</span><span class="p">,</span><span class="s2">&quot;null_count&quot;</span><span class="p">]</span>
+<span class="n">analyze_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;value_count&quot;</span><span class="p">,</span><span class="s2">&quot;null_count&quot;</span><span class="p">,</span><span class="s2">&quot;difference&quot;</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -1110,33 +1110,6 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="set-GrossProfit-and-CostOfRevenue-to-0.0-if-Revenue-is-0.0">set GrossProfit and CostOfRevenue to 0.0 if Revenue is 0.0<a class="anchor-link" href="#set-GrossProfit-and-CostOfRevenue-to-0.0-if-Revenue-is-0.0"> </a></h3>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># do_set_grossp_zero = (is_df.Revenues_hj==0.0) &amp; (is_df.GrossProfit.isnull())</span>
-<span class="c1"># is_df.loc[do_set_grossp_zero, &#39;GrossProfit&#39;] = 0.0</span>
-
-<span class="c1"># do_set_costofrev_zero = (is_df.Revenues_hj==0.0) &amp; (is_df.CostOfRevenue_hj.isnull())</span>
-<span class="c1"># is_df.loc[do_set_grossp_zero, &#39;CostOfRevenue_hj&#39;] = 0.0</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="complete-OperatingIncomeLoss">complete OperatingIncomeLoss<a class="anchor-link" href="#complete-OperatingIncomeLoss"> </a></h3>
 </div>
 </div>
@@ -1160,6 +1133,12 @@ sidebar: home_sidebar
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="estimate-OperatingIncomeLoss_hj-based-on-GrossProfit-and-NetIncomeLoss">estimate OperatingIncomeLoss_hj based on GrossProfit and NetIncomeLoss<a class="anchor-link" href="#estimate-OperatingIncomeLoss_hj-based-on-GrossProfit-and-NetIncomeLoss"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1167,13 +1146,243 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Falls OpIncome vorhanden und CostsAndExpenses vorhanden und das dem Revenue entspricht, dann</span>
-<span class="c1"># - entweder grossprofit auf opIncome setzen</span>
-<span class="c1"># - oder oder schauen, wie sich die existierenden aufteilen , bzw. schauen wo im durchschnitt grosssprofit zwischen opincome und revenues liegt</span>
-<span class="n">selection</span> <span class="o">=</span> <span class="p">((</span><span class="n">is_df</span><span class="o">.</span><span class="n">Revenues_hj</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span>  <span class="o">&amp;</span> <span class="p">(</span><span class="n">is_df</span><span class="o">.</span><span class="n">GrossProfit</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span>  <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="o">.</span><span class="n">notnull</span><span class="p">()))</span>
-<span class="nb">sum</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
-<span class="n">selected_cols</span> <span class="o">=</span> <span class="n">is_df</span><span class="p">[</span><span class="n">selection</span><span class="p">][[</span><span class="s1">&#39;Revenues_hj&#39;</span><span class="p">,</span><span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="p">((</span><span class="n">selected_cols</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">-</span><span class="n">selected_cols</span><span class="o">.</span><span class="n">GrossProfit</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">selected_cols</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">-</span><span class="n">selected_cols</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">todo</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="estimate-OperatingIncomeLoss_hj-based-on-Revenues-and-NetIncomeLoss">estimate OperatingIncomeLoss_hj based on Revenues and NetIncomeLoss<a class="anchor-link" href="#estimate-OperatingIncomeLoss_hj-based-on-Revenues-and-NetIncomeLoss"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">todo</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="estimate-GrossProfit-based-on-Revenue-and-OperatingIncomeLoss">estimate GrossProfit based on Revenue and OperatingIncomeLoss<a class="anchor-link" href="#estimate-GrossProfit-based-on-Revenue-and-OperatingIncomeLoss"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># if Grossprofit is not set, we can try to estimate it based on the average</span>
+
+<span class="c1"># based on existing GrossProfit Values, we calculate the average grossprofit between Revenue and OperatingIncome (in percent)</span>
+<span class="n">calc_mean_gp_selection</span> <span class="o">=</span> <span class="p">((</span><span class="n">is_df</span><span class="o">.</span><span class="n">Revenues_hj</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span>  <span class="o">&amp;</span> <span class="p">(</span><span class="n">is_df</span><span class="o">.</span><span class="n">GrossProfit</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span>  <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="o">.</span><span class="n">notnull</span><span class="p">()))</span>
+<span class="n">selected_cols</span> <span class="o">=</span> <span class="n">is_df</span><span class="p">[</span><span class="n">calc_mean_gp_selection</span><span class="p">][[</span><span class="s1">&#39;Revenues_hj&#39;</span><span class="p">,</span><span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">avg_gross</span> <span class="o">=</span> <span class="p">((</span><span class="n">selected_cols</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">-</span><span class="n">selected_cols</span><span class="o">.</span><span class="n">GrossProfit</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">selected_cols</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">-</span><span class="n">selected_cols</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># if we have revenue and operatingincome, we try estimate grossprofit based on the average position</span>
+<span class="n">do_updated_grossprofit</span> <span class="o">=</span> <span class="p">(</span><span class="n">is_df</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">GrossProfit</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>
+
+<span class="n">is_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">do_updated_grossprofit</span><span class="p">,</span><span class="s1">&#39;GrossProfit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">is_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">do_updated_grossprofit</span><span class="p">,</span><span class="s1">&#39;Revenues_hj&#39;</span><span class="p">]</span> \
+                                    <span class="o">-</span> <span class="n">avg_gross</span> <span class="o">*</span> <span class="p">(</span><span class="n">is_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">do_updated_grossprofit</span><span class="p">,</span><span class="s1">&#39;Revenues_hj&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">is_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">do_updated_grossprofit</span><span class="p">,</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_df</span><span class="p">[</span><span class="n">do_updated_grossprofit</span><span class="p">][[</span><span class="s1">&#39;cik&#39;</span><span class="p">,</span><span class="s1">&#39;ticker&#39;</span><span class="p">,</span><span class="s1">&#39;adsh&#39;</span><span class="p">,</span><span class="s1">&#39;Revenues_hj&#39;</span><span class="p">,</span><span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cik</th>
+      <th>ticker</th>
+      <th>adsh</th>
+      <th>Revenues_hj</th>
+      <th>GrossProfit</th>
+      <th>OperatingIncomeLoss_hj</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>1465112</td>
+      <td>DTV</td>
+      <td>0001047469-14-001182</td>
+      <td>3.175400e+10</td>
+      <td>1.804006e+10</td>
+      <td>5.150000e+09</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>726854</td>
+      <td>CHCO</td>
+      <td>0000726854-19-000112</td>
+      <td>6.667900e+07</td>
+      <td>4.703133e+07</td>
+      <td>2.856400e+07</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1527590</td>
+      <td>ZFC</td>
+      <td>0001558370-18-006746</td>
+      <td>6.157600e+07</td>
+      <td>3.836530e+07</td>
+      <td>1.654900e+07</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1098972</td>
+      <td>AGEN</td>
+      <td>0001564590-16-018449</td>
+      <td>5.958876e+06</td>
+      <td>-1.153046e+07</td>
+      <td>-2.796912e+07</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1275229</td>
+      <td>GMO</td>
+      <td>0001558370-18-002006</td>
+      <td>0.000000e+00</td>
+      <td>-3.674885e+06</td>
+      <td>-7.129000e+06</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>115885</th>
+      <td>1481506</td>
+      <td>PNG</td>
+      <td>0001104659-12-075408</td>
+      <td>6.612700e+07</td>
+      <td>4.228071e+07</td>
+      <td>1.986700e+07</td>
+    </tr>
+    <tr>
+      <th>115888</th>
+      <td>1297996</td>
+      <td>DLR</td>
+      <td>0001297996-17-000057</td>
+      <td>5.505690e+08</td>
+      <td>3.375267e+08</td>
+      <td>1.372830e+08</td>
+    </tr>
+    <tr>
+      <th>115895</th>
+      <td>1008586</td>
+      <td>STRM</td>
+      <td>0001558370-19-008592</td>
+      <td>4.793000e+06</td>
+      <td>2.099081e+06</td>
+      <td>-4.330000e+05</td>
+    </tr>
+    <tr>
+      <th>115896</th>
+      <td>44689</td>
+      <td>GYRO</td>
+      <td>0001437749-14-014713</td>
+      <td>6.349990e+05</td>
+      <td>-3.549586e+05</td>
+      <td>-1.285444e+06</td>
+    </tr>
+    <tr>
+      <th>115897</th>
+      <td>1125345</td>
+      <td>MGNX</td>
+      <td>0001125345-16-000070</td>
+      <td>3.255000e+06</td>
+      <td>-1.608596e+07</td>
+      <td>-3.426500e+07</td>
+    </tr>
+  </tbody>
+</table>
+<p>33065 rows × 6 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">is_df</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> <span class="o">|</span> <span class="n">is_df</span><span class="o">.</span><span class="n">GrossProfit</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> <span class="o">|</span> <span class="n">is_df</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> <span class="o">|</span> <span class="n">is_df</span><span class="o">.</span><span class="n">NetIncomeLoss_hj</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -1188,58 +1397,9 @@ sidebar: home_sidebar
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.5154839817248579</pre>
+<pre>4478</pre>
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">do_set</span> <span class="o">=</span> <span class="p">(</span><span class="n">is_df</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span>  <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">GrossProfit</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span>  <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_df</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;is&quot;</span><span class="p">)</span>
-<span class="n">count_null</span><span class="p">(</span><span class="n">is_df</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>lines with missing values:  115883
-</pre>
-</div>
 </div>
 
 </div>
@@ -1277,7 +1437,7 @@ dann könnte man grossprofit schätzen -&gt; Operating income + 0.5* CostAndExpe
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_df</span><span class="p">[((</span><span class="n">is_df</span><span class="o">.</span><span class="n">CostsAndExpenses</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">NetIncomeLoss_hj</span><span class="o">.</span><span class="n">notnull</span><span class="p">()))]</span> \
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_df</span><span class="p">[((</span><span class="n">is_df</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">GrossProfit</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">is_df</span><span class="o">.</span><span class="n">NetIncomeLoss_hj</span><span class="o">.</span><span class="n">notnull</span><span class="p">()</span> <span class="p">))]</span> \
   <span class="p">[[</span><span class="s1">&#39;cik&#39;</span><span class="p">,</span><span class="s1">&#39;adsh&#39;</span><span class="p">,</span><span class="s1">&#39;Revenues_hj&#39;</span><span class="p">,</span><span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingExpenses&#39;</span><span class="p">,</span><span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">]]</span> <span class="c1">#721</span>
 </pre></div>
 
@@ -1322,59 +1482,59 @@ dann könnte man grossprofit schätzen -&gt; Operating income + 0.5* CostAndExpe
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
-      <td>1465112</td>
-      <td>0001047469-14-001182</td>
-      <td>3.175400e+10</td>
+      <th>386</th>
+      <td>918646</td>
+      <td>0001564590-15-008677</td>
+      <td>3.289880e+08</td>
+      <td>4.429400e+07</td>
       <td>NaN</td>
-      <td>5.150000e+09</td>
-      <td>2.859000e+09</td>
+      <td>2.981900e+07</td>
       <td>NaN</td>
-      <td>2.660400e+10</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>816761</td>
-      <td>0000816761-15-000008</td>
-      <td>2.732000e+09</td>
-      <td>1.479000e+09</td>
-      <td>5.030000e+08</td>
-      <td>3.670000e+08</td>
+      <th>638</th>
+      <td>701374</td>
+      <td>0001047469-13-001833</td>
+      <td>1.070332e+09</td>
+      <td>9.901630e+08</td>
       <td>NaN</td>
-      <td>2.229000e+09</td>
+      <td>3.540090e+08</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>12</th>
-      <td>1275229</td>
-      <td>0001558370-18-002006</td>
-      <td>0.000000e+00</td>
+      <th>673</th>
+      <td>1298675</td>
+      <td>0001298675-19-000015</td>
+      <td>1.528450e+08</td>
+      <td>1.014200e+08</td>
       <td>NaN</td>
-      <td>-7.129000e+06</td>
-      <td>-8.045000e+06</td>
+      <td>3.549800e+07</td>
       <td>NaN</td>
-      <td>7.129000e+06</td>
+      <td>99014000.0</td>
     </tr>
     <tr>
-      <th>13</th>
-      <td>764622</td>
-      <td>0000764622-16-000087</td>
-      <td>3.495443e+09</td>
+      <th>713</th>
+      <td>799850</td>
+      <td>0001171843-16-012077</td>
+      <td>1.458400e+08</td>
+      <td>7.032700e+07</td>
       <td>NaN</td>
-      <td>8.546020e+08</td>
-      <td>4.372570e+08</td>
+      <td>7.099000e+06</td>
       <td>NaN</td>
-      <td>2.640841e+09</td>
+      <td>134502000.0</td>
     </tr>
     <tr>
-      <th>17</th>
-      <td>1179929</td>
-      <td>0001179929-14-000017</td>
-      <td>2.312039e+09</td>
+      <th>1100</th>
+      <td>914025</td>
+      <td>0000914025-19-000045</td>
+      <td>4.477670e+08</td>
+      <td>2.126460e+08</td>
       <td>NaN</td>
-      <td>3.242700e+07</td>
-      <td>7.811000e+06</td>
+      <td>-4.487100e+07</td>
       <td>NaN</td>
-      <td>2.279612e+09</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1388,63 +1548,249 @@ dann könnte man grossprofit schätzen -&gt; Operating income + 0.5* CostAndExpe
       <td>...</td>
     </tr>
     <tr>
-      <th>115885</th>
-      <td>1481506</td>
-      <td>0001104659-12-075408</td>
-      <td>6.612700e+07</td>
+      <th>113606</th>
+      <td>29915</td>
+      <td>0000029915-15-000055</td>
+      <td>1.203600e+10</td>
+      <td>2.687000e+09</td>
       <td>NaN</td>
-      <td>1.986700e+07</td>
-      <td>1.788900e+07</td>
+      <td>1.375000e+09</td>
       <td>NaN</td>
-      <td>4.626000e+07</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>115888</th>
-      <td>1297996</td>
-      <td>0001297996-17-000057</td>
-      <td>5.505690e+08</td>
+      <th>113696</th>
+      <td>895051</td>
+      <td>0001144204-17-017953</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
       <td>NaN</td>
-      <td>1.372830e+08</td>
-      <td>8.353800e+07</td>
+      <td>-9.453488e+06</td>
       <td>NaN</td>
-      <td>4.132860e+08</td>
+      <td>9420610.0</td>
     </tr>
     <tr>
-      <th>115895</th>
-      <td>1008586</td>
-      <td>0001558370-19-008592</td>
-      <td>4.793000e+06</td>
+      <th>115371</th>
+      <td>918646</td>
+      <td>0001564590-18-025641</td>
+      <td>3.814990e+08</td>
+      <td>9.793100e+07</td>
       <td>NaN</td>
-      <td>-4.330000e+05</td>
-      <td>-6.080000e+05</td>
+      <td>7.260300e+07</td>
       <td>NaN</td>
-      <td>5.226000e+06</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>115896</th>
-      <td>44689</td>
-      <td>0001437749-14-014713</td>
-      <td>6.349990e+05</td>
+      <th>115748</th>
+      <td>1466085</td>
+      <td>0001564590-20-005043</td>
+      <td>2.032230e+08</td>
+      <td>1.954970e+08</td>
       <td>NaN</td>
-      <td>-1.285444e+06</td>
-      <td>-5.388500e+04</td>
+      <td>4.589600e+07</td>
       <td>NaN</td>
-      <td>1.740727e+06</td>
+      <td>152854000.0</td>
     </tr>
     <tr>
-      <th>115897</th>
-      <td>1125345</td>
-      <td>0001125345-16-000070</td>
-      <td>3.255000e+06</td>
+      <th>115889</th>
+      <td>217346</td>
+      <td>0001104659-19-055774</td>
+      <td>3.259000e+09</td>
+      <td>5.120000e+08</td>
       <td>NaN</td>
-      <td>-3.426500e+07</td>
-      <td>-3.384600e+07</td>
+      <td>2.200000e+08</td>
       <td>NaN</td>
-      <td>3.752000e+07</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
-<p>28206 rows × 8 columns</p>
+<p>306 rows × 8 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">is_df</span><span class="p">[((</span><span class="n">is_df</span><span class="o">.</span><span class="n">Revenues_hj</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> <span class="o">|</span> <span class="n">is_df</span><span class="o">.</span><span class="n">GrossProfit</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> <span class="o">|</span> <span class="n">is_df</span><span class="o">.</span><span class="n">OperatingIncomeLoss_hj</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> <span class="o">|</span> <span class="n">is_df</span><span class="o">.</span><span class="n">NetIncomeLoss_hj</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span> <span class="p">))]</span> \
+  <span class="p">[[</span><span class="s1">&#39;cik&#39;</span><span class="p">,</span><span class="s1">&#39;adsh&#39;</span><span class="p">,</span><span class="s1">&#39;Revenues_hj&#39;</span><span class="p">,</span><span class="s1">&#39;GrossProfit&#39;</span><span class="p">,</span><span class="s1">&#39;OperatingIncomeLoss_hj&#39;</span><span class="p">,</span> <span class="s1">&#39;NetIncomeLoss_hj&#39;</span><span class="p">,</span> <span class="s1">&#39;OperatingExpenses&#39;</span><span class="p">,</span><span class="s1">&#39;CostsAndExpenses&#39;</span><span class="p">]]</span> <span class="c1">#721</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cik</th>
+      <th>adsh</th>
+      <th>Revenues_hj</th>
+      <th>GrossProfit</th>
+      <th>OperatingIncomeLoss_hj</th>
+      <th>NetIncomeLoss_hj</th>
+      <th>OperatingExpenses</th>
+      <th>CostsAndExpenses</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>55</th>
+      <td>1399541</td>
+      <td>0001193125-12-462451</td>
+      <td>1.797200e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-631900.0</td>
+      <td>NaN</td>
+      <td>2429200.0</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>1571283</td>
+      <td>0001571283-18-000030</td>
+      <td>4.853600e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>14766000.0</td>
+      <td>37574000.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>75</th>
+      <td>1507986</td>
+      <td>0001144204-12-029739</td>
+      <td>0.000000e+00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-286262.0</td>
+      <td>NaN</td>
+      <td>290266.0</td>
+    </tr>
+    <tr>
+      <th>84</th>
+      <td>1046050</td>
+      <td>0000939057-18-000051</td>
+      <td>1.317200e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3614000.0</td>
+      <td>278000.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>1405528</td>
+      <td>0001104659-20-058630</td>
+      <td>-2.501457e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-25119958.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>115889</th>
+      <td>217346</td>
+      <td>0001104659-19-055774</td>
+      <td>3.259000e+09</td>
+      <td>512000000.0</td>
+      <td>NaN</td>
+      <td>220000000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>115892</th>
+      <td>65172</td>
+      <td>0001104659-14-044501</td>
+      <td>5.034350e+05</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>137218.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>115893</th>
+      <td>825313</td>
+      <td>0000825313-18-000058</td>
+      <td>0.000000e+00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>65900000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>115894</th>
+      <td>60086</td>
+      <td>0001193125-12-441141</td>
+      <td>3.715000e+09</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>177000000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>115898</th>
+      <td>1103601</td>
+      <td>0001193125-12-208968</td>
+      <td>0.000000e+00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>74179000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>4478 rows × 8 columns</p>
 </div>
 </div>
 
@@ -1649,10 +1995,10 @@ form                          0
 qtrs                          0
 fp                            1
 Revenues_hj                   0
-CostOfRevenue_hj          34159
-GrossProfit               34159
+CostOfRevenue_hj          36655
+GrossProfit                3590
 OperatingExpenses         73773
-OperatingIncomeLoss_hj     3352
+OperatingIncomeLoss_hj     3903
 CostsAndExpenses          87531
 NetIncomeLoss_hj            621
 NetIncomeLoss             15026
