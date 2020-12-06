@@ -7,8 +7,8 @@
     "pivoting": "/Pivoting",
     "uniform BS": "/01_Uniform_BS",
     "uniform CF": "/02_Uniform_CF",
-    "Uniform IS": "/03_Uniform_IS",
-    "todos": "/Uniform_Archive",
-    "Complete and Combine": "/CompleteAndCombine"
+    "uniform IS": "/03_Uniform_IS",
+    "Complete and Combine": "/CompleteAndCombine",
+    "Archive - uniform and complete": "/Archive_Uniform"
   }
 }

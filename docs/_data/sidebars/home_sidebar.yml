@@ -28,14 +28,14 @@ entries:
       title: uniform CF
       url: /02_Uniform_CF
     - output: web,pdf
-      title: Uniform IS
+      title: uniform IS
       url: /03_Uniform_IS
-    - output: web,pdf
-      title: todos
-      url: /Uniform_Archive
     - output: web,pdf
       title: Complete and Combine
       url: /CompleteAndCombine
+    - output: web,pdf
+      title: Archive - uniform and complete
+      url: /Archive_Uniform
     output: web
     title: bfh_mt_hs2020_sec_data
   output: web
