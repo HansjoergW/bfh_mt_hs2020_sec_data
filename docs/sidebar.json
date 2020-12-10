@@ -5,10 +5,11 @@
     "Prepare_Whole_Dataset": "/PrepareWholeSet",
     "filter_and_partition": "/FilterAndPartition",
     "pivoting": "/Pivoting",
-    "uniform BS": "/01_Uniform_BS",
-    "uniform CF": "/02_Uniform_CF",
-    "uniform IS": "/03_Uniform_IS",
-    "Complete and Combine": "/CompleteAndCombine",
+    "Uniform BS": "/01_Uniform_BS",
+    "Uniform CF": "/02_Uniform_CF",
+    "Uniform IS": "/03_Uniform_IS",
+    "Complete": "/Complete",
+    "Combine": "/Combine",
     "Archive - uniform and complete": "/Archive_Uniform"
   }
 }

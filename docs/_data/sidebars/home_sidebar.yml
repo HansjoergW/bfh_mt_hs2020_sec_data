@@ -22,17 +22,20 @@ entries:
       title: pivoting
       url: /Pivoting
     - output: web,pdf
-      title: uniform BS
+      title: Uniform BS
       url: /01_Uniform_BS
     - output: web,pdf
-      title: uniform CF
+      title: Uniform CF
       url: /02_Uniform_CF
     - output: web,pdf
-      title: uniform IS
+      title: Uniform IS
       url: /03_Uniform_IS
     - output: web,pdf
-      title: Complete and Combine
-      url: /CompleteAndCombine
+      title: Complete
+      url: /Complete
+    - output: web,pdf
+      title: Combine
+      url: /Combine
     - output: web,pdf
       title: Archive - uniform and complete
       url: /Archive_Uniform
