@@ -37,6 +37,9 @@ entries:
       title: Combine
       url: /Combine
     - output: web,pdf
+      title: Features
+      url: /Features
+    - output: web,pdf
       title: Archive - uniform and complete
       url: /Archive_Uniform
     output: web

@@ -73,6 +73,7 @@ sidebar: home_sidebar
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">all_data_local_folder</span> <span class="o">=</span> <span class="s2">&quot;./data/&quot;</span>
 
 <span class="n">join_group</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span><span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;filed&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">]</span>
+<span class="n">analyze_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;value_count&#39;</span><span class="p">,</span><span class="s1">&#39;null_count&#39;</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -760,7 +761,7 @@ number of companies:  3060
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">joined_cleaned_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;complete.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">joined_cleaned_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">analyze_cols</span><span class="p">)</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;complete.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
