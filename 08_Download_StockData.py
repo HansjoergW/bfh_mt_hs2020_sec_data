@@ -98,16 +98,25 @@ def download_tickers(tickers: List[str]):
 def get_add_data(ticker:str) -> Dict[str,str]:
 
     try:
-        #print(ticker)
+        print(ticker)
         info = yf.Ticker(ticker)
         return {'ticker'            : ticker,
                 'sector'            : info.info['sector'],
                 'industry'          : info.info['industry'],
                 'marketCap'         : info.info['marketCap'],
-                'sharesOutstanding' : info.info['sharesOutstanding']}
+                'sharesOutstanding' : info.info['sharesOutstanding'],
+                'message'           : None}
     except Exception as ex:
-        print(ticker, "-error ", str(ex))
-        return None
+        msg = str(ex)
+        if "404" in msg:
+            return None
+
+        return {'ticker'            : ticker,
+                'sector'            : None,
+                'industry'          : None,
+                'marketCap'         : None,
+                'sharesOutstanding' : None,
+                'message'           : msg}
 
 
 def parallel_download_add_info(tickers: List[str]):
@@ -117,7 +126,7 @@ def parallel_download_add_info(tickers: List[str]):
     current_tickers = current.ticker.to_list()
     tickers = list(set(tickers) - set(current_tickers))
 
-    data = pd.DataFrame(columns=['ticker', 'sector', 'industry','marketCap', 'sharesOutstanding'])
+    data = pd.DataFrame(columns=['ticker', 'sector', 'industry','marketCap', 'sharesOutstanding','message'],)
 
     start = time.time()
     pool = Pool(20)
