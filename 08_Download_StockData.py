@@ -20,7 +20,6 @@ def load_data() -> pd.DataFrame:
     df.reset_index(inplace = True)
     return df
 
-
 def ensure_dir(file_path:str):
     directory = os.path.dirname(file_path)
     if not os.path.exists(directory):
@@ -39,9 +38,11 @@ def downloadTicker(stock:str, startyear:int)->pd.DataFrame:
     stock_df = stockFetcher.get_historical()
     return stock_df
 
+
 def downloadTicker_yf(stock:str, startyear:int)->pd.DataFrame:
     stock_df = yf.download(stock,start=str(startyear)+"-01-01",end="2020-12-10", progress=False, auto_adjust=True)
     return stock_df
+
 
 def save(df: pd.DataFrame, filename:str):
     df.to_csv(filename, sep=',', encoding='utf-8', index=True)
@@ -95,29 +96,43 @@ def download_tickers(tickers: List[str]):
 
 
 def get_add_data(ticker:str) -> Dict[str,str]:
-    print(ticker)
+
     try:
+        #print(ticker)
         info = yf.Ticker(ticker)
         return {'ticker'            : ticker,
                 'sector'            : info.info['sector'],
                 'industry'          : info.info['industry'],
                 'marketCap'         : info.info['marketCap'],
                 'sharesOutstanding' : info.info['sharesOutstanding']}
-    except:
+    except Exception as ex:
+        print(ticker, "-error ", str(ex))
         return None
 
 
 def parallel_download_add_info(tickers: List[str]):
+    filename = stock_data_folder + "add_ticker_info.csv"
+    current = pd.read_csv(filename, sep=',', encoding='utf-8', header=0)
+
+    current_tickers = current.ticker.to_list()
+    tickers = list(set(tickers) - set(current_tickers))
+
     data = pd.DataFrame(columns=['ticker', 'sector', 'industry','marketCap', 'sharesOutstanding'])
 
     start = time.time()
     pool = Pool(20)
-    list_infos = pool.map_async(get_add_data, tickers)
+    list_infos = pool.map(get_add_data, tickers)
     pool.close()
     pool.join()
 
-    entries = [x for x in list_infos.get() if x is not None]
-    data = data.append(entries)
+    entries = [x for x in list_infos if x is not None]
+    print(len(entries))
+    print("duration: ", time.time() - start)
+
+    for entry in entries:
+        data = data.append(entry, ignore_index=True)
+
+    data = pd.concat([current, data])
 
     print(data.shape)
     print("duration: ", time.time() - start)

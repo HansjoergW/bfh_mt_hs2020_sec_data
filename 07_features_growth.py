@@ -1,8 +1,19 @@
 from multiprocessing import Pool
+from typing import List, Tuple
 import pandas as pd
-from typing import List
 
-mycounter = 0
+def create_growth_rate_lists() -> Tuple[List[str], List[str]]:
+    list_data_cols = ['Revenues_hj', 'GrossProfit', 'OperatingIncomeLoss_hj', 'NetIncomeLoss_hj', 'RetainedEarnings_hj', 'Equity_hj']
+    list_new_cols  = ['gr_revenue' , 'gr_grosspr' , 'gr_opiincome',           'gr_netincome',     'gr_earnings',         'gr_equity']
+
+    list_data_cols.extend(['AssetsCurrent', 'AssetsNoncurrent', 'LiabilitiesCurrent', 'LiabilitiesNoncurrent'])
+    list_new_cols.extend( ['gr_asscur',     'gr_assnoncur',     'gr_liabcur',         'gr_liabnoncur'        ])
+
+    list_data_cols.extend(['CashFromInvesting', 'CashFromFinancing', 'CashFromOperating', 'PaymentsOfDividendsTotal_hj'])
+    list_new_cols.extend( ['gr_cashfrominv',    'gr_cashfromfin',    'gr_cashfromope',    'gr_dividends'])
+
+    return list_data_cols, list_new_cols
+
 
 def calculate_growth(all_df: pd.DataFrame, grouped_df: pd.DataFrame, data_cols:List[str], new_cols_prefix:List[str]):
 
@@ -22,6 +33,7 @@ def calculate_growth(all_df: pd.DataFrame, grouped_df: pd.DataFrame, data_cols:L
         all_df.loc[grouped_df.index[1:], col_name_p] =  is_positiv_arr[:-1] * change_arr
         all_df.loc[grouped_df.index[1:], col_name_n] =  is_negativ_arr[:-1] * change_arr
 
+
 def load_data() -> pd.DataFrame:
     df = pd.read_csv("./data/features_ratios.csv")
 
@@ -32,19 +44,13 @@ def load_data() -> pd.DataFrame:
     df.reset_index(inplace = True)
     return df
 
-list_data_cols = ['Revenues_hj', 'GrossProfit', 'OperatingIncomeLoss_hj', 'NetIncomeLoss_hj', 'RetainedEarnings_hj', 'Equity_hj']
-list_new_cols  = ['gr_revenue' , 'gr_grosspr' , 'gr_opiincome',           'gr_netincome',     'gr_earnings',         'gr_equity']
-
-list_data_cols.extend(['AssetsCurrent', 'AssetsNoncurrent', 'LiabilitiesCurrent', 'LiabilitiesNoncurrent'])
-list_new_cols.extend( ['gr_asscur',     'gr_assnoncur',     'gr_liabcur',         'gr_liabnoncur'        ])
-
-list_data_cols.extend(['CashFromInvesting', 'CashFromFinancing', 'CashFromOperating', 'PaymentsOfDividendsTotal_hj'])
-list_new_cols.extend( ['gr_cashfrominv',    'gr_cashfromfin',    'gr_cashfromope',    'gr_dividends'])
 
 df = load_data()
 
+
 def call_function(x):
     print(x[0])
+    list_data_cols, list_new_cols = create_growth_rate_lists()
     calculate_growth(df, x[1], list_data_cols, list_new_cols)
 
 
