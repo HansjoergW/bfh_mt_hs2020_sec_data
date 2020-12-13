@@ -553,7 +553,8 @@ Therefore, for every "growthrate"-feature two features will be created. The firs
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># m</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># multiprocessing cannot is not really working in jupyter on windows</span>
+<span class="c1"># therfore there ist the 07_features_growth.py skript, which which enables multiprocessing</span>
 
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">ticker</span><span class="p">,</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;cik&#39;</span><span class="p">,</span> <span class="s1">&#39;fp&#39;</span><span class="p">]):</span>
@@ -1507,7 +1508,7 @@ Therefore, for every "growthrate"-feature two features will be created. The firs
     </tr>
   </tbody>
 </table>
-<p>15 rows Ã— 51 columns</p>
+<p>15 rows × 51 columns</p>
 </div>
 </div>
 

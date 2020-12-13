@@ -40,6 +40,9 @@ entries:
       title: Features
       url: /Features
     - output: web,pdf
+      title: Stock
+      url: /Download_StockData
+    - output: web,pdf
       title: Archive - uniform and complete
       url: /Archive_Uniform
     output: web
