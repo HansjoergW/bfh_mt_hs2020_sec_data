@@ -43,6 +43,9 @@ entries:
       title: Stock
       url: /Download_StockData
     - output: web,pdf
+      title: Title
+      url: /Final_Preparation
+    - output: web,pdf
       title: Archive - uniform and complete
       url: /Archive_Uniform
     output: web

@@ -167,6 +167,7 @@ def download_add_info(tickers: List[str]):
     print(data.shape)
 
 
+
 if __name__ == '__main__':
     tickers = list(load_data().ticker.sort_values().unique())
     print(len(tickers))

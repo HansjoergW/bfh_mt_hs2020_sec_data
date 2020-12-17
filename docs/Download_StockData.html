@@ -226,7 +226,10 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="03_Download-historical-data">03_Download historical data<a class="anchor-link" href="#03_Download-historical-data"> </a></h2>
+<h2 id="03_Download-historical-data">03_Download historical data<a class="anchor-link" href="#03_Download-historical-data"> </a></h2><p>Unfortuantely, it is not that easy to get historical data of of companies that are no longer listed or went out of business for what reason ever. So we will only be able to work with companies, which are still in business. That is a problem, since a serious "survivor" bias is introduced in the data. It would be important to also have data of "failed" companies.</p>
+<p>We will be using two different libraries to download: yahoo-historical and yfinance. yfinance has the advantage that Open, High, Low and Close can be download "adjusted" meaning that splits and payed dividends are taken into consideration. The standard Open, High, Low and Close from yahoo is only adjusted for splits.</p>
+<p>The code in a Jupyter Notebook cannot be parallelized that easily, therefore there is the "08_Download_StodkData.py" Script that implements a parallelized version.</p>
+
 </div>
 </div>
 </div>
@@ -419,7 +422,11 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="04_Download-Additional-Data">04_Download Additional Data<a class="anchor-link" href="#04_Download-Additional-Data"> </a></h2>
+<h2 id="04_Download-Additional-Data">04_Download Additional Data<a class="anchor-link" href="#04_Download-Additional-Data"> </a></h2><p>There are some important information which are not available from the SEC data. These are mainly the sector, industry the company is in, as well as the marketCap and the sharesOutstanding. These attributes are downloaded into a separate file.</p>
+<p>The code in a Jupyter Notebook cannot be parallelized that easily, therefore there is the "08_Download_StodkData.py" Script that implements a parallelized version.</p>
+<p>The data is downloaded from Yahoo Finance. However, Yahoo Finance restricts the number of calls that can be made from one computer within a certain amount of time. If there are too many requests from the same computer, yahoo answers with a HTTP Error 404.  Therefore the code has to be able to be started multiple times and has to keep track of the data that already has been downloaded successfully.</p>
+<p>In the script "08_Download_StockData.py" there is a also a parallelized version of the code</p>
+
 </div>
 </div>
 </div>
@@ -524,6 +531,252 @@ sidebar: home_sidebar
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_add_info</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="05_Normalization-and-feature-generation-of-historical-data">05_Normalization and feature generation of historical data<a class="anchor-link" href="#05_Normalization-and-feature-generation-of-historical-data"> </a></h2><p>In order to be able to compare the historical stock price data of different companies, they have to be normalized.</p>
+<ul>
+<li>First, Open, High, and Low are compared with the Close price.</li>
+<li>Second, the Close price is normalized (divided by) the last Close Price</li>
+<li>Third, the volume is normalized by that sharesOutstanding </li>
+</ul>
+<p>Furthermore, as additional features, well we add</p>
+<ul>
+<li>the percentual change of the close Price, compared to the day before</li>
+<li>the percentual change of the traded volume, compared to the day before</li>
+<li>day of week, day of month, day of year, and month of year</li>
+</ul>
+<p>And again, there is also a parallelized version of this code in "08_Download_StockData.py"</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="reading-the-data">reading the data<a class="anchor-link" href="#reading-the-data"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># reading all files with adjusted OHLC Data (stored stored in &quot;*_2.csv&quot; files)</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+
+<span class="k">def</span> <span class="nf">get_data_files</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;**/*_2.csv&quot;</span><span class="p">,</span><span class="n">recursive</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_stockdata</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">df</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">Date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_additional_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_ticker_from_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">filename</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">stock_data_folder</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="normalization">normalization<a class="anchor-link" href="#normalization"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">norm_historical_data</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">shares_outstanding</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="n">lastClose</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">Close</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;close_norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Close</span> <span class="o">/</span> <span class="n">lastClose</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;high_norm&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">High</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">Close</span><span class="p">)</span> <span class="o">/</span> <span class="n">df</span><span class="o">.</span><span class="n">Close</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;low_norm&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Low</span> <span class="o">-</span> <span class="n">df</span><span class="o">.</span><span class="n">Close</span><span class="p">)</span> <span class="o">/</span> <span class="n">df</span><span class="o">.</span><span class="n">Close</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;open_norm&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Open</span> <span class="o">-</span><span class="n">df</span><span class="o">.</span><span class="n">Close</span><span class="p">)</span> <span class="o">/</span> <span class="n">df</span><span class="o">.</span><span class="n">Close</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;volume_norm&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Volume</span> <span class="o">/</span> <span class="n">shares_outstanding</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="additional-features">additional features<a class="anchor-link" href="#additional-features"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_features_from_historical_data</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;close_chg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        
+        <span class="n">close_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Close</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">close_change</span> <span class="o">=</span> <span class="p">((</span><span class="n">close_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">close_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">close_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    
+    
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="s1">&#39;close_chg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">close_change</span>
+        
+        
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;volume_chg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        
+        <span class="n">volume_data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Volume</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">volume_change</span> <span class="o">=</span> <span class="p">((</span><span class="n">volume_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">volume_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">volume_data</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    
+    
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="s1">&#39;volume_chg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume_change</span>
+        
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;day_of_week&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span> <span class="o">/</span> <span class="mi">7</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;day_of_month&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span> <span class="o">/</span> <span class="mi">31</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;day_of_year&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofyear</span> <span class="o">/</span> <span class="mi">365</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;week_of_year&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">weekofyear</span> <span class="o">/</span> <span class="mi">52</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;month_of_year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span> <span class="o">/</span> <span class="mi">12</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="process-stocks">process stocks<a class="anchor-link" href="#process-stocks"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_stock_data</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">df_add_info</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+    <span class="n">ticker</span> <span class="o">=</span> <span class="n">get_ticker_from_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">df_stock</span> <span class="o">=</span> <span class="n">read_stockdata</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">df_stock_add_info</span> <span class="o">=</span> <span class="n">df_add_info</span><span class="p">[</span><span class="n">df_add_info</span><span class="o">.</span><span class="n">ticker</span> <span class="o">==</span> <span class="n">ticker</span><span class="p">]</span>
+    
+    <span class="n">sharesOutstanding</span> <span class="o">=</span> <span class="n">df_stock_add_info</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">sharesOutstanding</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">norm_historical_data</span><span class="p">(</span><span class="n">df_stock</span><span class="p">,</span> <span class="n">sharesOutstanding</span><span class="p">)</span>
+    <span class="n">create_features_from_historical_data</span><span class="p">(</span><span class="n">df_stock</span><span class="p">)</span>
+    
+    <span class="n">df_stock</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="n">ticker</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">ticker</span> <span class="o">+</span> <span class="s2">&quot;_processed.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">process_stock_data</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;A/AAPL_2.csv&quot;</span><span class="p">,</span> <span class="n">df_add_info</span><span class="p">)</span> <span class="c1"># test with one stock</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_add_info</span> <span class="o">=</span> <span class="n">read_additional_info</span><span class="p">()</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">get_data_files</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+    <span class="k">pass</span>
+    <span class="c1"># process_stock_data(filename, df_add_info)</span>
 </pre></div>
 
     </div>
@@ -924,7 +1177,7 @@ sidebar: home_sidebar
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;zip&#39;: &#39;95014&#39;, &#39;sector&#39;: &#39;Technology&#39;, &#39;fullTimeEmployees&#39;: 147000, &#39;longBusinessSummary&#39;: &#39;Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. It also sells various related services. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, HomePod, iPod touch, and other Apple-branded and third-party accessories. It also provides AppleCare support services; cloud services store services; and operates various platforms, including the App Store, that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts. In addition, the company offers various services, such as Apple Arcade, a game subscription service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It sells and delivers third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and resellers. Apple Inc. was founded in 1977 and is headquartered in Cupertino, California.&#39;, &#39;city&#39;: &#39;Cupertino&#39;, &#39;phone&#39;: &#39;408-996-1010&#39;, &#39;state&#39;: &#39;CA&#39;, &#39;country&#39;: &#39;United States&#39;, &#39;companyOfficers&#39;: [], &#39;website&#39;: &#39;http://www.apple.com&#39;, &#39;maxAge&#39;: 1, &#39;address1&#39;: &#39;One Apple Park Way&#39;, &#39;industry&#39;: &#39;Consumer Electronics&#39;, &#39;previousClose&#39;: 123.24, &#39;regularMarketOpen&#39;: 122.43, &#39;twoHundredDayAverage&#39;: 108.05752, &#39;trailingAnnualDividendYield&#39;: 0.0064508277, &#39;payoutRatio&#39;: 0.24239999, &#39;volume24Hr&#39;: None, &#39;regularMarketDayHigh&#39;: 122.76, &#39;navPrice&#39;: None, &#39;averageDailyVolume10Day&#39;: 87060985, &#39;totalAssets&#39;: None, &#39;regularMarketPreviousClose&#39;: 123.24, &#39;fiftyDayAverage&#39;: 117.944115, &#39;trailingAnnualDividendRate&#39;: 0.795, &#39;open&#39;: 122.43, &#39;toCurrency&#39;: None, &#39;averageVolume10days&#39;: 87060985, &#39;expireDate&#39;: None, &#39;yield&#39;: None, &#39;algorithm&#39;: None, &#39;dividendRate&#39;: 0.82, &#39;exDividendDate&#39;: 1604620800, &#39;beta&#39;: 1.297637, &#39;circulatingSupply&#39;: None, &#39;startDate&#39;: None, &#39;regularMarketDayLow&#39;: 120.55, &#39;priceHint&#39;: 2, &#39;currency&#39;: &#39;USD&#39;, &#39;trailingPE&#39;: 37.32012, &#39;regularMarketVolume&#39;: 81462378, &#39;lastMarket&#39;: None, &#39;maxSupply&#39;: None, &#39;openInterest&#39;: None, &#39;marketCap&#39;: 2081190313984, &#39;volumeAllCurrencies&#39;: None, &#39;strikePrice&#39;: None, &#39;averageVolume&#39;: 125250132, &#39;priceToSalesTrailing12Months&#39;: 7.5813355, &#39;dayLow&#39;: 120.55, &#39;ask&#39;: 122.19, &#39;ytdReturn&#39;: None, &#39;askSize&#39;: 800, &#39;volume&#39;: 81462378, &#39;fiftyTwoWeekHigh&#39;: 137.98, &#39;forwardPE&#39;: 28.270208, &#39;fromCurrency&#39;: None, &#39;fiveYearAvgDividendYield&#39;: 1.49, &#39;fiftyTwoWeekLow&#39;: 53.1525, &#39;bid&#39;: 122.17, &#39;tradeable&#39;: False, &#39;dividendYield&#39;: 0.0067000003, &#39;bidSize&#39;: 900, &#39;dayHigh&#39;: 122.76, &#39;exchange&#39;: &#39;NMS&#39;, &#39;shortName&#39;: &#39;Apple Inc.&#39;, &#39;longName&#39;: &#39;Apple Inc.&#39;, &#39;exchangeTimezoneName&#39;: &#39;America/New_York&#39;, &#39;exchangeTimezoneShortName&#39;: &#39;EST&#39;, &#39;isEsgPopulated&#39;: False, &#39;gmtOffSetMilliseconds&#39;: &#39;-18000000&#39;, &#39;quoteType&#39;: &#39;EQUITY&#39;, &#39;symbol&#39;: &#39;AAPL&#39;, &#39;messageBoardId&#39;: &#39;finmb_24937&#39;, &#39;market&#39;: &#39;us_market&#39;, &#39;annualHoldingsTurnover&#39;: None, &#39;enterpriseToRevenue&#39;: 7.695, &#39;beta3Year&#39;: None, &#39;profitMargins&#39;: 0.20914, &#39;enterpriseToEbitda&#39;: 27.313, &#39;52WeekChange&#39;: 0.7495892, &#39;morningStarRiskRating&#39;: None, &#39;forwardEps&#39;: 4.33, &#39;revenueQuarterlyGrowth&#39;: None, &#39;sharesOutstanding&#39;: 17102499840, &#39;fundInceptionDate&#39;: None, &#39;annualReportExpenseRatio&#39;: None, &#39;bookValue&#39;: 3.849, &#39;sharesShort&#39;: 89985311, &#39;sharesPercentSharesOut&#39;: 0.0053, &#39;fundFamily&#39;: None, &#39;lastFiscalYearEnd&#39;: 1601078400, &#39;heldPercentInstitutions&#39;: 0.59731996, &#39;netIncomeToCommon&#39;: 57410998272, &#39;trailingEps&#39;: 3.28, &#39;lastDividendValue&#39;: 0.205, &#39;SandP52WeekChange&#39;: 0.14789832, &#39;priceToBook&#39;: 31.803066, &#39;heldPercentInsiders&#39;: 0.00066, &#39;nextFiscalYearEnd&#39;: 1664150400, &#39;mostRecentQuarter&#39;: 1601078400, &#39;shortRatio&#39;: 0.82, &#39;sharesShortPreviousMonthDate&#39;: 1604016000, &#39;floatShares&#39;: 16984630180, &#39;enterpriseValue&#39;: 2112525565952, &#39;threeYearAverageReturn&#39;: None, &#39;lastSplitDate&#39;: 1598832000, &#39;lastSplitFactor&#39;: &#39;4:1&#39;, &#39;legalType&#39;: None, &#39;lastDividendDate&#39;: 1604620800, &#39;morningStarOverallRating&#39;: None, &#39;earningsQuarterlyGrowth&#39;: -0.074, &#39;dateShortInterest&#39;: 1606694400, &#39;pegRatio&#39;: 2.46, &#39;lastCapGain&#39;: None, &#39;shortPercentOfFloat&#39;: 0.0053, &#39;sharesShortPriorMonth&#39;: 80528396, &#39;impliedSharesOutstanding&#39;: None, &#39;category&#39;: None, &#39;fiveYearAverageReturn&#39;: None, &#39;regularMarketPrice&#39;: 122.43, &#39;logo_url&#39;: &#39;https://logo.clearbit.com/apple.com&#39;}
+<pre>{&#39;zip&#39;: &#39;95014&#39;, &#39;sector&#39;: &#39;Technology&#39;, &#39;fullTimeEmployees&#39;: 147000, &#39;longBusinessSummary&#39;: &#39;Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. It also sells various related services. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, HomePod, iPod touch, and other Apple-branded and third-party accessories. It also provides AppleCare support services; cloud services store services; and operates various platforms, including the App Store, that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts. In addition, the company offers various services, such as Apple Arcade, a game subscription service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It sells and delivers third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and resellers. Apple Inc. was founded in 1977 and is headquartered in Cupertino, California.&#39;, &#39;city&#39;: &#39;Cupertino&#39;, &#39;phone&#39;: &#39;408-996-1010&#39;, &#39;state&#39;: &#39;CA&#39;, &#39;country&#39;: &#39;United States&#39;, &#39;companyOfficers&#39;: [], &#39;website&#39;: &#39;http://www.apple.com&#39;, &#39;maxAge&#39;: 1, &#39;address1&#39;: &#39;One Apple Park Way&#39;, &#39;industry&#39;: &#39;Consumer Electronics&#39;, &#39;previousClose&#39;: 127.88, &#39;regularMarketOpen&#39;: 127.41, &#39;twoHundredDayAverage&#39;: 109.04962, &#39;trailingAnnualDividendYield&#39;: 0.006216766, &#39;payoutRatio&#39;: 0.24239999, &#39;volume24Hr&#39;: None, &#39;regularMarketDayHigh&#39;: 128.36, &#39;navPrice&#39;: None, &#39;averageDailyVolume10Day&#39;: 98387850, &#39;totalAssets&#39;: None, &#39;regularMarketPreviousClose&#39;: 127.88, &#39;fiftyDayAverage&#39;: 118.74057, &#39;trailingAnnualDividendRate&#39;: 0.795, &#39;open&#39;: 127.41, &#39;toCurrency&#39;: None, &#39;averageVolume10days&#39;: 98387850, &#39;expireDate&#39;: None, &#39;yield&#39;: None, &#39;algorithm&#39;: None, &#39;dividendRate&#39;: 0.82, &#39;exDividendDate&#39;: 1604620800, &#39;beta&#39;: 1.297637, &#39;circulatingSupply&#39;: None, &#39;startDate&#39;: None, &#39;regularMarketDayLow&#39;: 126.56, &#39;priceHint&#39;: 2, &#39;currency&#39;: &#39;USD&#39;, &#39;trailingPE&#39;: 38.96646, &#39;regularMarketVolume&#39;: 98208591, &#39;lastMarket&#39;: None, &#39;maxSupply&#39;: None, &#39;openInterest&#39;: None, &#39;marketCap&#39;: 2172999958528, &#39;volumeAllCurrencies&#39;: None, &#39;strikePrice&#39;: None, &#39;averageVolume&#39;: 122994596, &#39;priceToSalesTrailing12Months&#39;: 7.9157786, &#39;dayLow&#39;: 126.56, &#39;ask&#39;: 0, &#39;ytdReturn&#39;: None, &#39;askSize&#39;: 900, &#39;volume&#39;: 98208591, &#39;fiftyTwoWeekHigh&#39;: 137.98, &#39;forwardPE&#39;: 29.449306, &#39;fromCurrency&#39;: None, &#39;fiveYearAvgDividendYield&#39;: 1.49, &#39;fiftyTwoWeekLow&#39;: 53.1525, &#39;bid&#39;: 0, &#39;tradeable&#39;: False, &#39;dividendYield&#39;: 0.0064, &#39;bidSize&#39;: 1300, &#39;dayHigh&#39;: 128.36, &#39;exchange&#39;: &#39;NMS&#39;, &#39;shortName&#39;: &#39;Apple Inc.&#39;, &#39;longName&#39;: &#39;Apple Inc.&#39;, &#39;exchangeTimezoneName&#39;: &#39;America/New_York&#39;, &#39;exchangeTimezoneShortName&#39;: &#39;EST&#39;, &#39;isEsgPopulated&#39;: False, &#39;gmtOffSetMilliseconds&#39;: &#39;-18000000&#39;, &#39;quoteType&#39;: &#39;EQUITY&#39;, &#39;symbol&#39;: &#39;AAPL&#39;, &#39;messageBoardId&#39;: &#39;finmb_24937&#39;, &#39;market&#39;: &#39;us_market&#39;, &#39;annualHoldingsTurnover&#39;: None, &#39;enterpriseToRevenue&#39;: 8.034, &#39;beta3Year&#39;: None, &#39;profitMargins&#39;: 0.20914, &#39;enterpriseToEbitda&#39;: 28.516, &#39;52WeekChange&#39;: 0.82572675, &#39;morningStarRiskRating&#39;: None, &#39;forwardEps&#39;: 4.34, &#39;revenueQuarterlyGrowth&#39;: None, &#39;sharesOutstanding&#39;: 17102499840, &#39;fundInceptionDate&#39;: None, &#39;annualReportExpenseRatio&#39;: None, &#39;bookValue&#39;: 3.849, &#39;sharesShort&#39;: 89985311, &#39;sharesPercentSharesOut&#39;: 0.0053, &#39;fundFamily&#39;: None, &#39;lastFiscalYearEnd&#39;: 1601078400, &#39;heldPercentInstitutions&#39;: 0.59707, &#39;netIncomeToCommon&#39;: 57410998272, &#39;trailingEps&#39;: 3.28, &#39;lastDividendValue&#39;: 0.205, &#39;SandP52WeekChange&#39;: 0.15467787, &#39;priceToBook&#39;: 33.206028, &#39;heldPercentInsiders&#39;: 0.00066, &#39;nextFiscalYearEnd&#39;: 1664150400, &#39;mostRecentQuarter&#39;: 1601078400, &#39;shortRatio&#39;: 0.82, &#39;sharesShortPreviousMonthDate&#39;: 1604016000, &#39;floatShares&#39;: 16984630180, &#39;enterpriseValue&#39;: 2205525475328, &#39;threeYearAverageReturn&#39;: None, &#39;lastSplitDate&#39;: 1598832000, &#39;lastSplitFactor&#39;: &#39;4:1&#39;, &#39;legalType&#39;: None, &#39;lastDividendDate&#39;: 1604620800, &#39;morningStarOverallRating&#39;: None, &#39;earningsQuarterlyGrowth&#39;: -0.074, &#39;dateShortInterest&#39;: 1606694400, &#39;pegRatio&#39;: 2.55, &#39;lastCapGain&#39;: None, &#39;shortPercentOfFloat&#39;: 0.0053, &#39;sharesShortPriorMonth&#39;: 80528396, &#39;impliedSharesOutstanding&#39;: None, &#39;category&#39;: None, &#39;fiveYearAverageReturn&#39;: None, &#39;regularMarketPrice&#39;: 127.41, &#39;logo_url&#39;: &#39;https://logo.clearbit.com/apple.com&#39;}
 </pre>
 </div>
 </div>
@@ -1029,7 +1282,7 @@ sidebar: home_sidebar
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Technology
-Software—Infrastructure
+Software�Infrastructure
 1612352192512
 7560500224
 </pre>
@@ -1322,7 +1575,7 @@ Software—Infrastructure
     </tr>
   </tbody>
 </table>
-<p>81 rows × 12 columns</p>
+<p>81 rows � 12 columns</p>
 </div>
 </div>
 
@@ -1423,7 +1676,7 @@ Software—Infrastructure
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">aacob</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">Ticker</span><span class="p">(</span><span class="s2">&quot;AAC&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">aacob</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">Ticker</span><span class="p">(</span><span class="s2">&quot;AAPL&quot;</span><span class="p">)</span>
 <span class="n">aacob</span><span class="o">.</span><span class="n">info</span>
 </pre></div>
 
@@ -1436,120 +1689,134 @@ Software—Infrastructure
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">HTTPError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-29-a7635d9b1a89&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">      1</span> aacob <span class="ansi-yellow-intense-fg ansi-bold">=</span> yf<span class="ansi-yellow-intense-fg ansi-bold">.</span>Ticker<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-blue-intense-fg ansi-bold">&#34;AAC&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 2</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>aacob<span class="ansi-yellow-intense-fg ansi-bold">.</span>info
 
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\site-packages\yfinance\ticker.py</span> in <span class="ansi-cyan-fg">info</span><span class="ansi-blue-intense-fg ansi-bold">(self)</span>
-<span class="ansi-green-fg">    136</span>     <span class="ansi-yellow-intense-fg ansi-bold">@</span>property
-<span class="ansi-green-fg">    137</span>     <span class="ansi-green-intense-fg ansi-bold">def</span> info<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 138</span><span class="ansi-yellow-intense-fg ansi-bold">         </span><span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>get_info<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    139</span> 
-<span class="ansi-green-fg">    140</span>     <span class="ansi-yellow-intense-fg ansi-bold">@</span>property
 
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\site-packages\yfinance\base.py</span> in <span class="ansi-cyan-fg">get_info</span><span class="ansi-blue-intense-fg ansi-bold">(self, proxy, as_dict, *args, **kwargs)</span>
-<span class="ansi-green-fg">    444</span> 
-<span class="ansi-green-fg">    445</span>     <span class="ansi-green-intense-fg ansi-bold">def</span> get_info<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">,</span> proxy<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">None</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> as_dict<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">False</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-yellow-intense-fg ansi-bold">*</span>args<span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-yellow-intense-fg ansi-bold">**</span>kwargs<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 446</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_get_fundamentals<span class="ansi-yellow-intense-fg ansi-bold">(</span>proxy<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    447</span>         data <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_info
-<span class="ansi-green-fg">    448</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> as_dict<span class="ansi-yellow-intense-fg ansi-bold">:</span>
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\site-packages\yfinance\base.py</span> in <span class="ansi-cyan-fg">_get_fundamentals</span><span class="ansi-blue-intense-fg ansi-bold">(self, kind, proxy)</span>
-<span class="ansi-green-fg">    283</span>         <span class="ansi-red-intense-fg ansi-bold"># holders</span>
-<span class="ansi-green-fg">    284</span>         url <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-blue-intense-fg ansi-bold">&#34;{}/{}/holders&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">.</span>format<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_scrape_url<span class="ansi-yellow-intense-fg ansi-bold">,</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>ticker<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 285</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>holders <span class="ansi-yellow-intense-fg ansi-bold">=</span> _pd<span class="ansi-yellow-intense-fg ansi-bold">.</span>read_html<span class="ansi-yellow-intense-fg ansi-bold">(</span>url<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    286</span> 
-<span class="ansi-green-fg">    287</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> len<span class="ansi-yellow-intense-fg ansi-bold">(</span>holders<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">&gt;=</span><span class="ansi-cyan-intense-fg ansi-bold">3</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\site-packages\pandas\io\html.py</span> in <span class="ansi-cyan-fg">read_html</span><span class="ansi-blue-intense-fg ansi-bold">(io, match, flavor, header, index_col, skiprows, attrs, parse_dates, thousands, encoding, decimal, converters, na_values, keep_default_na, displayed_only)</span>
-<span class="ansi-green-fg">   1098</span>         na_values<span class="ansi-yellow-intense-fg ansi-bold">=</span>na_values<span class="ansi-yellow-intense-fg ansi-bold">,</span>
-<span class="ansi-green-fg">   1099</span>         keep_default_na<span class="ansi-yellow-intense-fg ansi-bold">=</span>keep_default_na<span class="ansi-yellow-intense-fg ansi-bold">,</span>
-<span class="ansi-green-intense-fg ansi-bold">-&gt; 1100</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>displayed_only<span class="ansi-yellow-intense-fg ansi-bold">=</span>displayed_only<span class="ansi-yellow-intense-fg ansi-bold">,</span>
-<span class="ansi-green-fg">   1101</span>     )
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\site-packages\pandas\io\html.py</span> in <span class="ansi-cyan-fg">_parse</span><span class="ansi-blue-intense-fg ansi-bold">(flavor, io, match, attrs, encoding, displayed_only, **kwargs)</span>
-<span class="ansi-green-fg">    893</span> 
-<span class="ansi-green-fg">    894</span>         <span class="ansi-green-intense-fg ansi-bold">try</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 895</span><span class="ansi-yellow-intense-fg ansi-bold">             </span>tables <span class="ansi-yellow-intense-fg ansi-bold">=</span> p<span class="ansi-yellow-intense-fg ansi-bold">.</span>parse_tables<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    896</span>         <span class="ansi-green-intense-fg ansi-bold">except</span> ValueError <span class="ansi-green-intense-fg ansi-bold">as</span> caught<span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    897</span>             <span class="ansi-red-intense-fg ansi-bold"># if `io` is an io-like object, check if it&#39;s seekable</span>
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\site-packages\pandas\io\html.py</span> in <span class="ansi-cyan-fg">parse_tables</span><span class="ansi-blue-intense-fg ansi-bold">(self)</span>
-<span class="ansi-green-fg">    211</span>         list of parsed <span class="ansi-yellow-intense-fg ansi-bold">(</span>header<span class="ansi-yellow-intense-fg ansi-bold">,</span> body<span class="ansi-yellow-intense-fg ansi-bold">,</span> footer<span class="ansi-yellow-intense-fg ansi-bold">)</span> tuples <span class="ansi-green-intense-fg ansi-bold">from</span> tables<span class="ansi-yellow-intense-fg ansi-bold">.</span>
-<span class="ansi-green-fg">    212</span>         &#34;&#34;&#34;
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 213</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>tables <span class="ansi-yellow-intense-fg ansi-bold">=</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_parse_tables<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_build_doc<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>match<span class="ansi-yellow-intense-fg ansi-bold">,</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>attrs<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    214</span>         <span class="ansi-green-intense-fg ansi-bold">return</span> <span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_parse_thead_tbody_tfoot<span class="ansi-yellow-intense-fg ansi-bold">(</span>table<span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-green-intense-fg ansi-bold">for</span> table <span class="ansi-green-intense-fg ansi-bold">in</span> tables<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    215</span> 
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\site-packages\pandas\io\html.py</span> in <span class="ansi-cyan-fg">_build_doc</span><span class="ansi-blue-intense-fg ansi-bold">(self)</span>
-<span class="ansi-green-fg">    731</span>                     <span class="ansi-green-intense-fg ansi-bold">pass</span>
-<span class="ansi-green-fg">    732</span>             <span class="ansi-green-intense-fg ansi-bold">else</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 733</span><span class="ansi-yellow-intense-fg ansi-bold">                 </span><span class="ansi-green-intense-fg ansi-bold">raise</span> e
-<span class="ansi-green-fg">    734</span>         <span class="ansi-green-intense-fg ansi-bold">else</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    735</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> <span class="ansi-green-intense-fg ansi-bold">not</span> hasattr<span class="ansi-yellow-intense-fg ansi-bold">(</span>r<span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-blue-intense-fg ansi-bold">&#34;text_content&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\site-packages\pandas\io\html.py</span> in <span class="ansi-cyan-fg">_build_doc</span><span class="ansi-blue-intense-fg ansi-bold">(self)</span>
-<span class="ansi-green-fg">    712</span>         <span class="ansi-green-intense-fg ansi-bold">try</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    713</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> is_url<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>io<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 714</span><span class="ansi-yellow-intense-fg ansi-bold">                 </span><span class="ansi-green-intense-fg ansi-bold">with</span> urlopen<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">.</span>io<span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-green-intense-fg ansi-bold">as</span> f<span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    715</span>                     r <span class="ansi-yellow-intense-fg ansi-bold">=</span> parse<span class="ansi-yellow-intense-fg ansi-bold">(</span>f<span class="ansi-yellow-intense-fg ansi-bold">,</span> parser<span class="ansi-yellow-intense-fg ansi-bold">=</span>parser<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    716</span>             <span class="ansi-green-intense-fg ansi-bold">else</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\site-packages\pandas\io\common.py</span> in <span class="ansi-cyan-fg">urlopen</span><span class="ansi-blue-intense-fg ansi-bold">(*args, **kwargs)</span>
-<span class="ansi-green-fg">    139</span>     <span class="ansi-green-intense-fg ansi-bold">import</span> urllib<span class="ansi-yellow-intense-fg ansi-bold">.</span>request
-<span class="ansi-green-fg">    140</span> 
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 141</span><span class="ansi-yellow-intense-fg ansi-bold">     </span><span class="ansi-green-intense-fg ansi-bold">return</span> urllib<span class="ansi-yellow-intense-fg ansi-bold">.</span>request<span class="ansi-yellow-intense-fg ansi-bold">.</span>urlopen<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">*</span>args<span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-yellow-intense-fg ansi-bold">**</span>kwargs<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    142</span> 
-<span class="ansi-green-fg">    143</span> 
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\urllib\request.py</span> in <span class="ansi-cyan-fg">urlopen</span><span class="ansi-blue-intense-fg ansi-bold">(url, data, timeout, cafile, capath, cadefault, context)</span>
-<span class="ansi-green-fg">    220</span>     <span class="ansi-green-intense-fg ansi-bold">else</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    221</span>         opener <span class="ansi-yellow-intense-fg ansi-bold">=</span> _opener
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 222</span><span class="ansi-yellow-intense-fg ansi-bold">     </span><span class="ansi-green-intense-fg ansi-bold">return</span> opener<span class="ansi-yellow-intense-fg ansi-bold">.</span>open<span class="ansi-yellow-intense-fg ansi-bold">(</span>url<span class="ansi-yellow-intense-fg ansi-bold">,</span> data<span class="ansi-yellow-intense-fg ansi-bold">,</span> timeout<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    223</span> 
-<span class="ansi-green-fg">    224</span> <span class="ansi-green-intense-fg ansi-bold">def</span> install_opener<span class="ansi-yellow-intense-fg ansi-bold">(</span>opener<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\urllib\request.py</span> in <span class="ansi-cyan-fg">open</span><span class="ansi-blue-intense-fg ansi-bold">(self, fullurl, data, timeout)</span>
-<span class="ansi-green-fg">    529</span>         <span class="ansi-green-intense-fg ansi-bold">for</span> processor <span class="ansi-green-intense-fg ansi-bold">in</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>process_response<span class="ansi-yellow-intense-fg ansi-bold">.</span>get<span class="ansi-yellow-intense-fg ansi-bold">(</span>protocol<span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-yellow-intense-fg ansi-bold">]</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    530</span>             meth <span class="ansi-yellow-intense-fg ansi-bold">=</span> getattr<span class="ansi-yellow-intense-fg ansi-bold">(</span>processor<span class="ansi-yellow-intense-fg ansi-bold">,</span> meth_name<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 531</span><span class="ansi-yellow-intense-fg ansi-bold">             </span>response <span class="ansi-yellow-intense-fg ansi-bold">=</span> meth<span class="ansi-yellow-intense-fg ansi-bold">(</span>req<span class="ansi-yellow-intense-fg ansi-bold">,</span> response<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    532</span> 
-<span class="ansi-green-fg">    533</span>         <span class="ansi-green-intense-fg ansi-bold">return</span> response
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\urllib\request.py</span> in <span class="ansi-cyan-fg">http_response</span><span class="ansi-blue-intense-fg ansi-bold">(self, request, response)</span>
-<span class="ansi-green-fg">    639</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> <span class="ansi-green-intense-fg ansi-bold">not</span> <span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-cyan-intense-fg ansi-bold">200</span> <span class="ansi-yellow-intense-fg ansi-bold">&lt;=</span> code <span class="ansi-yellow-intense-fg ansi-bold">&lt;</span> <span class="ansi-cyan-intense-fg ansi-bold">300</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    640</span>             response = self.parent.error(
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 641</span><span class="ansi-yellow-intense-fg ansi-bold">                 &#39;http&#39;, request, response, code, msg, hdrs)
-</span><span class="ansi-green-fg">    642</span> 
-<span class="ansi-green-fg">    643</span>         <span class="ansi-green-intense-fg ansi-bold">return</span> response
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\urllib\request.py</span> in <span class="ansi-cyan-fg">error</span><span class="ansi-blue-intense-fg ansi-bold">(self, proto, *args)</span>
-<span class="ansi-green-fg">    567</span>         <span class="ansi-green-intense-fg ansi-bold">if</span> http_err<span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    568</span>             args <span class="ansi-yellow-intense-fg ansi-bold">=</span> <span class="ansi-yellow-intense-fg ansi-bold">(</span>dict<span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-blue-intense-fg ansi-bold">&#39;default&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">,</span> <span class="ansi-blue-intense-fg ansi-bold">&#39;http_error_default&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span> <span class="ansi-yellow-intense-fg ansi-bold">+</span> orig_args
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 569</span><span class="ansi-yellow-intense-fg ansi-bold">             </span><span class="ansi-green-intense-fg ansi-bold">return</span> self<span class="ansi-yellow-intense-fg ansi-bold">.</span>_call_chain<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">*</span>args<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    570</span> 
-<span class="ansi-green-fg">    571</span> <span class="ansi-red-intense-fg ansi-bold"># XXX probably also want an abstract factory that knows when it makes</span>
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\urllib\request.py</span> in <span class="ansi-cyan-fg">_call_chain</span><span class="ansi-blue-intense-fg ansi-bold">(self, chain, kind, meth_name, *args)</span>
-<span class="ansi-green-fg">    501</span>         <span class="ansi-green-intense-fg ansi-bold">for</span> handler <span class="ansi-green-intense-fg ansi-bold">in</span> handlers<span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    502</span>             func <span class="ansi-yellow-intense-fg ansi-bold">=</span> getattr<span class="ansi-yellow-intense-fg ansi-bold">(</span>handler<span class="ansi-yellow-intense-fg ansi-bold">,</span> meth_name<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 503</span><span class="ansi-yellow-intense-fg ansi-bold">             </span>result <span class="ansi-yellow-intense-fg ansi-bold">=</span> func<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-yellow-intense-fg ansi-bold">*</span>args<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    504</span>             <span class="ansi-green-intense-fg ansi-bold">if</span> result <span class="ansi-green-intense-fg ansi-bold">is</span> <span class="ansi-green-intense-fg ansi-bold">not</span> <span class="ansi-green-intense-fg ansi-bold">None</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    505</span>                 <span class="ansi-green-intense-fg ansi-bold">return</span> result
-
-<span class="ansi-green-intense-fg ansi-bold">C:\ieu\Anaconda3\envs\spark\lib\urllib\request.py</span> in <span class="ansi-cyan-fg">http_error_default</span><span class="ansi-blue-intense-fg ansi-bold">(self, req, fp, code, msg, hdrs)</span>
-<span class="ansi-green-fg">    647</span> <span class="ansi-green-intense-fg ansi-bold">class</span> HTTPDefaultErrorHandler<span class="ansi-yellow-intense-fg ansi-bold">(</span>BaseHandler<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-fg">    648</span>     <span class="ansi-green-intense-fg ansi-bold">def</span> http_error_default<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">,</span> req<span class="ansi-yellow-intense-fg ansi-bold">,</span> fp<span class="ansi-yellow-intense-fg ansi-bold">,</span> code<span class="ansi-yellow-intense-fg ansi-bold">,</span> msg<span class="ansi-yellow-intense-fg ansi-bold">,</span> hdrs<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-<span class="ansi-green-intense-fg ansi-bold">--&gt; 649</span><span class="ansi-yellow-intense-fg ansi-bold">         </span><span class="ansi-green-intense-fg ansi-bold">raise</span> HTTPError<span class="ansi-yellow-intense-fg ansi-bold">(</span>req<span class="ansi-yellow-intense-fg ansi-bold">.</span>full_url<span class="ansi-yellow-intense-fg ansi-bold">,</span> code<span class="ansi-yellow-intense-fg ansi-bold">,</span> msg<span class="ansi-yellow-intense-fg ansi-bold">,</span> hdrs<span class="ansi-yellow-intense-fg ansi-bold">,</span> fp<span class="ansi-yellow-intense-fg ansi-bold">)</span>
-<span class="ansi-green-fg">    650</span> 
-<span class="ansi-green-fg">    651</span> <span class="ansi-green-intense-fg ansi-bold">class</span> HTTPRedirectHandler<span class="ansi-yellow-intense-fg ansi-bold">(</span>BaseHandler<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
-
-<span class="ansi-red-intense-fg ansi-bold">HTTPError</span>: HTTP Error 404: Not Found</pre>
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;zip&#39;: &#39;95014&#39;,
+ &#39;sector&#39;: &#39;Technology&#39;,
+ &#39;fullTimeEmployees&#39;: 147000,
+ &#39;longBusinessSummary&#39;: &#39;Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. It also sells various related services. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, HomePod, iPod touch, and other Apple-branded and third-party accessories. It also provides AppleCare support services; cloud services store services; and operates various platforms, including the App Store, that allow customers to discover and download applications and digital content, such as books, music, video, games, and podcasts. In addition, the company offers various services, such as Apple Arcade, a game subscription service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It sells and delivers third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and resellers. Apple Inc. was founded in 1977 and is headquartered in Cupertino, California.&#39;,
+ &#39;city&#39;: &#39;Cupertino&#39;,
+ &#39;phone&#39;: &#39;408-996-1010&#39;,
+ &#39;state&#39;: &#39;CA&#39;,
+ &#39;country&#39;: &#39;United States&#39;,
+ &#39;companyOfficers&#39;: [],
+ &#39;website&#39;: &#39;http://www.apple.com&#39;,
+ &#39;maxAge&#39;: 1,
+ &#39;address1&#39;: &#39;One Apple Park Way&#39;,
+ &#39;industry&#39;: &#39;Consumer Electronics&#39;,
+ &#39;previousClose&#39;: 127.88,
+ &#39;regularMarketOpen&#39;: 127.41,
+ &#39;twoHundredDayAverage&#39;: 109.04962,
+ &#39;trailingAnnualDividendYield&#39;: 0.006216766,
+ &#39;payoutRatio&#39;: 0.24239999,
+ &#39;volume24Hr&#39;: None,
+ &#39;regularMarketDayHigh&#39;: 128.36,
+ &#39;navPrice&#39;: None,
+ &#39;averageDailyVolume10Day&#39;: 98387850,
+ &#39;totalAssets&#39;: None,
+ &#39;regularMarketPreviousClose&#39;: 127.88,
+ &#39;fiftyDayAverage&#39;: 118.74057,
+ &#39;trailingAnnualDividendRate&#39;: 0.795,
+ &#39;open&#39;: 127.41,
+ &#39;toCurrency&#39;: None,
+ &#39;averageVolume10days&#39;: 98387850,
+ &#39;expireDate&#39;: None,
+ &#39;yield&#39;: None,
+ &#39;algorithm&#39;: None,
+ &#39;dividendRate&#39;: 0.82,
+ &#39;exDividendDate&#39;: 1604620800,
+ &#39;beta&#39;: 1.297637,
+ &#39;circulatingSupply&#39;: None,
+ &#39;startDate&#39;: None,
+ &#39;regularMarketDayLow&#39;: 126.56,
+ &#39;priceHint&#39;: 2,
+ &#39;currency&#39;: &#39;USD&#39;,
+ &#39;trailingPE&#39;: 38.96646,
+ &#39;regularMarketVolume&#39;: 98208591,
+ &#39;lastMarket&#39;: None,
+ &#39;maxSupply&#39;: None,
+ &#39;openInterest&#39;: None,
+ &#39;marketCap&#39;: 2172999958528,
+ &#39;volumeAllCurrencies&#39;: None,
+ &#39;strikePrice&#39;: None,
+ &#39;averageVolume&#39;: 122994596,
+ &#39;priceToSalesTrailing12Months&#39;: 7.9157786,
+ &#39;dayLow&#39;: 126.56,
+ &#39;ask&#39;: 0,
+ &#39;ytdReturn&#39;: None,
+ &#39;askSize&#39;: 900,
+ &#39;volume&#39;: 98208591,
+ &#39;fiftyTwoWeekHigh&#39;: 137.98,
+ &#39;forwardPE&#39;: 29.449306,
+ &#39;fromCurrency&#39;: None,
+ &#39;fiveYearAvgDividendYield&#39;: 1.49,
+ &#39;fiftyTwoWeekLow&#39;: 53.1525,
+ &#39;bid&#39;: 0,
+ &#39;tradeable&#39;: False,
+ &#39;dividendYield&#39;: 0.0064,
+ &#39;bidSize&#39;: 1300,
+ &#39;dayHigh&#39;: 128.36,
+ &#39;exchange&#39;: &#39;NMS&#39;,
+ &#39;shortName&#39;: &#39;Apple Inc.&#39;,
+ &#39;longName&#39;: &#39;Apple Inc.&#39;,
+ &#39;exchangeTimezoneName&#39;: &#39;America/New_York&#39;,
+ &#39;exchangeTimezoneShortName&#39;: &#39;EST&#39;,
+ &#39;isEsgPopulated&#39;: False,
+ &#39;gmtOffSetMilliseconds&#39;: &#39;-18000000&#39;,
+ &#39;quoteType&#39;: &#39;EQUITY&#39;,
+ &#39;symbol&#39;: &#39;AAPL&#39;,
+ &#39;messageBoardId&#39;: &#39;finmb_24937&#39;,
+ &#39;market&#39;: &#39;us_market&#39;,
+ &#39;annualHoldingsTurnover&#39;: None,
+ &#39;enterpriseToRevenue&#39;: 8.034,
+ &#39;beta3Year&#39;: None,
+ &#39;profitMargins&#39;: 0.20914,
+ &#39;enterpriseToEbitda&#39;: 28.516,
+ &#39;52WeekChange&#39;: 0.82572675,
+ &#39;morningStarRiskRating&#39;: None,
+ &#39;forwardEps&#39;: 4.34,
+ &#39;revenueQuarterlyGrowth&#39;: None,
+ &#39;sharesOutstanding&#39;: 17102499840,
+ &#39;fundInceptionDate&#39;: None,
+ &#39;annualReportExpenseRatio&#39;: None,
+ &#39;bookValue&#39;: 3.849,
+ &#39;sharesShort&#39;: 89985311,
+ &#39;sharesPercentSharesOut&#39;: 0.0053,
+ &#39;fundFamily&#39;: None,
+ &#39;lastFiscalYearEnd&#39;: 1601078400,
+ &#39;heldPercentInstitutions&#39;: 0.59707,
+ &#39;netIncomeToCommon&#39;: 57410998272,
+ &#39;trailingEps&#39;: 3.28,
+ &#39;lastDividendValue&#39;: 0.205,
+ &#39;SandP52WeekChange&#39;: 0.15467787,
+ &#39;priceToBook&#39;: 33.206028,
+ &#39;heldPercentInsiders&#39;: 0.00066,
+ &#39;nextFiscalYearEnd&#39;: 1664150400,
+ &#39;mostRecentQuarter&#39;: 1601078400,
+ &#39;shortRatio&#39;: 0.82,
+ &#39;sharesShortPreviousMonthDate&#39;: 1604016000,
+ &#39;floatShares&#39;: 16984630180,
+ &#39;enterpriseValue&#39;: 2205525475328,
+ &#39;threeYearAverageReturn&#39;: None,
+ &#39;lastSplitDate&#39;: 1598832000,
+ &#39;lastSplitFactor&#39;: &#39;4:1&#39;,
+ &#39;legalType&#39;: None,
+ &#39;lastDividendDate&#39;: 1604620800,
+ &#39;morningStarOverallRating&#39;: None,
+ &#39;earningsQuarterlyGrowth&#39;: -0.074,
+ &#39;dateShortInterest&#39;: 1606694400,
+ &#39;pegRatio&#39;: 2.55,
+ &#39;lastCapGain&#39;: None,
+ &#39;shortPercentOfFloat&#39;: 0.0053,
+ &#39;sharesShortPriorMonth&#39;: 80528396,
+ &#39;impliedSharesOutstanding&#39;: None,
+ &#39;category&#39;: None,
+ &#39;fiveYearAverageReturn&#39;: None,
+ &#39;regularMarketPrice&#39;: 127.41,
+ &#39;logo_url&#39;: &#39;https://logo.clearbit.com/apple.com&#39;}</pre>
 </div>
+
 </div>
 
 </div>
