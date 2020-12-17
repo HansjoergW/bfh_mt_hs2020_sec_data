@@ -1,0 +1,3054 @@
+ticker,sector,industry,marketCap,sharesOutstanding,message
+AAL,Industrials,Airlines,10413696000.0,610774016.0,
+AAOI,Technology,Semiconductors,178295312.0,22976200.0,
+AAPL,Technology,Consumer Electronics,2081190313984.0,17102499840.0,
+AAME,Financial Services,Insurance—Life,46340460.0,20414300.0,
+AAN,Consumer Cyclical,Specialty Retail,598555008.0,33778500.0,
+AAON,Industrials,Building Products & Equipment,3296476416.0,52242100.0,
+AA,Basic Materials,Aluminum,4246641152.0,185930000.0,
+AAT,Real Estate,REIT—Diversified,1745792768.0,60282900.0,
+A,Healthcare,Diagnostics & Research,36254879744.0,306000000.0,
+ABCB,Financial Services,Banks—Regional,2614232320.0,69490496.0,
+ABM,Industrials,Specialty Business Services,2682155264.0,66687100.0,
+ABG,Consumer Cyclical,Auto & Truck Dealerships,2766312192.0,19285500.0,
+AB,Financial Services,Asset Management,3087204608.0,96174600.0,
+ABT,Healthcare,Medical Devices,189677961216.0,1772359936.0,
+ABR,Real Estate,REIT—Mortgage,1720126208.0,123395000.0,
+ABC,Healthcare,Medical Distribution,20028753920.0,204250000.0,
+ACFN,Technology,Scientific & Technical Instruments,16470354.0,39687600.0,
+ABBV,Healthcare,Drug Manufacturers—General,187740061696.0,1765469952.0,
+ACET,Healthcare,Biotechnology,246542768.0,19629200.0,
+ABMD,Healthcare,Medical Devices,11679330304.0,45189900.0,
+ACAD,Healthcare,Biotechnology,8149212160.0,158978000.0,
+ACC,Real Estate,REIT—Residential,5918176256.0,137632000.0,
+NSIT,Technology,Information Technology Services,2517214208.0,35097800.0,
+OSIS,Technology,Electronic Components,1654448256.0,17920800.0,
+ACOR,Healthcare,Biotechnology,42653700.0,56871600.0,
+FPRX,Healthcare,Biotechnology,747567680.0,46317700.0,
+NDSN,Industrials,Specialty Industrial Machinery,11478643712.0,58034500.0,
+CELP,Energy,Oil & Gas Equipment & Services,32361006.0,12211700.0,
+FUNC,Financial Services,Banks—Regional,111614328.0,6989000.0,
+NSTG,Healthcare,Biotechnology,3036099328.0,44065300.0,
+NUVA,Healthcare,Medical Devices,2341609216.0,51283600.0,
+CCL,Consumer Cyclical,Travel Services,23537491968.0,921342016.0,
+SGMA,Technology,Electronic Components,18477594.0,4242510.0,
+HBNC,Financial Services,Banks—Regional,670495552.0,43880600.0,
+AZZ,Industrials,Electrical Equipment & Parts,1224808576.0,26076400.0,
+CMP,Basic Materials,Other Industrial Metals & Mining,2089257216.0,33955100.0,
+PNFP,Financial Services,Banks—Regional,4551692288.0,75848896.0,
+CVGW,Consumer Defensive,Packaged Foods,1319316096.0,17656800.0,
+DGLY,Industrials,Security & Protection Services,69609016.0,26772700.0,
+PVH,Consumer Cyclical,Apparel Manufacturing,6706202624.0,71093000.0,
+NPTN,Technology,Semiconductors,418221824.0,50146500.0,
+CPSS,Financial Services,Credit Services,90711704.0,22565100.0,
+MTDR,Energy,Oil & Gas E&P,1553932160.0,116837000.0,
+GLP,Energy,Oil & Gas Midstream,610900928.0,33995600.0,
+HAE,Healthcare,Medical Instruments & Supplies,5958715904.0,50777300.0,
+TRV,Financial Services,Insurance—Property & Casualty,34184048640.0,253308992.0,
+EEFT,Technology,Software—Infrastructure,6952126976.0,52314900.0,
+MERC,Basic Materials,Paper & Paper Products,659339712.0,65868100.0,
+APA,Energy,Oil & Gas E&P,6077395968.0,377478016.0,
+BRN,Energy,Oil & Gas E&P,11339709.0,8277160.0,
+EXP,Basic Materials,Building Materials,4121154048.0,41817900.0,
+LRN,Consumer Defensive,Education & Training Services,943702464.0,41536200.0,
+MCK,Healthcare,Medical Distribution,28044109824.0,162116000.0,
+RCMT,Industrials,Engineering & Construction,18915104.0,11463700.0,
+WERN,Industrials,Trucking,2765989120.0,69097904.0,
+CTIC,Healthcare,Biotechnology,266414032.0,75471400.0,
+FOXF,Consumer Cyclical,Recreational Vehicles,4033859840.0,41715200.0,
+UBA,Real Estate,REIT—Retail,560036736.0,29994400.0,
+DRAD,Healthcare,Medical Devices,13707937.0,4759700.0,
+ADP,Industrials,Staffing & Employment Services,74412097536.0,428814016.0,
+KALU,Basic Materials,Aluminum,1495043584.0,15812200.0,
+V,Financial Services,Credit Services,454637551616.0,1695680000.0,
+IGC,Industrials,Conglomerates,71877792.0,41304400.0,
+EXEL,Healthcare,Biotechnology,6164548608.0,310244000.0,
+MGRC,Industrials,Rental & Leasing Services,1516359680.0,24111300.0,
+TC,Communication Services,Internet Content & Information,77038536.0,20114500.0,
+IBKR,Financial Services,Capital Markets,23602651136.0,90766800.0,
+LFUS,Technology,Electronic Components,6014043648.0,24375000.0,
+FATE,Healthcare,Biotechnology,8265496576.0,87244000.0,
+STKL,Consumer Defensive,Packaged Foods,933577088.0,89937696.0,
+DRNA,Healthcare,Biotechnology,1770309120.0,75044896.0,
+ARLP,Energy,Thermal Coal,647422592.0,127195000.0,
+NP,Basic Materials,Paper & Paper Products,925812224.0,16802400.0,
+WPX,Energy,Oil & Gas E&P,4667869184.0,561041984.0,
+WINA,Consumer Cyclical,Specialty Retail,687728960.0,3740300.0,
+MBWM,Financial Services,Banks—Regional,423209952.0,16233600.0,
+OTTR,Utilities,Utilities—Diversified,1781360640.0,41064100.0,
+DHI,Consumer Cyclical,Residential Construction,25474576384.0,364391008.0,
+MKSI,Technology,Scientific & Technical Instruments,8140992512.0,55137100.0,
+PAYX,Industrials,Staffing & Employment Services,33009289216.0,359500000.0,
+CDNS,Technology,Software—Application,33058902016.0,278931008.0,
+FCX,Basic Materials,Copper,35755130880.0,1452870016.0,
+SKYW,Industrials,Airlines,2154524416.0,50140200.0,
+EPAY,Technology,Software—Infrastructure,2222747136.0,45113600.0,
+TSBK,Financial Services,Banks—Regional,200373152.0,8310790.0,
+CMC,Basic Materials,Steel,2389353216.0,119069000.0,
+ARTNA,Utilities,Utilities—Regulated Water,366020832.0,8459520.0,
+RELL,Technology,Electronic Components,60359192.0,11110700.0,
+SUMR,Consumer Defensive,Household & Personal Products,35724108.0,2131510.0,
+VZ,Communication Services,Telecom Services,249733726208.0,4138089984.0,
+INDB,Financial Services,Banks—Regional,2458207488.0,32965100.0,
+FNHC,Financial Services,Insurance—Property & Casualty,71605344.0,13717500.0,
+AXL,Consumer Cyclical,Auto Parts,890325824.0,113273000.0,
+PMT,Real Estate,REIT—Mortgage,1704117120.0,98789400.0,
+MICT,Technology,Computer Hardware,113846784.0,68582400.0,
+UFI,Consumer Cyclical,Textile Manufacturing,312609088.0,18453900.0,
+GBX,Industrials,Railroads,1147858816.0,32700900.0,
+SCCO,Basic Materials,Copper,46198841344.0,773073024.0,
+FRBK,Financial Services,Banks—Regional,170104832.0,58859800.0,
+AKER,Healthcare,Medical Instruments & Supplies,37437856.0,18625800.0,
+OXY,Energy,Oil & Gas E&P,19452956672.0,931209024.0,
+UFS,Basic Materials,Paper & Paper Products,1709373568.0,55194500.0,
+STRT,Consumer Cyclical,Auto Parts,178905888.0,3859890.0,
+PFE,Healthcare,Drug Manufacturers—General,228561403904.0,5558400000.0,
+LUNA,Technology,Scientific & Technical Instruments,265129920.0,30838100.0,
+SF,Financial Services,Capital Markets,5100068352.0,68669296.0,
+NX,Industrials,Building Products & Equipment,728935936.0,32805400.0,
+CBU,Financial Services,Banks—Regional,3443802112.0,53541700.0,
+BGCP,Financial Services,Capital Markets,1555532544.0,316710016.0,
+JCTCF,Basic Materials,Lumber & Wood Production,32061484.0,3481160.0,
+KO,Consumer Defensive,Beverages—Non-Alcoholic,229267881984.0,4297430016.0,
+BOKF,Financial Services,Banks—Regional,4947419136.0,70305800.0,
+DCI,Industrials,Specialty Industrial Machinery,6992433664.0,126240000.0,
+LECO,Industrials,Tools & Accessories,7178707968.0,59470700.0,
+AEHR,Technology,Semiconductor Equipment & Materials,47786112.0,23310300.0,
+PNM,Utilities,Utilities—Regulated Electric,3910195200.0,79653600.0,
+ATNI,Communication Services,Telecom Services,737690432.0,15898500.0,
+HOMB,Financial Services,Banks—Regional,3186090752.0,165168000.0,
+TMP,Financial Services,Banks—Regional,1039204544.0,14931100.0,
+CHS,Consumer Cyclical,Apparel Retail,177477168.0,119917000.0,
+MRIN,Technology,Software—Application,17849700.0,9015000.0,
+GNTX,Consumer Cyclical,Auto Parts,8104034816.0,245056992.0,
+PTN,Healthcare,Biotechnology,101156432.0,229900992.0,
+BJRI,Consumer Cyclical,Restaurants,728866688.0,22316800.0,
+CDXS,Healthcare,Biotechnology,1115609600.0,63567500.0,
+PSMT,Consumer Defensive,Discount Stores,2682144000.0,30649000.0,
+CMA,Financial Services,Banks—Regional,7328546304.0,139088000.0,
+CUB,Industrials,Aerospace & Defense,1981289600.0,31329000.0,
+OFIX,Healthcare,Medical Devices,732167168.0,19333700.0,
+CKH,Energy,Oil & Gas Equipment & Services,851379328.0,20372800.0,
+BMTC,Financial Services,Banks—Regional,624691648.0,19958200.0,
+MITK,Technology,Software—Application,604667136.0,42522300.0,
+SPLK,Technology,Software—Infrastructure,25107183616.0,160394000.0,
+AROW,Financial Services,Banks—Regional,479613728.0,15491400.0,
+CHD,Consumer Defensive,Household & Personal Products,21329432576.0,248450000.0,
+KMI,Energy,Oil & Gas Midstream,33390903296.0,2263790080.0,
+IVAC,Industrials,Aerospace & Defense,153855712.0,23853600.0,
+CORT,Healthcare,Biotechnology,2941500416.0,116173000.0,
+EQIX,Real Estate,REIT—Specialty,61378592768.0,89101696.0,
+NTCT,Technology,Software—Infrastructure,1911504384.0,73576000.0,
+COWN,Financial Services,Capital Markets,691580672.0,26568600.0,
+MCBC,Financial Services,Banks—Regional,276902560.0,34101300.0,
+SCHW,Financial Services,Capital Markets,92882919424.0,1799779968.0,
+MOV,Consumer Cyclical,Luxury Goods,394526528.0,16585200.0,
+FFG,Financial Services,Insurance—Life,1287541632.0,24383100.0,
+ALGN,Healthcare,Medical Devices,39983460352.0,78850400.0,
+SBSI,Financial Services,Banks—Regional,1029534464.0,33072100.0,
+TNDM,Healthcare,Medical Devices,5659708416.0,62194600.0,
+EBAY,Consumer Cyclical,Internet Retail,33867227136.0,689339008.0,
+KAR,Consumer Cyclical,Specialty Retail,2423474944.0,129252000.0,
+SVBI,Financial Services,Banks—Regional,92157104.0,12817400.0,
+GFF,Industrials,Tools & Accessories,1092743936.0,56129800.0,
+KIRK,Consumer Cyclical,Specialty Retail,251468768.0,14255600.0,
+INOD,Technology,Information Technology Services,128414616.0,24742700.0,
+CFX,Industrials,Specialty Industrial Machinery,4410153984.0,118457000.0,
+HTH,Financial Services,Banks—Regional,2343491072.0,90238400.0,
+SEIC,Financial Services,Asset Management,8142182400.0,144570000.0,
+BSTC,Healthcare,Biotechnology,650249280.0,7344960.0,
+STC,Financial Services,Insurance—Property & Casualty,1290007808.0,26719300.0,
+VSAT,Technology,Communication Equipment,2353521408.0,67532896.0,
+WIFI,Communication Services,Telecom Services,612299904.0,44530900.0,
+CALX,Technology,Software—Application,1531967872.0,61772900.0,
+FOLD,Healthcare,Biotechnology,5758994944.0,260588000.0,
+CORR,Real Estate,REIT—Diversified,112897912.0,13651500.0,
+FMC,Basic Materials,Agricultural Inputs,15107607552.0,129757000.0,
+ALV,Consumer Cyclical,Auto Parts,7949459456.0,87337504.0,
+MFNC,Financial Services,Banks—Regional,132407352.0,10533600.0,
+PDM,Real Estate,REIT—Office,2039149312.0,126029000.0,
+ESMC,Healthcare,Medical Devices,1021832.0,7415330.0,
+CNSL,Communication Services,Telecom Services,424846144.0,79410496.0,
+CRVL,Financial Services,Insurance Brokers,1698472832.0,17897500.0,
+ECOL,Industrials,Waste Management,1140745344.0,31512300.0,
+FFIN,Financial Services,Banks—Regional,5019466240.0,142114000.0,
+ACUR,Healthcare,Drug Manufacturers—Specialty & Generic,5001219.0,21650300.0,
+TIGR,Financial Services,Capital Markets,754291072.0,140958000.0,
+CASY,Consumer Defensive,Grocery Stores,6478152192.0,36935700.0,
+FLT,Technology,Information Technology Services,22825349120.0,83401600.0,
+FRD,Basic Materials,Steel,48884876.0,7043930.0,
+DRRX,Healthcare,Drug Manufacturers—Specialty & Generic,406358016.0,203179008.0,
+JAKK,Consumer Cyclical,Leisure,23947934.0,4947920.0,
+NLS,Consumer Cyclical,Leisure,500177984.0,30258800.0,
+FTEK,Industrials,Pollution & Treatment Controls,94605592.0,24701200.0,
+STON,Consumer Cyclical,Personal Services,208928512.0,128177000.0,
+ATRC,Healthcare,Medical Instruments & Supplies,2110237312.0,45023200.0,
+IMKTA,Consumer Defensive,Grocery Stores,829638848.0,14213000.0,
+CBZ,Industrials,Specialty Business Services,1400914304.0,54531500.0,
+CSL,Industrials,Building Products & Equipment,8297750016.0,53378900.0,
+GABC,Financial Services,Banks—Regional,855701248.0,26492300.0,
+MYGN,Healthcare,Diagnostics & Research,1483150976.0,75210496.0,
+SNX,Technology,Information Technology Services,4154978048.0,51544200.0,
+SJW,Utilities,Utilities—Regulated Water,1980086784.0,28556200.0,
+DXCM,Healthcare,Diagnostics & Research,33389756416.0,96027600.0,
+OMI,Healthcare,Medical Distribution,2017912832.0,73512304.0,
+EXPR,Consumer Cyclical,Apparel Retail,69493832.0,64837700.0,
+TNAV,Technology,Software—Application,224307600.0,47522800.0,
+TJX,Consumer Cyclical,Apparel Retail,79313616896.0,1200630016.0,
+SANM,Technology,Electronic Components,2090557824.0,67763800.0,
+KEQU,Consumer Cyclical,"Furnishings, Fixtures & Appliances",26012750.0,2758510.0,
+BLIN,Technology,Software—Infrastructure,12818493.0,4420170.0,
+GNW,Financial Services,Insurance—Life,2184170496.0,505595008.0,
+THFF,Financial Services,Banks—Regional,519779584.0,13714500.0,
+VIVO,Healthcare,Diagnostics & Research,843430016.0,42862600.0,
+SYNA,Technology,Semiconductors,2719343872.0,34518200.0,
+FB,Communication Services,Internet Content & Information,779149705216.0,2403970048.0,
+TTEK,Industrials,Engineering & Construction,6246244864.0,53888300.0,
+ICON,Consumer Cyclical,Apparel Manufacturing,15282768.0,13174800.0,
+AOS,Industrials,Specialty Industrial Machinery,9100336128.0,135430000.0,
+ZEUS,Basic Materials,Steel,167563232.0,11074900.0,
+SCS,Industrials,Business Equipment & Supplies,1434937472.0,88093696.0,
+TCFC,Financial Services,Banks—Regional,157892592.0,5913580.0,
+CVLY,Financial Services,Banks—Regional,166325216.0,9795360.0,
+PBI,Industrials,Business Equipment & Supplies,1000569984.0,173108992.0,
+FLR,Industrials,Engineering & Construction,2358214144.0,140326000.0,
+MRC,Energy,Oil & Gas Equipment & Services,528796768.0,82239000.0,
+MED,Consumer Cyclical,Personal Services,2174117376.0,11769800.0,
+RAD,Healthcare,Pharmaceutical Retailers,1019436864.0,55224100.0,
+IO,Energy,Oil & Gas Equipment & Services,38383360.0,14993500.0,
+CRWS,Consumer Cyclical,Textile Manufacturing,72723216.0,10228300.0,
+CE,Basic Materials,Chemicals,15313245184.0,116895000.0,
+AMRN,Healthcare,Biotechnology,1948033280.0,388828992.0,
+IDA,Utilities,Utilities—Regulated Electric,4736858624.0,50461900.0,
+ALLE,Industrials,Security & Protection Services,10085634048.0,92039000.0,
+RP,Technology,Software—Application,6921861632.0,101852000.0,
+SATS,Technology,Communication Equipment,2104241664.0,50458500.0,
+ILMN,Healthcare,Diagnostics & Research,49933459456.0,146000000.0,
+BZH,Consumer Cyclical,Residential Construction,462400832.0,31012800.0,
+NBTB,Financial Services,Banks—Regional,1398627200.0,43625300.0,
+CAC,Financial Services,Banks—Regional,541025088.0,14916600.0,
+ASPS,Financial Services,Mortgage Finance,215496384.0,15649700.0,
+GNE,Utilities,Utilities—Regulated Electric,211855168.0,24645400.0,
+AGNC,Real Estate,REIT—Mortgage,8352648192.0,545212032.0,
+KVHI,Technology,Communication Equipment,193642560.0,18302700.0,
+FBSS,Financial Services,Banks—Regional,65762496.0,3794720.0,
+PRGX,Industrials,Specialty Business Services,165401728.0,23561500.0,
+INTC,Technology,Semiconductors,203793530880.0,4097999872.0,
+UAN,Basic Materials,Agricultural Inputs,165928560.0,11098900.0,
+TITN,Industrials,Industrial Distribution,427883520.0,22555800.0,
+OFED,Financial Services,Banks—Regional,134506320.0,5604430.0,
+AMBA,Technology,Semiconductor Equipment & Materials,3111315200.0,35172000.0,
+COLM,Consumer Cyclical,Apparel Manufacturing,5506190336.0,66212000.0,
+KMPR,Financial Services,Insurance—Property & Casualty,5088119296.0,65408400.0,
+AIT,Industrials,Industrial Distribution,2984519936.0,38760000.0,
+USLM,Basic Materials,Building Materials,640161088.0,5630760.0,
+MOD,Consumer Cyclical,Auto Parts,613771200.0,51147600.0,
+FLIC,Financial Services,Banks—Regional,421846176.0,23887100.0,
+MRK,Healthcare,Drug Manufacturers—General,209891295232.0,2530030080.0,
+SFST,Financial Services,Banks—Regional,266250464.0,7734640.0,
+INFN,Technology,Communication Equipment,1818719360.0,193070000.0,
+VHI,Basic Materials,Chemicals,482904544.0,28273100.0,
+FELE,Industrials,Specialty Industrial Machinery,3292376064.0,46202300.0,
+BRC,Industrials,Security & Protection Services,2494081024.0,48475600.0,
+FARO,Technology,Scientific & Technical Instruments,1255591040.0,17835100.0,
+AWH,Healthcare,Diagnostics & Research,483999904.0,104086000.0,
+VSTM,Healthcare,Biotechnology,405759872.0,169774000.0,
+KTCC,Technology,Computer Hardware,85862408.0,10759700.0,
+XEC,Energy,Oil & Gas E&P,4031617024.0,101963000.0,
+LEG,Consumer Cyclical,"Furnishings, Fixtures & Appliances",5455806976.0,132519000.0,
+MRO,Energy,Oil & Gas E&P,5573100032.0,789390976.0,
+MDCA,Communication Services,Advertising Agencies,171329088.0,73528096.0,
+AEIS,Industrials,Electrical Equipment & Parts,3754934528.0,38272700.0,
+FAF,Financial Services,Insurance—Specialty,5748601344.0,111645000.0,
+SAFM,Consumer Defensive,Packaged Foods,3191884800.0,22240000.0,
+HSON,Industrials,Staffing & Employment Services,28353284.0,2684970.0,
+IBTX,Financial Services,Banks—Regional,2615224832.0,43248300.0,
+COO,Healthcare,Medical Instruments & Supplies,18090930176.0,53340400.0,
+NWL,Consumer Defensive,Household & Personal Products,8702393344.0,424300000.0,
+R,Industrials,Rental & Leasing Services,3378307584.0,53889100.0,
+HUM,Healthcare,Healthcare Plans,51762536448.0,132293000.0,
+RDI,Communication Services,Entertainment,125952072.0,20068600.0,
+SIG,Consumer Cyclical,Luxury Goods,1381220864.0,52338800.0,
+GME,Consumer Cyclical,Specialty Retail,928332608.0,69747000.0,
+BECN,Industrials,Building Products & Equipment,2644471808.0,68990496.0,
+MSON,Healthcare,Medical Devices,220870560.0,17377700.0,
+LEDS,Technology,Semiconductors,12314752.0,4006320.0,
+DXYN,Consumer Cyclical,Textile Manufacturing,43013264.0,14933400.0,
+MCS,Communication Services,Entertainment,393274048.0,23139000.0,
+CIX,Industrials,Security & Protection Services,176558016.0,12451200.0,
+GWRE,Technology,Software—Application,10321030144.0,83754200.0,
+HI,Industrials,Specialty Industrial Machinery,2871525120.0,74779296.0,
+IDT,Communication Services,Telecom Services,323268864.0,23900000.0,
+TRGP,Energy,Oil & Gas Midstream,6469617152.0,229012992.0,
+OPTT,Industrials,Electrical Equipment & Parts,68064464.0,30798400.0,
+GES,Consumer Cyclical,Apparel Retail,1231141888.0,63624900.0,
+QUIK,Technology,Semiconductors,34755092.0,11068500.0,
+MANT,Technology,Software—Application,3283784192.0,27179500.0,
+DAN,Consumer Cyclical,Auto Parts,2759778304.0,144491008.0,
+ALE,Utilities,Utilities—Diversified,3071716608.0,51974900.0,
+HR,Real Estate,REIT—Healthcare Facilities,4023116800.0,136054000.0,
+SYPR,Consumer Cyclical,Auto Parts,29204016.0,21316800.0,
+HD,Consumer Cyclical,Home Improvement Retail,284814540800.0,1076600064.0,
+CYTK,Healthcare,Biotechnology,1439644928.0,70779000.0,
+IT,Technology,Information Technology Services,13818933248.0,89286896.0,
+TWIN,Industrials,Specialty Industrial Machinery,101892680.0,13567600.0,
+CTSH,Technology,Information Technology Services,41974665216.0,534640992.0,
+AWR,Utilities,Utilities—Regulated Water,2844518400.0,36889100.0,
+BDC,Industrials,Electrical Equipment & Parts,1886556928.0,44610000.0,
+PLT,Technology,Communication Equipment,1057975296.0,41246600.0,
+NSEC,Financial Services,Insurance—Property & Casualty,30364440.0,2531450.0,
+SMSI,Technology,Software—Application,242404000.0,41295400.0,
+RPT,Real Estate,REIT—Retail,666316416.0,80961904.0,
+USB,Financial Services,Banks—Regional,69055209472.0,1506439936.0,
+BCRX,Healthcare,Biotechnology,1433715840.0,176566000.0,
+GCBC,Financial Services,Banks—Regional,233607968.0,8513410.0,
+CBAN,Financial Services,Banks—Regional,139537072.0,9498780.0,
+CARA,Healthcare,Biotechnology,742996608.0,49832100.0,
+MGEE,Utilities,Utilities—Diversified,2584101888.0,36163400.0,
+TPX,Consumer Cyclical,"Furnishings, Fixtures & Appliances",5437428224.0,206354000.0,
+ADS,Financial Services,Credit Services,3606016000.0,49621800.0,
+CAAS,Consumer Cyclical,Auto Parts,215654080.0,30851800.0,
+FICO,Technology,Software—Application,14895660032.0,29098200.0,
+ORMP,Healthcare,Biotechnology,100620872.0,23675500.0,
+BBW,Consumer Cyclical,Specialty Retail,67990880.0,15591600.0,
+DDS,Consumer Cyclical,Department Stores,1133331840.0,17987700.0,
+SPWR,Technology,Solar,3658439936.0,170160000.0,
+LKFN,Financial Services,Banks—Regional,1340696704.0,25713400.0,
+PPG,Basic Materials,Specialty Chemicals,33760636928.0,236204000.0,
+FSFG,Financial Services,Banks—Regional,152258016.0,2375320.0,
+ENSG,Healthcare,Medical Care Facilities,3917342976.0,54241800.0,
+HFC,Energy,Oil & Gas Refining & Marketing,4452227072.0,162016992.0,
+JBHT,Industrials,Integrated Freight & Logistics,14677755904.0,105679000.0,
+MGPI,Consumer Defensive,Packaged Foods,765382080.0,16915800.0,
+UBOH,Financial Services,Banks—Regional,80319008.0,3271650.0,
+FC,Industrials,Consulting Services,328755392.0,14025400.0,
+COST,Consumer Defensive,Discount Stores,166152421376.0,441524000.0,
+NSSC,Industrials,Security & Protection Services,479967968.0,18347400.0,
+TRMB,Technology,Scientific & Technical Instruments,15721060352.0,250176000.0,
+ARW,Technology,Electronics & Computer Distribution,7237230592.0,75545200.0,
+ESSA,Financial Services,Banks—Regional,176532080.0,10876900.0,
+JLL,Real Estate,Real Estate Services,7606681088.0,51302900.0,
+PDFS,Technology,Software—Application,799996992.0,36629900.0,
+MTRN,Basic Materials,Other Industrial Metals & Mining,1173495040.0,20327300.0,
+RBC,Industrials,Specialty Industrial Machinery,4758581248.0,40595300.0,
+POR,Utilities,Utilities—Regulated Electric,3718270464.0,89510600.0,
+CBRL,Consumer Cyclical,Restaurants,3203521024.0,23721000.0,
+HSC,Industrials,Specialty Industrial Machinery,1382610048.0,78916096.0,
+AKAM,Technology,Software—Infrastructure,16854063104.0,162704992.0,
+BLKB,Technology,Software—Application,2771864832.0,49568400.0,
+FITB,Financial Services,Banks—Regional,19477561344.0,712419968.0,
+MAS,Industrials,Building Products & Equipment,14222090240.0,261676000.0,
+PFMT,Industrials,Specialty Business Services,40465204.0,54756700.0,
+SAIC,Technology,Information Technology Services,5750813696.0,58224300.0,
+AIG,Financial Services,Insurance—Diversified,33418594304.0,861526016.0,
+PBPB,Consumer Cyclical,Restaurants,126386632.0,24212000.0,
+AVAV,Industrials,Aerospace & Defense,2022325632.0,24104000.0,
+ASH,Basic Materials,Chemicals,4584867840.0,60646400.0,
+SWM,Basic Materials,Paper & Paper Products,1215344000.0,31323300.0,
+CYCC,Healthcare,Biotechnology,21012394.0,4863980.0,
+NRZ,Real Estate,REIT—Mortgage,3870586112.0,415744992.0,
+ELMD,Healthcare,Medical Devices,81586584.0,8606180.0,
+HUBG,Industrials,Integrated Freight & Logistics,1984492544.0,33494200.0,
+LPLA,Financial Services,Capital Markets,7742532096.0,79288600.0,
+PED,Energy,Oil & Gas E&P,89854488.0,72463296.0,
+TRNO,Real Estate,REIT—Industrial,3809721344.0,68372600.0,
+CLB,Energy,Oil & Gas Equipment & Services,1292571008.0,44494700.0,
+LEAF,Communication Services,Internet Content & Information,134211496.0,27390100.0,
+TSN,Consumer Defensive,Farm Products,25230983168.0,294126016.0,
+UCBI,Financial Services,Banks—Regional,2343076352.0,86620200.0,
+FLEX,Technology,Electronic Components,8224003072.0,501158016.0,
+SYBT,Financial Services,Banks—Regional,946483328.0,22692000.0,
+KNL,Industrials,Business Equipment & Supplies,722219904.0,50682100.0,
+CMRX,Healthcare,Biotechnology,308785120.0,62633900.0,
+CMS,Utilities,Utilities—Regulated Electric,17002514432.0,286334016.0,
+GVA,Industrials,Engineering & Construction,1262949888.0,46741300.0,
+AMP,Financial Services,Asset Management,22621102080.0,117978000.0,
+SRPT,Healthcare,Biotechnology,13197410304.0,78913000.0,
+PAG,Consumer Cyclical,Auto & Truck Dealerships,4655453696.0,80335696.0,
+CASH,Financial Services,Banks—Regional,1162272768.0,34360900.0,
+CNBKA,Financial Services,Banks—Regional,414475232.0,3655470.0,
+LYV,Communication Services,Entertainment,15137667072.0,213416992.0,
+PFG,Financial Services,Insurance—Diversified,13398484992.0,274728000.0,
+CWST,Industrials,Waste Management,2972344320.0,49734400.0,
+CENT,Consumer Defensive,Packaged Foods,1959192832.0,11300800.0,
+NYMT,Real Estate,REIT—Mortgage,1416540032.0,377744000.0,
+AZPN,Technology,Software—Application,9141622784.0,67718704.0,
+WBS,Financial Services,Banks—Regional,3702759168.0,90201200.0,
+PSIX,Industrials,Specialty Industrial Machinery,73709984.0,22891300.0,
+TREX,Industrials,Building Products & Equipment,8992018432.0,115787000.0,
+WHR,Consumer Cyclical,"Furnishings, Fixtures & Appliances",11504250880.0,62546900.0,
+YORW,Utilities,Utilities—Regulated Water,643756544.0,13050000.0,
+ARR,Real Estate,REIT—Mortgage,712679488.0,64730200.0,
+AME,Industrials,Specialty Industrial Machinery,27235092480.0,230064992.0,
+OMER,Healthcare,Biotechnology,895807872.0,61652300.0,
+FBNC,Financial Services,Banks—Regional,954527552.0,28630100.0,
+NATR,Consumer Defensive,Household & Personal Products,260469824.0,19658100.0,
+MTN,Consumer Cyclical,Resorts & Casinos,11198869504.0,40249100.0,
+GOOD,Real Estate,REIT—Diversified,635180864.0,34268300.0,
+PICO,Utilities,Utilities—Regulated Water,167125856.0,18715100.0,
+SBRA,Real Estate,REIT—Healthcare Facilities,3621240064.0,206928000.0,
+TRST,Financial Services,Banks—Regional,611383360.0,96432704.0,
+LDOS,Technology,Information Technology Services,15003479040.0,142320992.0,
+UBCP,Financial Services,Banks—Regional,77274208.0,5976350.0,
+TGC,Energy,Oil & Gas E&P,13459138.0,10684400.0,
+STMP,Technology,Software—Application,3585360384.0,18235900.0,
+CUBE,Real Estate,REIT—Industrial,6426204160.0,195266000.0,
+SGEN,Healthcare,Biotechnology,34219751424.0,178996992.0,
+MATX,Industrials,Marine Shipping,2496841472.0,43078700.0,
+SXT,Basic Materials,Specialty Chemicals,3083165952.0,42357000.0,
+ATLO,Financial Services,Banks—Regional,231626624.0,9122750.0,
+UVE,Financial Services,Insurance—Property & Casualty,452464384.0,31334100.0,
+ENZ,Healthcare,Diagnostics & Research,124891600.0,48977100.0,
+PEI,Real Estate,REIT—Retail,89081664.0,79537200.0,
+STRM,Healthcare,Health Information Services,51927648.0,31624800.0,
+KEY,Financial Services,Banks—Regional,15467332608.0,976473024.0,
+HMTV,Communication Services,Entertainment,441176064.0,20241200.0,
+TR,Consumer Defensive,Confectioners,1998808448.0,39336100.0,
+NYT,Communication Services,Publishing,8461555712.0,166435008.0,
+AVEO,Healthcare,Biotechnology,146926912.0,28809200.0,
+ESP,Industrials,Electrical Equipment & Parts,56755232.0,2702630.0,
+DPW,Industrials,Electrical Equipment & Parts,72657448.0,18487900.0,
+MSTR,Technology,Software—Application,2649617920.0,7252960.0,
+MHO,Consumer Cyclical,Residential Construction,1252733312.0,28745600.0,
+OPY,Financial Services,Capital Markets,390296928.0,12465100.0,
+NEOG,Healthcare,Diagnostics & Research,4215706880.0,53041100.0,
+GTS,Healthcare,Healthcare Plans,505389408.0,23430200.0,
+SYKE,Technology,Information Technology Services,1549780608.0,39565500.0,
+VVI,Industrials,Specialty Business Services,664127232.0,20428400.0,
+PPL,Utilities,Utilities—Regulated Electric,21588662272.0,768827008.0,
+TPRE,Financial Services,Insurance—Reinsurance,917083264.0,95529504.0,
+BR,Technology,Information Technology Services,17068833792.0,115619000.0,
+GIGA,Technology,Scientific & Technical Instruments,8896028.0,2635860.0,
+VOXX,Technology,Consumer Electronics,295864416.0,21657000.0,
+CXP,Real Estate,REIT—Office,1595642112.0,114465000.0,
+OFG,Financial Services,Banks—Regional,892926016.0,51347100.0,
+MVIS,Technology,Scientific & Technical Instruments,412864896.0,146406000.0,
+NBIX,Healthcare,Biotechnology,8428248064.0,93429200.0,
+NMIH,Financial Services,Insurance—Property & Casualty,1993963008.0,84813400.0,
+ARMK,Consumer Cyclical,Restaurants,9517950976.0,252976000.0,
+NBR,Energy,Oil & Gas Drilling,537496320.0,7294020.0,
+CCBG,Financial Services,Banks—Regional,428256320.0,16761500.0,
+BAX,Healthcare,Medical Instruments & Supplies,40528297984.0,510817984.0,
+MSCI,Financial Services,Financial Data & Stock Exchanges,34771963904.0,82895000.0,
+NFLX,Communication Services,Entertainment,222320082944.0,441795008.0,
+ICAD,Healthcare,Health Information Services,312936096.0,22993100.0,
+HBMD,Financial Services,Banks—Regional,238776896.0,18742300.0,
+LLY,Healthcare,Drug Manufacturers—General,153091375104.0,956582016.0,
+OII,Energy,Oil & Gas Equipment & Services,814297728.0,99304600.0,
+MSM,Industrials,Industrial Distribution,4725534208.0,45525500.0,
+PRSP,Technology,Information Technology Services,3772996352.0,160964000.0,
+HMST,Financial Services,Banks—Regional,729458880.0,21787900.0,
+EL,Consumer Defensive,Household & Personal Products,88864677888.0,226538000.0,
+IKNX,Basic Materials,Specialty Chemicals,11996445.0,1976350.0,
+MRTX,Healthcare,Biotechnology,11981483008.0,49369500.0,
+EXR,Real Estate,REIT—Industrial,14267544576.0,129235000.0,
+D,Utilities,Utilities—Diversified,61113004032.0,815819008.0,
+WPC,Real Estate,REIT—Diversified,12067383296.0,175398000.0,
+GALT,Healthcare,Biotechnology,148400448.0,57077100.0,
+KOPN,Technology,Electronic Components,150543808.0,85053000.0,
+HPQ,Technology,Computer Hardware,29803579392.0,1373500032.0,
+BKE,Consumer Cyclical,Apparel Retail,1601303552.0,49407700.0,
+OXM,Consumer Cyclical,Apparel Manufacturing,930455232.0,16875800.0,
+AMPE,Healthcare,Biotechnology,277582528.0,185055008.0,
+CW,Industrials,Specialty Industrial Machinery,4807591424.0,41502000.0,
+GPI,Consumer Cyclical,Auto & Truck Dealerships,2240376064.0,18314200.0,
+LQDT,Consumer Cyclical,Internet Retail,499939904.0,34045100.0,
+TNC,Industrials,Specialty Industrial Machinery,1283887360.0,18473200.0,
+CKX,Energy,Oil & Gas E&P,18240174.0,1942500.0,
+AEO,Consumer Cyclical,Apparel Retail,3242249984.0,166184000.0,
+HL,Basic Materials,Gold,2702902016.0,531022016.0,
+ACM,Industrials,Engineering & Construction,7262301696.0,160388992.0,
+OCN,Financial Services,Mortgage Finance,230559920.0,8683990.0,
+G,Technology,Information Technology Services,7645872640.0,189348000.0,
+RYN,Real Estate,REIT—Specialty,4182911488.0,136518000.0,
+TREE,Financial Services,Mortgage Finance,3584381696.0,13127200.0,
+ASTE,Industrials,Farm & Heavy Construction Machinery,1377132416.0,22609300.0,
+LOW,Consumer Cyclical,Home Improvement Retail,115638353920.0,732723008.0,
+EA,Communication Services,Electronic Gaming & Multimedia,39362174976.0,289854016.0,
+DJCO,Communication Services,Publishing,415881920.0,1380750.0,
+ROP,Industrials,Specialty Industrial Machinery,44093431808.0,104872000.0,
+NOW,Technology,Software—Application,104838930432.0,195100000.0,
+VMC,Basic Materials,Building Materials,18403129344.0,132511000.0,
+ESGR,Financial Services,Insurance—Diversified,4577723392.0,18564300.0,
+UMPQ,Financial Services,Banks—Regional,3259330048.0,220224992.0,
+PMBC,Financial Services,Banks—Regional,115856096.0,22177000.0,
+HBP,Industrials,Industrial Distribution,97607800.0,26889200.0,
+JCOM,Technology,Software—Infrastructure,4498239488.0,44758600.0,
+DPZ,Consumer Cyclical,Restaurants,15104739328.0,39399900.0,
+NVDA,Technology,Semiconductors,322208104448.0,619000000.0,
+DRH,Real Estate,REIT—Hotel & Motel,1642041344.0,199519008.0,
+IHT,Real Estate,REIT—Hotel & Motel,22862524.0,9309020.0,
+VLGEA,Consumer Defensive,Grocery Stores,334928960.0,10262100.0,
+USEG,Energy,Oil & Gas E&P,11487661.0,2915650.0,
+TIF,Consumer Cyclical,Luxury Goods,15931813888.0,121413000.0,
+JJSF,Consumer Defensive,Packaged Foods,2891197184.0,18915000.0,
+GEL,Energy,Oil & Gas Midstream,870310912.0,122539000.0,
+ETR,Utilities,Utilities—Diversified,20579946496.0,200232992.0,
+WAB,Industrials,Railroads,14245901312.0,190326000.0,
+UBFO,Financial Services,Banks—Regional,130554672.0,16977200.0,
+BKH,Utilities,Utilities—Diversified,3710212352.0,62746700.0,
+SENEA,Consumer Defensive,Packaged Foods,371977792.0,7361440.0,
+BBY,Consumer Cyclical,Specialty Retail,26049865728.0,258832000.0,
+FSI,Basic Materials,Specialty Chemicals,30356440.0,12240500.0,
+TSRI,Technology,Software—Application,14421141.0,1962060.0,
+IVZ,Financial Services,Asset Management,8203723776.0,459166016.0,
+LFVN,Consumer Defensive,Packaged Foods,148628800.0,14263800.0,
+SRI,Consumer Cyclical,Auto Parts,822851456.0,27005300.0,
+GRMN,Technology,Scientific & Technical Instruments,22745729024.0,191236992.0,
+APT,Industrials,Building Products & Equipment,164291392.0,13577800.0,
+ATOS,Healthcare,Biotechnology,9128736.0,10492800.0,
+CATY,Financial Services,Banks—Regional,2404959488.0,79660800.0,
+CSII,Healthcare,Medical Devices,1466550400.0,40124500.0,
+ACHC,Healthcare,Medical Care Facilities,4184366336.0,88991200.0,
+RNR,Financial Services,Insurance—Reinsurance,8495431680.0,50810000.0,
+DLR,Real Estate,REIT—Office,36497096704.0,280164992.0,
+EXPD,Industrials,Integrated Freight & Logistics,15316880384.0,169266000.0,
+EPM,Energy,Oil & Gas E&P,96554640.0,32953800.0,
+ISSC,Industrials,Aerospace & Defense,129796576.0,16984400.0,
+EXC,Utilities,Utilities—Diversified,40183808000.0,975571968.0,
+OXFD,Healthcare,Diagnostics & Research,420321568.0,25961800.0,
+FFBC,Financial Services,Banks—Regional,1706496896.0,98018200.0,
+ESE,Technology,Scientific & Technical Instruments,2675634176.0,26037700.0,
+GOGO,Communication Services,Telecom Services,862727936.0,85249800.0,
+CCUR,Technology,Computer Hardware,28667200.0,8972520.0,
+TSCO,Consumer Cyclical,Specialty Retail,16153474048.0,116497000.0,
+MPW,Real Estate,REIT—Healthcare Facilities,11084418048.0,535996992.0,
+SMCI,Technology,Computer Hardware,1549320448.0,51782100.0,
+SGA,Communication Services,Broadcasting,143228160.0,5038970.0,
+IEX,Industrials,Specialty Industrial Machinery,14605919232.0,75705800.0,
+RICK,Consumer Cyclical,Restaurants,266093168.0,9125280.0,
+TOL,Consumer Cyclical,Residential Construction,5601263104.0,126183000.0,
+ICFI,Industrials,Consulting Services,1460758528.0,18863100.0,
+IBM,Technology,Information Technology Services,110731657216.0,891057024.0,
+WLL,Energy,Oil & Gas E&P,941767168.0,38051200.0,
+LSCC,Technology,Semiconductors,5846409216.0,136156000.0,
+CMTL,Technology,Communication Equipment,420181408.0,24731900.0,
+PLCE,Consumer Cyclical,Apparel Retail,634684672.0,14587100.0,
+TEX,Industrials,Farm & Heavy Construction Machinery,2452526848.0,69300000.0,
+MLAB,Technology,Scientific & Technical Instruments,1455744000.0,5118650.0,
+YELP,Communication Services,Internet Content & Information,2167345664.0,73996096.0,
+SKY,Consumer Cyclical,Residential Construction,1679340416.0,56638800.0,
+SRCL,Industrials,Waste Management,6320784384.0,91552496.0,
+TXN,Technology,Semiconductors,147430670336.0,917942016.0,
+FFNW,Financial Services,Banks—Regional,107448848.0,9785870.0,
+HMSY,Healthcare,Health Information Services,2818597376.0,88551600.0,
+KNX,Industrials,Trucking,6971603456.0,169832000.0,
+HII,Industrials,Aerospace & Defense,7195534848.0,40492600.0,
+EGBN,Financial Services,Banks—Regional,1298425728.0,32235000.0,
+MX,Technology,Semiconductors,470529728.0,35538500.0,
+PSTI,Healthcare,Biotechnology,152006064.0,25633400.0,
+AJG,Financial Services,Insurance Brokers,23067101184.0,192322000.0,
+CRS,Industrials,Metal Fabrication,1354599040.0,48018400.0,
+WHG,Financial Services,Capital Markets,108013504.0,8373140.0,
+SMG,Basic Materials,Agricultural Inputs,10602824704.0,55768800.0,
+RWT,Real Estate,REIT—Mortgage,984966400.0,111928000.0,
+K,Consumer Defensive,Packaged Foods,21348014080.0,343712992.0,
+PKG,Consumer Cyclical,Packaging & Containers,12857159680.0,94830800.0,
+MNTX,Industrials,Farm & Heavy Construction Machinery,86489288.0,19791600.0,
+FUL,Basic Materials,Specialty Chemicals,2680938752.0,51735600.0,
+HCACU,Financial Services,Shell Companies,895771072.0,0.0,
+TCO,Real Estate,REIT—Retail,2648632576.0,61725400.0,
+GHM,Industrials,Specialty Industrial Machinery,149852896.0,9976890.0,
+CEVA,Technology,Semiconductors,868425280.0,22250200.0,
+SCVL,Consumer Cyclical,Apparel Retail,511819648.0,14103600.0,
+NNN,Real Estate,REIT—Retail,6930009600.0,173540000.0,
+BXMT,Real Estate,REIT—Mortgage,4108163840.0,146198000.0,
+UNF,Industrials,Specialty Business Services,3741065472.0,15254300.0,
+CNX,Energy,Oil & Gas E&P,2406950912.0,224528992.0,
+MFA,Real Estate,REIT—Mortgage,1727104000.0,453332992.0,
+EWBC,Financial Services,Banks—Diversified,6751186944.0,141564000.0,
+IPWR,Industrials,Electrical Equipment & Parts,22017886.0,2975390.0,
+MIND,Technology,Scientific & Technical Instruments,32316752.0,12875200.0,
+IVR,Real Estate,REIT—Mortgage,594910016.0,181375008.0,
+GIS,Consumer Defensive,Packaged Foods,36264333312.0,610918016.0,
+SCX,Industrials,Tools & Accessories,30044724.0,6434820.0,
+FDS,Financial Services,Financial Data & Stock Exchanges,13353013248.0,37993500.0,
+FTK,Energy,Oil & Gas Equipment & Services,168849200.0,73094896.0,
+FARM,Consumer Defensive,Packaged Foods,70160800.0,17540200.0,
+KRC,Real Estate,REIT—Office,6955397632.0,115251000.0,
+WSO,Industrials,Industrial Distribution,8453790720.0,32846300.0,
+BHE,Technology,Electronic Components,925722752.0,36474500.0,
+SFM,Consumer Defensive,Grocery Stores,2322435584.0,117950000.0,
+PRFT,Technology,Information Technology Services,1541157504.0,33008300.0,
+BAC,Financial Services,Banks—Diversified,247153065984.0,8650789888.0,
+BLL,Consumer Cyclical,Packaging & Containers,30284029952.0,326567008.0,
+AMWD,Consumer Cyclical,"Furnishings, Fixtures & Appliances",1590233088.0,16993300.0,
+RRC,Energy,Oil & Gas E&P,1858414208.0,256332992.0,
+HEES,Industrials,Rental & Leasing Services,1041693056.0,36094700.0,
+RSG,Industrials,Waste Management,30272501760.0,318724992.0,
+SJM,Consumer Defensive,Packaged Foods,13140090880.0,114093000.0,
+LAMR,Real Estate,REIT—Specialty,7936737280.0,86428000.0,
+ALEX,Real Estate,REIT—Diversified,1165627904.0,72354304.0,
+CHE,Healthcare,Medical Care Facilities,7736623104.0,15951800.0,
+WTT,Technology,Communication Equipment,45776448.0,21695000.0,
+HOV,Consumer Cyclical,Residential Construction,207602976.0,5517610.0,
+SBAC,Real Estate,REIT—Specialty,30605670400.0,111043000.0,
+PEBO,Financial Services,Banks—Regional,520445088.0,19721300.0,
+LNDC,Consumer Defensive,Packaged Foods,338199200.0,29241900.0,
+MPWR,Technology,Semiconductors,13825387520.0,45097000.0,
+GDOT,Financial Services,Credit Services,3004495104.0,53479800.0,
+CUZ,Real Estate,REIT—Office,5019977728.0,148564000.0,
+TRNS,Industrials,Industrial Distribution,254562432.0,7434650.0,
+AMS,Healthcare,Medical Care Facilities,11406780.0,5761000.0,
+AEY,Technology,Electronics & Computer Distribution,41968484.0,11788900.0,
+CMO,Real Estate,REIT—Mortgage,569236736.0,96480800.0,
+EW,Healthcare,Medical Devices,52465016832.0,623248000.0,
+ERIE,Financial Services,Insurance Brokers,12200280064.0,46189100.0,
+WYNN,Consumer Cyclical,Resorts & Casinos,11971523584.0,107871000.0,
+ENPH,Technology,Solar,17675249664.0,126333000.0,
+FCCO,Financial Services,Banks—Regional,128878056.0,7492910.0,
+TXMD,Healthcare,Drug Manufacturers—Specialty & Generic,359718016.0,299764992.0,
+IPGP,Technology,Semiconductor Equipment & Materials,11141445632.0,53300700.0,
+VPG,Technology,Scientific & Technical Instruments,407394752.0,12552400.0,
+HMHC,Consumer Defensive,Education & Training Services,420338976.0,125850000.0,
+PBF,Energy,Oil & Gas Refining & Marketing,982647104.0,120128000.0,
+NRG,Utilities,Utilities—Independent Power Producers,8103252480.0,244220992.0,
+PEB,Real Estate,REIT—Hotel & Motel,2432437760.0,130917000.0,
+AP,Industrials,Metal Fabrication,105841632.0,18311700.0,
+BOH,Financial Services,Banks—Regional,3155597056.0,40060900.0,
+CLW,Basic Materials,Paper & Paper Products,614534272.0,16573200.0,
+DYNT,Healthcare,Medical Devices,11648462.0,14389700.0,
+PENN,Consumer Cyclical,Resorts & Casinos,11559212032.0,155324000.0,
+VSH,Technology,Semiconductors,2787559680.0,132561000.0,
+COG,Energy,Oil & Gas E&P,6775860224.0,398580000.0,
+FIVE,Consumer Cyclical,Specialty Retail,9148432384.0,55871700.0,
+ADC,Real Estate,REIT—Retail,3622891776.0,55370500.0,
+RNST,Financial Services,Banks—Regional,1897434240.0,56195300.0,
+MCO,Financial Services,Financial Data & Stock Exchanges,51577393152.0,187800000.0,
+MPLX,Energy,Oil & Gas Midstream,24192831488.0,1040169984.0,
+SWX,Utilities,Utilities—Regulated Gas,3583156736.0,56830400.0,
+XYL,Industrials,Specialty Industrial Machinery,17749248000.0,180232000.0,
+WEX,Technology,Software—Infrastructure,8285407744.0,44130000.0,
+L,Financial Services,Insurance—Property & Casualty,12000954368.0,274872992.0,
+HMN,Financial Services,Insurance—Property & Casualty,1767088384.0,41412900.0,
+SLGN,Consumer Cyclical,Packaging & Containers,3922521088.0,110587000.0,
+PRTA,Healthcare,Biotechnology,445922048.0,39921400.0,
+HBAN,Financial Services,Banks—Regional,13153818624.0,1017310016.0,
+UHAL,Industrials,Rental & Leasing Services,8448216576.0,19607800.0,
+SON,Consumer Cyclical,Packaging & Containers,6151545344.0,100417000.0,
+MSI,Technology,Communication Equipment,28547674112.0,169523008.0,
+CENX,Basic Materials,Aluminum,1039813376.0,89484800.0,
+MORN,Financial Services,Financial Data & Stock Exchanges,8774320128.0,42832900.0,
+PGR,Financial Services,Insurance—Property & Casualty,55255904256.0,585400000.0,
+TRS,Industrials,Specialty Industrial Machinery,1342139264.0,43225100.0,
+BK,Financial Services,Asset Management,35658113024.0,886136000.0,
+CCK,Consumer Cyclical,Packaging & Containers,13045059584.0,134763008.0,
+PW,Real Estate,REIT—Specialty,53939340.0,1916140.0,
+ATVI,Communication Services,Electronic Gaming & Multimedia,64672677888.0,772857024.0,
+MKL,Financial Services,Insurance—Property & Casualty,13903205376.0,13777800.0,
+JCI,Industrials,Engineering & Construction,32974008320.0,723907968.0,
+LGL,Technology,Electronic Components,52967332.0,5213320.0,
+FLDM,Healthcare,Diagnostics & Research,466949728.0,74119000.0,
+DMLP,Energy,Oil & Gas E&P,404366464.0,34679800.0,
+JBT,Industrials,Specialty Industrial Machinery,3832252672.0,31729200.0,
+CLCT,Industrials,Specialty Business Services,681200512.0,9026110.0,
+WMK,Consumer Defensive,Grocery Stores,1323132288.0,26898400.0,
+APEI,Consumer Defensive,Education & Training Services,479818112.0,14809200.0,
+EARN,Real Estate,REIT—Mortgage,149742048.0,12334600.0,
+LGND,Healthcare,Biotechnology,1492987776.0,16091300.0,
+VG,Communication Services,Telecom Services,3327662080.0,248332992.0,
+SMIT,Technology,Scientific & Technical Instruments,24326828.0,3754140.0,
+UCTT,Technology,Semiconductor Equipment & Materials,1383884928.0,40500000.0,
+HIBB,Consumer Cyclical,Specialty Retail,765817856.0,16597700.0,
+RMD,Healthcare,Medical Instruments & Supplies,29639467008.0,144908000.0,
+ROLL,Industrials,Tools & Accessories,4420321280.0,25101200.0,
+MBI,Financial Services,Insurance—Specialty,394755168.0,53928300.0,
+MDP,Communication Services,Publishing,891284608.0,40482800.0,
+CBNK,Financial Services,Banks—Regional,174843184.0,13681000.0,
+EOG,Energy,Oil & Gas E&P,31269058560.0,583377984.0,
+HES,Energy,Oil & Gas E&P,17389770752.0,307076992.0,
+ADTN,Technology,Communication Equipment,674743744.0,47956200.0,
+SAMG,Financial Services,Asset Management,206673680.0,9544610.0,
+RRTS,Industrials,Trucking,75406272.0,37892600.0,
+SSY,Healthcare,Pharmaceutical Retailers,7934218.0,6899320.0,
+DRQ,Energy,Oil & Gas Equipment & Services,1149387392.0,35095800.0,
+EMR,Industrials,Specialty Industrial Machinery,49290371072.0,598038976.0,
+VIRC,Consumer Cyclical,"Furnishings, Fixtures & Appliances",36771964.0,15713500.0,
+XONE,Industrials,Specialty Industrial Machinery,216243136.0,19187500.0,
+MITT,Real Estate,REIT—Mortgage,130716976.0,40721800.0,
+TEL,Technology,Electronic Components,39054135296.0,330657984.0,
+SPG,Real Estate,REIT—Retail,28843155456.0,328128000.0,
+CNP,Utilities,Utilities—Regulated Gas,11849857024.0,544819008.0,
+DCTH,Healthcare,Medical Devices,64756476.0,4116750.0,
+ACGL,Financial Services,Insurance—Diversified,13703411712.0,406027008.0,
+LWAY,Consumer Defensive,Packaged Foods,100794880.0,15604500.0,
+VBFC,Financial Services,Banks—Regional,48326608.0,1466220.0,
+GPS,Consumer Cyclical,Apparel Retail,7798504448.0,374028992.0,
+GPK,Consumer Cyclical,Packaging & Containers,4427302400.0,270783008.0,
+MO,Consumer Defensive,Tobacco,79912058880.0,1858419968.0,
+MXIM,Technology,Semiconductors,22509416448.0,267300992.0,
+TZOO,Consumer Cyclical,Travel Services,114574352.0,11310400.0,
+RVP,Healthcare,Medical Instruments & Supplies,383480256.0,33816600.0,
+QBAK,Industrials,Electrical Equipment & Parts,5005052.0,1925020.0,
+NXST,Communication Services,Broadcasting,4610630656.0,44045000.0,
+PRSC,Healthcare,Medical Care Facilities,2027829248.0,14183600.0,
+NAUH,Consumer Defensive,Education & Training Services,2238008.0,24593500.0,
+RJF,Financial Services,Capital Markets,12644300800.0,136600000.0,
+STRL,Industrials,Engineering & Construction,465638528.0,28101300.0,
+DYSL,Technology,Scientific & Technical Instruments,16503190.0,15002900.0,
+EPZM,Healthcare,Biotechnology,1269762560.0,101581000.0,
+IEC,Technology,Electronic Components,130553536.0,10479000.0,
+RGLD,Basic Materials,Gold,7167958528.0,65604600.0,
+FSS,Industrials,Pollution & Treatment Controls,1999693184.0,60523400.0,
+VRTX,Healthcare,Biotechnology,58292719616.0,260038000.0,
+REFR,Technology,Electronic Components,86833448.0,31575800.0,
+AMT,Real Estate,REIT—Specialty,97646903296.0,444212992.0,
+APO,Financial Services,Asset Management,17787283456.0,200788000.0,
+RGLS,Healthcare,Biotechnology,70490216.0,63504700.0,
+ULBI,Industrials,Specialty Industrial Machinery,108311080.0,15928100.0,
+NYCB,Financial Services,Banks—Regional,4717903872.0,463904000.0,
+AVT,Technology,Electronics & Computer Distribution,3119052544.0,98829296.0,
+FSLR,Technology,Solar,9153147904.0,105976000.0,
+RLI,Financial Services,Insurance—Property & Casualty,4545168384.0,45055200.0,
+MYRG,Industrials,Engineering & Construction,988069760.0,16727100.0,
+CRY,Healthcare,Medical Devices,846314176.0,38857400.0,
+PSA,Real Estate,REIT—Industrial,38471327744.0,174822000.0,
+SCL,Basic Materials,Specialty Chemicals,2651792896.0,22461400.0,
+NUS,Consumer Defensive,Household & Personal Products,2639833600.0,51031000.0,
+MGYR,Financial Services,Banks—Regional,55027804.0,5810750.0,
+CLDT,Real Estate,REIT—Hotel & Motel,551455936.0,46972400.0,
+NICK,Financial Services,Credit Services,66300000.0,7800000.0,
+ALGT,Industrials,Airlines,2863409664.0,16389500.0,
+ATRI,Healthcare,Medical Instruments & Supplies,1140789248.0,1828950.0,
+CINF,Financial Services,Insurance—Property & Casualty,12899111936.0,160896992.0,
+SGU,Energy,Oil & Gas Midstream,396007008.0,41466700.0,
+HOFT,Consumer Cyclical,"Furnishings, Fixtures & Appliances",399741792.0,11890000.0,
+STX,Technology,Computer Hardware,16638916608.0,256932000.0,
+KRO,Basic Materials,Specialty Chemicals,1655731200.0,115543000.0,
+WAFD,Financial Services,Banks—Regional,1928011136.0,75816400.0,
+WAL,Financial Services,Banks—Regional,5861189632.0,100829000.0,
+SAVE,Industrials,Airlines,2562101760.0,97678304.0,
+THS,Consumer Defensive,Packaged Foods,2450803968.0,56509200.0,
+NEON,Technology,Electronic Components,81418536.0,11467400.0,
+O,Real Estate,REIT—Retail,21220855808.0,350990016.0,
+VRA,Consumer Cyclical,Footwear & Accessories,242255120.0,33409300.0,
+TMUS,Communication Services,Telecom Services,162881355776.0,1241190016.0,
+GLT,Basic Materials,Paper & Paper Products,750259520.0,44367800.0,
+SCHL,Communication Services,Publishing,886036480.0,32547100.0,
+RGEN,Healthcare,Medical Instruments & Supplies,9586307072.0,52992300.0,
+BBGI,Communication Services,Broadcasting,43349200.0,12627200.0,
+AXAS,Energy,Oil & Gas E&P,23781792.0,8403460.0,
+MTRX,Energy,Oil & Gas Equipment & Services,254365152.0,26468800.0,
+CNO,Financial Services,Insurance—Life,3182756352.0,138984992.0,
+CHUY,Consumer Cyclical,Restaurants,492756384.0,19694500.0,
+NOV,Energy,Oil & Gas Equipment & Services,5559940608.0,388264000.0,
+SMLP,Energy,Oil & Gas Midstream,55794352.0,3774990.0,
+ACU,Consumer Defensive,Household & Personal Products,101752944.0,3338910.0,
+IFF,Basic Materials,Specialty Chemicals,11874284544.0,106937000.0,
+GPRE,Basic Materials,Specialty Chemicals,494937216.0,35658300.0,
+LAD,Consumer Cyclical,Auto & Truck Dealerships,7179863040.0,26102400.0,
+CALM,Consumer Defensive,Farm Products,1831380992.0,43971800.0,
+KFY,Industrials,Staffing & Employment Services,2206599424.0,53937900.0,
+JPM,Financial Services,Banks—Diversified,364442779648.0,3048199936.0,
+KRG,Real Estate,REIT—Retail,1271474432.0,84203600.0,
+IMAX,Communication Services,Entertainment,903519424.0,58861200.0,
+IHC,Financial Services,Insurance—Life,585365632.0,14637800.0,
+THTI,Industrial Goods,Diversified Machinery,3068025.0,20453500.0,
+C,Financial Services,Banks—Diversified,122689896448.0,2081959936.0,
+ATSG,Industrials,Integrated Freight & Logistics,1808252416.0,59589800.0,
+TCBK,Financial Services,Banks—Regional,1014243456.0,29769400.0,
+CLRO,Technology,Communication Equipment,51984036.0,18771300.0,
+NCR,Technology,Information Technology Services,4319438848.0,128900000.0,
+NGS,Energy,Oil & Gas Equipment & Services,154217760.0,13468800.0,
+POWI,Technology,Semiconductors,4355479040.0,59860900.0,
+OSUR,Healthcare,Medical Instruments & Supplies,921049152.0,71732800.0,
+UFCS,Financial Services,Insurance—Property & Casualty,601249408.0,25031200.0,
+CVI,Energy,Oil & Gas Refining & Marketing,1620559744.0,100531000.0,
+CATM,Industrials,Business Equipment & Supplies,1605257984.0,44479300.0,
+SNV,Financial Services,Banks—Regional,4791870464.0,147806000.0,
+GFED,Financial Services,Banks—Regional,70175528.0,4364150.0,
+BRKS,Technology,Semiconductor Equipment & Materials,5276759040.0,73831800.0,
+REGN,Healthcare,Biotechnology,51194335232.0,104857000.0,
+AVGO,Technology,Semiconductors,164154589184.0,404500992.0,
+DK,Energy,Oil & Gas Refining & Marketing,1217950208.0,73725800.0,
+NBHC,Financial Services,Banks—Regional,1009336384.0,30604500.0,
+WES,Energy,Oil & Gas Midstream,6405256704.0,416196000.0,
+NOVS,Financial Services,Shell Companies,219477504.0,12650000.0,
+ITIC,Financial Services,Insurance—Specialty,293134304.0,1892410.0,
+SPR,Industrials,Aerospace & Defense,3953992960.0,105637000.0,
+CAMP,Technology,Communication Equipment,360004576.0,35019900.0,
+EBS,Healthcare,Drug Manufacturers—Specialty & Generic,4434964480.0,52999100.0,
+HTLF,Financial Services,Banks—Regional,1775808384.0,42070800.0,
+CVV,Industrials,Specialty Industrial Machinery,29585824.0,6648500.0,
+MOFG,Financial Services,Banks—Regional,405626784.0,16096300.0,
+JAZZ,Healthcare,Biotechnology,8109172736.0,55714000.0,
+BCBP,Financial Services,Banks—Regional,189601328.0,17081200.0,
+ROG,Technology,Electronic Components,2812015360.0,18675800.0,
+CCI,Real Estate,REIT—Specialty,68007063552.0,431297984.0,
+PPSI,Industrials,Electrical Equipment & Parts,33857036.0,8726040.0,
+CAH,Healthcare,Medical Distribution,15926891520.0,293420992.0,
+OESX,Industrials,Electrical Equipment & Parts,298557600.0,30715800.0,
+PEGA,Technology,Software—Application,10105773056.0,80697696.0,
+UDR,Real Estate,REIT—Residential,11231542272.0,294481984.0,
+BV,Industrials,Specialty Business Services,1412814464.0,104903000.0,
+WETF,Financial Services,Asset Management,733495232.0,148782000.0,
+NTGR,Technology,Communication Equipment,1099240192.0,30282100.0,
+H,Consumer Cyclical,Lodging,7444530176.0,38479000.0,
+TWI,Industrials,Farm & Heavy Construction Machinery,321615456.0,61377000.0,
+SGMO,Healthcare,Biotechnology,1736895360.0,141440992.0,
+TGLS,Industrials,Building Products & Equipment,294153504.0,47674800.0,
+MTH,Consumer Cyclical,Residential Construction,3245924352.0,37612100.0,
+PRMW,Consumer Defensive,Beverages—Non-Alcoholic,2549003520.0,160196992.0,
+PTC,Technology,Software—Application,13180585984.0,116663000.0,
+FOSL,Consumer Cyclical,Luxury Goods,684088128.0,51473900.0,
+TDC,Technology,Information Technology Services,2532481024.0,109300000.0,
+STZ,Consumer Defensive,Beverages—Wineries & Distilleries,39824818176.0,169504992.0,
+TFX,Healthcare,Medical Instruments & Supplies,17854605312.0,46566700.0,
+HEP,Energy,Oil & Gas Midstream,1566838400.0,105440000.0,
+EGY,Energy,Oil & Gas E&P,92504320.0,57456100.0,
+IRWD,Healthcare,Drug Manufacturers—Specialty & Generic,1890745600.0,160096992.0,
+MU,Technology,Semiconductors,78775656448.0,1116909952.0,
+TPC,Industrials,Engineering & Construction,666852864.0,50827200.0,
+WSM,Consumer Cyclical,Specialty Retail,8041708032.0,76587696.0,
+FTI,Energy,Oil & Gas Equipment & Services,4332817408.0,449408000.0,
+ST,Technology,Scientific & Technical Instruments,7723920896.0,157310000.0,
+HT,Real Estate,REIT—Hotel & Motel,327062272.0,38843500.0,
+CIT,Financial Services,Banks—Regional,3739080704.0,98526496.0,
+DVN,Energy,Oil & Gas E&P,6181426176.0,382500000.0,
+RELV,Consumer Defensive,Packaged Foods,6514258.0,1746450.0,
+AOSL,Technology,Semiconductors,634636224.0,25487400.0,
+MSA,Industrials,Security & Protection Services,5978962944.0,38953300.0,
+VEEV,Healthcare,Health Information Services,39994597376.0,136372000.0,
+PFBX,Financial Services,Banks—Regional,68299840.0,4878560.0,
+MNOV,Healthcare,Biotechnology,273609088.0,44927600.0,
+HCI,Financial Services,Insurance—Property & Casualty,407883264.0,7982060.0,
+IMUC,Healthcare,Biotechnology,1161599.0,4193500.0,
+VGR,Consumer Defensive,Tobacco,1911563648.0,153292992.0,
+CIA,Financial Services,Insurance—Life,311708416.0,49518300.0,
+ZAGG,Consumer Cyclical,Specialty Retail,126259152.0,29848500.0,
+PDEX,Healthcare,Medical Instruments & Supplies,155815440.0,3860640.0,
+EPAM,Technology,Information Technology Services,17983635456.0,55988900.0,
+MCHP,Technology,Semiconductors,37802438656.0,268846016.0,
+EHTH,Financial Services,Insurance Brokers,1838449280.0,25897300.0,
+PKBK,Financial Services,Banks—Regional,186074832.0,11851900.0,
+CHEF,Consumer Defensive,Food Distribution,883810944.0,37769700.0,
+OMC,Communication Services,Advertising Agencies,13885105152.0,214972992.0,
+PCG,Utilities,Utilities—Regulated Electric,23695765504.0,1984569984.0,
+CPE,Energy,Oil & Gas E&P,581582016.0,39752700.0,
+IVC,Healthcare,Medical Devices,311425888.0,34411700.0,
+NTWK,Technology,Software—Application,44932328.0,11640500.0,
+OCFC,Financial Services,Banks—Regional,1059031936.0,60378100.0,
+ONE,Consumer Defensive,Education & Training Services,621745600.0,161074000.0,
+DIT,Consumer Defensive,Food Distribution,50759776.0,551437.0,
+FORR,Industrials,Consulting Services,831761024.0,18964000.0,
+PACW,Financial Services,Banks—Regional,2952621312.0,118484000.0,
+WRE,Real Estate,REIT—Office,1894565248.0,82372400.0,
+TSLA,Consumer Cyclical,Auto Manufacturers,578210103296.0,947900992.0,
+ALL,Financial Services,Insurance—Property & Casualty,31753822208.0,304068000.0,
+UVSP,Financial Services,Banks—Regional,574513152.0,29267100.0,
+KFRC,Industrials,Staffing & Employment Services,954651200.0,21956100.0,
+FMBI,Financial Services,Banks—Regional,1714530048.0,114302000.0,
+APOG,Industrials,Building Products & Equipment,758324992.0,26385700.0,
+CLSN,Healthcare,Biotechnology,26360770.0,37417700.0,
+NCLH,Consumer Cyclical,Travel Services,8367510528.0,315636000.0,
+EXLS,Technology,Information Technology Services,2819374080.0,33809600.0,
+NDAQ,Financial Services,Financial Data & Stock Exchanges,20614656000.0,164038000.0,
+HFBL,Financial Services,Banks—Regional,48736168.0,1683460.0,
+TWER,Communication Services,Telecom Services,142776.0,394409.0,
+LANC,Consumer Defensive,Packaged Foods,4753506816.0,27539000.0,
+CSOD,Technology,Software—Application,2843177984.0,64603000.0,
+HZNP,Healthcare,Drug Manufacturers—General,16679054336.0,220710000.0,
+ITT,Industrials,Specialty Industrial Machinery,6712416256.0,86400000.0,
+NPK,Industrials,Aerospace & Defense,634203136.0,7023290.0,
+LGIH,Consumer Cyclical,Residential Construction,2706325248.0,25100400.0,
+DLTR,Consumer Defensive,Discount Stores,25059708928.0,235192000.0,
+ORA,Utilities,Utilities—Renewable,4270169088.0,55841100.0,
+GBLI,Financial Services,Insurance—Property & Casualty,378091424.0,10242700.0,
+LAZ,Financial Services,Capital Markets,4280054016.0,105032000.0,
+FSTR,Industrials,Railroads,163230224.0,10745900.0,
+AMD,Technology,Semiconductors,110353014784.0,1204070016.0,
+CNS,Financial Services,Asset Management,3600174336.0,47785700.0,
+AHC,Communication Services,Publishing,31473288.0,18941300.0,
+FALC,Technology,Software—Application,47358720.0,5919840.0,
+VIDE,Technology,Computer Hardware,7053948.0,5878290.0,
+LMAT,Healthcare,Medical Instruments & Supplies,705053696.0,20342000.0,
+SMMF,Financial Services,Banks—Regional,283148320.0,12982500.0,
+CSX,Industrials,Railroads,69158600704.0,764774976.0,
+SIEB,Financial Services,Capital Markets,126291096.0,30953700.0,
+ORCL,Technology,Software—Infrastructure,182490038272.0,3007160064.0,
+EQR,Real Estate,REIT—Residential,21940590592.0,372252992.0,
+IRIX,Healthcare,Medical Devices,25710560.0,13897600.0,
+BCPC,Basic Materials,Specialty Chemicals,3614911744.0,32351100.0,
+LEN,Consumer Cyclical,Residential Construction,22214502400.0,275116000.0,
+EPR,Real Estate,REIT—Retail,2447378432.0,74615200.0,
+UEIC,Technology,Consumer Electronics,722546752.0,13749700.0,
+MMM,Industrials,Specialty Industrial Machinery,100378566656.0,576822016.0,
+TBI,Industrials,Staffing & Employment Services,708434368.0,35472800.0,
+PCH,Real Estate,REIT—Specialty,3202552832.0,66873100.0,
+UNTY,Financial Services,Banks—Regional,196940912.0,10565500.0,
+COLB,Financial Services,Banks—Regional,2406664192.0,71605600.0,
+LCUT,Consumer Cyclical,"Furnishings, Fixtures & Appliances",314329920.0,21768000.0,
+COF,Financial Services,Credit Services,42158280704.0,457396992.0,
+SASR,Financial Services,Banks—Regional,1487417472.0,47040400.0,
+GTN,Communication Services,Broadcasting,1753670400.0,89113000.0,
+HE,Utilities,Utilities—Regulated Electric,4091012096.0,109181000.0,
+PRI,Financial Services,Insurance—Life,5283149312.0,39303300.0,
+REX,Energy,Oil & Gas Refining & Marketing,523401184.0,5992000.0,
+TGEN,Industrials,Building Products & Equipment,32305388.0,24850300.0,
+SNPS,Technology,Software—Infrastructure,36077367296.0,151762000.0,
+OLP,Real Estate,REIT—Diversified,431993088.0,20580900.0,
+FBIZ,Financial Services,Banks—Regional,163295040.0,8529010.0,
+FEIM,Technology,Communication Equipment,98955760.0,9162570.0,
+AGCO,Industrials,Farm & Heavy Construction Machinery,6716238336.0,74899504.0,
+KAMN,Industrials,Aerospace & Defense,1567924736.0,27677400.0,
+CSU,Healthcare,Medical Care Facilities,32233442.0,31914300.0,
+MN,Financial Services,Asset Management,106365656.0,16490800.0,
+ZION,Financial Services,Banks—Regional,6836020224.0,164012000.0,
+MKTX,Financial Services,Capital Markets,20235802624.0,37963500.0,
+TTMI,Technology,Electronic Components,1414331520.0,106742000.0,
+FRGI,Consumer Cyclical,Restaurants,321936352.0,25920800.0,
+OKE,Energy,Oil & Gas Midstream,18473582592.0,444396992.0,
+MPC,Energy,Oil & Gas Refining & Marketing,27919433728.0,650651008.0,
+RNWK,Communication Services,Electronic Gaming & Multimedia,59327644.0,38275900.0,
+HHC,Real Estate,Real Estate—Diversified,4262558464.0,54922800.0,
+PTSI,Industrials,Trucking,268948512.0,5734510.0,
+WMB,Energy,Oil & Gas Midstream,26614030336.0,1213590016.0,
+JCS,Technology,Communication Equipment,42408184.0,9320480.0,
+TKR,Industrials,Tools & Accessories,5698436096.0,75356200.0,
+MLHR,Consumer Cyclical,"Furnishings, Fixtures & Appliances",2247065600.0,58900800.0,
+DNB,Technology,Information Technology Services,10808646656.0,423039008.0,
+SHO,Real Estate,REIT—Hotel & Motel,2378465024.0,215636000.0,
+LEA,Consumer Cyclical,Auto Parts,9306613760.0,60038800.0,
+SJI,Utilities,Utilities—Diversified,2309546240.0,100590000.0,
+CSCD,,,,,'regularMarketOpen'
+SN,,,,,'regularMarketOpen'
+EAT,Consumer Cyclical,Restaurants,2415736576.0,45289400.0,
+WTFC,Financial Services,Banks—Regional,3513484288.0,57635900.0,
+ARIS,,,,,'regularMarketOpen'
+QCRH,Financial Services,Banks—Regional,616890240.0,15793400.0,
+AMZN,Consumer Cyclical,Internet Retail,1563666808832.0,500889984.0,
+RPRX,Healthcare,Biotechnology,26516428800.0,365899008.0,
+BKSC,Financial Services,Banks—Regional,89928464.0,5520470.0,
+DEPO,,,,,'regularMarketOpen'
+BANR,Financial Services,Banks—Regional,1573911552.0,35155600.0,
+REE,,,,,'regularMarketOpen'
+AR,Energy,Oil & Gas E&P,1383660800.0,268672000.0,
+FST,Financial Services,Shell Companies,250125008.0,20000000.0,
+LRCX,Technology,Semiconductor Equipment & Materials,70809223168.0,144008992.0,
+AIV,Real Estate,REIT—Residential,6314775552.0,155612992.0,
+OC,Industrials,Building Products & Equipment,8033053184.0,108233000.0,
+SGC,Consumer Cyclical,Apparel Manufacturing,336174304.0,15435000.0,
+CHCO,Financial Services,Banks—Regional,1108468480.0,15787900.0,
+AVD,Basic Materials,Agricultural Inputs,495505152.0,30287600.0,
+CERN,Healthcare,Health Information Services,22844022784.0,306590016.0,
+SPAR,,,,,'regularMarketOpen'
+FSBK,,,,,'regularMarketOpen'
+SPPI,Healthcare,Biotechnology,688751808.0,145922000.0,
+TWC,,,,,'regularMarketOpen'
+ALB,Basic Materials,Specialty Chemicals,14760262656.0,106457000.0,
+GST,,,,,'regularMarketOpen'
+CRCM,,,,,'regularMarketOpen'
+SPN,,,,,'regularMarketOpen'
+HDSN,Basic Materials,Specialty Chemicals,62716524.0,42664300.0,
+SMRT,,,,,'sector'
+STRZA,,,,,'regularMarketOpen'
+RDC,,,,,'regularMarketOpen'
+SHLD,,,,,'sector'
+VRNG,,,,,'regularMarketOpen'
+BBOX,,,,,'regularMarketOpen'
+SYMC,,,,,'regularMarketOpen'
+WLFC,Industrials,Rental & Leasing Services,234343824.0,5975110.0,
+DGICA,Financial Services,Insurance—Property & Casualty,413727840.0,24195200.0,
+ODFL,Industrials,Trucking,23558891520.0,117331000.0,
+LNG,Energy,Oil & Gas Midstream,15270145024.0,252274000.0,
+PPS,,,,,'regularMarketOpen'
+CSUH,,,,,'regularMarketOpen'
+ASUR,Technology,Software—Application,119304752.0,15907300.0,
+SHOS,,,,,'regularMarketOpen'
+TDG,Industrials,Aerospace & Defense,32758978560.0,54435900.0,
+PNRA,,,,,'regularMarketOpen'
+DMND,,,,,'regularMarketOpen'
+TUMI,,,,,'regularMarketOpen'
+CIZN,Financial Services,Banks—Regional,119116328.0,5587070.0,
+TST,,,,,'regularMarketOpen'
+AVHI,,,,,'regularMarketOpen'
+SPSC,Technology,Software—Infrastructure,3418244864.0,35308800.0,
+KERX,,,,,'regularMarketOpen'
+ATRM,,,,,'regularMarketOpen'
+DATA,,,,,'regularMarketOpen'
+PNY,,,,,'regularMarketOpen'
+LTC,Real Estate,REIT—Healthcare Facilities,1516711040.0,39242200.0,
+LGCY,,,,,'sector'
+NHTB,,,,,'regularMarketOpen'
+NXTM,,,,,'regularMarketOpen'
+MTGE,,,,,'regularMarketOpen'
+JBLU,Industrials,Airlines,4653993472.0,314459008.0,
+PRK,Financial Services,Banks—Regional,1692761472.0,16314200.0,
+FMD,,,,,'regularMarketOpen'
+VALU,Financial Services,Financial Data & Stock Exchanges,305290976.0,9609410.0,
+CLFD,Technology,Communication Equipment,346983008.0,13647000.0,
+AGYS,Technology,Software—Application,935862848.0,23591200.0,
+SYNC,Technology,Software—Infrastructure,58673712.0,39644400.0,
+BKJ,,,,,'regularMarketOpen'
+IFMI,,,,,'regularMarketOpen'
+WDFC,Basic Materials,Specialty Chemicals,3581134336.0,13664800.0,
+MENT,,,,,'regularMarketOpen'
+CDE,Basic Materials,Gold,2081488384.0,243734000.0,
+ISIG,Communication Services,Advertising Agencies,11130270.0,12235100.0,
+WAYN,Financial Services,Banks—Regional,51270676.0,2493710.0,
+TWX,,,,,'regularMarketOpen'
+ROST,Consumer Cyclical,Apparel Retail,40216158208.0,356463008.0,
+WDR,Financial Services,Asset Management,1577757440.0,62510200.0,
+SMBC,Financial Services,Banks—Regional,278316448.0,9119150.0,
+NKSH,Financial Services,Banks—Regional,211863312.0,6479000.0,
+ESRX,,,,,'regularMarketOpen'
+FXCM,,,,,'regularMarketOpen'
+WTBA,Financial Services,Banks—Regional,340255744.0,16469300.0,
+LTS,,,,,'regularMarketOpen'
+EXPO,Industrials,Consulting Services,4457690624.0,51629500.0,
+ALOG,,,,,'regularMarketOpen'
+BBG,,,,,'regularMarketOpen'
+UNT,,,,,'regularMarketOpen'
+LBAI,Financial Services,Banks—Regional,632878720.0,50468800.0,
+ASYS,Technology,Semiconductor Equipment & Materials,87895000.0,14048200.0,
+HFWA,Financial Services,Banks—Regional,853228736.0,35910300.0,
+PGI,,,,,'regularMarketOpen'
+SNTA,,,,,'regularMarketOpen'
+LION,,,,,'regularMarketOpen'
+LPNT,,,,,'regularMarketOpen'
+NCT,,,,,'regularMarketOpen'
+ATW,,,,,'regularMarketOpen'
+FHN,Financial Services,Banks—Regional,7112381440.0,554787968.0,
+TPL,Energy,Oil & Gas E&P,5367262720.0,7756160.0,
+THK,,,,,'regularMarketOpen'
+INS,Technology,Software—Application,384141504.0,8929370.0,
+WWE,Communication Services,Entertainment,3442384384.0,46695000.0,
+ZLTQ,,,,,'regularMarketOpen'
+LYB,Basic Materials,Specialty Chemicals,29551833088.0,333919008.0,
+WLDN,Industrials,Engineering & Construction,460498528.0,12073900.0,
+BEBE,Consumer Cyclical,Apparel Retail,61420140.0,11374100.0,
+CBLI,Healthcare,Biotechnology,37226904.0,13016400.0,
+MNRO,Consumer Cyclical,Auto Parts,1598755200.0,33307400.0,
+RIGL,Healthcare,Biotechnology,539049344.0,168980992.0,
+WFC,Financial Services,Banks—Diversified,120230969344.0,4134490112.0,
+MRLN,Financial Services,Credit Services,152195888.0,11974500.0,
+EXA,,,,,'regularMarketOpen'
+OPHT,,,,,'sector'
+EME,Industrials,Engineering & Construction,4943754240.0,54930600.0,
+VVUS,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+NVL,,,,,'regularMarketOpen'
+AVP,,,,,'regularMarketOpen'
+HSKA,Healthcare,Diagnostics & Research,1340213632.0,9454770.0,
+GAIA,Communication Services,Internet Content & Information,194899280.0,13783000.0,
+WPO,,,,,'regularMarketOpen'
+RECN,,,,,'regularMarketOpen'
+WGP,,,,,'regularMarketOpen'
+DEI,Real Estate,REIT—Office,5461177856.0,175375008.0,
+BID,,,,,'regularMarketOpen'
+VVC,,,,,'regularMarketOpen'
+CCMP,Technology,Semiconductor Equipment & Materials,4206944256.0,29081600.0,
+DG,Consumer Defensive,Discount Stores,50619654144.0,245000992.0,
+KEX,Industrials,Marine Shipping,3271525120.0,60039000.0,
+LORL,Communication Services,Telecom Services,664127168.0,21427100.0,
+ADGE,,,,,'regularMarketOpen'
+MUSA,Consumer Cyclical,Specialty Retail,3580104192.0,28567700.0,
+STBZ,,,,,'regularMarketOpen'
+NSM,,,,,'regularMarketOpen'
+SCG,,,,,'regularMarketOpen'
+AYI,Industrials,Electrical Equipment & Parts,4274484224.0,36836300.0,
+TIK,,,,,'regularMarketOpen'
+WSTC,,,,,'regularMarketOpen'
+MHLD,Financial Services,Insurance—Reinsurance,178930528.0,84801200.0,
+APOL,,,,,'regularMarketOpen'
+CSS,,,,,'regularMarketOpen'
+IPDN,Industrials,Staffing & Employment Services,19229700.0,12819800.0,
+BKD,Healthcare,Medical Care Facilities,735373888.0,183384992.0,
+MA,Financial Services,Credit Services,326413189120.0,988470016.0,
+CREG,Utilities,Utilities—Renewable,12220588.0,3125470.0,
+CBNJ,,,,,'regularMarketOpen'
+ESS,Real Estate,REIT—Residential,15906010112.0,65204600.0,
+BUSE,Financial Services,Banks—Regional,1155325440.0,54522200.0,
+SCI,Consumer Cyclical,Personal Services,8493821952.0,172744000.0,
+KRA,Basic Materials,Specialty Chemicals,886357504.0,31871900.0,
+SUP,Consumer Cyclical,Auto Parts,126935824.0,25591900.0,
+QLGC,,,,,'regularMarketOpen'
+AMSWA,Technology,Software—Application,534739552.0,30764600.0,
+ELSE,Technology,Scientific & Technical Instruments,14668647.0,3395520.0,
+GPX,Consumer Defensive,Education & Training Services,210576528.0,17161900.0,
+WTI,Energy,Oil & Gas E&P,371458336.0,141778000.0,
+PF,,,,,'regularMarketOpen'
+OXGN,,,,,'regularMarketOpen'
+MELA,,,,,'regularMarketOpen'
+NATI,Technology,Software—Application,5243277824.0,131246000.0,
+GRA,Basic Materials,Specialty Chemicals,3620609536.0,66190300.0,
+UPL,,,,,'sector'
+LIME,,,,,'regularMarketOpen'
+CYTX,,,,,'regularMarketOpen'
+FCN,Industrials,Consulting Services,3921717248.0,35661700.0,
+GLPW,,,,,'regularMarketOpen'
+SSP,Communication Services,Broadcasting,1142394368.0,69666896.0,
+HSWI,,,,,'regularMarketOpen'
+WNRL,,,,,'regularMarketOpen'
+OMN,,,,,'regularMarketOpen'
+TUP,Consumer Cyclical,Packaging & Containers,1613431808.0,49175000.0,
+RSYS,,,,,'regularMarketOpen'
+CXO,Energy,Oil & Gas E&P,12420216832.0,196304992.0,
+ESPR,Healthcare,Biotechnology,812602880.0,27876600.0,
+GLBZ,Financial Services,Banks—Regional,28136194.0,2842040.0,
+CLMS,,,,,'regularMarketOpen'
+SE,Communication Services,Electronic Gaming & Multimedia,94678851584.0,493964000.0,
+CLX,Consumer Defensive,Household & Personal Products,25428066304.0,126050000.0,
+DVAX,Healthcare,Biotechnology,546458112.0,110173000.0,
+MNRK,,,,,'regularMarketOpen'
+JNPR,Technology,Communication Equipment,7227813376.0,329736000.0,
+VTR,Real Estate,REIT—Healthcare Facilities,18372708352.0,374571008.0,
+BOFI,,,,,'regularMarketOpen'
+VSI,,,,,'regularMarketOpen'
+GAS,,,,,'regularMarketOpen'
+WR,,,,,'regularMarketOpen'
+FCZA,,,,,'regularMarketOpen'
+SKX,Consumer Cyclical,Footwear & Accessories,5533427712.0,135584000.0,
+NDLS,Consumer Cyclical,Restaurants,368731328.0,44372000.0,
+SREV,Technology,Software—Application,141030160.0,96596000.0,
+EDGW,,,,,'regularMarketOpen'
+TEP,,,,,'regularMarketOpen'
+CSC,,,,,'regularMarketOpen'
+FBNK,,,,,'regularMarketOpen'
+HTWO,,,,,'regularMarketOpen'
+ETE,,,,,'regularMarketOpen'
+BCR,,,,,'regularMarketOpen'
+MDC,Consumer Cyclical,Residential Construction,3103895296.0,64867200.0,
+HBHC,,,,,'regularMarketOpen'
+CREE,Technology,Semiconductors,10239552512.0,110340000.0,
+RBCAA,Financial Services,Banks—Regional,683702784.0,18716200.0,
+ALR,,,,,'regularMarketOpen'
+UFPI,Basic Materials,Lumber & Wood Production,3312642560.0,61186600.0,
+SCTY,Industrials,Security & Protection Services,251550000.0,22500000.0,
+HRG,,,,,'regularMarketOpen'
+FN,Technology,Electronic Components,2526223872.0,36938500.0,
+ANGI,Communication Services,Internet Content & Information,5947584000.0,77938200.0,
+STAY,Consumer Cyclical,Lodging,2496507648.0,177560992.0,
+GIII,Consumer Cyclical,Apparel Retail,1099676800.0,48358700.0,
+FII,,,,,'regularMarketOpen'
+RLGY,Real Estate,Real Estate Services,1548278400.0,115457000.0,
+IROQ,Financial Services,Banks—Regional,71223552.0,3240380.0,
+BOOM,Energy,Oil & Gas Equipment & Services,696284480.0,14773700.0,
+OUTR,,,,,'regularMarketOpen'
+PM,Consumer Defensive,Tobacco,132372193280.0,1557319936.0,
+PBCT,Financial Services,Banks—Regional,5531768832.0,424867008.0,
+ONVI,,,,,'regularMarketOpen'
+MXWL,,,,,'regularMarketOpen'
+WOOF,,,,,'regularMarketOpen'
+PNRG,Energy,Oil & Gas E&P,109101584.0,1994180.0,
+KONA,,,,,'sector'
+DAR,Consumer Defensive,Packaged Foods,8818119680.0,162068000.0,
+EDUC,Communication Services,Publishing,134865344.0,8355970.0,
+FBMS,Financial Services,Banks—Regional,637895808.0,21405900.0,
+NLST,Technology,Semiconductors,105421640.0,195951008.0,
+CRM,Technology,Software—Application,203514298368.0,915000000.0,
+OSIR,,,,,'regularMarketOpen'
+ONTX,Healthcare,Biotechnology,62142528.0,184948000.0,
+ENT,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+NTRI,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+SPHS,Healthcare,Biotechnology,334379.0,34472100.0,
+ULTI,,,,,'regularMarketOpen'
+CWT,Utilities,Utilities—Regulated Water,2605635072.0,49840000.0,
+CVA,Industrials,Waste Management,1719725440.0,131982000.0,
+NWBT,,,,,'regularMarketOpen'
+BGG,,,,,'sector'
+BMOM,,,,,'regularMarketOpen'
+INN,Real Estate,REIT—Hotel & Motel,975694016.0,105709000.0,
+SIRO,,,,,'regularMarketOpen'
+QTM,,,,,'regularMarketOpen'
+HRT,,,,,'regularMarketOpen'
+FDX,Industrials,Integrated Freight & Logistics,76012503040.0,262592000.0,
+HNSN,,,,,'regularMarketOpen'
+RPI,,,,,'regularMarketOpen'
+PPHM,,,,,'regularMarketOpen'
+FLL,Consumer Cyclical,Resorts & Casinos,94056776.0,27105700.0,
+GXP,,,,,'regularMarketOpen'
+CFFN,Financial Services,Banks—Regional,1712693248.0,138956000.0,
+ANF,Consumer Cyclical,Apparel Retail,1290863616.0,62390700.0,
+MHH,Industrials,Staffing & Employment Services,200851696.0,11379700.0,
+TPLM,,,,,'regularMarketOpen'
+DOOR,Industrials,Building Products & Equipment,2330235136.0,24503000.0,
+KKR,Financial Services,Asset Management,22551267328.0,569188992.0,
+TLYS,Consumer Cyclical,Apparel Retail,245692432.0,22413600.0,
+PESI,Industrials,Waste Management,75597256.0,12153900.0,
+VRML,,,,,'regularMarketOpen'
+PODD,Healthcare,Medical Devices,15754131456.0,65927900.0,
+INBK,Financial Services,Banks—Regional,269907712.0,9800570.0,
+MAR,Consumer Cyclical,Lodging,41679904768.0,324332000.0,
+TPH,Consumer Cyclical,Residential Construction,2138269568.0,126825000.0,
+AUM,,,,,'regularMarketOpen'
+UMH,Real Estate,REIT—Residential,631898880.0,41709500.0,
+WTR,,,,,'regularMarketOpen'
+CBK,,,,,'regularMarketOpen'
+JEC,,,,,'regularMarketOpen'
+BONT,,,,,'regularMarketOpen'
+SPPR,,,,,'regularMarketOpen'
+STLD,Basic Materials,Steel,8231621632.0,210366000.0,
+GEVO,Basic Materials,Specialty Chemicals,215330400.0,119628000.0,
+CCC,Technology,Information Technology Services,17881790464.0,605956992.0,
+CZR,Consumer Cyclical,Resorts & Casinos,14558562304.0,208276992.0,
+CBI,,,,,'regularMarketOpen'
+DNKN,Consumer Cyclical,Restaurants,8770828288.0,82417104.0,
+LGF,,,,,'regularMarketOpen'
+INCY,Healthcare,Biotechnology,17804376064.0,218996000.0,
+HY,Industrials,Farm & Heavy Construction Machinery,936060800.0,12953400.0,
+CSFL,,,,,'regularMarketOpen'
+HDY,,,,,'regularMarketOpen'
+PATK,Consumer Cyclical,Recreational Vehicles,1601774080.0,23363100.0,
+CHGG,Consumer Defensive,Education & Training Services,10556060672.0,128811000.0,
+SLI,,,,,'regularMarketOpen'
+TXU,,,,,'regularMarketOpen'
+CDTI,Consumer Cyclical,Auto Parts,1221160.0,4070530.0,
+DDD,Technology,Computer Hardware,1229005696.0,124142000.0,
+MAN,Industrials,Staffing & Employment Services,5198700032.0,57533200.0,
+SHEN,Communication Services,Telecom Services,2230396416.0,49852400.0,
+PRH,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+ROX,,,,,'regularMarketOpen'
+EFX,Industrials,Consulting Services,22885914624.0,121643000.0,
+SLB,Energy,Oil & Gas Equipment & Services,31933167616.0,1392029952.0,
+UAL,Industrials,Airlines,14153135104.0,292662016.0,
+UGA,,,,,'sector'
+WNR,,,,,'regularMarketOpen'
+BMS,,,,,'sector'
+ALJ,,,,,'regularMarketOpen'
+LXP,Real Estate,REIT—Diversified,2898325504.0,276952992.0,
+ORLY,Consumer Cyclical,Specialty Retail,32452536320.0,72448400.0,
+FIX,Industrials,Engineering & Construction,1859410304.0,36394800.0,
+ISRG,Healthcare,Medical Instruments & Supplies,89341796352.0,117555000.0,
+EXAR,,,,,'regularMarketOpen'
+HDS,Industrials,Industrial Distribution,8665630720.0,155159008.0,
+WHLR,Real Estate,REIT—Retail,26779672.0,9702780.0,
+QEP,Energy,Oil & Gas E&P,588597056.0,242220992.0,
+RLOC,,,,,'regularMarketOpen'
+CG,Financial Services,Asset Management,10478361600.0,353520992.0,
+RSTI,,,,,'regularMarketOpen'
+HSFC,,,,,'regularMarketOpen'
+FOE,Basic Materials,Specialty Chemicals,1153714304.0,82290600.0,
+AGII,,,,,'regularMarketOpen'
+IFT,,,,,'regularMarketOpen'
+MBII,Basic Materials,Agricultural Inputs,199744848.0,152476992.0,
+HTBK,Financial Services,Banks—Regional,528450272.0,59915000.0,
+CPT,Real Estate,REIT—Residential,9346081792.0,97395600.0,
+WIBC,,,,,'regularMarketOpen'
+PTLA,,,,,'sector'
+MAT,Consumer Cyclical,Leisure,5551238144.0,348040000.0,
+HXL,Industrials,Aerospace & Defense,4326313984.0,83535696.0,
+CACB,,,,,'regularMarketOpen'
+COTY,Consumer Defensive,Household & Personal Products,5292389376.0,765902976.0,
+CAB,,,,,'regularMarketOpen'
+NBY,Healthcare,Biotechnology,28829994.0,41782600.0,
+DGII,Technology,Communication Equipment,549457216.0,29035900.0,
+ATU,,,,,'regularMarketOpen'
+BIOF,,,,,'regularMarketOpen'
+BOBE,,,,,'regularMarketOpen'
+CGIX,Healthcare,Biotechnology,10785192.0,4085300.0,
+IDCC,Communication Services,Telecom Services,1877970304.0,30806600.0,
+DSFX,,,,,'regularMarketOpen'
+EMMS,Communication Services,Broadcasting,22711476.0,12156800.0,
+MNI,,,,,'regularMarketOpen'
+PPBI,Financial Services,Banks—Regional,2820244480.0,94385696.0,
+FRME,Financial Services,Banks—Regional,1961969280.0,54258000.0,
+ODP,Consumer Cyclical,Specialty Retail,1399037312.0,52674600.0,
+VNTV,,,,,'regularMarketOpen'
+SFI,,,,,'regularMarketOpen'
+EXAM,,,,,'regularMarketOpen'
+IYSA,,,,,'regularMarketOpen'
+PRKR,Technology,Semiconductors,27232530.0,52878700.0,
+DAL,Industrials,Airlines,26619019264.0,637734016.0,
+DMD,,,,,'regularMarketOpen'
+LNC,Financial Services,Insurance—Life,9920292864.0,193264992.0,
+AVX,,,,,'regularMarketOpen'
+BIO,Healthcare,Medical Devices,16866114560.0,24740500.0,
+OPXA,,,,,'regularMarketOpen'
+PRXL,,,,,'regularMarketOpen'
+SLCA,Energy,Oil & Gas Equipment & Services,488069984.0,73950000.0,
+TRK,,,,,'regularMarketOpen'
+HSTM,Healthcare,Health Information Services,641794240.0,31677900.0,
+NATL,,,,,'regularMarketOpen'
+WLK,Basic Materials,Specialty Chemicals,10654569472.0,127722000.0,
+PLBC,Financial Services,Banks—Regional,127194280.0,5181030.0,
+RST,,,,,'regularMarketOpen'
+GT,Consumer Cyclical,Auto Parts,2424593408.0,233134000.0,
+DEL,,,,,'regularMarketOpen'
+HIG,Financial Services,Insurance—Diversified,16569179136.0,358329984.0,
+PBIB,,,,,'regularMarketOpen'
+TCCO,Technology,Communication Equipment,7235064.0,1850400.0,
+GSIT,Technology,Semiconductors,171163728.0,23641400.0,
+SNHY,,,,,'regularMarketOpen'
+THRX,,,,,'regularMarketOpen'
+SPA,,,,,'regularMarketOpen'
+AEPI,,,,,'regularMarketOpen'
+HSIC,Healthcare,Medical Distribution,9987180544.0,142768000.0,
+EONC,,,,,'regularMarketOpen'
+JOE,Real Estate,Real Estate—Diversified,2144500480.0,58882500.0,
+ANSS,Technology,Software—Application,28787060736.0,85884096.0,
+RRD,Industrials,Specialty Business Services,118524000.0,71400000.0,
+WWAV,,,,,'regularMarketOpen'
+BSET,Consumer Cyclical,"Furnishings, Fixtures & Appliances",180973888.0,9976510.0,
+EFII,,,,,'regularMarketOpen'
+DV,,,,,'regularMarketOpen'
+POST,Consumer Defensive,Packaged Foods,6327783936.0,65880100.0,
+ARC,Industrials,Specialty Business Services,61408200.0,43863000.0,
+SHLM,,,,,'regularMarketOpen'
+APU,,,,,'regularMarketOpen'
+RPTP,,,,,'regularMarketOpen'
+AFH,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+DTE,Utilities,Utilities—Regulated Electric,24208549888.0,193560000.0,
+FPP,,,,,'regularMarketOpen'
+LULU,Consumer Cyclical,Apparel Retail,44877979648.0,124921000.0,
+MCZ,,,,,'regularMarketOpen'
+RNN,,,,,'regularMarketOpen'
+MCHX,Communication Services,Advertising Agencies,92199496.0,34909700.0,
+LMOS,,,,,'regularMarketOpen'
+CGEIU,,,,,'regularMarketOpen'
+PWX,,,,,'regularMarketOpen'
+NSYS,Technology,Electronic Components,12835870.0,2657530.0,
+ALXA,,,,,'regularMarketOpen'
+WSBF,Financial Services,Banks—Regional,454671904.0,25161700.0,
+EDE,,,,,'regularMarketOpen'
+ANAD,,,,,'regularMarketOpen'
+PAY,,,,,'regularMarketOpen'
+AGIO,Healthcare,Biotechnology,2334747904.0,69259800.0,
+EE,,,,,'sector'
+ROCK,Industrials,Building Products & Equipment,2235244032.0,32522100.0,
+TIS,,,,,'regularMarketOpen'
+CTB,Consumer Cyclical,Auto Parts,1944936320.0,50373900.0,
+STCK,,,,,'regularMarketOpen'
+NG,Basic Materials,Gold,3295151360.0,329912000.0,
+DFRG,,,,,'regularMarketOpen'
+EDR,,,,,'regularMarketOpen'
+TXRH,Consumer Cyclical,Restaurants,5431446528.0,69482496.0,
+CVCO,Consumer Cyclical,Residential Construction,1638065152.0,9188160.0,
+DCO,Industrials,Aerospace & Defense,613259264.0,11714600.0,
+FLIR,Technology,Scientific & Technical Instruments,5488418304.0,131145000.0,
+TTS,,,,,'regularMarketOpen'
+MGM,Consumer Cyclical,Resorts & Casinos,14907079680.0,493939008.0,
+AREX,,,,,'regularMarketOpen'
+RNG,Technology,Software—Application,31819251712.0,79327800.0,
+SNH,,,,,'regularMarketOpen'
+FCLF,,,,,'regularMarketOpen'
+MSG,,,,,'regularMarketOpen'
+HBCP,Financial Services,Banks—Regional,250487712.0,8755250.0,
+LDL,Industrials,Specialty Industrial Machinery,532888672.0,17733400.0,
+YHOO,,,,,'regularMarketOpen'
+LUV,Industrials,Airlines,27081725952.0,590273024.0,
+NC,Energy,Thermal Coal,212987888.0,5477220.0,
+MGLN,Healthcare,Healthcare Plans,2047295616.0,25607200.0,
+CCFI,,,,,'regularMarketOpen'
+HOT,,,,,'regularMarketOpen'
+DF,,,,,'regularMarketOpen'
+SSNI,,,,,'regularMarketOpen'
+ANCB,,,,,'regularMarketOpen'
+TTC,Industrials,Tools & Accessories,9819821056.0,107297000.0,
+TYL,Technology,Software—Application,18179366912.0,40326900.0,
+FCNCA,Financial Services,Banks—Regional,5833379840.0,8811220.0,
+CRI,Consumer Cyclical,Apparel Retail,3944433664.0,43647600.0,
+GWW,Industrials,Industrial Distribution,21656647680.0,53668000.0,
+SFG,,,,,'regularMarketOpen'
+PG,Consumer Defensive,Household & Personal Products,338491572224.0,2479610112.0,
+MKC,Consumer Defensive,Packaged Foods,24917542912.0,248696000.0,
+IEP,Industrials,Conglomerates,11824578560.0,232082000.0,
+XLRT,,,,,'regularMarketOpen'
+B,Industrials,Specialty Industrial Machinery,2506573568.0,50617400.0,
+AXLL,,,,,'regularMarketOpen'
+GGP,,,,,'regularMarketOpen'
+MLNK,,,,,'regularMarketOpen'
+CYNO,,,,,'regularMarketOpen'
+USMO,,,,,'regularMarketOpen'
+VNX,,,,,'regularMarketOpen'
+AFL,Financial Services,Insurance—Life,31497633792.0,702444992.0,
+ISIS,,,,,'regularMarketOpen'
+AVB,Real Estate,REIT—Residential,22666915840.0,139608992.0,
+AUBN,Financial Services,Banks—Regional,153171728.0,3566220.0,
+BKU,Financial Services,Banks—Regional,2979490304.0,92387296.0,
+DGI,,,,,'regularMarketOpen'
+CDR,Real Estate,REIT—Retail,127197032.0,13531600.0,
+ORM,,,,,'regularMarketOpen'
+COB,,,,,'regularMarketOpen'
+VTUS,,,,,'regularMarketOpen'
+UTIW,,,,,'regularMarketOpen'
+CDI,,,,,'regularMarketOpen'
+ACXM,,,,,'regularMarketOpen'
+BMM,,,,,'regularMarketOpen'
+COIN,,,,,'regularMarketOpen'
+TRCH,Energy,Oil & Gas E&P,75727312.0,99641200.0,
+XTEX,,,,,'regularMarketOpen'
+WEBK,,,,,'regularMarketOpen'
+SBFG,Financial Services,Banks—Regional,139313920.0,7546800.0,
+AKR,Real Estate,REIT—Retail,1252612736.0,86268096.0,
+VIA,,,,,'regularMarketOpen'
+WU,Financial Services,Credit Services,9098106880.0,411120992.0,
+ISLE,,,,,'regularMarketOpen'
+CF,Basic Materials,Agricultural Inputs,8421872640.0,213916000.0,
+MMSI,Healthcare,Medical Instruments & Supplies,3096217856.0,55547500.0,
+EMCF,Financial Services,Banks—Regional,66688444.0,2708710.0,
+EMN,Basic Materials,Chemicals,13885469696.0,135468000.0,
+COSI,,,,,'regularMarketOpen'
+HURC,Industrials,Specialty Industrial Machinery,219276352.0,6803160.0,
+SBCF,Financial Services,Banks—Regional,1538100480.0,55168600.0,
+CODI,Industrials,Conglomerates,1357058944.0,64900000.0,
+HCP,,,,,'regularMarketOpen'
+TGTX,Healthcare,Biotechnology,5558082560.0,126649000.0,
+UNB,Financial Services,Banks—Regional,119938304.0,4475310.0,
+FCS,,,,,'regularMarketOpen'
+PRLB,Industrials,Metal Fabrication,3980385792.0,26753500.0,
+HRS,,,,,'regularMarketOpen'
+BFIN,Financial Services,Banks—Regional,130512696.0,14780600.0,
+CTT,Real Estate,REIT—Specialty,459858688.0,48765500.0,
+STRP,,,,,'regularMarketOpen'
+LBY,,,,,'regularMarketOpen'
+CCO,Communication Services,Advertising Agencies,649513664.0,467276000.0,
+AOC,,,,,'regularMarketOpen'
+VICR,Technology,Electronic Components,3605265152.0,31517000.0,
+EFSC,Financial Services,Banks—Regional,1098269312.0,26209700.0,
+ORIT,,,,,'regularMarketOpen'
+MLR,Consumer Cyclical,Auto Parts,407632576.0,11405500.0,
+CAVM,,,,,'regularMarketOpen'
+WM,Industrials,Waste Management,48772960256.0,422606016.0,
+HEI,Industrials,Aerospace & Defense,16954558464.0,54189200.0,
+EXTR,Technology,Communication Equipment,774981952.0,123013000.0,
+CBSH,Financial Services,Banks—Regional,7377452032.0,117121000.0,
+DFT,,,,,'regularMarketOpen'
+GSBC,Financial Services,Banks—Regional,665218624.0,13844300.0,
+ENOC,,,,,'regularMarketOpen'
+FBRC,,,,,'regularMarketOpen'
+KND,,,,,'regularMarketOpen'
+ARO,,,,,'regularMarketOpen'
+PLXS,Technology,Electronic Components,2215078144.0,29002000.0,
+SMTC,Technology,Semiconductors,4543730688.0,65003300.0,
+AN,Consumer Cyclical,Auto & Truck Dealerships,5878168576.0,87865000.0,
+AFG,Financial Services,Insurance—Property & Casualty,7647500288.0,86844200.0,
+URRE,,,,,'regularMarketOpen'
+ABAX,,,,,'regularMarketOpen'
+DX,Real Estate,REIT—Mortgage,418685824.0,23145200.0,
+TYC,,,,,'regularMarketOpen'
+KMT,Industrials,Tools & Accessories,3176979456.0,83276000.0,
+ICGE,,,,,'regularMarketOpen'
+BELFB,Technology,Electronic Components,170508496.0,10214400.0,
+FORM,Technology,Semiconductors,3240235520.0,77388000.0,
+IILG,,,,,'regularMarketOpen'
+ANX,,,,,'regularMarketOpen'
+MILB,,,,,'regularMarketOpen'
+RF,Financial Services,Banks—Regional,14925299712.0,960444032.0,
+VLO,Energy,Oil & Gas Refining & Marketing,24071784448.0,407788992.0,
+ARIA,,,,,'regularMarketOpen'
+GS,Financial Services,Capital Markets,82572877824.0,344068000.0,
+BHLB,Financial Services,Banks—Regional,940900352.0,50832000.0,
+BLUE,Healthcare,Biotechnology,2818210304.0,66223000.0,
+SSH,,,,,'regularMarketOpen'
+RBCV,,,,,'regularMarketOpen'
+CCCR,,,,,'regularMarketOpen'
+NU,,,,,'regularMarketOpen'
+EAC,,,,,'regularMarketOpen'
+FCF,Financial Services,Banks—Regional,998819840.0,96132800.0,
+NAVB,Healthcare,Biotechnology,50171936.0,26687200.0,
+FGL,,,,,'regularMarketOpen'
+SBBX,,,,,'sector'
+AV,,,,,'regularMarketOpen'
+PJC,,,,,'regularMarketOpen'
+DLX,Communication Services,Advertising Agencies,1144125056.0,41894000.0,
+OPOF,Financial Services,Banks—Regional,100583040.0,5222380.0,
+UNH,Healthcare,Healthcare Plans,319819087872.0,948820992.0,
+HLS,,,,,'regularMarketOpen'
+FMI,,,,,'regularMarketOpen'
+AES,Utilities,Utilities—Diversified,14067520512.0,665131008.0,
+POWL,Industrials,Electrical Equipment & Parts,328539296.0,11614600.0,
+CPST,Industrials,Specialty Industrial Machinery,81942424.0,11073300.0,
+SAM,Consumer Defensive,Beverages—Brewers,11510124544.0,9934620.0,
+NL,Industrials,Security & Protection Services,242969216.0,48789000.0,
+HWKN,Basic Materials,Specialty Chemicals,547401792.0,10670600.0,
+BWINB,,,,,'regularMarketOpen'
+PWR,Industrials,Engineering & Construction,10007711744.0,138860992.0,
+CWCO,Utilities,Utilities—Regulated Water,180266160.0,15123000.0,
+LTRX,Technology,Communication Equipment,140381808.0,28591000.0,
+BOTA,,,,,'regularMarketOpen'
+CTBI,Financial Services,Banks—Regional,665752768.0,17810400.0,
+ATI,Industrials,Metal Fabrication,2097536768.0,126816000.0,
+OCLR,,,,,'regularMarketOpen'
+AIMC,Industrials,Specialty Industrial Machinery,3446667520.0,64714000.0,
+TSRO,,,,,'regularMarketOpen'
+BIOL,Healthcare,Medical Devices,27538666.0,93014200.0,
+WBC,,,,,'regularMarketOpen'
+EPIQ,,,,,'regularMarketOpen'
+ADUS,Healthcare,Medical Care Facilities,1656435584.0,15808700.0,
+PLAB,Technology,Semiconductor Equipment & Materials,738715520.0,65663600.0,
+BDL,Consumer Cyclical,Restaurants,35574932.0,1858650.0,
+ODC,Basic Materials,Specialty Chemicals,273792128.0,5399730.0,
+ANAT,Financial Services,Insurance—Diversified,2373602048.0,26887200.0,
+IDSY,,,,,'regularMarketOpen'
+ATHN,,,,,'regularMarketOpen'
+FL,Consumer Cyclical,Footwear & Accessories,4380030464.0,104212000.0,
+BYBK,,,,,'regularMarketOpen'
+PQ,,,,,'regularMarketOpen'
+CORE,Consumer Defensive,Food Distribution,1385828352.0,44921500.0,
+RT,,,,,'regularMarketOpen'
+SHOO,Consumer Cyclical,Footwear & Accessories,2729519616.0,83191696.0,
+SOV,,,,,'regularMarketOpen'
+PDLI,Healthcare,Biotechnology,285567488.0,114227000.0,
+LH,Healthcare,Diagnostics & Research,19885185024.0,97400000.0,
+STFC,Financial Services,Insurance—Property & Casualty,750503168.0,43837800.0,
+SPAN,,,,,'regularMarketOpen'
+TA,Consumer Cyclical,Specialty Retail,460943904.0,14395500.0,
+AHGP,,,,,'regularMarketOpen'
+MFRM,,,,,'regularMarketOpen'
+GBCI,Financial Services,Banks—Regional,4206838528.0,95414800.0,
+FHCO,,,,,'regularMarketOpen'
+FFIV,Technology,Software—Infrastructure,10619758592.0,61603100.0,
+WSH,,,,,'regularMarketOpen'
+TSC,Financial Services,Banks—Regional,485330848.0,29829800.0,
+COT,,,,,'regularMarketOpen'
+NWN,Utilities,Utilities—Regulated Gas,1492664832.0,30568600.0,
+NFG,Energy,Oil & Gas Integrated,3921527040.0,90954304.0,
+TLLP,,,,,'regularMarketOpen'
+SNFCA,Financial Services,Credit Services,162886352.0,16573300.0,
+ALSN,Consumer Cyclical,Auto Parts,4795277824.0,112671000.0,
+ETP,,,,,'regularMarketOpen'
+CVBF,Financial Services,Banks—Regional,2662692864.0,135506000.0,
+CBM,,,,,'regularMarketOpen'
+DECK,Consumer Cyclical,Footwear & Accessories,8198029824.0,28084100.0,
+NRF,,,,,'regularMarketOpen'
+ONTY,,,,,'regularMarketOpen'
+QLYS,Technology,Software—Infrastructure,3708527872.0,39016600.0,
+WLB,,,,,'regularMarketOpen'
+PFIN,Industrials,Tools & Accessories,15818321.0,3151060.0,
+SEV,,,,,'regularMarketOpen'
+GTWN,,,,,'regularMarketOpen'
+AAC,,,,,'regularMarketOpen'
+CDIS,,,,,'regularMarketOpen'
+OCRX,,,,,'regularMarketOpen'
+INVN,,,,,'regularMarketOpen'
+ROIAK,,,,,'regularMarketOpen'
+KORS,,,,,'regularMarketOpen'
+FTR,,,,,'regularMarketOpen'
+TAP,Consumer Defensive,Beverages—Brewers,10264714240.0,200296992.0,
+SWHC,,,,,'regularMarketOpen'
+HYNI,,,,,'regularMarketOpen'
+ACAT,,,,,'regularMarketOpen'
+BSFT,,,,,'regularMarketOpen'
+ONVO,Healthcare,Diagnostics & Research,51769772.0,6732090.0,
+HGR,,,,,'regularMarketOpen'
+UNXL,,,,,'regularMarketOpen'
+NRCIA,,,,,'regularMarketOpen'
+CMCSA,Communication Services,Entertainment,233021046784.0,4565879808.0,
+RM,Financial Services,Credit Services,310487552.0,11335800.0,
+CBB,Communication Services,Telecom Services,772879168.0,50680600.0,
+NTLS,,,,,'regularMarketOpen'
+IRDM,Communication Services,Telecom Services,4425626624.0,133302000.0,
+NGLS,,,,,'regularMarketOpen'
+ANH,Real Estate,REIT—Mortgage,249081360.0,99235600.0,
+JAH,,,,,'regularMarketOpen'
+ITRI,Technology,Scientific & Technical Instruments,3367485696.0,40396900.0,
+REN,,,,,'regularMarketOpen'
+FAST,Industrials,Industrial Distribution,28249147392.0,574052992.0,
+GM,Consumer Cyclical,Auto Manufacturers,60000509952.0,1431309952.0,
+ITI,Technology,Communication Equipment,236752224.0,41174300.0,
+XPO,Industrials,Integrated Freight & Logistics,11049415680.0,91415696.0,
+SAH,Consumer Cyclical,Auto & Truck Dealerships,1744233984.0,30020600.0,
+WASH,Financial Services,Banks—Regional,771736576.0,17264800.0,
+IBKC,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+LOGM,,,,,'sector'
+NWPX,Industrials,Metal Fabrication,272787328.0,9805440.0,
+EGN,,,,,'regularMarketOpen'
+ACFC,,,,,'regularMarketOpen'
+FRAN,Consumer Cyclical,Apparel Retail,7309144.0,3032840.0,
+WGA,,,,,'regularMarketOpen'
+IMI,,,,,'regularMarketOpen'
+ECPG,Financial Services,Mortgage Finance,1221816448.0,31344700.0,
+VNCE,Consumer Cyclical,Apparel Manufacturing,70775400.0,11795900.0,
+ZBB,,,,,'regularMarketOpen'
+WTW,,,,,'regularMarketOpen'
+AMRI,,,,,'regularMarketOpen'
+MTSN,,,,,'regularMarketOpen'
+IBOC,Financial Services,Banks—Regional,2253236992.0,63275400.0,
+AGX,Industrials,Engineering & Construction,733821312.0,15670000.0,
+QLIK,,,,,'regularMarketOpen'
+SIVB,Financial Services,Banks—Regional,18123735040.0,51796900.0,
+AVID,Communication Services,Electronic Gaming & Multimedia,602998528.0,44208100.0,
+ASXHTW,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+CRDC,,,,,'regularMarketOpen'
+CNTY,Consumer Cyclical,Resorts & Casinos,181596640.0,29576000.0,
+SGYP,,,,,'sector'
+CHSCP,Consumer Defensive,Farm Products,,,
+SSI,,,,,'regularMarketOpen'
+MOH,Healthcare,Healthcare Plans,11870673920.0,59300000.0,
+MMC,Financial Services,Insurance Brokers,58288775168.0,507191008.0,
+PULB,,,,,'regularMarketOpen'
+FNGN,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+APH,Technology,Electronic Components,39192297472.0,299155008.0,
+CGAG,,,,,'regularMarketOpen'
+RBCN,Technology,Semiconductor Equipment & Materials,22038562.0,2421820.0,
+USO,,,,,'sector'
+TFM,,,,,'regularMarketOpen'
+ALN,,,,,'regularMarketOpen'
+CBMX,,,,,'regularMarketOpen'
+AMTD,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+KNDI,Consumer Cyclical,Auto Parts,613038272.0,72377600.0,
+HDNG,,,,,'regularMarketOpen'
+STWD,Real Estate,REIT—Mortgage,5332206080.0,284688000.0,
+BLDR,Industrials,Building Products & Equipment,4178687232.0,116821000.0,
+NS,Energy,Oil & Gas Midstream,1817004672.0,109195000.0,
+SGB,,,,,'regularMarketOpen'
+COL,,,,,'regularMarketOpen'
+BIOS,,,,,'regularMarketOpen'
+CCF,Basic Materials,Specialty Chemicals,1066299072.0,9445470.0,
+FIG,,,,,'regularMarketOpen'
+MNTA,,,,,'sector'
+CCRN,Industrials,Staffing & Employment Services,344456384.0,37563400.0,
+EEP,,,,,'regularMarketOpen'
+DHR,Healthcare,Diagnostics & Research,158946852864.0,710377024.0,
+ORN,Industrials,Engineering & Construction,134434752.0,30415100.0,
+UPIP,,,,,'regularMarketOpen'
+CXW,Real Estate,REIT—Specialty,900844032.0,119634000.0,
+SUI,Real Estate,REIT—Residential,15407325184.0,107563000.0,
+CECO,,,,,'regularMarketOpen'
+PX,,,,,'regularMarketOpen'
+VRTB,Financial Services,Mortgage Finance,1752520.0,2337.0,
+PBNY,,,,,'regularMarketOpen'
+CLC,,,,,'regularMarketOpen'
+BIOD,,,,,'regularMarketOpen'
+ACN,Technology,Information Technology Services,155970781184.0,635000000.0,
+MON,,,,,'regularMarketOpen'
+MIC,Industrials,Airports & Air Services,2878402560.0,87197904.0,
+DST,,,,,'regularMarketOpen'
+PRAA,Financial Services,Credit Services,1977260416.0,45580000.0,
+KEYW,,,,,'sector'
+LNN,Industrials,Farm & Heavy Construction Machinery,1331799040.0,10865200.0,
+HALL,Financial Services,Insurance—Property & Casualty,61139212.0,18142200.0,
+MLNX,,,,,'regularMarketOpen'
+FEYE,Technology,Software—Infrastructure,3243577600.0,234532000.0,
+SCBT,,,,,'regularMarketOpen'
+NFBK,Financial Services,Banks—Regional,625251840.0,53122600.0,
+PDO,,,,,'regularMarketOpen'
+HPJ,,,,,'regularMarketOpen'
+GCI,Communication Services,Publishing,386285216.0,137959008.0,
+BSIC,,,,,'regularMarketOpen'
+BYFC,Financial Services,Banks—Regional,47664940.0,19281800.0,
+KINS,Financial Services,Insurance—Property & Casualty,65972736.0,10675200.0,
+FMNB,Financial Services,Banks—Regional,382645824.0,28260400.0,
+AGO,Financial Services,Insurance—Specialty,2549435648.0,80806200.0,
+BCO,Industrials,Security & Protection Services,3419781888.0,49433100.0,
+IR,Industrials,Specialty Industrial Machinery,18510514176.0,417656000.0,
+POOL,Consumer Cyclical,Leisure,13565173760.0,40158600.0,
+NFEC,,,,,'regularMarketOpen'
+RESI,Real Estate,REIT—Residential,951115584.0,58747100.0,
+STR,,,,,'regularMarketOpen'
+NYNY,,,,,'regularMarketOpen'
+YOD,,,,,'regularMarketOpen'
+SNDK,,,,,'regularMarketOpen'
+HAS,Consumer Cyclical,Leisure,12195760128.0,137031008.0,
+ECL,Basic Materials,Specialty Chemicals,63154704384.0,285444992.0,
+SCSS,,,,,'regularMarketOpen'
+DFS,Financial Services,Credit Services,25580154880.0,306496000.0,
+MCD,Consumer Cyclical,Restaurants,154804256768.0,745110976.0,
+CR,Industrials,Specialty Industrial Machinery,4425505280.0,58108000.0,
+NTK,,,,,'regularMarketOpen'
+ECYT,,,,,'regularMarketOpen'
+JIVE,,,,,'regularMarketOpen'
+ATR,Consumer Cyclical,Packaging & Containers,8443049984.0,64722500.0,
+LXK,,,,,'regularMarketOpen'
+NWFL,Financial Services,Banks—Regional,222250624.0,8201130.0,
+IHS,,,,,'regularMarketOpen'
+CIEN,Technology,Communication Equipment,7378039296.0,154320000.0,
+FCEL,Industrials,Electrical Equipment & Parts,2540567296.0,322407008.0,
+CVM,Healthcare,Biotechnology,560805120.0,38756400.0,
+III,,,,,'sector'
+LPI,Energy,Oil & Gas E&P,261562816.0,12003800.0,
+FLXS,Consumer Cyclical,"Furnishings, Fixtures & Appliances",237776496.0,7316200.0,
+TDS,Communication Services,Telecom Services,1997571584.0,107051000.0,
+OREX,,,,,'regularMarketOpen'
+FLML,,,,,'regularMarketOpen'
+BLT,,,,,'regularMarketOpen'
+DAG,,,,,'sector'
+SOFO,Technology,Software—Application,26301172.0,7922040.0,
+ZGNX,Healthcare,Biotechnology,1110121600.0,55673100.0,
+TEN,Consumer Cyclical,Auto Parts,837119936.0,61123400.0,
+PSXP,Energy,Oil & Gas Midstream,6873034240.0,228340000.0,
+AETI,,,,,'regularMarketOpen'
+GK,,,,,'regularMarketOpen'
+MBRG,,,,,'regularMarketOpen'
+ARWR,Healthcare,Biotechnology,7610183168.0,102292000.0,
+CMG,Consumer Cyclical,Restaurants,36374388736.0,27980300.0,
+COR,Real Estate,REIT—Office,5079816704.0,42766600.0,
+ARE,Real Estate,REIT—Office,23288635392.0,134944000.0,
+UFPT,Consumer Cyclical,Packaging & Containers,351205408.0,7494780.0,
+WLP,,,,,'regularMarketOpen'
+OVAS,,,,,'regularMarketOpen'
+ICPT,Healthcare,Biotechnology,1013196544.0,32992400.0,
+CL,Consumer Defensive,Household & Personal Products,72585076736.0,857169024.0,
+HSNI,,,,,'regularMarketOpen'
+SYY,Consumer Defensive,Food Distribution,38650159104.0,509359008.0,
+PCAR,Industrials,Farm & Heavy Construction Machinery,29606762496.0,346148992.0,
+MEG,Industrials,Waste Management,721143488.0,24961700.0,
+SCON,Technology,Semiconductor Equipment & Materials,2915239.0,3151780.0,
+CMN,,,,,'regularMarketOpen'
+EGL,,,,,'regularMarketOpen'
+LMNR,Consumer Defensive,Farm Products,275251008.0,17815600.0,
+QNST,Communication Services,Advertising Agencies,1107585792.0,52893300.0,
+DWRE,,,,,'regularMarketOpen'
+POM,,,,,'regularMarketOpen'
+TESO,,,,,'regularMarketOpen'
+PTIE,,,,,'sector'
+PKE,Industrials,Aerospace & Defense,279836608.0,20381400.0,
+ANTH,Healthcare,Biotechnology,617830.0,26179300.0,
+DWA,,,,,'regularMarketOpen'
+XBKS,,,,,'regularMarketOpen'
+GRC,Industrials,Specialty Industrial Machinery,923488768.0,26102000.0,
+RLJ,Real Estate,REIT—Hotel & Motel,2201393408.0,165022000.0,
+ALOT,Technology,Computer Hardware,78803680.0,7168420.0,
+FE,Utilities,Utilities—Diversified,16483884032.0,542590016.0,
+WVFC,Financial Services,Banks—Regional,29301426.0,1902690.0,
+ARII,,,,,'regularMarketOpen'
+MMS,Industrials,Specialty Business Services,4486032384.0,61312600.0,
+AMB,,,,,'regularMarketOpen'
+CHRW,Industrials,Integrated Freight & Logistics,12666088448.0,135946000.0,
+AET,,,,,'regularMarketOpen'
+PEBK,Financial Services,Banks—Regional,150475008.0,5787500.0,
+TRVN,Healthcare,Biotechnology,358028384.0,157030000.0,
+CHK,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+JMBA,,,,,'regularMarketOpen'
+PPC,Consumer Defensive,Packaged Foods,5019627520.0,243552992.0,
+OKSB,,,,,'regularMarketOpen'
+RGA,Financial Services,Insurance—Reinsurance,8079747584.0,67937000.0,
+FIS,Technology,Information Technology Services,91723644928.0,620508992.0,
+CRWN,,,,,'regularMarketOpen'
+IMPV,,,,,'regularMarketOpen'
+MOCO,,,,,'regularMarketOpen'
+DLA,Consumer Cyclical,Apparel Manufacturing,161159904.0,6890120.0,
+ASEI,,,,,'regularMarketOpen'
+CPN,,,,,'regularMarketOpen'
+SXE,,,,,'regularMarketOpen'
+SC,Financial Services,Credit Services,6810079744.0,306071008.0,
+ORBC,Communication Services,Telecom Services,527654528.0,78014800.0,
+REV,Consumer Defensive,Household & Personal Products,639997184.0,53333100.0,
+AHS,,,,,'regularMarketOpen'
+UBSI,Financial Services,Banks—Regional,3969419520.0,129762000.0,
+ISCA,,,,,'regularMarketOpen'
+ALSK,Communication Services,Telecom Services,195375680.0,53822500.0,
+ACRE,Real Estate,REIT—Mortgage,387926048.0,33441900.0,
+AIRT,Industrials,Integrated Freight & Logistics,31700350.0,2881850.0,
+TRNX,Energy,Oil & Gas Integrated,5166955.0,188575008.0,
+OAS,Energy,Oil & Gas E&P,770400000.0,20000000.0,
+WSTG,Technology,Electronics & Computer Distribution,83579752.0,4362200.0,
+CFNL,,,,,'regularMarketOpen'
+DTLA,,,,,'regularMarketOpen'
+FXCB,,,,,'regularMarketOpen'
+INGR,Consumer Defensive,Packaged Foods,5416835584.0,66990300.0,
+CRIS,Healthcare,Biotechnology,464069280.0,58817400.0,
+DMRC,Technology,Information Technology Services,802083200.0,15315700.0,
+TSPT,,,,,'regularMarketOpen'
+ILGN,,,,,'regularMarketOpen'
+CGI,,,,,'regularMarketOpen'
+HWCC,Industrials,Industrial Distribution,45497376.0,16544500.0,
+UMBF,Financial Services,Banks—Regional,3254093568.0,48030900.0,
+TELK,,,,,'regularMarketOpen'
+CUO,,,,,'regularMarketOpen'
+PANW,Technology,Software—Infrastructure,29598314496.0,95500000.0,
+ESXB,Financial Services,Banks—Regional,152898848.0,22321000.0,
+DEST,,,,,'sector'
+BSRR,Financial Services,Banks—Regional,364776256.0,15359000.0,
+ONI,,,,,'regularMarketOpen'
+SKH,,,,,'regularMarketOpen'
+GMCR,,,,,'regularMarketOpen'
+OLN,Basic Materials,Specialty Chemicals,3763430144.0,157862000.0,
+EXXI,,,,,'regularMarketOpen'
+EXLP,,,,,'regularMarketOpen'
+TASR,,,,,'regularMarketOpen'
+SXC,Basic Materials,Coking Coal,415495840.0,82768096.0,
+CVX,Energy,Oil & Gas Integrated,177967169536.0,1925010048.0,
+ZTS,Healthcare,Drug Manufacturers—Specialty & Generic,75819499520.0,475268000.0,
+CYH,Healthcare,Medical Care Facilities,1021563328.0,119621000.0,
+MTZ,Industrials,Engineering & Construction,5019255296.0,73866896.0,
+DIS,Communication Services,Entertainment,318137532416.0,1807059968.0,
+CHTR,Communication Services,Entertainment,130270535680.0,234196000.0,
+HTBI,Financial Services,Banks—Regional,323393312.0,17020700.0,
+DDE,,,,,'regularMarketOpen'
+AWLD,,,,,'regularMarketOpen'
+OTT,,,,,'regularMarketOpen'
+EQM,,,,,'regularMarketOpen'
+SRC,Real Estate,REIT—Diversified,4589462528.0,114251000.0,
+NETE,Technology,Software—Infrastructure,64925812.0,4845210.0,
+OLBK,,,,,'sector'
+TTEC,Technology,Information Technology Services,3411669504.0,46735200.0,
+MWW,,,,,'regularMarketOpen'
+PIR,,,,,'regularMarketOpen'
+HF,,,,,'regularMarketOpen'
+TYPE,,,,,'regularMarketOpen'
+CLRX,,,,,'regularMarketOpen'
+CAP,,,,,'regularMarketOpen'
+LTRE,Consumer Defensive,Education & Training Services,5501350.0,13224300.0,
+GLOWE,,,,,'regularMarketOpen'
+BYLK,,,,,'regularMarketOpen'
+GGOX,,,,,'regularMarketOpen'
+GALE,,,,,'regularMarketOpen'
+TTGT,Communication Services,Internet Content & Information,1690698752.0,28098700.0,
+CLVS,Healthcare,Biotechnology,501645184.0,103432000.0,
+AMSG,,,,,'regularMarketOpen'
+CWEI,,,,,'regularMarketOpen'
+UAM,,,,,'regularMarketOpen'
+HP,Energy,Oil & Gas Drilling,2723406592.0,107602000.0,
+CTG,Technology,Information Technology Services,99785160.0,15188000.0,
+MCEP,Energy,Oil & Gas E&P,43077616.0,14311500.0,
+SNCR,Technology,Software—Application,135405104.0,44105900.0,
+RPM,Basic Materials,Specialty Chemicals,11242148864.0,129937000.0,
+KFS,Consumer Cyclical,Auto & Truck Dealerships,97430616.0,22711100.0,
+ADAT,,,,,'regularMarketOpen'
+DISH,Communication Services,Entertainment,18941474816.0,287569984.0,
+PHII,,,,,'sector'
+FSN,,,,,'regularMarketOpen'
+AHP,,,,,'regularMarketOpen'
+HVT,Consumer Cyclical,Home Improvement Retail,475318752.0,16699700.0,
+ALX,Real Estate,REIT—Retail,1429888000.0,5107290.0,
+DW,,,,,'regularMarketOpen'
+RSOL,,,,,'regularMarketOpen'
+ASTI,Technology,Solar,9630468.0,4187160064.0,
+SLAB,Technology,Semiconductors,5257973248.0,43827400.0,
+LXU,Basic Materials,Chemicals,80313680.0,29317200.0,
+MSN,Technology,Consumer Electronics,19359284.0,21042700.0,
+PZN,Financial Services,Asset Management,527369696.0,16843600.0,
+SNT,,,,,'regularMarketOpen'
+TUES,,,,,'regularMarketOpen'
+HLT,Consumer Cyclical,Lodging,29059694592.0,277446016.0,
+ITG,,,,,'regularMarketOpen'
+VAR,Healthcare,Medical Instruments & Supplies,15948844032.0,91161296.0,
+DOC,Real Estate,REIT—Healthcare Facilities,3758551296.0,208230000.0,
+IMMR,Technology,Software—Application,227079760.0,26937100.0,
+SHOR,,,,,'regularMarketOpen'
+PERY,,,,,'regularMarketOpen'
+CPF,Financial Services,Banks—Regional,499064224.0,28179800.0,
+AHPI,Healthcare,Medical Devices,19184722.0,4013540.0,
+PFS,Financial Services,Banks—Regional,1348297216.0,78572096.0,
+ZMH,,,,,'regularMarketOpen'
+IPAS,,,,,'regularMarketOpen'
+SANW,Consumer Defensive,Farm Products,100446000.0,33482000.0,
+TAL,Consumer Defensive,Education & Training Services,40490102784.0,600387008.0,
+OIS,Energy,Oil & Gas Equipment & Services,321023584.0,61031100.0,
+WWD,Industrials,Aerospace & Defense,7423922176.0,62383700.0,
+VPFG,,,,,'regularMarketOpen'
+SEAS,Consumer Cyclical,Leisure,2266017792.0,78381800.0,
+HCA,Healthcare,Medical Care Facilities,53317750784.0,338375008.0,
+CPI,,,,,'sector'
+PVTB,,,,,'regularMarketOpen'
+GHL,Financial Services,Capital Markets,262764976.0,18972200.0,
+AVCA,,,,,'regularMarketOpen'
+SIFI,,,,,'regularMarketOpen'
+LKQ,Consumer Cyclical,Auto Parts,11157286912.0,304344992.0,
+NHI,Real Estate,REIT—Healthcare Facilities,2998198272.0,44729200.0,
+NANO,,,,,'regularMarketOpen'
+NR,Energy,Oil & Gas Equipment & Services,184331312.0,90803600.0,
+LMIA,,,,,'regularMarketOpen'
+SEB,Industrials,Conglomerates,3860800768.0,1160780.0,
+GPOR,,,,,'sector'
+AIN,Consumer Cyclical,Textile Manufacturing,2302020864.0,30700000.0,
+RMTI,Healthcare,Drug Manufacturers—Specialty & Generic,104801984.0,93573200.0,
+VRX,,,,,'regularMarketOpen'
+CUNB,,,,,'regularMarketOpen'
+MTSC,Technology,Scientific & Technical Instruments,1124279552.0,19276500.0,
+NILE,,,,,'regularMarketOpen'
+CQH,,,,,'regularMarketOpen'
+AXS,Financial Services,Insurance—Property & Casualty,4374579200.0,84321104.0,
+WRI,Real Estate,REIT—Retail,2866558976.0,128143000.0,
+GSCP,,,,,'regularMarketOpen'
+ORPN,,,,,'sector'
+CTF,,,,,'regularMarketOpen'
+GEB,,,,,'regularMarketOpen'
+ASBB,,,,,'regularMarketOpen'
+ESNT,Financial Services,Mortgage Finance,4864543232.0,112423000.0,
+BHI,,,,,'regularMarketOpen'
+PHMD,,,,,'regularMarketOpen'
+XGTI,,,,,'sector'
+BWP,,,,,'regularMarketOpen'
+GERN,Healthcare,Biotechnology,537116544.0,310472000.0,
+USAK,Industrials,Trucking,80507336.0,8760320.0,
+MDCO,,,,,'regularMarketOpen'
+OVTI,,,,,'regularMarketOpen'
+DISCA,Communication Services,Entertainment,13110960128.0,160318000.0,
+MDXG,Healthcare,Medical Devices,659607296.0,111035000.0,
+IRT,Real Estate,REIT—Residential,1253784832.0,94840000.0,
+INSY,,,,,'sector'
+IART,Healthcare,Medical Devices,4911413248.0,84272704.0,
+MTB,Financial Services,Banks—Regional,16144390144.0,128293000.0,
+RNET,Energy,Oil & Gas Equipment & Services,108966944.0,20559800.0,
+XRAY,Healthcare,Medical Instruments & Supplies,11574673408.0,218555008.0,
+PFBI,Financial Services,Banks—Regional,209534720.0,14673300.0,
+SBY,,,,,'regularMarketOpen'
+PSDV,,,,,'regularMarketOpen'
+BREW,,,,,'sector'
+CWBC,Financial Services,Banks—Regional,78036880.0,8473060.0,
+BBBY,Consumer Cyclical,Specialty Retail,2415573248.0,126008000.0,
+MCY,Financial Services,Insurance—Property & Casualty,2589079552.0,55357700.0,
+BYD,Consumer Cyclical,Resorts & Casinos,4576485888.0,111540000.0,
+HAWK,,,,,'regularMarketOpen'
+PROV,Financial Services,Banks—Regional,111336064.0,7442250.0,
+SONA,Financial Services,Banks—Regional,273659360.0,24368600.0,
+TAT,Energy,Oil & Gas E&P,19347386.0,76335600.0,
+ACIW,Technology,Software—Infrastructure,4586411008.0,116762000.0,
+URBN,Consumer Cyclical,Apparel Retail,2605029632.0,97786400.0,
+TGE,,,,,'regularMarketOpen'
+MPB,Financial Services,Banks—Regional,206097792.0,8415590.0,
+OI,Consumer Cyclical,Packaging & Containers,1823125632.0,156956000.0,
+TFSL,Financial Services,Banks—Regional,4956097536.0,280243008.0,
+ANCX,,,,,'regularMarketOpen'
+VSR,,,,,'regularMarketOpen'
+TRGT,,,,,'regularMarketOpen'
+LAKE,Consumer Cyclical,Apparel Manufacturing,178685152.0,7979900.0,
+MYCC,,,,,'regularMarketOpen'
+NPBC,,,,,'regularMarketOpen'
+BLOX,,,,,'regularMarketOpen'
+IM,,,,,'regularMarketOpen'
+EPD,Energy,Oil & Gas Midstream,47172038656.0,2182880000.0,
+KBIO,,,,,'regularMarketOpen'
+RFIL,Industrials,Electrical Equipment & Parts,55697664.0,9771520.0,
+BMRN,Healthcare,Biotechnology,14429818880.0,181530000.0,
+CRDS,,,,,'regularMarketOpen'
+EZPW,Financial Services,Credit Services,280845760.0,52097600.0,
+DHX,Industrials,Staffing & Employment Services,110642696.0,52437300.0,
+RPXC,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+EBTC,Financial Services,Banks—Regional,326788832.0,11926600.0,
+XRM,,,,,'regularMarketOpen'
+IRG,,,,,'regularMarketOpen'
+OXFV,,,,,'regularMarketOpen'
+GWR,,,,,'regularMarketOpen'
+HYTM,,,,,'regularMarketOpen'
+PCRX,Healthcare,Drug Manufacturers—Specialty & Generic,2524513536.0,43443700.0,
+UHN,,,,,'regularMarketOpen'
+EXE,,,,,'regularMarketOpen'
+CAT,Industrials,Farm & Heavy Construction Machinery,97400717312.0,543257984.0,
+ISRL,,,,,'regularMarketOpen'
+PNC,Financial Services,Banks—Regional,60868886528.0,423700992.0,
+NNBR,Industrials,Conglomerates,267063120.0,42730100.0,
+UNTD,,,,,'regularMarketOpen'
+ELRC,,,,,'regularMarketOpen'
+BC,Consumer Cyclical,Leisure,5778550272.0,78342600.0,
+AMGN,Healthcare,Drug Manufacturers—General,132385234944.0,582169024.0,
+BPFH,Financial Services,Banks—Regional,636239360.0,82254600.0,
+GPC,Consumer Cyclical,Specialty Retail,14004787200.0,144290000.0,
+BRCD,,,,,'regularMarketOpen'
+CLI,Real Estate,REIT—Office,1191960960.0,90712400.0,
+CNMD,Healthcare,Medical Devices,2962267648.0,28601600.0,
+HHS,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+NVEC,Technology,Semiconductors,249346336.0,4833230.0,
+ARCI,,,,,'regularMarketOpen'
+ACY,Industrials,Rental & Leasing Services,3756488.0,1545880.0,
+SYK,Healthcare,Medical Devices,87258669056.0,375606016.0,
+SFBC,Financial Services,Banks—Regional,81621872.0,2595290.0,
+CASS,Industrials,Specialty Business Services,619140736.0,14422100.0,
+PRA,Financial Services,Insurance—Property & Casualty,968399680.0,53889800.0,
+BAMM,,,,,'regularMarketOpen'
+AXDX,Healthcare,Diagnostics & Research,417457408.0,57029700.0,
+GFN,Industrials,Rental & Leasing Services,273387328.0,30175200.0,
+CNC,Healthcare,Healthcare Plans,35199537152.0,579798016.0,
+MMI,Real Estate,Real Estate Services,1408128256.0,39376500.0,
+SRT,Industrials,Specialty Business Services,320730688.0,40292800.0,
+FUEL,,,,,'regularMarketOpen'
+EXPE,Consumer Cyclical,Travel Services,17402529792.0,135938000.0,
+CY,,,,,'regularMarketOpen'
+UIS,Technology,Information Technology Services,1098750592.0,63037900.0,
+SEMG,,,,,'regularMarketOpen'
+ELGX,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+ECTE,Healthcare,Medical Devices,72025.0,12004300.0,
+PTEN,Energy,Oil & Gas Drilling,1042466624.0,187494000.0,
+NLNK,,,,,'regularMarketOpen'
+IMMY,,,,,'regularMarketOpen'
+IPI,Basic Materials,Agricultural Inputs,215631920.0,13294200.0,
+KCG,,,,,'regularMarketOpen'
+IRC,,,,,'regularMarketOpen'
+CEMP,,,,,'regularMarketOpen'
+CHFN,,,,,'regularMarketOpen'
+SQI,,,,,'regularMarketOpen'
+OZM,,,,,'regularMarketOpen'
+VNDA,Healthcare,Biotechnology,698686464.0,54691700.0,
+STRA,Consumer Defensive,Education & Training Services,2312887808.0,24402700.0,
+DTSI,,,,,'regularMarketOpen'
+ANIK,Healthcare,Biotechnology,529632256.0,14214500.0,
+PDII,,,,,'regularMarketOpen'
+MFSF,,,,,'regularMarketOpen'
+WAGE,,,,,'regularMarketOpen'
+CTS,Technology,Electronic Components,1063230656.0,32268000.0,
+GNC,,,,,'sector'
+NTAP,Technology,Computer Hardware,13809659904.0,223384992.0,
+FWRD,Industrials,Integrated Freight & Logistics,2049881216.0,27507800.0,
+CPIX,Healthcare,Drug Manufacturers—Specialty & Generic,45561808.0,15036900.0,
+CUTR,Healthcare,Medical Devices,379100896.0,17632600.0,
+OFC,Real Estate,REIT—Office,2864949504.0,112175000.0,
+WVVI,Consumer Defensive,Beverages—Wineries & Distilleries,32964478.0,4964530.0,
+PEIX,Energy,Oil & Gas Refining & Marketing,428142688.0,72320496.0,
+PWOD,Financial Services,Banks—Regional,186731136.0,7051780.0,
+TRMK,Financial Services,Banks—Regional,1727664256.0,63423800.0,
+SOHU,Communication Services,Internet Content & Information,646755456.0,39268700.0,
+ATLC,Financial Services,Credit Services,345258048.0,15962000.0,
+WEYS,Consumer Cyclical,Footwear & Accessories,176278336.0,9820520.0,
+EVTC,Technology,Software—Infrastructure,2897852160.0,71907000.0,
+ATRO,Industrials,Aerospace & Defense,364356448.0,23927400.0,
+STT,Financial Services,Asset Management,25683697664.0,351956000.0,
+HFBC,,,,,'regularMarketOpen'
+RTK,,,,,'regularMarketOpen'
+ECP,,,,,'regularMarketOpen'
+VOYA,Financial Services,Financial Conglomerates,7285663744.0,126268000.0,
+SCMP,,,,,'regularMarketOpen'
+NVR,Consumer Cyclical,Residential Construction,14895336448.0,3720430.0,
+NJR,Utilities,Utilities—Regulated Gas,3225245184.0,95930200.0,
+XCO,,,,,'regularMarketOpen'
+CAKE,Consumer Cyclical,Restaurants,1694360960.0,45584100.0,
+HFFC,,,,,'regularMarketOpen'
+UVV,Consumer Defensive,Tobacco,1214958464.0,24514900.0,
+VC,Consumer Cyclical,Auto Parts,3461008640.0,27832800.0,
+GROW,Financial Services,Asset Management,60497672.0,13018000.0,
+VRSK,Industrials,Consulting Services,31540834304.0,162590000.0,
+GRIF,Real Estate,Real Estate—Development,428540480.0,5657300.0,
+LUK,,,,,'regularMarketOpen'
+RTEC,,,,,'regularMarketOpen'
+SEAC,Technology,Software—Application,34927172.0,37556100.0,
+BRSS,,,,,'regularMarketOpen'
+CRR,,,,,'regularMarketOpen'
+GV,Industrials,Engineering & Construction,171167056.0,24522500.0,
+AMRC,Industrials,Engineering & Construction,2089355392.0,29866100.0,
+PGC,Financial Services,Banks—Regional,422241568.0,18934600.0,
+SSD,Industrials,Building Products & Equipment,3917487872.0,43421500.0,
+TTPH,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+HEOP,,,,,'regularMarketOpen'
+AMCX,Communication Services,Broadcasting,1327077504.0,29754800.0,
+TRR,,,,,'regularMarketOpen'
+TRMR,,,,,'regularMarketOpen'
+CYS,,,,,'regularMarketOpen'
+GOV,,,,,'regularMarketOpen'
+JNJ,Healthcare,Drug Manufacturers—General,402646958080.0,2632539904.0,
+FRT,Real Estate,REIT—Retail,6819586560.0,75647104.0,
+TAIT,Technology,Electronics & Computer Distribution,17532156.0,5042740.0,
+JNS,,,,,'regularMarketOpen'
+ANGO,Healthcare,Medical Instruments & Supplies,552217600.0,37953100.0,
+PACB,Healthcare,Diagnostics & Research,3958830592.0,187223008.0,
+NMRX,,,,,'regularMarketOpen'
+BGC,,,,,'regularMarketOpen'
+VGZ,Basic Materials,Gold,100662104.0,102685000.0,
+RECV,,,,,'regularMarketOpen'
+BKMU,,,,,'regularMarketOpen'
+USBI,,,,,'regularMarketOpen'
+CEQP,Energy,Oil & Gas Midstream,1472146688.0,73533800.0,
+DVD,Consumer Cyclical,Leisure,72381080.0,17862400.0,
+WDAY,Technology,Software—Application,52617601024.0,180000000.0,
+XOXO,,,,,'regularMarketOpen'
+SPNC,,,,,'regularMarketOpen'
+SPRT,Technology,Software—Application,39144568.0,19378500.0,
+CTIB,Consumer Cyclical,Specialty Retail,11278118.0,5783650.0,
+SMTX,Technology,Electronic Components,121887944.0,28214800.0,
+BPI,,,,,'regularMarketOpen'
+MTSI,Technology,Semiconductors,3262840832.0,66885300.0,
+MBFI,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+CKP,,,,,'regularMarketOpen'
+NBL,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+KW,Real Estate,Real Estate Services,2423582976.0,141730000.0,
+USG,,,,,'regularMarketOpen'
+DRI,Consumer Cyclical,Restaurants,14676144128.0,130081000.0,
+TCB,,,,,'regularMarketOpen'
+BBT,,,,,'regularMarketOpen'
+SPNHU,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+EXH,,,,,'regularMarketOpen'
+EGOV,Technology,Software—Application,1634205952.0,67030600.0,
+SONC,,,,,'regularMarketOpen'
+WG,,,,,'regularMarketOpen'
+BNCN,,,,,'regularMarketOpen'
+GTXI,,,,,'regularMarketOpen'
+VFC,Consumer Cyclical,Apparel Manufacturing,33797748736.0,390004000.0,
+MATR,,,,,'regularMarketOpen'
+SPF,,,,,'regularMarketOpen'
+ADK,,,,,'regularMarketOpen'
+CNET,Communication Services,Advertising Agencies,29568984.0,21741900.0,
+VMI,Industrials,Metal Fabrication,3607875328.0,21252800.0,
+MLVF,Financial Services,Banks—Regional,129369152.0,7609950.0,
+NNI,Financial Services,Credit Services,2663584000.0,27169900.0,
+ECHO,Industrials,Integrated Freight & Logistics,781476992.0,26608000.0,
+FIDM,,,,,'regularMarketOpen'
+MTW,Industrials,Farm & Heavy Construction Machinery,440967744.0,34558600.0,
+SRCE,Financial Services,Banks—Regional,1024699328.0,25553600.0,
+PDCE,Energy,Oil & Gas E&P,1955887872.0,99637696.0,
+PCLN,,,,,'regularMarketOpen'
+OCLS,,,,,'regularMarketOpen'
+OGE,Utilities,Utilities—Regulated Electric,6432643072.0,200020000.0,
+LEI,,,,,'regularMarketOpen'
+ERII,Industrials,Pollution & Treatment Controls,696204736.0,56100300.0,
+NOR,,,,,'regularMarketOpen'
+HUSI,,,,,'regularMarketOpen'
+WFBI,,,,,'regularMarketOpen'
+BERY,Consumer Cyclical,Packaging & Containers,7095525376.0,133500000.0,
+ZLCS,,,,,'regularMarketOpen'
+IMMU,,,,,'sector'
+FNP,,,,,'regularMarketOpen'
+PERF,,,,,'regularMarketOpen'
+REXI,,,,,'regularMarketOpen'
+KAI,Industrials,Specialty Industrial Machinery,1558169728.0,11509600.0,
+RLOG,,,,,'regularMarketOpen'
+URI,Industrials,Rental & Leasing Services,17367607296.0,72136600.0,
+JCP,,,,,'regularMarketOpen'
+APD,Basic Materials,Chemicals,59099656192.0,220894000.0,
+INVE,Technology,Computer Hardware,134791104.0,18020200.0,
+DSPG,Technology,Semiconductors,381329120.0,23597100.0,
+CAR,Industrials,Rental & Leasing Services,2722530304.0,69683400.0,
+KKD,,,,,'regularMarketOpen'
+CBS,,,,,'regularMarketOpen'
+TWRT,,,,,'regularMarketOpen'
+LTD,,,,,'regularMarketOpen'
+SALM,Communication Services,Broadcasting,29351740.0,21129700.0,
+ABCD,,,,,'regularMarketOpen'
+PBY,,,,,index 0 is out of bounds for axis 0 with size 0
+UNP,Industrials,Railroads,136835833856.0,673868992.0,
+GSIG,,,,,'sector'
+SYMX,,,,,'regularMarketOpen'
+NTRS,Financial Services,Asset Management,18751700992.0,208120992.0,
+LVS,Consumer Cyclical,Resorts & Casinos,43347238912.0,763827968.0,
+WFD,,,,,'regularMarketOpen'
+TXT,Industrials,Aerospace & Defense,10901316608.0,228875008.0,
+TER,Technology,Semiconductor Equipment & Materials,19157880832.0,166056000.0,
+FUN,Consumer Cyclical,Leisure,2180357376.0,56706300.0,
+XLRN,Healthcare,Biotechnology,7488118272.0,60252000.0,
+KFFB,Financial Services,Banks—Regional,59440828.0,8244220.0,
+BVX,,,,,'regularMarketOpen'
+USGL,,,,,'regularMarketOpen'
+CBPO,Healthcare,Biotechnology,4592510976.0,38788100.0,
+BCOV,Technology,Software—Application,671918464.0,39805600.0,
+AMKR,Technology,Semiconductors,3595474176.0,242446000.0,
+DCOM,Financial Services,Banks—Regional,520173952.0,33047900.0,
+BABY,,,,,'regularMarketOpen'
+CLUB,,,,,'sector'
+CAM,,,,,'regularMarketOpen'
+TDY,Technology,Scientific & Technical Instruments,14292028416.0,36881700.0,
+WSCI,,,,,'regularMarketOpen'
+CXDC,Consumer Cyclical,Auto Parts,72672320.0,70548800.0,
+MHK,Consumer Cyclical,"Furnishings, Fixtures & Appliances",9594011648.0,71198600.0,
+GLUU,Communication Services,Electronic Gaming & Multimedia,1573781632.0,171998000.0,
+PRU,Financial Services,Insurance—Life,31117680640.0,396000000.0,
+TGT,Consumer Defensive,Discount Stores,85987737600.0,500772992.0,
+BBCN,,,,,'regularMarketOpen'
+HMPR,,,,,'regularMarketOpen'
+BAH,Industrials,Consulting Services,12103482368.0,137900000.0,
+BMRC,Financial Services,Banks—Regional,522839072.0,13615600.0,
+PTSX,,,,,'regularMarketOpen'
+HMG,Real Estate,REIT—Retail,11215729.0,1007250.0,
+MRVL,Technology,Semiconductors,28847091712.0,671800000.0,
+UNFI,Consumer Defensive,Food Distribution,874589504.0,56135400.0,
+AXTI,Technology,Semiconductor Equipment & Materials,376656000.0,41300000.0,
+ORRF,Financial Services,Banks—Regional,196061248.0,11203500.0,
+MFLX,,,,,'regularMarketOpen'
+NGL,Energy,Oil & Gas Refining & Marketing,357986144.0,128772000.0,
+PMD,Healthcare,Diagnostics & Research,26914006.0,5526490.0,
+FDML,,,,,'regularMarketOpen'
+KMG,,,,,'regularMarketOpen'
+BNFT,Technology,Software—Application,435361600.0,32201300.0,
+BSPM,Healthcare,Drug Manufacturers—Specialty & Generic,316462.0,2637190.0,
+NAII,Consumer Defensive,Packaged Foods,64950968.0,6475670.0,
+AMAT,Technology,Semiconductor Equipment & Materials,80642891776.0,913283008.0,
+ZIXI,Technology,Software—Infrastructure,430283584.0,56991200.0,
+SBSA,,,,,'regularMarketOpen'
+MNGA,,,,,'regularMarketOpen'
+FIZZ,Consumer Defensive,Beverages—Non-Alcoholic,3935749376.0,46630100.0,
+OAK,,,,,'regularMarketOpen'
+LABL,,,,,'regularMarketOpen'
+IDXX,Healthcare,Diagnostics & Research,38916374528.0,85299904.0,
+COH,,,,,'regularMarketOpen'
+VICL,,,,,'regularMarketOpen'
+RLGT,Industrials,Integrated Freight & Logistics,302551808.0,49680100.0,
+DE,Industrials,Farm & Heavy Construction Machinery,80151928832.0,313375008.0,
+MOC,,,,,'regularMarketOpen'
+PBSK,,,,,'regularMarketOpen'
+CMI,Industrials,Specialty Industrial Machinery,32363212800.0,148007008.0,
+OTIV,,,,,'sector'
+RGC,,,,,'regularMarketOpen'
+NLY,Real Estate,REIT—Mortgage,11521415168.0,1398230016.0,
+INTG,Consumer Cyclical,Lodging,80964968.0,2283920.0,
+ACHN,,,,,'regularMarketOpen'
+USM,Communication Services,Telecom Services,2616339712.0,53029600.0,
+MNK,,,,,'sector'
+CBIN,,,,,'regularMarketOpen'
+ERA,,,,,'regularMarketOpen'
+EIG,Financial Services,Insurance—Specialty,940802432.0,29019200.0,
+WIRE,Industrials,Electrical Equipment & Parts,1164865792.0,20631700.0,
+TBLC,,,,,'regularMarketOpen'
+DGX,Healthcare,Diagnostics & Research,16449538048.0,134766000.0,
+HOTR,,,,,'regularMarketOpen'
+TOF,,,,,'regularMarketOpen'
+NKA,,,,,'regularMarketOpen'
+LLL,,,,,'regularMarketOpen'
+RS,Basic Materials,Steel,7732363776.0,63756300.0,
+USL,,,,,'sector'
+BXS,Financial Services,Banks—Regional,2858821120.0,102577000.0,
+EEI,,,,,'regularMarketOpen'
+TLP,,,,,'regularMarketOpen'
+VRNT,Technology,Software—Infrastructure,3883037440.0,65736200.0,
+ARCP,,,,,'regularMarketOpen'
+POL,,,,,'sector'
+TTWO,Communication Services,Electronic Gaming & Multimedia,21895264256.0,115111000.0,
+BRO,Financial Services,Insurance Brokers,12785495040.0,284059008.0,
+ROYL,Energy,Oil & Gas E&P,5427390.0,54273900.0,
+THLD,,,,,'regularMarketOpen'
+WBMD,,,,,'regularMarketOpen'
+INTT,Technology,Semiconductors,53593120.0,10529100.0,
+DNBF,,,,,'regularMarketOpen'
+UPS,Industrials,Integrated Freight & Logistics,145564614656.0,715217024.0,
+CTHR,Consumer Cyclical,Luxury Goods,37945064.0,28965700.0,
+BMY,Healthcare,Drug Manufacturers—General,137212018688.0,2259749888.0,
+ABCO,,,,,'regularMarketOpen'
+ESI,Basic Materials,Specialty Chemicals,3975184896.0,247212992.0,
+TIVO,,,,,'regularMarketOpen'
+FISI,Financial Services,Banks—Regional,359897216.0,16038200.0,
+HCN,,,,,'regularMarketOpen'
+PRE,,,,,'regularMarketOpen'
+CFFI,Financial Services,Banks—Regional,134126472.0,3649700.0,
+REXX,,,,,'regularMarketOpen'
+ASTM,,,,,'regularMarketOpen'
+CME,Financial Services,Financial Data & Stock Exchanges,64715309056.0,358987008.0,
+UEPS,Technology,Software—Infrastructure,195969904.0,56638700.0,
+GPN,Industrials,Specialty Business Services,57490661376.0,299336992.0,
+FLS,Industrials,Specialty Industrial Machinery,4831454720.0,130263000.0,
+DKS,Consumer Cyclical,Specialty Retail,4798010368.0,65733000.0,
+HAR,,,,,'regularMarketOpen'
+DIOD,Technology,Semiconductors,3521681920.0,52042000.0,
+HH,,,,,'regularMarketOpen'
+MW,,,,,'regularMarketOpen'
+KTOS,Industrials,Aerospace & Defense,2927730688.0,122756000.0,
+RCKB,,,,,'regularMarketOpen'
+ETFC,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+OPHC,Financial Services,Banks—Regional,8440861.0,2951350.0,
+HCOM,,,,,'regularMarketOpen'
+JXSB,,,,,'regularMarketOpen'
+PCCC,,,,,'regularMarketOpen'
+CFI,,,,,'regularMarketOpen'
+ANIP,Healthcare,Drug Manufacturers—Specialty & Generic,369886912.0,12347600.0,
+CSG,,,,,'regularMarketOpen'
+LG,,,,,'regularMarketOpen'
+INFI,Healthcare,Biotechnology,155380464.0,64206800.0,
+OBCI,Industrials,Conglomerates,125798624.0,9462100.0,
+FVE,Healthcare,Medical Care Facilities,243419344.0,31571900.0,
+CFR,Financial Services,Banks—Regional,5468978688.0,62854600.0,
+FNLC,Financial Services,Banks—Regional,281903264.0,10947700.0,
+XXIA,,,,,'regularMarketOpen'
+VR,,,,,'regularMarketOpen'
+LLTC,,,,,'regularMarketOpen'
+JKHY,Technology,Information Technology Services,11891591168.0,76316200.0,
+SYRG,,,,,'regularMarketOpen'
+HMNF,Financial Services,Banks—Regional,79316304.0,4836360.0,
+MLI,Industrials,Metal Fabrication,1911616000.0,57080200.0,
+CHFC,,,,,'regularMarketOpen'
+PH,Industrials,Specialty Industrial Machinery,35378782208.0,128800000.0,
+SIF,Industrials,Aerospace & Defense,23782802.0,5916120.0,
+PII,Consumer Cyclical,Recreational Vehicles,5791171584.0,61700100.0,
+LNCE,,,,,'regularMarketOpen'
+ADSK,Technology,Software—Application,61498552320.0,219888992.0,
+PCC,,,,,'regularMarketOpen'
+NAVG,,,,,'regularMarketOpen'
+HOS,,,,,'regularMarketOpen'
+LECT,,,,,'regularMarketOpen'
+RAX,,,,,'regularMarketOpen'
+TROW,Financial Services,Asset Management,34302334976.0,227548992.0,
+HUSA,Energy,Oil & Gas E&P,11862124.0,6977720.0,
+DGAS,,,,,'regularMarketOpen'
+CVTI,,,,,'sector'
+IPAR,Consumer Defensive,Household & Personal Products,1769574784.0,31537600.0,
+THC,Healthcare,Medical Care Facilities,4330417664.0,105517000.0,
+CBAK,,,,,'regularMarketOpen'
+HCCI,Industrials,Waste Management,471462432.0,23993000.0,
+AEGR,,,,,'regularMarketOpen'
+AH,,,,,'regularMarketOpen'
+MYE,Consumer Cyclical,Packaging & Containers,676019648.0,35825100.0,
+MDSO,,,,,'regularMarketOpen'
+DNR,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+ENTG,Technology,Semiconductor Equipment & Materials,12714896384.0,134992000.0,
+XLNX,Technology,Semiconductors,35255898112.0,245122000.0,
+ARQL,,,,,'regularMarketOpen'
+UHT,Real Estate,REIT—Healthcare Facilities,960630080.0,13770500.0,
+LOCK,,,,,'regularMarketOpen'
+ETAK,,,,,'regularMarketOpen'
+SNA,Industrials,Tools & Accessories,9800914944.0,54214600.0,
+PAA,Energy,Oil & Gas Midstream,6381458432.0,728476992.0,
+BRS,,,,,'regularMarketOpen'
+UCBA,,,,,'regularMarketOpen'
+IBIO,Healthcare,Biotechnology,254122800.0,182108000.0,
+MUR,Energy,Oil & Gas E&P,2065906688.0,153599008.0,
+VII,,,,,'regularMarketOpen'
+ENTA,Healthcare,Biotechnology,832069568.0,20072100.0,
+ARVT,,,,,'regularMarketOpen'
+PIP,,,,,'regularMarketOpen'
+COKE,Consumer Defensive,Beverages—Non-Alcoholic,2442221312.0,7141450.0,
+PMDX,,,,,'regularMarketOpen'
+XNPT,,,,,'regularMarketOpen'
+RGCO,Utilities,Utilities—Regulated Gas,198711424.0,8149980.0,
+PCBK,,,,,'regularMarketOpen'
+ARNA,Healthcare,Biotechnology,4024367360.0,58164000.0,
+PTCT,Healthcare,Biotechnology,4433955840.0,68235696.0,
+CRZO,,,,,'sector'
+HRL,Consumer Defensive,Packaged Foods,25484130304.0,539608000.0,
+P,,,,,'regularMarketOpen'
+SLTC,,,,,'regularMarketOpen'
+NTY,,,,,'regularMarketOpen'
+UCFC,,,,,'regularMarketOpen'
+RATE,,,,,'regularMarketOpen'
+DO,,,,,'regularMarketOpen'
+EMCI,,,,,'regularMarketOpen'
+CLNE,Energy,Oil & Gas Refining & Marketing,868422592.0,198270000.0,
+UGI,Utilities,Utilities—Regulated Gas,7371850240.0,208420992.0,
+MTD,Healthcare,Diagnostics & Research,27241723904.0,23794600.0,
+MODN,Technology,Software—Application,1135522560.0,34821300.0,
+SMP,Consumer Cyclical,Auto Parts,1152607232.0,22446100.0,
+PGEM,,,,,'regularMarketOpen'
+AMAG,,,,,'sector'
+ANAC,,,,,'regularMarketOpen'
+RHI,Industrials,Staffing & Employment Services,7317515776.0,113980000.0,
+CCXI,Healthcare,Biotechnology,4201641984.0,69208400.0,
+BDGE,Financial Services,Banks—Regional,480753504.0,19759700.0,
+BRT,Real Estate,REIT—Residential,253180128.0,17176400.0,
+BLMN,Consumer Cyclical,Restaurants,1562328960.0,87574496.0,
+MPAA,Consumer Cyclical,Auto Parts,457392896.0,19050100.0,
+BVSN,,,,,'regularMarketOpen'
+ADI,Technology,Semiconductors,52152803328.0,369560000.0,
+SKUL,,,,,'regularMarketOpen'
+BHB,Financial Services,Banks—Regional,357987808.0,14928600.0,
+BA,Industrials,Aerospace & Defense,130028191744.0,564529984.0,
+HZO,Consumer Cyclical,Specialty Retail,679551616.0,21628100.0,
+FCTY,,,,,'regularMarketOpen'
+ATLS,Energy,Oil & Gas E&P,124697.0,31973800.0,
+NSR,,,,,'regularMarketOpen'
+HRC,Healthcare,Medical Instruments & Supplies,6420719616.0,66640800.0,
+VAL,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+HELE,Consumer Defensive,Household & Personal Products,5484172288.0,25353300.0,
+XOMA,Healthcare,Biotechnology,418619360.0,11022100.0,
+FI,Energy,Oil & Gas Equipment & Services,606534976.0,226319008.0,
+AMH,Real Estate,REIT—Residential,9329759232.0,315628000.0,
+ARKR,Consumer Cyclical,Restaurants,49909344.0,3502410.0,
+GNVC,,,,,'regularMarketOpen'
+GB,Technology,Information Technology Services,2245498368.0,167824992.0,
+WWW,Consumer Cyclical,Footwear & Accessories,2514679808.0,82071800.0,
+PGTI,Industrials,Building Products & Equipment,1153901952.0,58962800.0,
+BFAM,Consumer Cyclical,Personal Services,9971911680.0,60564300.0,
+AHT,Real Estate,REIT—Hotel & Motel,206446272.0,53207800.0,
+CUBI,Financial Services,Banks—Regional,578303744.0,31601300.0,
+RAS,,,,,'regularMarketOpen'
+BANC,Financial Services,Banks—Regional,727981952.0,49763000.0,
+MANH,Technology,Software—Application,6346923008.0,63526400.0,
+FR,Real Estate,REIT—Industrial,5266530816.0,129050000.0,
+FBP,Financial Services,Banks—Regional,1907321344.0,218228992.0,
+PEG,Utilities,Utilities—Diversified,28570294272.0,505848000.0,
+SUBK,,,,,'regularMarketOpen'
+ATO,Utilities,Utilities—Regulated Gas,12471823360.0,123355000.0,
+EMAN,Technology,Semiconductor Equipment & Materials,78974528.0,67499600.0,
+GVP,Technology,Software—Application,24951894.0,20621400.0,
+HURN,Industrials,Consulting Services,1173521280.0,22871200.0,
+ASNA,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+KEM,,,,,'regularMarketOpen'
+ASBC,,,,,'regularMarketOpen'
+DRE,Real Estate,REIT—Industrial,14260601856.0,371951008.0,
+CNAT,,,,,'regularMarketOpen'
+VRTS,Financial Services,Asset Management,1605004288.0,7613150.0,
+CLMT,Energy,Oil & Gas E&P,296636736.0,78062304.0,
+WD,Financial Services,Mortgage Finance,2644969216.0,31227500.0,
+WRP,,,,,'regularMarketOpen'
+SWFT,,,,,'regularMarketOpen'
+BEAV,,,,,'regularMarketOpen'
+BBX,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+TRT,Technology,Semiconductor Equipment & Materials,13914600.0,3710560.0,
+GLDC,,,,,'regularMarketOpen'
+QCOM,Technology,Semiconductors,163180691456.0,1128269952.0,
+RAI,,,,,'regularMarketOpen'
+EVOK,Healthcare,Drug Manufacturers—Specialty & Generic,76531584.0,26390200.0,
+LII,Industrials,Specialty Industrial Machinery,10737114112.0,38289400.0,
+TSLU,,,,,'regularMarketOpen'
+HGG,,,,,'regularMarketOpen'
+AMIC,,,,,'regularMarketOpen'
+BTX,,,,,'regularMarketOpen'
+ARSD,,,,,'regularMarketOpen'
+BWS,,,,,'regularMarketOpen'
+NCBC,,,,,'regularMarketOpen'
+EML,Industrials,Tools & Accessories,149517696.0,6242910.0,
+CCU,Consumer Defensive,Beverages—Brewers,2831032320.0,184751008.0,
+CNBC,,,,,'regularMarketOpen'
+CQP,Energy,Oil & Gas Midstream,17565085696.0,484020000.0,
+GNRC,Industrials,Specialty Industrial Machinery,13654114304.0,62841700.0,
+FBHS,Consumer Cyclical,"Furnishings, Fixtures & Appliances",11563060224.0,138928992.0,
+FCCY,Financial Services,Banks—Regional,183258400.0,10237900.0,
+UNL,,,,,'sector'
+HLIT,Technology,Communication Equipment,685212096.0,97747800.0,
+GCO,Consumer Cyclical,Apparel Retail,446164896.0,14993800.0,
+NSH,Financial Services,Shell Companies,284624992.0,23000000.0,
+USPH,Healthcare,Medical Care Facilities,1427036928.0,12850400.0,
+GBNK,,,,,'regularMarketOpen'
+SSFN,,,,,'regularMarketOpen'
+ESIO,,,,,'regularMarketOpen'
+ACRX,Healthcare,Drug Manufacturers—Specialty & Generic,127573416.0,90477600.0,
+ARG,,,,,'regularMarketOpen'
+DNO,,,,,index 0 is out of bounds for axis 0 with size 0
+CADC,,,,,'regularMarketOpen'
+NWY,,,,,'regularMarketOpen'
+SCSC,Technology,Electronics & Computer Distribution,682054080.0,25364600.0,
+XNWK,,,,,'regularMarketOpen'
+MTOR,Consumer Cyclical,Auto Parts,1994353920.0,72311600.0,
+LOGI,Technology,Computer Hardware,15292135424.0,169150000.0,
+NE,,,,,'sector'
+TE,,,,,'regularMarketOpen'
+WSTL,Technology,Communication Equipment,9147648.0,7523720.0,
+NTI,,,,,'regularMarketOpen'
+FCFS,Financial Services,Credit Services,2944347648.0,41440500.0,
+SPLS,,,,,'regularMarketOpen'
+NKTR,Healthcare,Biotechnology,3004036608.0,179399008.0,
+CSCO,Technology,Communication Equipment,187274592256.0,4225509888.0,
+FPO,,,,,'regularMarketOpen'
+USAP,Basic Materials,Steel,67988920.0,8829730.0,
+LAND,Real Estate,REIT—Industrial,356474496.0,24102400.0,
+VCG,,,,,'regularMarketOpen'
+CLNY,Real Estate,REIT—Diversified,2291219456.0,481628000.0,
+NTN,Communication Services,Broadcasting,6281284.0,2962870.0,
+LSTR,Industrials,Integrated Freight & Logistics,5324600832.0,38383800.0,
+CCNE,Financial Services,Banks—Regional,347433120.0,16833000.0,
+SIRI,Communication Services,Broadcasting,27281788928.0,4249499904.0,
+DUK,Utilities,Utilities—Regulated Electric,67369684992.0,735958976.0,
+PRSS,,,,,'regularMarketOpen'
+TSO,,,,,'regularMarketOpen'
+SLP,Healthcare,Health Information Services,1178561408.0,19931700.0,
+THG,Financial Services,Insurance—Property & Casualty,4229252864.0,36383800.0,
+CACC,Financial Services,Credit Services,5888899072.0,17649400.0,
+AMID,,,,,'regularMarketOpen'
+IG,,,,,'sector'
+CVG,,,,,'regularMarketOpen'
+IIN,Healthcare,Medical Instruments & Supplies,152663328.0,8943370.0,
+BANF,Financial Services,Banks—Regional,1905378048.0,32682300.0,
+IFO,,,,,'regularMarketOpen'
+ADBE,Technology,Software—Infrastructure,228303077376.0,479719008.0,
+CHMT,,,,,'regularMarketOpen'
+BOCH,Financial Services,Banks—Regional,167531264.0,16786700.0,
+MGN,,,,,'regularMarketOpen'
+XOM,Energy,Oil & Gas Integrated,185196462080.0,4228229888.0,
+YRCW,Industrials,Trucking,279191904.0,53280900.0,
+NVAX,Healthcare,Biotechnology,7949860864.0,63660000.0,
+BKS,,,,,'regularMarketOpen'
+CIE,,,,,'regularMarketOpen'
+CTAS,Industrials,Specialty Business Services,36525633536.0,104625000.0,
+CASM,,,,,'sector'
+NSP,Industrials,Staffing & Employment Services,3315328512.0,38354100.0,
+XON,,,,,'regularMarketOpen'
+CRAY,,,,,'regularMarketOpen'
+PKY,,,,,'regularMarketOpen'
+ELS,Real Estate,REIT—Residential,11000922112.0,182224992.0,
+CVC,,,,,'regularMarketOpen'
+IMH,Financial Services,Mortgage Finance,63689700.0,21229900.0,
+SSNC,Technology,Software—Application,18291257344.0,255964992.0,
+AMG,Financial Services,Asset Management,4408191488.0,46553100.0,
+CNDO,,,,,'regularMarketOpen'
+ENZN,Healthcare,Biotechnology,18546228.0,74214600.0,
+WMT,Consumer Defensive,Discount Stores,415905611776.0,2829289984.0,
+FTNT,Technology,Software—Infrastructure,20836935680.0,162332000.0,
+SNI,,,,,'regularMarketOpen'
+AVA,Utilities,Utilities—Diversified,2677950720.0,68736000.0,
+SAAS,,,,,'regularMarketOpen'
+TSRA,,,,,'regularMarketOpen'
+HSY,Consumer Defensive,Confectioners,31036352512.0,147530000.0,
+NHC,Healthcare,Medical Care Facilities,1031851200.0,15359500.0,
+FSBW,Financial Services,Banks—Regional,242108992.0,4240830.0,
+SINO,Industrials,Integrated Freight & Logistics,10076053.0,4438790.0,
+NAV,Industrials,Farm & Heavy Construction Machinery,4401263616.0,99576096.0,
+IRM,Real Estate,REIT—Specialty,8754634752.0,288171008.0,
+MDR,,,,,'regularMarketOpen'
+TMNG,,,,,'regularMarketOpen'
+VPRT,,,,,'regularMarketOpen'
+NAQ,,,,,'regularMarketOpen'
+NEE,Utilities,Utilities—Regulated Electric,144579362816.0,1959069952.0,
+BSQR,Technology,Software—Application,17073150.0,13235000.0,
+MS,Financial Services,Capital Markets,114558541824.0,1809200000.0,
+AGEN,Healthcare,Biotechnology,654112512.0,190148992.0,
+BDR,Technology,Communication Equipment,12352744.0,10125200.0,
+NUAN,Technology,Software—Application,12349527040.0,282303008.0,
+BMI,Industrials,Electrical Equipment & Parts,2578019328.0,29117000.0,
+SCLN,,,,,'regularMarketOpen'
+NLSN,Industrials,Consulting Services,6818681344.0,356999008.0,
+BRKR,Healthcare,Medical Devices,8272424960.0,153108000.0,
+PATR,,,,,'regularMarketOpen'
+TMK,,,,,'regularMarketOpen'
+VLP,,,,,'regularMarketOpen'
+FCBC,Financial Services,Banks—Regional,391020800.0,17717300.0,
+INTU,Technology,Software—Application,99840450560.0,274046016.0,
+RIBT,Consumer Defensive,Packaged Foods,23630574.0,41972600.0,
+WYN,,,,,'regularMarketOpen'
+GNMK,Healthcare,Medical Devices,929504192.0,71721000.0,
+ORC,Real Estate,REIT—Mortgage,369347680.0,69296000.0,
+BXP,Real Estate,REIT—Office,15562887168.0,155636000.0,
+NUTR,,,,,'regularMarketOpen'
+CZFC,,,,,'regularMarketOpen'
+SWN,Energy,Oil & Gas E&P,2198612480.0,674420992.0,
+APC,,,,,'regularMarketOpen'
+IDRA,Healthcare,Biotechnology,156513552.0,35199200.0,
+AIQ,,,,,'sector'
+RGS,Consumer Cyclical,Personal Services,336685152.0,35665800.0,
+CHSP,,,,,'regularMarketOpen'
+PNK,,,,,'regularMarketOpen'
+ABFS,,,,,'regularMarketOpen'
+CLGX,Technology,Information Technology Services,6104850432.0,77778704.0,
+FSYS,,,,,'regularMarketOpen'
+ARTW,Industrials,Farm & Heavy Construction Machinery,10769007.0,4431690.0,
+CCOI,Communication Services,Telecom Services,2760420864.0,47251300.0,
+LF,,,,,'regularMarketOpen'
+VCRA,Technology,Communication Equipment,1164563456.0,32493400.0,
+PFSW,Industrials,Specialty Business Services,122096648.0,20248200.0,
+COOL,,,,,'regularMarketOpen'
+RHT,,,,,'regularMarketOpen'
+DAKT,Technology,Computer Hardware,288024352.0,62750400.0,
+HTZ,,,,,'sector'
+WAIR,,,,,'regularMarketOpen'
+TMO,Healthcare,Diagnostics & Research,186828357632.0,396335008.0,
+FBC,Financial Services,Banks—Regional,1934366208.0,52564300.0,
+JWN,Consumer Cyclical,Department Stores,4859821056.0,157684000.0,
+OME,,,,,'regularMarketOpen'
+OMEX,Industrials,Specialty Business Services,87532080.0,12208100.0,
+GNCMA,,,,,'regularMarketOpen'
+GSHO,,,,,'regularMarketOpen'
+CI,Healthcare,Healthcare Plans,75631247360.0,361267008.0,
+YUME,,,,,'regularMarketOpen'
+CLRS,,,,,'regularMarketOpen'
+FCH,,,,,'regularMarketOpen'
+AT,Utilities,Utilities—Independent Power Producers,181310352.0,89222600.0,
+SCHN,Basic Materials,Steel,799680128.0,26899500.0,
+ZINC,,,,,'regularMarketOpen'
+ZTM,,,,,'regularMarketOpen'
+GGG,Industrials,Specialty Industrial Machinery,11724519424.0,167540992.0,
+IPG,Communication Services,Advertising Agencies,9329637376.0,390035008.0,
+AFOP,,,,,'regularMarketOpen'
+FGP,,,,,'regularMarketOpen'
+ALNY,Healthcare,Biotechnology,15062865920.0,116181000.0,
+LHCG,Healthcare,Medical Care Facilities,6334256128.0,31592300.0,
+RDEN,,,,,'regularMarketOpen'
+ENR,Industrials,Electrical Equipment & Parts,2904507904.0,68518704.0,
+USTR,,,,,'regularMarketOpen'
+ABTL,,,,,'regularMarketOpen'
+CLGY,,,,,'regularMarketOpen'
+EIX,Utilities,Utilities—Regulated Electric,23770677248.0,378513984.0,
+RJET,,,,,'regularMarketOpen'
+JGW,,,,,'regularMarketOpen'
+LACO,,,,,'regularMarketOpen'
+CTO,Real Estate,Real Estate—Development,196171296.0,4716790.0,
+PLCM,,,,,'regularMarketOpen'
+ETH,Consumer Cyclical,"Furnishings, Fixtures & Appliances",472501472.0,25053100.0,
+UNAM,Financial Services,Insurance—Property & Casualty,25464530.0,5305110.0,
+ROK,Industrials,Specialty Industrial Machinery,28663683072.0,115967000.0,
+LZB,Consumer Cyclical,"Furnishings, Fixtures & Appliances",1790394880.0,46144200.0,
+ALG,Industrials,Farm & Heavy Construction Machinery,1604893440.0,11879300.0,
+IDTI,,,,,'sector'
+LAYN,,,,,'regularMarketOpen'
+INT,Energy,Oil & Gas Refining & Marketing,1952686464.0,63502000.0,
+FF,Basic Materials,Chemicals,527543008.0,43743200.0,
+AWRE,Technology,Software—Application,76781336.0,21447300.0,
+DLB,Communication Services,Entertainment,9142797312.0,64219900.0,
+ICLD,Technology,Information Technology Services,471492.0,942985984.0,
+WDC,Technology,Computer Hardware,15543876608.0,304244992.0,
+DDR,,,,,'regularMarketOpen'
+NWBI,Financial Services,Banks—Regional,1583454464.0,127801000.0,
+AMSF,Financial Services,Insurance—Specialty,1102646016.0,19331100.0,
+AIRM,,,,,'regularMarketOpen'
+AMED,Healthcare,Medical Care Facilities,8868349952.0,32810500.0,
+SWC,,,,,'regularMarketOpen'
+SFNC,Financial Services,Banks—Regional,2279235328.0,108846000.0,
+GUID,,,,,'regularMarketOpen'
+WABC,Financial Services,Banks—Regional,1446358272.0,26869000.0,
+CTWS,,,,,'regularMarketOpen'
+SWK,Industrials,Tools & Accessories,28071069696.0,160223008.0,
+DIN,Consumer Cyclical,Restaurants,1095619968.0,16418700.0,
+BRID,Consumer Defensive,Packaged Foods,178359712.0,9076830.0,
+KTEC,,,,,'regularMarketOpen'
+KLIC,Technology,Semiconductor Equipment & Materials,2088526464.0,61840100.0,
+PSB,Real Estate,REIT—Diversified,3667515648.0,27488500.0,
+LODE,Real Estate,Real Estate Services,37196064.0,34440800.0,
+JDSU,,,,,'regularMarketOpen'
+EGHT,Technology,Software—Application,3336352768.0,106321000.0,
+PLUS,Technology,Software—Application,1124609536.0,13507200.0,
+EGP,Real Estate,REIT—Industrial,5243267072.0,39556900.0,
+PFPT,Technology,Software—Infrastructure,6819389952.0,57708300.0,
+FTD,,,,,'sector'
+DSCI,,,,,'regularMarketOpen'
+AM,Energy,Oil & Gas Midstream,4013300480.0,476639008.0,
+MWA,Industrials,Specialty Industrial Machinery,1886156928.0,158064992.0,
+HTBX,Healthcare,Biotechnology,131744680.0,159846000.0,
+MIDD,Industrials,Specialty Industrial Machinery,7602758144.0,55612300.0,
+PSUN,,,,,'regularMarketOpen'
+DVA,Healthcare,Medical Care Facilities,12131840000.0,121989000.0,
+PXLW,Technology,Semiconductors,102988696.0,42036200.0,
+TILE,Consumer Cyclical,"Furnishings, Fixtures & Appliances",517464096.0,58669400.0,
+SRDX,Healthcare,Diagnostics & Research,522974080.0,13676100.0,
+DBD,Technology,Software—Application,843587392.0,77678400.0,
+CPRX,Healthcare,Biotechnology,376242240.0,103648000.0,
+ARTX,,,,,'regularMarketOpen'
+CPK,Utilities,Utilities—Regulated Gas,1838283520.0,17460900.0,
+AMCC,,,,,'regularMarketOpen'
+PP,,,,,'regularMarketOpen'
+STAG,Real Estate,REIT—Industrial,4533607424.0,149230000.0,
+PDX,,,,,'regularMarketOpen'
+HIIQ,,,,,'regularMarketOpen'
+CTCM,,,,,'regularMarketOpen'
+SVT,Industrials,Electrical Equipment & Parts,18691594.0,2488430.0,
+USAT,Technology,Software—Infrastructure,643430080.0,65256600.0,
+RNF,,,,,'regularMarketOpen'
+AEL,Financial Services,Insurance—Life,2691922688.0,99223104.0,
+HNRG,Energy,Thermal Coal,32902958.0,30465700.0,
+NWS,Communication Services,Broadcasting,10586944512.0,199630000.0,
+CRMD,Healthcare,Biotechnology,265093120.0,32132500.0,
+CVLT,Technology,Software—Application,2449361664.0,47130300.0,
+BWA,Consumer Cyclical,Auto Parts,8929833984.0,244519008.0,
+BFS,Real Estate,REIT—Retail,773604032.0,23400000.0,
+ASFI,,,,,'regularMarketOpen'
+LINC,Consumer Defensive,Education & Training Services,165741648.0,26476300.0,
+NUE,Basic Materials,Steel,17101257728.0,301895008.0,
+HUN,Basic Materials,Chemicals,5654457856.0,220791008.0,
+UNM,Financial Services,Insurance—Life,4739214848.0,203662000.0,
+PETS,Healthcare,Pharmaceutical Retailers,605730304.0,20272100.0,
+DOW,Basic Materials,Chemicals,40054607872.0,741752000.0,
+INFU,Healthcare,Medical Instruments & Supplies,364264192.0,20236900.0,
+TSET,,,,,'regularMarketOpen'
+WDWT,,,,,'regularMarketOpen'
+UTEK,,,,,'regularMarketOpen'
+NCIT,,,,,'regularMarketOpen'
+EQY,,,,,'regularMarketOpen'
+SRLP,Energy,Oil & Gas Refining & Marketing,447986976.0,22938400.0,
+UUU,Industrials,Security & Protection Services,7112137.0,2312890.0,
+SAFT,Financial Services,Insurance—Property & Casualty,1155602176.0,14893700.0,
+LOJN,,,,,'regularMarketOpen'
+SGNT,,,,,'regularMarketOpen'
+BNO,,,,,'sector'
+RSO,,,,,'regularMarketOpen'
+IACI,,,,,'regularMarketOpen'
+NSC,Industrials,Railroads,59749969920.0,253984992.0,
+CERS,Healthcare,Biotechnology,1283650560.0,167142000.0,
+BLMT,,,,,'sector'
+NCI,,,,,'regularMarketOpen'
+PNW,Utilities,Utilities—Regulated Electric,8976233472.0,112597000.0,
+OXBT,,,,,'regularMarketOpen'
+BWC,,,,,'regularMarketOpen'
+SHW,Basic Materials,Specialty Chemicals,65267388416.0,91049696.0,
+CTXS,Technology,Software—Application,16086150144.0,123124000.0,
+MELI,Consumer Cyclical,Internet Retail,79972581376.0,49776600.0,
+DWCH,,,,,'regularMarketOpen'
+ZP,,,,,'regularMarketOpen'
+BGF,,,,,'regularMarketOpen'
+RTIX,,,,,'regularMarketOpen'
+ACLS,Technology,Semiconductor Equipment & Materials,949946560.0,33496000.0,
+CA,,,,,'regularMarketOpen'
+IL,,,,,'regularMarketOpen'
+LMNX,Healthcare,Medical Instruments & Supplies,1158785280.0,46525500.0,
+NATH,Consumer Cyclical,Restaurants,245579024.0,4114930.0,
+NEM,Basic Materials,Gold,47293685760.0,803358016.0,
+KOP,Basic Materials,Specialty Chemicals,558233088.0,21045700.0,
+GIMO,,,,,'regularMarketOpen'
+CONN,Consumer Cyclical,Specialty Retail,321819264.0,29203200.0,
+VCYT,Healthcare,Biotechnology,3215616000.0,57897300.0,
+GIFI,Energy,Oil & Gas Equipment & Services,46742164.0,15325300.0,
+JBL,Technology,Electronic Components,5961700352.0,150472000.0,
+IBCP,Financial Services,Banks—Regional,397860224.0,21884500.0,
+KBALB,,,,,'regularMarketOpen'
+QUAD,Industrials,Specialty Business Services,184041792.0,40099700.0,
+LINTA,,,,,'regularMarketOpen'
+AERI,Healthcare,Drug Manufacturers—Specialty & Generic,580971648.0,46814800.0,
+AND,,,,,'regularMarketOpen'
+MDLZ,Consumer Defensive,Confectioners,82091188224.0,1430160000.0,
+EPE,,,,,'regularMarketOpen'
+ARCX,,,,,'regularMarketOpen'
+CBOE,Financial Services,Financial Data & Stock Exchanges,9288371200.0,108042000.0,
+PKOH,Industrials,Industrial Distribution,408622528.0,12615700.0,
+JOEZ,,,,,'regularMarketOpen'
+SAEX,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+REEDR,,,,,'regularMarketOpen'
+RTN,,,,,'regularMarketOpen'
+HW,,,,,'regularMarketOpen'
+AWX,Industrials,Waste Management,8758472.0,3263650.0,
+SYNT,,,,,'regularMarketOpen'
+BURL,Consumer Cyclical,Apparel Retail,15202788352.0,66240200.0,
+XL,,,,,'regularMarketOpen'
+PTX,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+QSII,,,,,'regularMarketOpen'
+FET,Energy,Oil & Gas Equipment & Services,72375960.0,5575960.0,
+OZRK,,,,,'regularMarketOpen'
+CVR,Industrials,Tools & Accessories,22583240.0,966132.0,
+CHCI,Real Estate,Real Estate—Diversified,25464066.0,7863580.0,
+CARB,,,,,'regularMarketOpen'
+SMED,Industrials,Waste Management,141615600.0,16486100.0,
+GTIM,Consumer Cyclical,Restaurants,24066954.0,12600500.0,
+RL,Consumer Cyclical,Apparel Manufacturing,7408338944.0,48222600.0,
+TAX,,,,,'regularMarketOpen'
+MDGN,,,,,'regularMarketOpen'
+CVGI,Consumer Cyclical,Auto Parts,290470400.0,30835500.0,
+ZFC,,,,,'regularMarketOpen'
+OFLX,Industrials,Specialty Industrial Machinery,1689180160.0,10094300.0,
+BDN,Real Estate,REIT—Office,1954766464.0,170572992.0,
+MNR,Real Estate,REIT—Industrial,1502358784.0,98065200.0,
+SEP,,,,,'regularMarketOpen'
+Y,Financial Services,Insurance—Property & Casualty,8265436160.0,14130400.0,
+WST,Healthcare,Medical Instruments & Supplies,19515303936.0,73927200.0,
+DAVE,,,,,'regularMarketOpen'
+FCAP,Financial Services,Banks—Regional,224116704.0,3375760.0,
+HAIN,Consumer Defensive,Packaged Foods,3780932096.0,100637000.0,
+IPXL,,,,,'regularMarketOpen'
+BLK,Financial Services,Asset Management,106025656320.0,152511008.0,
+HON,Industrials,Specialty Industrial Machinery,150602874880.0,701686016.0,
+WRLD,Financial Services,Credit Services,783512896.0,6872920.0,
+MLM,Basic Materials,Building Materials,16639667200.0,62274200.0,
+IP,Consumer Cyclical,Packaging & Containers,19116210176.0,393095008.0,
+BDSI,Healthcare,Biotechnology,435788416.0,101111000.0,
+EQT,Energy,Oil & Gas E&P,3844606208.0,275599008.0,
+ICUI,Healthcare,Medical Instruments & Supplies,4093202688.0,20981100.0,
+ASRV,Financial Services,Banks—Regional,55781620.0,17058600.0,
+KBR,Industrials,Engineering & Construction,4046341632.0,142527008.0,
+APAM,Financial Services,Asset Management,3795963392.0,61425500.0,
+FRED,,,,,'sector'
+AMRS,Basic Materials,Specialty Chemicals,834846400.0,239211008.0,
+LHO,,,,,'regularMarketOpen'
+CHH,Consumer Cyclical,Lodging,5737694720.0,55458100.0,
+TBNK,Financial Services,Banks—Regional,220912048.0,9513870.0,
+PKS,,,,,'regularMarketOpen'
+WEC,Utilities,Utilities—Regulated Electric,29095725056.0,315435008.0,
+BGFV,Consumer Cyclical,Specialty Retail,179196816.0,21906700.0,
+MXC,Energy,Oil & Gas E&P,11900846.0,2051870.0,
+RRMS,,,,,'regularMarketOpen'
+MRTN,Industrials,Trucking,1460969728.0,82680800.0,
+ARI,Real Estate,REIT—Mortgage,1585356032.0,140296992.0,
+OTIX,,,,,'regularMarketOpen'
+MPX,Consumer Cyclical,Recreational Vehicles,554767616.0,33868600.0,
+BONE,,,,,'regularMarketOpen'
+SOCB,,,,,'regularMarketOpen'
+TRC,Industrials,Conglomerates,386994272.0,26236900.0,
+VAC,Consumer Cyclical,Resorts & Casinos,5367949312.0,41062800.0,
+INAP,,,,,'regularMarketOpen'
+HIW,Real Estate,REIT—Office,4082545408.0,103908000.0,
+DGSE,,,,,'regularMarketOpen'
+STI,,,,,'sector'
+AIR,Industrials,Aerospace & Defense,1200933248.0,35300800.0,
+DLPH,,,,,'sector'
+EVR,Financial Services,Capital Markets,4105843456.0,40590800.0,
+BIOA,,,,,'regularMarketOpen'
+ISH,,,,,'regularMarketOpen'
+SFE,Financial Services,Asset Management,146669568.0,20893100.0,
+AWK,Utilities,Utilities—Regulated Water,26879012864.0,181272000.0,
+FANG,Energy,Oil & Gas E&P,7916026880.0,157972992.0,
+CTRL,,,,,'regularMarketOpen'
+MSB,Basic Materials,Steel,357782400.0,13120000.0,
+EXAC,,,,,'regularMarketOpen'
+KWR,Basic Materials,Specialty Chemicals,4509611520.0,17831600.0,
+BCC,Basic Materials,Lumber & Wood Production,1790318720.0,39201200.0,
+CLR,Energy,Oil & Gas E&P,6895617536.0,365233984.0,
+MDU,Basic Materials,Building Materials,4968935424.0,200522000.0,
+LNKD,,,,,'regularMarketOpen'
+TRCB,,,,,'regularMarketOpen'
+SSTK,Communication Services,Internet Content & Information,2447930112.0,36222700.0,
+CVCY,Financial Services,Banks—Regional,193867808.0,12507600.0,
+UTI,Consumer Defensive,Education & Training Services,199475616.0,32647400.0,
+BTN,Consumer Cyclical,Leisure,29580800.0,14790400.0,
+MATW,Industrials,Conglomerates,879037696.0,31791600.0,
+ADB,,,,,'regularMarketOpen'
+ELLI,,,,,'regularMarketOpen'
+IIIN,Industrials,Metal Fabrication,454646880.0,19260700.0,
+ONB,Financial Services,Banks—Regional,2721380864.0,165332992.0,
+BBRG,,,,,'regularMarketOpen'
+UG,Consumer Defensive,Household & Personal Products,66387924.0,4594320.0,
+ININ,,,,,'regularMarketOpen'
+IIVI,Technology,Scientific & Technical Instruments,7269118464.0,103726000.0,
+SFLY,,,,,'regularMarketOpen'
+EVBN,Financial Services,Banks—Regional,151725072.0,5384140.0,
+METH,,,,,'regularMarketOpen'
+USCR,Basic Materials,Building Materials,594655488.0,16675700.0,
+UTX,,,,,'regularMarketOpen'
+VRSN,Technology,Software—Infrastructure,23961960448.0,114110000.0,
+UTHR,Healthcare,Biotechnology,6163897344.0,44440500.0,
+WDPT,,,,,'regularMarketOpen'
+CCE,,,,,'regularMarketOpen'
+SLH,,,,,'regularMarketOpen'
+OMED,,,,,'sector'
+KOSS,Technology,Consumer Electronics,17623496.0,7404830.0,
+RLD,,,,,'regularMarketOpen'
+HSII,Industrials,Staffing & Employment Services,540520064.0,19359600.0,
+PLOW,Consumer Cyclical,Auto Parts,972358080.0,22857500.0,
+RSE,,,,,'regularMarketOpen'
+CLBH,,,,,'regularMarketOpen'
+HNT,,,,,'regularMarketOpen'
+PHH,,,,,'regularMarketOpen'
+ICCC,Healthcare,Biotechnology,44720104.0,7212920.0,
+BRKL,Financial Services,Banks—Regional,932908032.0,79060000.0,
+COMM,Technology,Communication Equipment,2620127488.0,198644992.0,
+GLDD,Industrials,Engineering & Construction,752358400.0,64970500.0,
+RH,Consumer Cyclical,Specialty Retail,8749752320.0,19514200.0,
+FDEF,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+CWH,Consumer Cyclical,Recreational Vehicles,2525122304.0,42757300.0,
+KOOL,,,,,'regularMarketOpen'
+POWR,,,,,'regularMarketOpen'
+WBB,,,,,'regularMarketOpen'
+RARE,Healthcare,Biotechnology,9588621312.0,66155800.0,
+CBF,,,,,'regularMarketOpen'
+STJ,,,,,'regularMarketOpen'
+FFKT,,,,,'regularMarketOpen'
+BBSI,Industrials,Staffing & Employment Services,536312896.0,7646320.0,
+STAN,,,,,'regularMarketOpen'
+PCO,,,,,'regularMarketOpen'
+CRUS,Technology,Semiconductors,4520682496.0,57964900.0,
+KSU,Industrials,Railroads,18399266816.0,93601600.0,
+MMLP,Energy,Oil & Gas Midstream,69157448.0,38852500.0,
+NCS,,,,,'regularMarketOpen'
+YDKN,,,,,'regularMarketOpen'
+MBVT,,,,,'regularMarketOpen'
+RCII,Industrials,Rental & Leasing Services,1849380864.0,54170500.0,
+WCC,Industrials,Industrial Distribution,3726186752.0,50042800.0,
+CELG,,,,,'regularMarketOpen'
+BIIB,Healthcare,Drug Manufacturers—General,37151731712.0,153882000.0,
+SNMX,,,,,'regularMarketOpen'
+LPTH,Technology,Electronic Components,83271072.0,26109200.0,
+ECOM,Technology,Software—Application,411222848.0,29000200.0,
+GPIC,,,,,'regularMarketOpen'
+EV,Financial Services,Asset Management,7440352256.0,114173000.0,
+SPH,Utilities,Utilities—Regulated Gas,967612992.0,62146400.0,
+EXBD,,,,,'regularMarketOpen'
+EGAN,Technology,Software—Application,348570976.0,30929100.0,
+KLAC,Technology,Semiconductor Equipment & Materials,39793528832.0,155111008.0,
+CVO,,,,,'regularMarketOpen'
+GMAN,,,,,'sector'
+KPTI,Healthcare,Biotechnology,1130508288.0,73600800.0,
+CALD,,,,,'regularMarketOpen'
+TWMC,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+CPRT,Industrials,Specialty Business Services,27622838272.0,236132992.0,
+CBG,,,,,'regularMarketOpen'
+SONS,,,,,'regularMarketOpen'
+ADES,Industrials,Pollution & Treatment Controls,102940848.0,18547900.0,
+EVBS,,,,,'regularMarketOpen'
+MPAQ,,,,,'regularMarketOpen'
+ENMD,,,,,'regularMarketOpen'
+IRBT,Technology,Consumer Electronics,2090420864.0,28127300.0,
+FINL,,,,,'regularMarketOpen'
+MET,Financial Services,Insurance—Life,42468593664.0,899948992.0,
+MTEX,Consumer Defensive,Household & Personal Products,40189956.0,2087790.0,
+HA,Industrials,Airlines,885113088.0,46003800.0,
+TWTR,Communication Services,Internet Content & Information,40912801792.0,795350016.0,
+DSKX,,,,,'regularMarketOpen'
+FONR,Healthcare,Medical Devices,124927088.0,6447460.0,
+ENH,,,,,'regularMarketOpen'
+FFBH,,,,,'regularMarketOpen'
+DPS,,,,,'regularMarketOpen'
+SIGA,Healthcare,Biotechnology,538700544.0,77399504.0,
+SBH,Consumer Cyclical,Specialty Retail,1318854016.0,112852000.0,
+EXAS,Healthcare,Diagnostics & Research,19479908352.0,150424000.0,
+SPW,,,,,'regularMarketOpen'
+ELON,,,,,'regularMarketOpen'
+TACT,Technology,Computer Hardware,79467032.0,8928880.0,
+VSCP,,,,,'regularMarketOpen'
+PHX,Energy,Oil & Gas E&P,51047376.0,22317100.0,
+WSFS,Financial Services,Banks—Regional,2122445056.0,50402400.0,
+VVIN,,,,,'regularMarketOpen'
+RHP,Real Estate,REIT—Hotel & Motel,3627666432.0,54981300.0,
+LIVE,Consumer Cyclical,Specialty Retail,18643240.0,1603030.0,
+ZNGA,Communication Services,Electronic Gaming & Multimedia,9376509952.0,1079000064.0,
+ROL,Consumer Cyclical,Personal Services,18027851776.0,491624000.0,
+LTBR,Industrials,Electrical Equipment & Parts,19951950.0,5631560.0,
+AFAM,,,,,'regularMarketOpen'
+LDR,,,,,'regularMarketOpen'
+MJN,,,,,'regularMarketOpen'
+NBS,,,,,'regularMarketOpen'
+SQNM,,,,,'regularMarketOpen'
+SYX,Industrials,Industrial Distribution,1363682048.0,37412400.0,
+NURO,Healthcare,Medical Instruments & Supplies,8742564.0,3784660.0,
+RES,Energy,Oil & Gas Equipment & Services,825861120.0,215068000.0,
+PZZA,Consumer Cyclical,Restaurants,2795335168.0,32952200.0,
+BSX,Healthcare,Medical Devices,48112508928.0,1431920000.0,
+MAMS,,,,,'regularMarketOpen'
+CRAI,Industrials,Consulting Services,403280480.0,7776330.0,
+CPLA,,,,,'regularMarketOpen'
+BOJF,,,,,'regularMarketOpen'
+MSL,,,,,'regularMarketOpen'
+CVRR,,,,,'regularMarketOpen'
+XEL,Utilities,Utilities—Regulated Electric,34924691456.0,537302976.0,
+PEP,Consumer Defensive,Beverages—Non-Alcoholic,200342732800.0,1381959936.0,
+BER,,,,,'regularMarketOpen'
+DMC,,,,,'regularMarketOpen'
+RBPAA,,,,,'regularMarketOpen'
+CFD,,,,,'regularMarketOpen'
+CYBE,Technology,Scientific & Technical Instruments,196964560.0,7254680.0,
+FIBK,Financial Services,Banks—Regional,2547317504.0,41143600.0,
+SRNE,Healthcare,Biotechnology,2154026752.0,273700992.0,
+CSGS,Technology,Software—Infrastructure,1421945088.0,32945900.0,
+CST,,,,,'regularMarketOpen'
+MSCC,,,,,'regularMarketOpen'
+PLPM,,,,,'regularMarketOpen'
+AXR,Real Estate,Real Estate Services,52435328.0,7323370.0,
+PKI,Healthcare,Diagnostics & Research,16356042752.0,111974000.0,
+ZHNE,,,,,'regularMarketOpen'
+ADXS,Healthcare,Biotechnology,36460904.0,109822000.0,
+NEO,Healthcare,Diagnostics & Research,5634772480.0,111030000.0,
+MXL,Technology,Semiconductors,2264364288.0,74168496.0,
+SBGI,Communication Services,Broadcasting,2117324800.0,49252900.0,
+TROV,,,,,'regularMarketOpen'
+ATML,,,,,'regularMarketOpen'
+SRE,Utilities,Utilities—Diversified,36924162048.0,288470016.0,
+HPP,Real Estate,REIT—Office,3852311040.0,152144992.0,
+NSPH,,,,,'regularMarketOpen'
+CUDA,,,,,'regularMarketOpen'
+PEGI,,,,,'regularMarketOpen'
+SSS,,,,,'regularMarketOpen'
+ULTA,Consumer Cyclical,Specialty Retail,14951701504.0,56338600.0,
+RSPP,,,,,'regularMarketOpen'
+RE,Financial Services,Insurance—Reinsurance,9256855552.0,39965700.0,
+MSFT,Technology,Software—Infrastructure,1612352192512.0,7560500224.0,
+AMSC,Industrials,Specialty Industrial Machinery,537432320.0,27603100.0,
+TRIP,Consumer Cyclical,Travel Services,3821854976.0,121725000.0,
+CETV,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+N,,,,,'regularMarketOpen'
+OHRP,,,,,'regularMarketOpen'
+COHU,Technology,Semiconductor Equipment & Materials,1556091904.0,41965800.0,
+VDSI,,,,,'regularMarketOpen'
+MNKD,Healthcare,Biotechnology,702290624.0,235668000.0,
+PLPC,Industrials,Electrical Equipment & Parts,329667360.0,4915540.0,
+AWI,Industrials,Building Products & Equipment,3797675008.0,47859800.0,
+USNA,Consumer Defensive,Household & Personal Products,1583733120.0,21037900.0,
+MFRI,,,,,'regularMarketOpen'
+DRAM,,,,,'regularMarketOpen'
+TECD,,,,,'sector'
+UBSH,,,,,'regularMarketOpen'
+CALL,,,,,'regularMarketOpen'
+GD,,,,,'sector'
+CVU,Industrials,Aerospace & Defense,41351500.0,11951300.0,
+HAL,Energy,Oil & Gas Equipment & Services,17529858048.0,884006976.0,
+ASGN,Industrials,Staffing & Employment Services,4417679360.0,52900000.0,
+MDVN,,,,,'regularMarketOpen'
+EMC,,,,,'regularMarketOpen'
+TCX,Technology,Software—Infrastructure,802366592.0,10606300.0,
+CSH,,,,,'regularMarketOpen'
+WOR,Industrials,Metal Fabrication,2794367232.0,54375700.0,
+JVA,Consumer Defensive,Packaged Foods,21464336.0,5708600.0,
+ARCW,Industrials,Metal Fabrication,10519785.0,23377300.0,
+ELNK,,,,,'regularMarketOpen'
+CAXG,,,,,"BeautifulSoup4 (bs4) not found, please install it"
+CUR,,,,,'regularMarketOpen'
+HLF,Consumer Defensive,Packaged Foods,5938509312.0,121616000.0,
+OVLY,Financial Services,Banks—Regional,144898672.0,8218870.0,
+SLM,Financial Services,Credit Services,4521617920.0,375238016.0,
+STAA,Healthcare,Medical Instruments & Supplies,3638063360.0,46109800.0,
+HTCH,,,,,'regularMarketOpen'
+BASI,Healthcare,Diagnostics & Research,79121520.0,10989100.0,
+KIN,Healthcare,Drug Manufacturers—Specialty & Generic,154639296.0,39448800.0,
+NKE,Consumer Cyclical,Footwear & Accessories,215710351360.0,1254809984.0,
+LSBK,Financial Services,Banks—Regional,77672296.0,5828050.0,
+DKL,Energy,Oil & Gas Midstream,1333833472.0,43433200.0,
+ACPW,,,,,'regularMarketOpen'
+AVY,Industrials,Business Equipment & Supplies,12513487872.0,83417696.0,
+RMBS,Technology,Semiconductors,2009601664.0,113923000.0,
+LPTN,,,,,'regularMarketOpen'
+SGRP,Industrials,Specialty Business Services,21323018.0,21111900.0,
+WCN,Industrials,Waste Management,26844514304.0,262898000.0,
+PBYI,Healthcare,Biotechnology,430626784.0,39762400.0,
+LAWS,Industrials,Industrial Distribution,452419520.0,9030330.0,
+GGI,,,,,'regularMarketOpen'
+MASI,Healthcare,Medical Instruments & Supplies,14589628416.0,55055200.0,
+IPCC,,,,,'regularMarketOpen'
+ARAY,Healthcare,Medical Devices,398866048.0,91273696.0,
+CLIR,Industrials,Pollution & Treatment Controls,82318368.0,30043200.0,
+BXC,Industrials,Building Products & Equipment,241269264.0,9461540.0,
+ED,Utilities,Utilities—Regulated Electric,24502456320.0,334916000.0,
+HTS,,,,,'regularMarketOpen'
+CECE,Industrials,Pollution & Treatment Controls,255989616.0,35504800.0,
+CNA,Financial Services,Insurance—Property & Casualty,10198798336.0,271388992.0,
+HCSG,Healthcare,Medical Care Facilities,1828597632.0,74424000.0,
+CVS,Healthcare,Healthcare Plans,93691772928.0,1308909952.0,
+TOWR,,,,,'regularMarketOpen'
+CDW,Technology,Information Technology Services,18688530432.0,142988000.0,
+DCT,Technology,Software—Application,5149586944.0,130833000.0,
+STXS,Healthcare,Medical Instruments & Supplies,325690368.0,73685600.0,
+ROVI,,,,,'regularMarketOpen'
+MSEX,Utilities,Utilities—Regulated Water,1302867840.0,17439800.0,
+ALXN,Healthcare,Biotechnology,26475868160.0,218844992.0,
+SLG,Real Estate,REIT—Office,4430373888.0,72569600.0,
+WTS,Industrials,Specialty Industrial Machinery,3966869760.0,27433900.0,
+RIG,Energy,Oil & Gas Drilling,1550077184.0,615110016.0,
+ASHN,,,,,'regularMarketOpen'
+CRMT,Consumer Cyclical,Auto & Truck Dealerships,748585472.0,6624650.0,
+GY,,,,,'regularMarketOpen'
+HAFC,Financial Services,Banks—Regional,340685920.0,30720100.0,
+SNBC,,,,,'regularMarketOpen'
+PBIP,Financial Services,Banks—Regional,114104296.0,8138680.0,
+ETRM,,,,,'regularMarketOpen'
+HART,,,,,'regularMarketOpen'
+MRCY,Industrials,Aerospace & Defense,4500473344.0,56003900.0,
+TBBK,Financial Services,Banks—Regional,779780800.0,57590900.0,
+DORM,Consumer Cyclical,Auto Parts,3154087680.0,32286700.0,
+AKS,,,,,'regularMarketOpen'
+LIOX,,,,,'regularMarketOpen'
+VSEC,Industrials,Aerospace & Defense,415296608.0,11051000.0,
+ISNS,Technology,Scientific & Technical Instruments,23577138.0,5346290.0,
+UTL,Utilities,Utilities—Diversified,653259072.0,15007100.0,
+CAG,Consumer Defensive,Packaged Foods,17269110784.0,488518016.0,
+URG,Energy,Uranium,106497240.0,169478000.0,
+NPO,Industrials,Specialty Industrial Machinery,1503029888.0,20536000.0,
+SPEX,,,,,'regularMarketOpen'
+EVER,Communication Services,Internet Content & Information,936897984.0,20346900.0,
+FBR,,,,,'regularMarketOpen'
+AGM,Financial Services,Credit Services,802562368.0,9204910.0,
+SUPN,Healthcare,Drug Manufacturers—Specialty & Generic,1141686144.0,52685100.0,
+IMN,,,,,'regularMarketOpen'
+SM,Energy,Oil & Gas E&P,764201920.0,114573000.0,
+MTG,Financial Services,Insurance—Specialty,4089974016.0,338574016.0,
+WCG,,,,,'regularMarketOpen'
+HPT,,,,,'regularMarketOpen'
+WNC,Industrials,Farm & Heavy Construction Machinery,962634624.0,52950200.0,
+FEIC,,,,,'regularMarketOpen'
+ACNB,Financial Services,Banks—Regional,240211360.0,8703310.0,
+IDN,Technology,Software—Application,180415056.0,18409700.0,
+ESCA,Consumer Cyclical,Leisure,278712096.0,14169400.0,
+BIG,Consumer Defensive,Discount Stores,1672176640.0,37110000.0,
+KIM,Real Estate,REIT—Retail,6379360256.0,432499008.0,
+PAMT,,,,,'regularMarketOpen'
+BWLD,,,,,'regularMarketOpen'
+OMCL,Healthcare,Health Information Services,4878020096.0,42307200.0,
+APNB,,,,,'regularMarketOpen'
+JOUT,Consumer Cyclical,Leisure,965821248.0,8873200.0,
+ERS,,,,,'regularMarketOpen'
+SNAK,,,,,'regularMarketOpen'
+UHS,Healthcare,Medical Care Facilities,11246785536.0,77724496.0,
+TSS,,,,,'regularMarketOpen'
+BG,Consumer Defensive,Farm Products,9223212032.0,139660992.0,
+UQM,,,,,'regularMarketOpen'
+SZYM,,,,,'regularMarketOpen'
+DTLK,,,,,'regularMarketOpen'
+SPU,,,,,'regularMarketOpen'
+MTX,Basic Materials,Chemicals,2101849088.0,33994000.0,
+EBIX,Technology,Software—Application,1123013504.0,30962600.0,
+EMKR,Technology,Semiconductors,133023600.0,29560800.0,
+CERE,Healthcare,Biotechnology,2148395520.0,127124000.0,
+SIGI,Financial Services,Insurance—Property & Casualty,3934729984.0,59834700.0,
+ATEC,Healthcare,Medical Devices,908949184.0,78425296.0,
+FORD,Consumer Cyclical,Footwear & Accessories,16388384.0,9583850.0,
+SBUX,Consumer Cyclical,Restaurants,120891097088.0,1173299968.0,
+CNK,Communication Services,Entertainment,1920067456.0,118158000.0,
+CPB,Consumer Defensive,Packaged Foods,14302032896.0,302944992.0,
+VASC,,,,,'regularMarketOpen'
+HBK,,,,,'regularMarketOpen'
+TISI,Industrials,Specialty Business Services,340275968.0,30627900.0,
+LMT,Industrials,Aerospace & Defense,101200666624.0,279784000.0,
+GTY,Real Estate,REIT—Retail,1231965312.0,42806300.0,
+KBH,Consumer Cyclical,Residential Construction,3334537216.0,97844400.0,
+EVOL,Technology,Software—Application,28537234.0,12195400.0,
+SIR,,,,,'regularMarketOpen'
+DOV,Industrials,Specialty Industrial Machinery,17489782784.0,143970000.0,
+BDX,Healthcare,Medical Instruments & Supplies,70387630080.0,289868992.0,
+LNT,Utilities,Utilities—Regulated Electric,12913892352.0,249760992.0,
+CBR,,,,,'regularMarketOpen'
+SXI,Industrials,Specialty Industrial Machinery,973826560.0,12380200.0,
+RNO,,,,,'regularMarketOpen'
+WY,Real Estate,REIT—Specialty,23885535232.0,746422976.0,
+VSCI,,,,,'regularMarketOpen'
+BEN,Financial Services,Asset Management,12276723712.0,495230016.0,
+PETX,,,,,'regularMarketOpen'
+MDH,,,,,'regularMarketOpen'
+UNIS,,,,,'regularMarketOpen'
+HOLX,Healthcare,Medical Instruments & Supplies,19100983296.0,258984992.0,
+LCI,Healthcare,Drug Manufacturers—Specialty & Generic,271885952.0,41700300.0,
+HALO,Healthcare,Biotechnology,5549262336.0,135183008.0,
+BX,Financial Services,Asset Management,44303302656.0,674006016.0,
+RAIL,Industrials,Railroads,47381140.0,15534800.0,
+ZUMZ,Consumer Cyclical,Apparel Retail,939798528.0,25475700.0,
+IQNT,,,,,'regularMarketOpen'
+CLE,,,,,'regularMarketOpen'
+CFNB,Financial Services,Banks—Regional,156832528.0,10284100.0,
+KMB,Consumer Defensive,Household & Personal Products,46258630656.0,340136992.0,
+AMNB,Financial Services,Banks—Regional,294686432.0,10971200.0,
+FDP,Consumer Defensive,Farm Products,1228697472.0,47366900.0,
+Q,,,,,'regularMarketOpen'
+SCOR,Communication Services,Advertising Agencies,180510512.0,72786496.0,
+PASW,,,,,'regularMarketOpen'
+CPHD,,,,,'regularMarketOpen'
+MDRX,Healthcare,Health Information Services,2265462016.0,157982000.0,
+GCA,,,,,'regularMarketOpen'
+GILD,Healthcare,Drug Manufacturers—General,76164481024.0,1253529984.0,
+ITC,,,,,'regularMarketOpen'
+CACI,Technology,Information Technology Services,6125142016.0,25218800.0,
+NOG,Energy,Oil & Gas E&P,419539392.0,45851300.0,
+MLSS,Healthcare,Medical Instruments & Supplies,141399568.0,63693500.0,
+ARMP,Healthcare,Biotechnology,50682148.0,18701900.0,
+RSPI,Healthcare,Biotechnology,1743252.0,645649024.0,
+PAR,Technology,Software—Application,1433979904.0,21616700.0,
+AAWW,,,,,HTTP Error 503: Service Unavailable

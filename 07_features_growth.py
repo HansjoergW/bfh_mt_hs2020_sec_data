@@ -35,7 +35,7 @@ def calculate_growth(all_df: pd.DataFrame, grouped_df: pd.DataFrame, data_cols:L
 
 
 def load_data() -> pd.DataFrame:
-    df = pd.read_csv("./data/features_ratios.csv")
+    df = pd.read_csv("./data/07_all_features_ratios.csv")
 
     df.period = pd.to_datetime(df.period)
     df.filed = pd.to_datetime(df.filed)
@@ -64,4 +64,5 @@ if __name__ ==  '__main__':
     pool.map(call_function, df.groupby(['cik', 'fp']))
     pool.close()
     pool.join()
-    print("duration: ", start - time.time())
+    print("duration: ", time.time() - start)
+    df.to_csv("./data/07_all_features_complete.csv", index=False)

@@ -11,7 +11,7 @@ stock_data_folder = "D:/data/stocks/sec/"
 
 
 def load_data() -> pd.DataFrame:
-    df = pd.read_csv(all_data_local_folder + "complete.csv")
+    df = pd.read_csv(all_data_local_folder + "07_all_features_complete_corrected.csv")
 
     df.period = pd.to_datetime(df.period)
     df.filed = pd.to_datetime(df.filed)
@@ -54,9 +54,9 @@ def get_filename(ticker:str):
 
 def download_and_store(ticker: str):
     filename = get_filename(ticker)
-    # if os.path.isfile(filename):
-    #     print("skipping: ", ticker)
-    #     return
+    if os.path.isfile(filename):
+        print("skipping: ", ticker)
+        return
 
     print("loading: ", ticker)
     try:
@@ -120,7 +120,7 @@ def get_add_data(ticker:str) -> Dict[str,str]:
 
 
 def parallel_download_add_info(tickers: List[str]):
-    filename = stock_data_folder + "add_ticker_info.csv"
+    filename = all_data_local_folder + "08_add_ticker_info.csv"
     current = pd.read_csv(filename, sep=',', encoding='utf-8', header=0)
 
     current_tickers = current.ticker.to_list()
@@ -146,7 +146,7 @@ def parallel_download_add_info(tickers: List[str]):
     print(data.shape)
     print("duration: ", time.time() - start)
 
-    data.to_csv(stock_data_folder + "add_ticker_info.csv", sep=',', encoding='utf-8', index=False)
+    data.to_csv(all_data_local_folder + "08_add_ticker_info.csv", sep=',', encoding='utf-8', index=False)
 
 
 def download_add_info(tickers: List[str]):
