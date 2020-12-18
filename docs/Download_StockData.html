@@ -37,7 +37,7 @@ sidebar: home_sidebar
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># imports</span>
 <span class="kn">from</span> <span class="nn">bfh_mt_hs2020_sec_data.core</span> <span class="kn">import</span> <span class="o">*</span> 
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Dict</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
@@ -82,6 +82,95 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="00_CIK-Ticker-Corrections">00_CIK-Ticker Corrections<a class="anchor-link" href="#00_CIK-Ticker-Corrections"> </a></h2><p>After checking the data in a later step, I discovered that some of the CIK-Ticker matching were wrong. In this Step, we correct that.</p>
+<p>Corrected Mappings:</p>
+<ul>
+<li>AAWW -&gt; 0001135185</li>
+<li>RSPI -&gt; 849636</li>
+<li>MLSS -&gt; 855683</li>
+<li>NOG  -&gt; 1104485</li>
+<li>PAR -&gt; 708821</li>
+<li>ARMP -&gt; 921114</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_cik_ticker_old</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_cik_ticker_old</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">df_cik_ticker_new</span> <span class="o">=</span> <span class="n">df_cik_ticker_old</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">CIK</span> <span class="o">==</span> <span class="mi">1135185</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;AAWW&quot;</span>
+<span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">CIK</span> <span class="o">==</span> <span class="mi">849636</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;RSPI&quot;</span>
+<span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">CIK</span> <span class="o">==</span> <span class="mi">855683</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;MLSS&quot;</span>
+<span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">CIK</span> <span class="o">==</span> <span class="mi">1104485</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;NOG&quot;</span>
+<span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">CIK</span> <span class="o">==</span> <span class="mi">708821</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PAR&quot;</span>
+<span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">CIK</span> <span class="o">==</span> <span class="mi">921114</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ARMP&quot;</span>
+
+<span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker_corrected.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(13737, 8)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;07_all_features_complete.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;ATLS&#39;</span><span class="p">,</span><span class="s1">&#39;IFT&#39;</span><span class="p">])]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">1117106</span><span class="p">,</span><span class="mi">1308161</span><span class="p">])]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">1135185</span><span class="p">,</span> <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;AAWW&quot;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">849636</span><span class="p">,</span>  <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;RSPI&quot;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">855683</span><span class="p">,</span>  <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;MLSS&quot;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">1104485</span><span class="p">,</span> <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;NOG&quot;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">708821</span><span class="p">,</span>  <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PAR&quot;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">921114</span><span class="p">,</span>  <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ARMP&quot;</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;level_0&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;07_all_features_complete_corrected.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="00_Tools">00_Tools<a class="anchor-link" href="#00_Tools"> </a></h2>
 </div>
 </div>
@@ -94,7 +183,7 @@ sidebar: home_sidebar
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;complete.csv&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;07_all_features_complete_corrected.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="n">df</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
     <span class="n">df</span><span class="o">.</span><span class="n">filed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">filed</span><span class="p">)</span>
@@ -119,7 +208,7 @@ sidebar: home_sidebar
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_cik_ticker</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker_corrected.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
@@ -143,11 +232,25 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tickers</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tickers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">load_data</span><span class="p">()</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tickers</span><span class="p">))</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3050
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -244,7 +347,6 @@ sidebar: home_sidebar
     <span class="n">filename</span> <span class="o">=</span> <span class="n">filename_function</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;skipping: &quot;</span><span class="p">,</span> <span class="n">ticker</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;loading: &quot;</span><span class="p">,</span> <span class="n">ticker</span><span class="p">)</span>
@@ -417,6 +519,6760 @@ sidebar: home_sidebar
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>skipping:  A
+skipping:  AA
+loading:  AAC
+
+1 Failed download:
+- AAC: No data found, symbol may be delisted
+too short:  0  -  AAC
+skipping:  AAL
+skipping:  AAME
+loading:  AAN
+too short:  10  -  AAN
+skipping:  AAOI
+skipping:  AAON
+skipping:  AAPL
+skipping:  AAT
+skipping:  AAWW
+skipping:  AB
+skipping:  ABAX
+skipping:  ABBV
+skipping:  ABC
+skipping:  ABCB
+skipping:  ABCD
+skipping:  ABCO
+loading:  ABFS
+
+1 Failed download:
+- ABFS: No data found for this date range, symbol may be delisted
+too short:  0  -  ABFS
+skipping:  ABG
+skipping:  ABM
+skipping:  ABMD
+skipping:  ABR
+skipping:  ABT
+loading:  ABTL
+
+1 Failed download:
+- ABTL: No data found for this date range, symbol may be delisted
+too short:  0  -  ABTL
+skipping:  ACAD
+loading:  ACAT
+
+1 Failed download:
+- ACAT: No data found for this date range, symbol may be delisted
+too short:  0  -  ACAT
+skipping:  ACC
+skipping:  ACET
+skipping:  ACFC
+skipping:  ACFN
+skipping:  ACGL
+skipping:  ACHC
+loading:  ACHN
+
+1 Failed download:
+- ACHN: No data found, symbol may be delisted
+too short:  0  -  ACHN
+skipping:  ACIW
+skipping:  ACLS
+skipping:  ACM
+skipping:  ACN
+skipping:  ACNB
+skipping:  ACOR
+loading:  ACPW
+
+1 Failed download:
+- ACPW: No data found for this date range, symbol may be delisted
+too short:  0  -  ACPW
+skipping:  ACRE
+skipping:  ACRX
+skipping:  ACU
+skipping:  ACUR
+loading:  ACXM
+
+1 Failed download:
+- ACXM: No data found for this date range, symbol may be delisted
+too short:  0  -  ACXM
+skipping:  ACY
+loading:  ADAT
+
+1 Failed download:
+- ADAT: No data found for this date range, symbol may be delisted
+too short:  0  -  ADAT
+skipping:  ADB
+skipping:  ADBE
+skipping:  ADC
+skipping:  ADES
+loading:  ADGE
+
+1 Failed download:
+- ADGE: No data found for this date range, symbol may be delisted
+too short:  0  -  ADGE
+skipping:  ADI
+loading:  ADK
+too short:  3  -  ADK
+skipping:  ADP
+skipping:  ADS
+skipping:  ADSK
+skipping:  ADTN
+skipping:  ADUS
+skipping:  ADXS
+loading:  AEGR
+
+1 Failed download:
+- AEGR: No data found for this date range, symbol may be delisted
+too short:  0  -  AEGR
+skipping:  AEHR
+skipping:  AEIS
+skipping:  AEL
+skipping:  AEO
+loading:  AEPI
+
+1 Failed download:
+- AEPI: No data found for this date range, symbol may be delisted
+too short:  0  -  AEPI
+skipping:  AERI
+skipping:  AES
+skipping:  AET
+loading:  AETI
+
+1 Failed download:
+- AETI: No data found, symbol may be delisted
+too short:  0  -  AETI
+skipping:  AEY
+skipping:  AFAM
+skipping:  AFG
+skipping:  AFH
+skipping:  AFL
+loading:  AFOP
+
+1 Failed download:
+- AFOP: No data found for this date range, symbol may be delisted
+too short:  0  -  AFOP
+skipping:  AGCO
+skipping:  AGEN
+loading:  AGII
+
+1 Failed download:
+- AGII: No data found for this date range, symbol may be delisted
+too short:  0  -  AGII
+skipping:  AGIO
+skipping:  AGM
+skipping:  AGNC
+skipping:  AGO
+skipping:  AGX
+skipping:  AGYS
+loading:  AH
+too short:  7  -  AH
+skipping:  AHC
+skipping:  AHGP
+loading:  AHP
+
+1 Failed download:
+- AHP: No data found for this date range, symbol may be delisted
+too short:  0  -  AHP
+skipping:  AHPI
+loading:  AHS
+
+1 Failed download:
+- AHS: No data found for this date range, symbol may be delisted
+too short:  0  -  AHS
+skipping:  AHT
+skipping:  AIG
+skipping:  AIMC
+skipping:  AIN
+skipping:  AIQ
+skipping:  AIR
+loading:  AIRM
+
+1 Failed download:
+- AIRM: No data found for this date range, symbol may be delisted
+too short:  0  -  AIRM
+skipping:  AIRT
+skipping:  AIT
+skipping:  AIV
+skipping:  AJG
+skipping:  AKAM
+skipping:  AKER
+skipping:  AKR
+loading:  AKS
+
+1 Failed download:
+- AKS: No data found, symbol may be delisted
+too short:  0  -  AKS
+skipping:  ALB
+skipping:  ALE
+skipping:  ALEX
+skipping:  ALG
+skipping:  ALGN
+skipping:  ALGT
+loading:  ALJ
+
+1 Failed download:
+- ALJ: No data found for this date range, symbol may be delisted
+too short:  0  -  ALJ
+skipping:  ALL
+skipping:  ALLE
+loading:  ALN
+
+1 Failed download:
+- ALN: No data found for this date range, symbol may be delisted
+too short:  0  -  ALN
+skipping:  ALNY
+skipping:  ALOG
+skipping:  ALOT
+loading:  ALR
+too short:  195  -  ALR
+skipping:  ALSK
+skipping:  ALSN
+skipping:  ALV
+skipping:  ALX
+loading:  ALXA
+
+1 Failed download:
+- ALXA: No data found for this date range, symbol may be delisted
+too short:  0  -  ALXA
+skipping:  ALXN
+skipping:  AM
+skipping:  AMAG
+skipping:  AMAT
+loading:  AMB
+
+1 Failed download:
+- AMB: No data found for this date range, symbol may be delisted
+too short:  0  -  AMB
+skipping:  AMBA
+loading:  AMCC
+
+1 Failed download:
+- AMCC: No data found for this date range, symbol may be delisted
+too short:  0  -  AMCC
+skipping:  AMCX
+skipping:  AMD
+skipping:  AME
+skipping:  AMED
+skipping:  AMG
+skipping:  AMGN
+skipping:  AMH
+loading:  AMIC
+
+1 Failed download:
+- AMIC: No data found for this date range, symbol may be delisted
+too short:  0  -  AMIC
+loading:  AMID
+
+1 Failed download:
+- AMID: No data found, symbol may be delisted
+too short:  0  -  AMID
+skipping:  AMKR
+skipping:  AMNB
+skipping:  AMP
+skipping:  AMPE
+skipping:  AMRC
+loading:  AMRI
+
+1 Failed download:
+- AMRI: No data found for this date range, symbol may be delisted
+too short:  0  -  AMRI
+skipping:  AMRN
+skipping:  AMRS
+skipping:  AMS
+skipping:  AMSC
+skipping:  AMSF
+loading:  AMSG
+
+1 Failed download:
+- AMSG: No data found for this date range, symbol may be delisted
+too short:  0  -  AMSG
+skipping:  AMSWA
+skipping:  AMT
+skipping:  AMTD
+skipping:  AMWD
+skipping:  AMZN
+skipping:  AN
+loading:  ANAC
+
+1 Failed download:
+- ANAC: No data found for this date range, symbol may be delisted
+too short:  0  -  ANAC
+loading:  ANAD
+
+1 Failed download:
+- ANAD: No data found for this date range, symbol may be delisted
+too short:  0  -  ANAD
+skipping:  ANAT
+skipping:  ANCB
+skipping:  ANCX
+skipping:  AND
+skipping:  ANF
+skipping:  ANGI
+skipping:  ANGO
+skipping:  ANH
+skipping:  ANIK
+skipping:  ANIP
+skipping:  ANSS
+skipping:  ANTH
+loading:  ANX
+
+1 Failed download:
+- ANX: No data found for this date range, symbol may be delisted
+too short:  0  -  ANX
+skipping:  AOC
+skipping:  AOS
+skipping:  AOSL
+skipping:  AP
+skipping:  APA
+skipping:  APAM
+loading:  APC
+
+1 Failed download:
+- APC: No data found, symbol may be delisted
+too short:  0  -  APC
+skipping:  APD
+skipping:  APEI
+skipping:  APH
+loading:  APNB
+
+1 Failed download:
+- APNB: No data found for this date range, symbol may be delisted
+too short:  0  -  APNB
+skipping:  APO
+skipping:  APOG
+loading:  APOL
+
+1 Failed download:
+- APOL: No data found for this date range, symbol may be delisted
+too short:  0  -  APOL
+skipping:  APT
+loading:  APU
+
+1 Failed download:
+- APU: No data found, symbol may be delisted
+too short:  0  -  APU
+skipping:  AR
+skipping:  ARAY
+skipping:  ARC
+loading:  ARCI
+
+1 Failed download:
+- ARCI: No data found, symbol may be delisted
+too short:  0  -  ARCI
+loading:  ARCP
+
+1 Failed download:
+- ARCP: No data found for this date range, symbol may be delisted
+too short:  0  -  ARCP
+skipping:  ARCW
+loading:  ARCX
+
+1 Failed download:
+- ARCX: No data found for this date range, symbol may be delisted
+too short:  0  -  ARCX
+skipping:  ARE
+loading:  AREX
+
+1 Failed download:
+- AREX: No data found, symbol may be delisted
+too short:  0  -  AREX
+loading:  ARG
+
+1 Failed download:
+- ARG: No data found for this date range, symbol may be delisted
+too short:  0  -  ARG
+skipping:  ARI
+loading:  ARIA
+
+1 Failed download:
+- ARIA: No data found for this date range, symbol may be delisted
+too short:  0  -  ARIA
+skipping:  ARII
+loading:  ARIS
+
+1 Failed download:
+- ARIS: No data found for this date range, symbol may be delisted
+too short:  0  -  ARIS
+skipping:  ARKR
+skipping:  ARLP
+skipping:  ARMK
+skipping:  ARMP
+skipping:  ARNA
+loading:  ARO
+
+1 Failed download:
+- ARO: No data found for this date range, symbol may be delisted
+too short:  0  -  ARO
+skipping:  AROW
+loading:  ARQL
+
+1 Failed download:
+- ARQL: No data found, symbol may be delisted
+too short:  0  -  ARQL
+skipping:  ARR
+loading:  ARSD
+
+1 Failed download:
+- ARSD: No data found for this date range, symbol may be delisted
+too short:  0  -  ARSD
+skipping:  ARTNA
+skipping:  ARTW
+loading:  ARTX
+
+1 Failed download:
+- ARTX: No data found, symbol may be delisted
+too short:  0  -  ARTX
+loading:  ARVT
+
+1 Failed download:
+- ARVT: No data found for this date range, symbol may be delisted
+too short:  0  -  ARVT
+skipping:  ARW
+skipping:  ARWR
+loading:  ASBB
+
+1 Failed download:
+- ASBB: No data found for this date range, symbol may be delisted
+too short:  0  -  ASBB
+loading:  ASBC
+
+1 Failed download:
+- ASBC: No data found for this date range, symbol may be delisted
+too short:  0  -  ASBC
+loading:  ASEI
+
+1 Failed download:
+- ASEI: No data found for this date range, symbol may be delisted
+too short:  0  -  ASEI
+skipping:  ASFI
+skipping:  ASGN
+skipping:  ASH
+loading:  ASHN
+
+1 Failed download:
+- ASHN: No data found, symbol may be delisted
+too short:  0  -  ASHN
+skipping:  ASNA
+skipping:  ASPS
+skipping:  ASRV
+skipping:  ASTE
+skipping:  ASTI
+loading:  ASTM
+
+1 Failed download:
+- ASTM: No data found for this date range, symbol may be delisted
+too short:  0  -  ASTM
+skipping:  ASUR
+loading:  ASXHTW
+
+1 Failed download:
+- ASXHTW: No data found, symbol may be delisted
+too short:  0  -  ASXHTW
+skipping:  ASYS
+skipping:  AT
+skipping:  ATEC
+skipping:  ATHN
+skipping:  ATI
+skipping:  ATLC
+skipping:  ATLO
+loading:  ATML
+
+1 Failed download:
+- ATML: No data found for this date range, symbol may be delisted
+too short:  0  -  ATML
+skipping:  ATNI
+skipping:  ATO
+skipping:  ATOS
+skipping:  ATR
+skipping:  ATRC
+skipping:  ATRI
+loading:  ATRM
+
+1 Failed download:
+- ATRM: No data found, symbol may be delisted
+too short:  0  -  ATRM
+skipping:  ATRO
+skipping:  ATSG
+loading:  ATU
+
+1 Failed download:
+- ATU: No data found, symbol may be delisted
+too short:  0  -  ATU
+skipping:  ATVI
+skipping:  ATW
+skipping:  AUBN
+skipping:  AUM
+loading:  AV
+
+1 Failed download:
+- AV: No data found for this date range, symbol may be delisted
+too short:  0  -  AV
+skipping:  AVA
+skipping:  AVAV
+skipping:  AVB
+loading:  AVCA
+
+1 Failed download:
+- AVCA: No data found for this date range, symbol may be delisted
+too short:  0  -  AVCA
+skipping:  AVD
+skipping:  AVEO
+skipping:  AVGO
+skipping:  AVHI
+skipping:  AVID
+loading:  AVP
+
+1 Failed download:
+- AVP: No data found, symbol may be delisted
+too short:  0  -  AVP
+skipping:  AVT
+loading:  AVX
+
+1 Failed download:
+- AVX: No data found, symbol may be delisted
+too short:  0  -  AVX
+skipping:  AVY
+skipping:  AWH
+skipping:  AWI
+skipping:  AWK
+loading:  AWLD
+
+1 Failed download:
+- AWLD: No data found for this date range, symbol may be delisted
+too short:  0  -  AWLD
+skipping:  AWR
+skipping:  AWRE
+skipping:  AWX
+skipping:  AXAS
+skipping:  AXDX
+skipping:  AXL
+loading:  AXLL
+
+1 Failed download:
+- AXLL: No data found for this date range, symbol may be delisted
+too short:  0  -  AXLL
+skipping:  AXR
+skipping:  AXS
+skipping:  AXTI
+skipping:  AYI
+skipping:  AZPN
+skipping:  AZZ
+skipping:  B
+skipping:  BA
+loading:  BABY
+
+1 Failed download:
+- BABY: No data found, symbol may be delisted
+too short:  0  -  BABY
+skipping:  BAC
+skipping:  BAH
+loading:  BAMM
+
+1 Failed download:
+- BAMM: No data found for this date range, symbol may be delisted
+too short:  0  -  BAMM
+skipping:  BANC
+skipping:  BANF
+skipping:  BANR
+skipping:  BASI
+skipping:  BAX
+skipping:  BBBY
+loading:  BBCN
+
+1 Failed download:
+- BBCN: No data found for this date range, symbol may be delisted
+too short:  0  -  BBCN
+loading:  BBG
+
+1 Failed download:
+- BBG: No data found for this date range, symbol may be delisted
+too short:  0  -  BBG
+skipping:  BBGI
+skipping:  BBOX
+skipping:  BBRG
+skipping:  BBSI
+loading:  BBT
+
+1 Failed download:
+- BBT: No data found, symbol may be delisted
+too short:  0  -  BBT
+skipping:  BBW
+skipping:  BBX
+skipping:  BBY
+skipping:  BC
+skipping:  BCBP
+skipping:  BCC
+skipping:  BCO
+skipping:  BCOV
+skipping:  BCPC
+loading:  BCR
+
+1 Failed download:
+- BCR: No data found for this date range, symbol may be delisted
+too short:  0  -  BCR
+skipping:  BCRX
+skipping:  BDC
+skipping:  BDGE
+skipping:  BDL
+skipping:  BDN
+skipping:  BDR
+skipping:  BDSI
+skipping:  BDX
+loading:  BEAV
+
+1 Failed download:
+- BEAV: No data found for this date range, symbol may be delisted
+too short:  0  -  BEAV
+skipping:  BEBE
+skipping:  BECN
+skipping:  BELFB
+skipping:  BEN
+skipping:  BER
+skipping:  BERY
+skipping:  BFAM
+skipping:  BFIN
+skipping:  BFS
+skipping:  BG
+skipping:  BGC
+skipping:  BGCP
+loading:  BGF
+
+1 Failed download:
+- BGF: No data found for this date range, symbol may be delisted
+too short:  0  -  BGF
+skipping:  BGFV
+skipping:  BGG
+skipping:  BHB
+skipping:  BHE
+loading:  BHI
+too short:  194  -  BHI
+skipping:  BHLB
+loading:  BID
+
+1 Failed download:
+- BID: No data found, symbol may be delisted
+too short:  0  -  BID
+skipping:  BIG
+skipping:  BIIB
+skipping:  BIO
+loading:  BIOA
+
+1 Failed download:
+- BIOA: No data found for this date range, symbol may be delisted
+too short:  0  -  BIOA
+loading:  BIOD
+
+1 Failed download:
+- BIOD: No data found for this date range, symbol may be delisted
+too short:  0  -  BIOD
+loading:  BIOF
+
+1 Failed download:
+- BIOF: No data found for this date range, symbol may be delisted
+too short:  0  -  BIOF
+skipping:  BIOL
+loading:  BIOS
+
+1 Failed download:
+- BIOS: No data found, symbol may be delisted
+too short:  0  -  BIOS
+skipping:  BJRI
+skipping:  BK
+skipping:  BKD
+skipping:  BKE
+skipping:  BKH
+loading:  BKJ
+
+1 Failed download:
+- BKJ: No data found, symbol may be delisted
+too short:  0  -  BKJ
+loading:  BKMU
+
+1 Failed download:
+- BKMU: No data found for this date range, symbol may be delisted
+too short:  0  -  BKMU
+loading:  BKS
+
+1 Failed download:
+- BKS: No data found, symbol may be delisted
+too short:  0  -  BKS
+skipping:  BKSC
+skipping:  BKU
+skipping:  BLDR
+skipping:  BLIN
+skipping:  BLK
+skipping:  BLKB
+skipping:  BLL
+skipping:  BLMN
+skipping:  BLMT
+loading:  BLOX
+
+1 Failed download:
+- BLOX: No data found for this date range, symbol may be delisted
+too short:  0  -  BLOX
+loading:  BLT
+
+1 Failed download:
+- BLT: No data found for this date range, symbol may be delisted
+too short:  0  -  BLT
+skipping:  BLUE
+skipping:  BMI
+skipping:  BMM
+loading:  BMOM
+
+1 Failed download:
+- BMOM: No data found for this date range, symbol may be delisted
+too short:  0  -  BMOM
+skipping:  BMRC
+skipping:  BMRN
+skipping:  BMS
+skipping:  BMTC
+skipping:  BMY
+loading:  BNCN
+
+1 Failed download:
+- BNCN: No data found for this date range, symbol may be delisted
+too short:  0  -  BNCN
+skipping:  BNFT
+skipping:  BNO
+loading:  BOBE
+
+1 Failed download:
+- BOBE: No data found for this date range, symbol may be delisted
+too short:  0  -  BOBE
+skipping:  BOCH
+loading:  BOFI
+
+1 Failed download:
+- BOFI: No data found for this date range, symbol may be delisted
+too short:  0  -  BOFI
+skipping:  BOH
+loading:  BOJF
+
+1 Failed download:
+- BOJF: No data found for this date range, symbol may be delisted
+too short:  0  -  BOJF
+skipping:  BOKF
+loading:  BONE
+
+1 Failed download:
+- BONE: No data found for this date range, symbol may be delisted
+too short:  0  -  BONE
+loading:  BONT
+
+1 Failed download:
+- BONT: No data found for this date range, symbol may be delisted
+too short:  0  -  BONT
+skipping:  BOOM
+loading:  BOTA
+
+1 Failed download:
+- BOTA: No data found for this date range, symbol may be delisted
+too short:  0  -  BOTA
+skipping:  BPFH
+loading:  BPI
+
+1 Failed download:
+- BPI: No data found, symbol may be delisted
+too short:  0  -  BPI
+skipping:  BR
+skipping:  BRC
+loading:  BRCD
+
+1 Failed download:
+- BRCD: No data found for this date range, symbol may be delisted
+too short:  0  -  BRCD
+skipping:  BREW
+skipping:  BRID
+skipping:  BRKL
+skipping:  BRKR
+skipping:  BRKS
+skipping:  BRN
+skipping:  BRO
+loading:  BRS
+
+1 Failed download:
+- BRS: No data found, symbol may be delisted
+too short:  0  -  BRS
+loading:  BRSS
+
+1 Failed download:
+- BRSS: No data found, symbol may be delisted
+too short:  0  -  BRSS
+skipping:  BRT
+skipping:  BSET
+loading:  BSFT
+
+1 Failed download:
+- BSFT: No data found for this date range, symbol may be delisted
+too short:  0  -  BSFT
+loading:  BSIC
+
+1 Failed download:
+- BSIC: No data found for this date range, symbol may be delisted
+too short:  0  -  BSIC
+skipping:  BSPM
+skipping:  BSQR
+skipping:  BSRR
+skipping:  BSTC
+skipping:  BSX
+skipping:  BTN
+loading:  BTX
+
+1 Failed download:
+- BTX: No data found, symbol may be delisted
+too short:  0  -  BTX
+skipping:  BURL
+skipping:  BUSE
+skipping:  BV
+loading:  BVSN
+
+1 Failed download:
+- BVSN: No data found, symbol may be delisted
+too short:  0  -  BVSN
+loading:  BVX
+
+1 Failed download:
+- BVX: No data found for this date range, symbol may be delisted
+too short:  0  -  BVX
+skipping:  BWA
+loading:  BWC
+
+1 Failed download:
+- BWC: No data found for this date range, symbol may be delisted
+too short:  0  -  BWC
+loading:  BWINB
+
+1 Failed download:
+- BWINB: No data found for this date range, symbol may be delisted
+too short:  0  -  BWINB
+loading:  BWLD
+
+1 Failed download:
+- BWLD: No data found for this date range, symbol may be delisted
+too short:  0  -  BWLD
+skipping:  BWP
+loading:  BWS
+
+1 Failed download:
+- BWS: No data found for this date range, symbol may be delisted
+too short:  0  -  BWS
+skipping:  BX
+skipping:  BXC
+skipping:  BXMT
+skipping:  BXP
+skipping:  BXS
+skipping:  BYBK
+skipping:  BYD
+skipping:  BYFC
+loading:  BYLK
+
+1 Failed download:
+- BYLK: No data found for this date range, symbol may be delisted
+too short:  0  -  BYLK
+skipping:  BZH
+skipping:  C
+skipping:  CA
+skipping:  CAAS
+loading:  CAB
+too short:  37  -  CAB
+skipping:  CAC
+loading:  CACB
+
+1 Failed download:
+- CACB: No data found for this date range, symbol may be delisted
+too short:  0  -  CACB
+skipping:  CACC
+skipping:  CACI
+loading:  CADC
+
+1 Failed download:
+- CADC: No data found, symbol may be delisted
+too short:  0  -  CADC
+skipping:  CAG
+skipping:  CAH
+skipping:  CAKE
+skipping:  CALD
+skipping:  CALL
+skipping:  CALM
+skipping:  CALX
+loading:  CAM
+
+1 Failed download:
+- CAM: No data found for this date range, symbol may be delisted
+too short:  0  -  CAM
+skipping:  CAMP
+skipping:  CAP
+skipping:  CAR
+skipping:  CARA
+loading:  CARB
+
+1 Failed download:
+- CARB: No data found, symbol may be delisted
+too short:  0  -  CARB
+skipping:  CASH
+skipping:  CASM
+skipping:  CASS
+skipping:  CASY
+skipping:  CAT
+skipping:  CATM
+skipping:  CATY
+skipping:  CAVM
+loading:  CAXG
+
+1 Failed download:
+- CAXG: No data found, symbol may be delisted
+too short:  0  -  CAXG
+loading:  CBAK
+
+1 Failed download:
+- CBAK: No data found for this date range, symbol may be delisted
+too short:  0  -  CBAK
+skipping:  CBAN
+skipping:  CBB
+loading:  CBF
+
+1 Failed download:
+- CBF: No data found for this date range, symbol may be delisted
+too short:  0  -  CBF
+loading:  CBG
+
+1 Failed download:
+- CBG: No data found for this date range, symbol may be delisted
+too short:  0  -  CBG
+skipping:  CBI
+loading:  CBIN
+
+1 Failed download:
+- CBIN: No data found for this date range, symbol may be delisted
+too short:  0  -  CBIN
+loading:  CBK
+
+1 Failed download:
+- CBK: No data found, symbol may be delisted
+too short:  0  -  CBK
+skipping:  CBLI
+loading:  CBM
+
+1 Failed download:
+- CBM: No data found, symbol may be delisted
+too short:  0  -  CBM
+loading:  CBMX
+
+1 Failed download:
+- CBMX: No data found for this date range, symbol may be delisted
+too short:  0  -  CBMX
+loading:  CBNJ
+
+1 Failed download:
+- CBNJ: No data found for this date range, symbol may be delisted
+too short:  0  -  CBNJ
+skipping:  CBNK
+skipping:  CBOE
+skipping:  CBPO
+loading:  CBR
+
+1 Failed download:
+- CBR: No data found for this date range, symbol may be delisted
+too short:  0  -  CBR
+skipping:  CBRL
+loading:  CBS
+
+1 Failed download:
+- CBS: No data found, symbol may be delisted
+too short:  0  -  CBS
+skipping:  CBSH
+skipping:  CBU
+skipping:  CBZ
+skipping:  CCBG
+skipping:  CCC
+loading:  CCCR
+
+1 Failed download:
+- CCCR: No data found for this date range, symbol may be delisted
+too short:  0  -  CCCR
+loading:  CCE
+too short:  138  -  CCE
+skipping:  CCF
+loading:  CCFI
+
+1 Failed download:
+- CCFI: No data found, symbol may be delisted
+too short:  0  -  CCFI
+skipping:  CCI
+skipping:  CCK
+skipping:  CCL
+skipping:  CCMP
+skipping:  CCNE
+skipping:  CCO
+skipping:  CCOI
+skipping:  CCRN
+skipping:  CCU
+skipping:  CCUR
+skipping:  CCXI
+skipping:  CDE
+loading:  CDI
+
+1 Failed download:
+- CDI: No data found for this date range, symbol may be delisted
+too short:  0  -  CDI
+loading:  CDIS
+
+1 Failed download:
+- CDIS: No data found for this date range, symbol may be delisted
+too short:  0  -  CDIS
+skipping:  CDNS
+skipping:  CDR
+skipping:  CDTI
+skipping:  CDW
+skipping:  CDXS
+skipping:  CE
+skipping:  CECE
+loading:  CECO
+
+1 Failed download:
+- CECO: No data found, symbol may be delisted
+too short:  0  -  CECO
+loading:  CELG
+
+1 Failed download:
+- CELG: No data found, symbol may be delisted
+too short:  0  -  CELG
+skipping:  CELP
+loading:  CEMP
+
+1 Failed download:
+- CEMP: No data found for this date range, symbol may be delisted
+too short:  0  -  CEMP
+skipping:  CENT
+skipping:  CENX
+skipping:  CEQP
+loading:  CERE
+too short:  30  -  CERE
+skipping:  CERN
+skipping:  CERS
+skipping:  CETV
+skipping:  CEVA
+skipping:  CF
+loading:  CFD
+
+1 Failed download:
+- CFD: No data found for this date range, symbol may be delisted
+too short:  0  -  CFD
+skipping:  CFFI
+skipping:  CFFN
+skipping:  CFI
+skipping:  CFNB
+loading:  CFNL
+
+1 Failed download:
+- CFNL: No data found for this date range, symbol may be delisted
+too short:  0  -  CFNL
+skipping:  CFR
+skipping:  CFX
+skipping:  CG
+loading:  CGAG
+
+1 Failed download:
+- CGAG: No data found, symbol may be delisted
+too short:  0  -  CGAG
+loading:  CGEIU
+
+1 Failed download:
+- CGEIU: No data found for this date range, symbol may be delisted
+too short:  0  -  CGEIU
+loading:  CGI
+
+1 Failed download:
+- CGI: No data found for this date range, symbol may be delisted
+too short:  0  -  CGI
+skipping:  CGIX
+skipping:  CHCI
+skipping:  CHCO
+skipping:  CHD
+skipping:  CHE
+skipping:  CHEF
+loading:  CHFC
+
+1 Failed download:
+- CHFC: No data found, symbol may be delisted
+too short:  0  -  CHFC
+skipping:  CHFN
+skipping:  CHGG
+skipping:  CHH
+skipping:  CHK
+loading:  CHMT
+
+1 Failed download:
+- CHMT: No data found for this date range, symbol may be delisted
+too short:  0  -  CHMT
+skipping:  CHRW
+skipping:  CHS
+skipping:  CHSCP
+loading:  CHSP
+
+1 Failed download:
+- CHSP: No data found, symbol may be delisted
+too short:  0  -  CHSP
+skipping:  CHTR
+skipping:  CHUY
+skipping:  CI
+skipping:  CIA
+loading:  CIE
+
+1 Failed download:
+- CIE: No data found for this date range, symbol may be delisted
+too short:  0  -  CIE
+skipping:  CIEN
+skipping:  CINF
+skipping:  CIT
+skipping:  CIX
+skipping:  CIZN
+skipping:  CKH
+loading:  CKP
+
+1 Failed download:
+- CKP: No data found for this date range, symbol may be delisted
+too short:  0  -  CKP
+skipping:  CKX
+skipping:  CL
+skipping:  CLB
+loading:  CLBH
+
+1 Failed download:
+- CLBH: No data found for this date range, symbol may be delisted
+too short:  0  -  CLBH
+skipping:  CLC
+skipping:  CLCT
+skipping:  CLDT
+skipping:  CLE
+skipping:  CLFD
+skipping:  CLGX
+loading:  CLGY
+
+1 Failed download:
+- CLGY: No data found for this date range, symbol may be delisted
+too short:  0  -  CLGY
+skipping:  CLI
+skipping:  CLIR
+loading:  CLMS
+
+1 Failed download:
+- CLMS: No data found for this date range, symbol may be delisted
+too short:  0  -  CLMS
+skipping:  CLMT
+skipping:  CLNE
+skipping:  CLNY
+skipping:  CLR
+skipping:  CLRO
+loading:  CLRS
+
+1 Failed download:
+- CLRS: No data found for this date range, symbol may be delisted
+too short:  0  -  CLRS
+loading:  CLRX
+
+1 Failed download:
+- CLRX: No data found for this date range, symbol may be delisted
+too short:  0  -  CLRX
+skipping:  CLSN
+skipping:  CLUB
+skipping:  CLVS
+skipping:  CLW
+skipping:  CLX
+skipping:  CMA
+skipping:  CMC
+skipping:  CMCSA
+skipping:  CME
+skipping:  CMG
+skipping:  CMI
+loading:  CMN
+
+1 Failed download:
+- CMN: No data found for this date range, symbol may be delisted
+too short:  0  -  CMN
+skipping:  CMO
+skipping:  CMP
+skipping:  CMRX
+skipping:  CMS
+skipping:  CMTL
+skipping:  CNA
+loading:  CNAT
+
+1 Failed download:
+- CNAT: No data found, symbol may be delisted
+too short:  0  -  CNAT
+loading:  CNBC
+
+1 Failed download:
+- CNBC: No data found for this date range, symbol may be delisted
+too short:  0  -  CNBC
+skipping:  CNBKA
+skipping:  CNC
+loading:  CNDO
+
+1 Failed download:
+- CNDO: No data found for this date range, symbol may be delisted
+too short:  0  -  CNDO
+skipping:  CNET
+skipping:  CNK
+skipping:  CNMD
+skipping:  CNO
+skipping:  CNP
+skipping:  CNS
+skipping:  CNSL
+skipping:  CNTY
+skipping:  CNX
+loading:  COB
+
+1 Failed download:
+- COB: No data found for this date range, symbol may be delisted
+too short:  0  -  COB
+skipping:  CODI
+skipping:  COF
+skipping:  COG
+loading:  COH
+
+1 Failed download:
+- COH: No data found for this date range, symbol may be delisted
+too short:  0  -  COH
+skipping:  COHU
+skipping:  COIN
+skipping:  COKE
+skipping:  COL
+skipping:  COLB
+skipping:  COLM
+skipping:  COMM
+skipping:  CONN
+skipping:  COO
+loading:  COOL
+
+1 Failed download:
+- COOL: No data found for this date range, symbol may be delisted
+too short:  0  -  COOL
+skipping:  COR
+skipping:  CORE
+skipping:  CORR
+skipping:  CORT
+loading:  COSI
+
+1 Failed download:
+- COSI: No data found for this date range, symbol may be delisted
+too short:  0  -  COSI
+skipping:  COST
+loading:  COT
+
+1 Failed download:
+- COT: No data found, symbol may be delisted
+too short:  0  -  COT
+skipping:  COTY
+skipping:  COWN
+skipping:  CPB
+skipping:  CPE
+skipping:  CPF
+loading:  CPHD
+
+1 Failed download:
+- CPHD: No data found for this date range, symbol may be delisted
+too short:  0  -  CPHD
+skipping:  CPI
+skipping:  CPIX
+skipping:  CPK
+skipping:  CPLA
+skipping:  CPN
+skipping:  CPRT
+skipping:  CPRX
+skipping:  CPSS
+skipping:  CPST
+skipping:  CPT
+skipping:  CQH
+skipping:  CQP
+skipping:  CR
+skipping:  CRAI
+loading:  CRAY
+
+1 Failed download:
+- CRAY: No data found, symbol may be delisted
+too short:  0  -  CRAY
+loading:  CRCM
+
+1 Failed download:
+- CRCM: No data found, symbol may be delisted
+too short:  0  -  CRCM
+loading:  CRDC
+
+1 Failed download:
+- CRDC: No data found for this date range, symbol may be delisted
+too short:  0  -  CRDC
+loading:  CRDS
+
+1 Failed download:
+- CRDS: No data found for this date range, symbol may be delisted
+too short:  0  -  CRDS
+skipping:  CREE
+skipping:  CREG
+skipping:  CRI
+skipping:  CRIS
+skipping:  CRM
+skipping:  CRMD
+skipping:  CRMT
+loading:  CRR
+
+1 Failed download:
+- CRR: No data found, symbol may be delisted
+too short:  0  -  CRR
+skipping:  CRS
+skipping:  CRUS
+skipping:  CRVL
+skipping:  CRWN
+skipping:  CRWS
+skipping:  CRY
+skipping:  CRZO
+skipping:  CSC
+loading:  CSCD
+
+1 Failed download:
+- CSCD: No data found for this date range, symbol may be delisted
+too short:  0  -  CSCD
+skipping:  CSCO
+loading:  CSFL
+
+1 Failed download:
+- CSFL: No data found, symbol may be delisted
+too short:  0  -  CSFL
+loading:  CSG
+too short:  1  -  CSG
+skipping:  CSGS
+loading:  CSH
+
+1 Failed download:
+- CSH: No data found for this date range, symbol may be delisted
+too short:  0  -  CSH
+skipping:  CSII
+skipping:  CSL
+skipping:  CSOD
+loading:  CSS
+
+1 Failed download:
+- CSS: No data found, symbol may be delisted
+too short:  0  -  CSS
+loading:  CST
+
+1 Failed download:
+- CST: No data found for this date range, symbol may be delisted
+too short:  0  -  CST
+skipping:  CSU
+loading:  CSUH
+
+1 Failed download:
+- CSUH: No data found, symbol may be delisted
+too short:  0  -  CSUH
+skipping:  CSX
+skipping:  CTAS
+skipping:  CTB
+skipping:  CTBI
+loading:  CTCM
+
+1 Failed download:
+- CTCM: No data found for this date range, symbol may be delisted
+too short:  0  -  CTCM
+skipping:  CTF
+skipping:  CTG
+skipping:  CTHR
+skipping:  CTIB
+skipping:  CTIC
+skipping:  CTO
+loading:  CTRL
+
+1 Failed download:
+- CTRL: No data found, symbol may be delisted
+too short:  0  -  CTRL
+skipping:  CTS
+skipping:  CTSH
+skipping:  CTT
+loading:  CTWS
+
+1 Failed download:
+- CTWS: No data found, symbol may be delisted
+too short:  0  -  CTWS
+skipping:  CTXS
+skipping:  CUB
+skipping:  CUBE
+skipping:  CUBI
+skipping:  CUDA
+loading:  CUNB
+
+1 Failed download:
+- CUNB: No data found for this date range, symbol may be delisted
+too short:  0  -  CUNB
+loading:  CUO
+
+1 Failed download:
+- CUO: No data found, symbol may be delisted
+too short:  0  -  CUO
+loading:  CUR
+
+1 Failed download:
+- CUR: No data found, symbol may be delisted
+too short:  0  -  CUR
+skipping:  CUTR
+skipping:  CUZ
+skipping:  CVA
+skipping:  CVBF
+loading:  CVC
+
+1 Failed download:
+- CVC: No data found for this date range, symbol may be delisted
+too short:  0  -  CVC
+skipping:  CVCO
+skipping:  CVCY
+skipping:  CVG
+skipping:  CVGI
+skipping:  CVGW
+skipping:  CVI
+skipping:  CVLT
+skipping:  CVLY
+skipping:  CVM
+loading:  CVO
+
+1 Failed download:
+- CVO: No data found for this date range, symbol may be delisted
+too short:  0  -  CVO
+skipping:  CVR
+skipping:  CVRR
+skipping:  CVS
+skipping:  CVTI
+skipping:  CVU
+skipping:  CVV
+skipping:  CVX
+skipping:  CW
+skipping:  CWBC
+skipping:  CWCO
+loading:  CWEI
+
+1 Failed download:
+- CWEI: No data found for this date range, symbol may be delisted
+too short:  0  -  CWEI
+skipping:  CWH
+skipping:  CWST
+skipping:  CWT
+skipping:  CXDC
+skipping:  CXO
+skipping:  CXP
+skipping:  CXW
+loading:  CY
+
+1 Failed download:
+- CY: No data found, symbol may be delisted
+too short:  0  -  CY
+skipping:  CYBE
+skipping:  CYCC
+skipping:  CYH
+loading:  CYNO
+
+1 Failed download:
+- CYNO: No data found for this date range, symbol may be delisted
+too short:  0  -  CYNO
+skipping:  CYS
+skipping:  CYTK
+loading:  CYTX
+
+1 Failed download:
+- CYTX: No data found, symbol may be delisted
+too short:  0  -  CYTX
+loading:  CZFC
+
+1 Failed download:
+- CZFC: No data found, symbol may be delisted
+too short:  0  -  CZFC
+skipping:  CZR
+skipping:  D
+skipping:  DAG
+skipping:  DAKT
+skipping:  DAL
+skipping:  DAN
+skipping:  DAR
+loading:  DATA
+
+1 Failed download:
+- DATA: No data found, symbol may be delisted
+too short:  0  -  DATA
+loading:  DAVE
+
+1 Failed download:
+- DAVE: No data found, symbol may be delisted
+too short:  0  -  DAVE
+skipping:  DBD
+skipping:  DCI
+skipping:  DCO
+skipping:  DCOM
+loading:  DCT
+too short:  82  -  DCT
+skipping:  DCTH
+skipping:  DDD
+loading:  DDE
+
+1 Failed download:
+- DDE: No data found, symbol may be delisted
+too short:  0  -  DDE
+skipping:  DDR
+skipping:  DDS
+skipping:  DE
+skipping:  DECK
+skipping:  DEI
+skipping:  DEL
+loading:  DEPO
+
+1 Failed download:
+- DEPO: No data found for this date range, symbol may be delisted
+too short:  0  -  DEPO
+loading:  DEST
+
+1 Failed download:
+- DEST: No data found for this date range, symbol may be delisted
+too short:  0  -  DEST
+loading:  DF
+
+1 Failed download:
+- DF: No data found, symbol may be delisted
+too short:  0  -  DF
+loading:  DFRG
+
+1 Failed download:
+- DFRG: No data found, symbol may be delisted
+too short:  0  -  DFRG
+skipping:  DFS
+loading:  DFT
+
+1 Failed download:
+- DFT: No data found for this date range, symbol may be delisted
+too short:  0  -  DFT
+skipping:  DG
+loading:  DGAS
+
+1 Failed download:
+- DGAS: No data found for this date range, symbol may be delisted
+too short:  0  -  DGAS
+loading:  DGI
+
+1 Failed download:
+- DGI: No data found for this date range, symbol may be delisted
+too short:  0  -  DGI
+skipping:  DGICA
+skipping:  DGII
+skipping:  DGLY
+loading:  DGSE
+
+1 Failed download:
+- DGSE: No data found, symbol may be delisted
+too short:  0  -  DGSE
+skipping:  DGX
+skipping:  DHI
+skipping:  DHR
+skipping:  DHX
+skipping:  DIN
+skipping:  DIOD
+skipping:  DIS
+skipping:  DISCA
+skipping:  DISH
+skipping:  DIT
+skipping:  DJCO
+skipping:  DK
+skipping:  DKL
+skipping:  DKS
+skipping:  DLA
+skipping:  DLB
+skipping:  DLPH
+skipping:  DLR
+skipping:  DLTR
+skipping:  DLX
+skipping:  DMC
+loading:  DMD
+
+1 Failed download:
+- DMD: No data found for this date range, symbol may be delisted
+too short:  0  -  DMD
+skipping:  DMLP
+loading:  DMND
+
+1 Failed download:
+- DMND: No data found for this date range, symbol may be delisted
+too short:  0  -  DMND
+skipping:  DMRC
+loading:  DNB
+too short:  113  -  DNB
+loading:  DNBF
+
+1 Failed download:
+- DNBF: No data found, symbol may be delisted
+too short:  0  -  DNBF
+skipping:  DNKN
+skipping:  DNO
+skipping:  DNR
+loading:  DO
+
+1 Failed download:
+- DO: No data found, symbol may be delisted
+too short:  0  -  DO
+skipping:  DOC
+skipping:  DOOR
+skipping:  DORM
+skipping:  DOV
+skipping:  DOW
+loading:  DPS
+
+1 Failed download:
+- DPS: No data found for this date range, symbol may be delisted
+too short:  0  -  DPS
+skipping:  DPW
+skipping:  DPZ
+skipping:  DRAD
+loading:  DRAM
+
+1 Failed download:
+- DRAM: No data found for this date range, symbol may be delisted
+too short:  0  -  DRAM
+skipping:  DRE
+skipping:  DRH
+skipping:  DRI
+skipping:  DRNA
+skipping:  DRQ
+skipping:  DRRX
+loading:  DSCI
+
+1 Failed download:
+- DSCI: No data found for this date range, symbol may be delisted
+too short:  0  -  DSCI
+loading:  DSFX
+
+1 Failed download:
+- DSFX: No data found, symbol may be delisted
+too short:  0  -  DSFX
+loading:  DSKX
+
+1 Failed download:
+- DSKX: No data found, symbol may be delisted
+too short:  0  -  DSKX
+skipping:  DSPG
+skipping:  DST
+skipping:  DTE
+loading:  DTLA
+
+1 Failed download:
+- DTLA: No data found, symbol may be delisted
+too short:  0  -  DTLA
+loading:  DTLK
+
+1 Failed download:
+- DTLK: No data found for this date range, symbol may be delisted
+too short:  0  -  DTLK
+loading:  DTSI
+
+1 Failed download:
+- DTSI: No data found for this date range, symbol may be delisted
+too short:  0  -  DTSI
+skipping:  DUK
+loading:  DV
+
+1 Failed download:
+- DV: No data found for this date range, symbol may be delisted
+too short:  0  -  DV
+skipping:  DVA
+skipping:  DVAX
+skipping:  DVD
+skipping:  DVN
+loading:  DW
+
+1 Failed download:
+- DW: No data found for this date range, symbol may be delisted
+too short:  0  -  DW
+loading:  DWA
+
+1 Failed download:
+- DWA: No data found for this date range, symbol may be delisted
+too short:  0  -  DWA
+skipping:  DWCH
+loading:  DWRE
+
+1 Failed download:
+- DWRE: No data found for this date range, symbol may be delisted
+too short:  0  -  DWRE
+skipping:  DX
+skipping:  DXCM
+skipping:  DXYN
+skipping:  DYNT
+skipping:  DYSL
+skipping:  EA
+loading:  EAC
+
+1 Failed download:
+- EAC: No data found for this date range, symbol may be delisted
+too short:  0  -  EAC
+skipping:  EARN
+skipping:  EAT
+skipping:  EBAY
+skipping:  EBIX
+skipping:  EBS
+skipping:  EBTC
+skipping:  ECHO
+skipping:  ECL
+skipping:  ECOL
+skipping:  ECOM
+skipping:  ECP
+skipping:  ECPG
+skipping:  ECTE
+skipping:  ECYT
+skipping:  ED
+loading:  EDE
+
+1 Failed download:
+- EDE: No data found for this date range, symbol may be delisted
+too short:  0  -  EDE
+skipping:  EDGW
+loading:  EDR
+
+1 Failed download:
+- EDR: No data found, symbol may be delisted
+too short:  0  -  EDR
+skipping:  EDUC
+skipping:  EE
+skipping:  EEFT
+loading:  EEI
+
+1 Failed download:
+- EEI: No data found, symbol may be delisted
+too short:  0  -  EEI
+skipping:  EEP
+loading:  EFII
+
+1 Failed download:
+- EFII: No data found, symbol may be delisted
+too short:  0  -  EFII
+skipping:  EFSC
+skipping:  EFX
+skipping:  EGAN
+skipping:  EGBN
+skipping:  EGHT
+skipping:  EGL
+skipping:  EGN
+skipping:  EGOV
+skipping:  EGP
+skipping:  EGY
+skipping:  EHTH
+skipping:  EIG
+skipping:  EIX
+skipping:  EL
+skipping:  ELGX
+loading:  ELLI
+
+1 Failed download:
+- ELLI: No data found, symbol may be delisted
+too short:  0  -  ELLI
+skipping:  ELMD
+loading:  ELNK
+
+1 Failed download:
+- ELNK: No data found for this date range, symbol may be delisted
+too short:  0  -  ELNK
+skipping:  ELON
+loading:  ELRC
+
+1 Failed download:
+- ELRC: No data found for this date range, symbol may be delisted
+too short:  0  -  ELRC
+skipping:  ELS
+skipping:  ELSE
+skipping:  EMAN
+skipping:  EMC
+skipping:  EMCF
+loading:  EMCI
+
+1 Failed download:
+- EMCI: No data found, symbol may be delisted
+too short:  0  -  EMCI
+skipping:  EME
+skipping:  EMKR
+skipping:  EML
+skipping:  EMMS
+skipping:  EMN
+skipping:  EMR
+loading:  ENH
+
+1 Failed download:
+- ENH: No data found for this date range, symbol may be delisted
+too short:  0  -  ENH
+loading:  ENMD
+
+1 Failed download:
+- ENMD: No data found for this date range, symbol may be delisted
+too short:  0  -  ENMD
+loading:  ENOC
+
+1 Failed download:
+- ENOC: No data found for this date range, symbol may be delisted
+too short:  0  -  ENOC
+skipping:  ENPH
+skipping:  ENR
+skipping:  ENSG
+skipping:  ENT
+skipping:  ENTA
+skipping:  ENTG
+skipping:  ENZ
+skipping:  ENZN
+skipping:  EOG
+loading:  EONC
+
+1 Failed download:
+- EONC: No data found for this date range, symbol may be delisted
+too short:  0  -  EONC
+skipping:  EPAM
+skipping:  EPAY
+skipping:  EPD
+loading:  EPE
+
+1 Failed download:
+- EPE: No data found, symbol may be delisted
+too short:  0  -  EPE
+loading:  EPIQ
+
+1 Failed download:
+- EPIQ: No data found for this date range, symbol may be delisted
+too short:  0  -  EPIQ
+skipping:  EPM
+skipping:  EPR
+skipping:  EPZM
+skipping:  EQIX
+loading:  EQM
+
+1 Failed download:
+- EQM: No data found, symbol may be delisted
+too short:  0  -  EQM
+skipping:  EQR
+skipping:  EQT
+loading:  EQY
+
+1 Failed download:
+- EQY: No data found for this date range, symbol may be delisted
+too short:  0  -  EQY
+loading:  ERA
+
+1 Failed download:
+- ERA: No data found, symbol may be delisted
+too short:  0  -  ERA
+skipping:  ERIE
+skipping:  ERII
+loading:  ERS
+
+1 Failed download:
+- ERS: No data found for this date range, symbol may be delisted
+too short:  0  -  ERS
+skipping:  ESCA
+skipping:  ESE
+skipping:  ESGR
+skipping:  ESI
+skipping:  ESIO
+skipping:  ESMC
+skipping:  ESNT
+skipping:  ESP
+skipping:  ESPR
+skipping:  ESRX
+skipping:  ESS
+skipping:  ESSA
+skipping:  ESXB
+loading:  ETAK
+
+1 Failed download:
+- ETAK: No data found for this date range, symbol may be delisted
+too short:  0  -  ETAK
+loading:  ETE
+too short:  71  -  ETE
+skipping:  ETFC
+skipping:  ETH
+skipping:  ETP
+skipping:  ETR
+loading:  ETRM
+
+1 Failed download:
+- ETRM: No data found for this date range, symbol may be delisted
+too short:  0  -  ETRM
+skipping:  EV
+skipping:  EVBN
+loading:  EVBS
+
+1 Failed download:
+- EVBS: No data found for this date range, symbol may be delisted
+too short:  0  -  EVBS
+skipping:  EVER
+skipping:  EVOK
+skipping:  EVOL
+skipping:  EVR
+skipping:  EVTC
+skipping:  EW
+skipping:  EWBC
+loading:  EXA
+
+1 Failed download:
+- EXA: No data found for this date range, symbol may be delisted
+too short:  0  -  EXA
+skipping:  EXAC
+loading:  EXAM
+
+1 Failed download:
+- EXAM: No data found for this date range, symbol may be delisted
+too short:  0  -  EXAM
+loading:  EXAR
+
+1 Failed download:
+- EXAR: No data found for this date range, symbol may be delisted
+too short:  0  -  EXAR
+skipping:  EXAS
+loading:  EXBD
+
+1 Failed download:
+- EXBD: No data found for this date range, symbol may be delisted
+too short:  0  -  EXBD
+skipping:  EXC
+skipping:  EXE
+skipping:  EXEL
+loading:  EXH
+
+1 Failed download:
+- EXH: No data found for this date range, symbol may be delisted
+too short:  0  -  EXH
+loading:  EXLP
+
+1 Failed download:
+- EXLP: No data found for this date range, symbol may be delisted
+too short:  0  -  EXLP
+skipping:  EXLS
+skipping:  EXP
+skipping:  EXPD
+skipping:  EXPE
+skipping:  EXPO
+skipping:  EXPR
+skipping:  EXR
+skipping:  EXTR
+loading:  EXXI
+
+1 Failed download:
+- EXXI: No data found for this date range, symbol may be delisted
+too short:  0  -  EXXI
+skipping:  EZPW
+skipping:  FAF
+skipping:  FALC
+skipping:  FANG
+skipping:  FARM
+skipping:  FARO
+skipping:  FAST
+skipping:  FATE
+skipping:  FB
+skipping:  FBC
+skipping:  FBHS
+skipping:  FBIZ
+skipping:  FBMS
+skipping:  FBNC
+loading:  FBNK
+
+1 Failed download:
+- FBNK: No data found, symbol may be delisted
+too short:  0  -  FBNK
+skipping:  FBP
+skipping:  FBR
+loading:  FBRC
+
+1 Failed download:
+- FBRC: No data found for this date range, symbol may be delisted
+too short:  0  -  FBRC
+skipping:  FBSS
+skipping:  FC
+skipping:  FCAP
+skipping:  FCBC
+skipping:  FCCO
+skipping:  FCCY
+skipping:  FCEL
+skipping:  FCF
+skipping:  FCFS
+loading:  FCH
+
+1 Failed download:
+- FCH: No data found for this date range, symbol may be delisted
+too short:  0  -  FCH
+loading:  FCLF
+
+1 Failed download:
+- FCLF: No data found for this date range, symbol may be delisted
+too short:  0  -  FCLF
+skipping:  FCN
+skipping:  FCNCA
+loading:  FCS
+
+1 Failed download:
+- FCS: No data found for this date range, symbol may be delisted
+too short:  0  -  FCS
+loading:  FCTY
+
+1 Failed download:
+- FCTY: No data found for this date range, symbol may be delisted
+too short:  0  -  FCTY
+skipping:  FCX
+loading:  FCZA
+
+1 Failed download:
+- FCZA: No data found for this date range, symbol may be delisted
+too short:  0  -  FCZA
+skipping:  FDEF
+loading:  FDML
+
+1 Failed download:
+- FDML: No data found for this date range, symbol may be delisted
+too short:  0  -  FDML
+skipping:  FDP
+skipping:  FDS
+skipping:  FDX
+skipping:  FE
+loading:  FEIC
+
+1 Failed download:
+- FEIC: No data found for this date range, symbol may be delisted
+too short:  0  -  FEIC
+skipping:  FEIM
+skipping:  FELE
+skipping:  FET
+skipping:  FEYE
+skipping:  FF
+skipping:  FFBC
+loading:  FFBH
+
+1 Failed download:
+- FFBH: No data found for this date range, symbol may be delisted
+too short:  0  -  FFBH
+skipping:  FFG
+skipping:  FFIN
+skipping:  FFIV
+skipping:  FFKT
+skipping:  FFNW
+loading:  FGL
+too short:  1  -  FGL
+loading:  FGP
+
+1 Failed download:
+- FGP: No data found, symbol may be delisted
+too short:  0  -  FGP
+loading:  FHCO
+
+1 Failed download:
+- FHCO: No data found for this date range, symbol may be delisted
+too short:  0  -  FHCO
+skipping:  FHN
+skipping:  FI
+skipping:  FIBK
+skipping:  FICO
+loading:  FIDM
+
+1 Failed download:
+- FIDM: No data found, symbol may be delisted
+too short:  0  -  FIDM
+loading:  FIG
+
+1 Failed download:
+- FIG: No data found for this date range, symbol may be delisted
+too short:  0  -  FIG
+loading:  FII
+
+1 Failed download:
+- FII: No data found, symbol may be delisted
+too short:  0  -  FII
+skipping:  FINL
+skipping:  FIS
+skipping:  FISI
+skipping:  FITB
+skipping:  FIVE
+skipping:  FIX
+skipping:  FIZZ
+skipping:  FL
+skipping:  FLDM
+skipping:  FLEX
+skipping:  FLIC
+skipping:  FLIR
+skipping:  FLL
+loading:  FLML
+
+1 Failed download:
+- FLML: No data found for this date range, symbol may be delisted
+too short:  0  -  FLML
+skipping:  FLR
+skipping:  FLS
+skipping:  FLT
+skipping:  FLXS
+skipping:  FMBI
+skipping:  FMC
+loading:  FMD
+
+1 Failed download:
+- FMD: No data found for this date range, symbol may be delisted
+too short:  0  -  FMD
+skipping:  FMI
+skipping:  FMNB
+skipping:  FN
+skipping:  FNGN
+skipping:  FNHC
+skipping:  FNLC
+loading:  FNP
+
+1 Failed download:
+- FNP: No data found for this date range, symbol may be delisted
+too short:  0  -  FNP
+skipping:  FOE
+skipping:  FOLD
+skipping:  FONR
+skipping:  FORD
+skipping:  FORM
+skipping:  FORR
+skipping:  FOSL
+skipping:  FOXF
+loading:  FPO
+
+1 Failed download:
+- FPO: No data found for this date range, symbol may be delisted
+too short:  0  -  FPO
+loading:  FPP
+
+1 Failed download:
+- FPP: No data found for this date range, symbol may be delisted
+too short:  0  -  FPP
+skipping:  FPRX
+skipping:  FR
+skipping:  FRAN
+skipping:  FRBK
+skipping:  FRD
+loading:  FRED
+
+1 Failed download:
+- FRED: No data found for this date range, symbol may be delisted
+too short:  0  -  FRED
+skipping:  FRGI
+skipping:  FRME
+skipping:  FRT
+loading:  FSBK
+
+1 Failed download:
+- FSBK: No data found for this date range, symbol may be delisted
+too short:  0  -  FSBK
+skipping:  FSBW
+skipping:  FSFG
+skipping:  FSI
+skipping:  FSLR
+skipping:  FSN
+skipping:  FSS
+loading:  FST
+too short:  42  -  FST
+skipping:  FSTR
+loading:  FSYS
+
+1 Failed download:
+- FSYS: No data found for this date range, symbol may be delisted
+too short:  0  -  FSYS
+loading:  FTD
+
+1 Failed download:
+- FTD: No data found for this date range, symbol may be delisted
+too short:  0  -  FTD
+skipping:  FTEK
+skipping:  FTI
+skipping:  FTK
+skipping:  FTNT
+loading:  FTR
+
+1 Failed download:
+- FTR: No data found, symbol may be delisted
+too short:  0  -  FTR
+loading:  FUEL
+
+1 Failed download:
+- FUEL: No data found for this date range, symbol may be delisted
+too short:  0  -  FUEL
+skipping:  FUL
+skipping:  FUN
+skipping:  FUNC
+skipping:  FVE
+skipping:  FWRD
+loading:  FXCB
+
+1 Failed download:
+- FXCB: No data found for this date range, symbol may be delisted
+too short:  0  -  FXCB
+loading:  FXCM
+
+1 Failed download:
+- FXCM: No data found for this date range, symbol may be delisted
+too short:  0  -  FXCM
+skipping:  G
+skipping:  GABC
+skipping:  GAIA
+skipping:  GALE
+skipping:  GALT
+skipping:  GAS
+loading:  GB
+too short:  147  -  GB
+skipping:  GBCI
+skipping:  GBLI
+skipping:  GBNK
+skipping:  GBX
+loading:  GCA
+
+1 Failed download:
+- GCA: No data found for this date range, symbol may be delisted
+too short:  0  -  GCA
+skipping:  GCBC
+skipping:  GCI
+skipping:  GCO
+skipping:  GD
+skipping:  GDOT
+skipping:  GEB
+skipping:  GEL
+skipping:  GERN
+skipping:  GES
+skipping:  GEVO
+skipping:  GFED
+skipping:  GFF
+skipping:  GFN
+skipping:  GGG
+skipping:  GGI
+loading:  GGOX
+
+1 Failed download:
+- GGOX: No data found for this date range, symbol may be delisted
+too short:  0  -  GGOX
+loading:  GGP
+
+1 Failed download:
+- GGP: No data found for this date range, symbol may be delisted
+too short:  0  -  GGP
+skipping:  GHL
+skipping:  GHM
+skipping:  GIFI
+skipping:  GIGA
+skipping:  GIII
+skipping:  GILD
+loading:  GIMO
+
+1 Failed download:
+- GIMO: No data found for this date range, symbol may be delisted
+too short:  0  -  GIMO
+skipping:  GIS
+loading:  GK
+
+1 Failed download:
+- GK: No data found for this date range, symbol may be delisted
+too short:  0  -  GK
+skipping:  GLBZ
+loading:  GLDC
+
+1 Failed download:
+- GLDC: No data found for this date range, symbol may be delisted
+too short:  0  -  GLDC
+skipping:  GLDD
+loading:  GLOWE
+
+1 Failed download:
+- GLOWE: No data found, symbol may be delisted
+too short:  0  -  GLOWE
+skipping:  GLP
+loading:  GLPW
+
+1 Failed download:
+- GLPW: No data found for this date range, symbol may be delisted
+too short:  0  -  GLPW
+skipping:  GLT
+skipping:  GLUU
+skipping:  GM
+skipping:  GMAN
+loading:  GMCR
+
+1 Failed download:
+- GMCR: No data found for this date range, symbol may be delisted
+too short:  0  -  GMCR
+skipping:  GME
+skipping:  GNC
+skipping:  GNCMA
+skipping:  GNE
+skipping:  GNMK
+skipping:  GNRC
+skipping:  GNTX
+loading:  GNVC
+
+1 Failed download:
+- GNVC: No data found for this date range, symbol may be delisted
+too short:  0  -  GNVC
+skipping:  GNW
+skipping:  GOGO
+skipping:  GOOD
+loading:  GOV
+
+1 Failed download:
+- GOV: No data found for this date range, symbol may be delisted
+too short:  0  -  GOV
+skipping:  GPC
+skipping:  GPI
+loading:  GPIC
+
+1 Failed download:
+- GPIC: No data found, symbol may be delisted
+too short:  0  -  GPIC
+skipping:  GPK
+skipping:  GPN
+skipping:  GPOR
+skipping:  GPRE
+skipping:  GPS
+skipping:  GPX
+skipping:  GRA
+skipping:  GRC
+skipping:  GRIF
+skipping:  GRMN
+skipping:  GROW
+skipping:  GS
+skipping:  GSBC
+loading:  GSCP
+
+1 Failed download:
+- GSCP: No data found for this date range, symbol may be delisted
+too short:  0  -  GSCP
+loading:  GSHO
+
+1 Failed download:
+- GSHO: No data found for this date range, symbol may be delisted
+too short:  0  -  GSHO
+loading:  GSIG
+too short:  106  -  GSIG
+skipping:  GSIT
+loading:  GST
+
+1 Failed download:
+- GST: No data found for this date range, symbol may be delisted
+too short:  0  -  GST
+skipping:  GT
+skipping:  GTIM
+skipping:  GTN
+skipping:  GTS
+loading:  GTWN
+
+1 Failed download:
+- GTWN: No data found for this date range, symbol may be delisted
+too short:  0  -  GTWN
+loading:  GTXI
+
+1 Failed download:
+- GTXI: No data found, symbol may be delisted
+too short:  0  -  GTXI
+skipping:  GTY
+loading:  GUID
+
+1 Failed download:
+- GUID: No data found for this date range, symbol may be delisted
+too short:  0  -  GUID
+skipping:  GV
+skipping:  GVA
+skipping:  GVP
+loading:  GWR
+
+1 Failed download:
+- GWR: No data found, symbol may be delisted
+too short:  0  -  GWR
+skipping:  GWRE
+skipping:  GWW
+skipping:  GXP
+loading:  GY
+
+1 Failed download:
+- GY: No data found for this date range, symbol may be delisted
+too short:  0  -  GY
+skipping:  H
+skipping:  HA
+skipping:  HAE
+skipping:  HAFC
+skipping:  HAIN
+skipping:  HAL
+skipping:  HALL
+skipping:  HALO
+skipping:  HAR
+loading:  HART
+
+1 Failed download:
+- HART: No data found, symbol may be delisted
+too short:  0  -  HART
+skipping:  HAS
+skipping:  HAWK
+skipping:  HBAN
+skipping:  HBCP
+loading:  HBHC
+
+1 Failed download:
+- HBHC: No data found for this date range, symbol may be delisted
+too short:  0  -  HBHC
+loading:  HBK
+
+1 Failed download:
+- HBK: No data found, symbol may be delisted
+too short:  0  -  HBK
+skipping:  HBMD
+skipping:  HBNC
+skipping:  HBP
+skipping:  HCA
+skipping:  HCACU
+skipping:  HCCI
+skipping:  HCI
+loading:  HCN
+
+1 Failed download:
+- HCN: No data found for this date range, symbol may be delisted
+too short:  0  -  HCN
+skipping:  HCOM
+loading:  HCP
+
+1 Failed download:
+- HCP: No data found, symbol may be delisted
+too short:  0  -  HCP
+skipping:  HCSG
+skipping:  HD
+skipping:  HDNG
+skipping:  HDS
+skipping:  HDSN
+loading:  HDY
+
+1 Failed download:
+- HDY: No data found for this date range, symbol may be delisted
+too short:  0  -  HDY
+skipping:  HE
+skipping:  HEES
+skipping:  HEI
+skipping:  HELE
+loading:  HEOP
+
+1 Failed download:
+- HEOP: No data found for this date range, symbol may be delisted
+too short:  0  -  HEOP
+skipping:  HEP
+skipping:  HES
+loading:  HF
+
+1 Failed download:
+- HF: No data found, symbol may be delisted
+too short:  0  -  HF
+loading:  HFBC
+
+1 Failed download:
+- HFBC: No data found, symbol may be delisted
+too short:  0  -  HFBC
+skipping:  HFBL
+skipping:  HFC
+loading:  HFFC
+
+1 Failed download:
+- HFFC: No data found for this date range, symbol may be delisted
+too short:  0  -  HFFC
+skipping:  HFWA
+loading:  HGG
+
+1 Failed download:
+- HGG: No data found for this date range, symbol may be delisted
+too short:  0  -  HGG
+loading:  HGR
+
+1 Failed download:
+- HGR: No data found for this date range, symbol may be delisted
+too short:  0  -  HGR
+loading:  HH
+
+1 Failed download:
+- HH: No data found for this date range, symbol may be delisted
+too short:  0  -  HH
+skipping:  HHC
+skipping:  HHS
+skipping:  HI
+skipping:  HIBB
+skipping:  HIG
+skipping:  HII
+loading:  HIIQ
+
+1 Failed download:
+- HIIQ: No data found, symbol may be delisted
+too short:  0  -  HIIQ
+skipping:  HIW
+skipping:  HL
+skipping:  HLF
+skipping:  HLIT
+loading:  HLS
+
+1 Failed download:
+- HLS: No data found for this date range, symbol may be delisted
+too short:  0  -  HLS
+skipping:  HLT
+skipping:  HMG
+skipping:  HMHC
+skipping:  HMN
+skipping:  HMNF
+loading:  HMPR
+
+1 Failed download:
+- HMPR: No data found for this date range, symbol may be delisted
+too short:  0  -  HMPR
+skipping:  HMST
+skipping:  HMSY
+skipping:  HMTV
+skipping:  HNRG
+loading:  HNSN
+
+1 Failed download:
+- HNSN: No data found for this date range, symbol may be delisted
+too short:  0  -  HNSN
+loading:  HNT
+
+1 Failed download:
+- HNT: No data found for this date range, symbol may be delisted
+too short:  0  -  HNT
+skipping:  HOFT
+skipping:  HOLX
+skipping:  HOMB
+skipping:  HON
+loading:  HOS
+
+1 Failed download:
+- HOS: No data found, symbol may be delisted
+too short:  0  -  HOS
+skipping:  HOT
+loading:  HOTR
+
+1 Failed download:
+- HOTR: No data found for this date range, symbol may be delisted
+too short:  0  -  HOTR
+skipping:  HOV
+skipping:  HP
+loading:  HPJ
+
+1 Failed download:
+- HPJ: No data found, symbol may be delisted
+too short:  0  -  HPJ
+skipping:  HPP
+skipping:  HPQ
+loading:  HPT
+
+1 Failed download:
+- HPT: No data found, symbol may be delisted
+too short:  0  -  HPT
+skipping:  HR
+skipping:  HRC
+loading:  HRG
+
+1 Failed download:
+- HRG: No data found for this date range, symbol may be delisted
+too short:  0  -  HRG
+skipping:  HRL
+loading:  HRS
+
+1 Failed download:
+- HRS: No data found, symbol may be delisted
+too short:  0  -  HRS
+loading:  HRT
+
+1 Failed download:
+- HRT: No data found for this date range, symbol may be delisted
+too short:  0  -  HRT
+skipping:  HSC
+loading:  HSFC
+
+1 Failed download:
+- HSFC: No data found, symbol may be delisted
+too short:  0  -  HSFC
+skipping:  HSIC
+skipping:  HSII
+skipping:  HSKA
+loading:  HSNI
+
+1 Failed download:
+- HSNI: No data found for this date range, symbol may be delisted
+too short:  0  -  HSNI
+skipping:  HSON
+skipping:  HSTM
+loading:  HSWI
+
+1 Failed download:
+- HSWI: No data found for this date range, symbol may be delisted
+too short:  0  -  HSWI
+skipping:  HSY
+skipping:  HT
+skipping:  HTBI
+skipping:  HTBK
+skipping:  HTBX
+loading:  HTCH
+
+1 Failed download:
+- HTCH: No data found for this date range, symbol may be delisted
+too short:  0  -  HTCH
+skipping:  HTH
+skipping:  HTLF
+loading:  HTS
+
+1 Failed download:
+- HTS: No data found for this date range, symbol may be delisted
+too short:  0  -  HTS
+loading:  HTWO
+
+1 Failed download:
+- HTWO: No data found, symbol may be delisted
+too short:  0  -  HTWO
+skipping:  HTZ
+skipping:  HUBG
+skipping:  HUM
+skipping:  HUN
+skipping:  HURC
+skipping:  HURN
+skipping:  HUSA
+loading:  HUSI
+
+1 Failed download:
+- HUSI: No data found, symbol may be delisted
+too short:  0  -  HUSI
+skipping:  HVT
+loading:  HW
+
+1 Failed download:
+- HW: No data found for this date range, symbol may be delisted
+too short:  0  -  HW
+skipping:  HWCC
+skipping:  HWKN
+skipping:  HXL
+skipping:  HY
+loading:  HYNI
+
+1 Failed download:
+- HYNI: No data found for this date range, symbol may be delisted
+too short:  0  -  HYNI
+loading:  HYTM
+
+1 Failed download:
+- HYTM: No data found for this date range, symbol may be delisted
+too short:  0  -  HYTM
+skipping:  HZNP
+skipping:  HZO
+loading:  IACI
+
+1 Failed download:
+- IACI: No data found for this date range, symbol may be delisted
+too short:  0  -  IACI
+skipping:  IART
+skipping:  IBCP
+skipping:  IBIO
+skipping:  IBKC
+skipping:  IBKR
+skipping:  IBM
+skipping:  IBOC
+skipping:  IBTX
+skipping:  ICAD
+skipping:  ICCC
+skipping:  ICFI
+loading:  ICGE
+
+1 Failed download:
+- ICGE: No data found for this date range, symbol may be delisted
+too short:  0  -  ICGE
+skipping:  ICLD
+skipping:  ICON
+skipping:  ICPT
+skipping:  ICUI
+skipping:  IDA
+skipping:  IDCC
+skipping:  IDN
+skipping:  IDRA
+loading:  IDSY
+
+1 Failed download:
+- IDSY: No data found, symbol may be delisted
+too short:  0  -  IDSY
+skipping:  IDT
+skipping:  IDTI
+skipping:  IDXX
+skipping:  IEC
+skipping:  IEP
+skipping:  IEX
+skipping:  IFF
+loading:  IFMI
+
+1 Failed download:
+- IFMI: No data found for this date range, symbol may be delisted
+too short:  0  -  IFMI
+skipping:  IFO
+skipping:  IG
+skipping:  IGC
+skipping:  IHC
+loading:  IHS
+
+1 Failed download:
+- IHS: No data found for this date range, symbol may be delisted
+too short:  0  -  IHS
+skipping:  IHT
+skipping:  III
+skipping:  IIIN
+loading:  IILG
+
+1 Failed download:
+- IILG: No data found for this date range, symbol may be delisted
+too short:  0  -  IILG
+skipping:  IIN
+skipping:  IIVI
+skipping:  IKNX
+loading:  IL
+
+1 Failed download:
+- IL: No data found for this date range, symbol may be delisted
+too short:  0  -  IL
+loading:  ILGN
+
+1 Failed download:
+- ILGN: No data found for this date range, symbol may be delisted
+too short:  0  -  ILGN
+skipping:  ILMN
+loading:  IM
+too short:  101  -  IM
+skipping:  IMAX
+skipping:  IMH
+loading:  IMI
+
+1 Failed download:
+- IMI: No data found, symbol may be delisted
+too short:  0  -  IMI
+skipping:  IMKTA
+skipping:  IMMR
+skipping:  IMMU
+loading:  IMMY
+
+1 Failed download:
+- IMMY: No data found for this date range, symbol may be delisted
+too short:  0  -  IMMY
+loading:  IMN
+
+1 Failed download:
+- IMN: No data found for this date range, symbol may be delisted
+too short:  0  -  IMN
+skipping:  IMPV
+skipping:  IMUC
+loading:  INAP
+
+1 Failed download:
+- INAP: No data found, symbol may be delisted
+too short:  0  -  INAP
+skipping:  INBK
+skipping:  INCY
+skipping:  INDB
+skipping:  INFI
+skipping:  INFN
+skipping:  INFU
+skipping:  INGR
+loading:  ININ
+
+1 Failed download:
+- ININ: No data found for this date range, symbol may be delisted
+too short:  0  -  ININ
+skipping:  INN
+skipping:  INOD
+skipping:  INS
+loading:  INSY
+
+1 Failed download:
+- INSY: No data found for this date range, symbol may be delisted
+too short:  0  -  INSY
+skipping:  INT
+skipping:  INTC
+skipping:  INTG
+skipping:  INTT
+skipping:  INTU
+skipping:  INVE
+loading:  INVN
+
+1 Failed download:
+- INVN: No data found for this date range, symbol may be delisted
+too short:  0  -  INVN
+skipping:  IO
+skipping:  IP
+skipping:  IPAR
+skipping:  IPAS
+skipping:  IPCC
+skipping:  IPDN
+skipping:  IPG
+skipping:  IPGP
+skipping:  IPI
+skipping:  IPWR
+skipping:  IPXL
+loading:  IQNT
+
+1 Failed download:
+- IQNT: No data found for this date range, symbol may be delisted
+too short:  0  -  IQNT
+skipping:  IR
+skipping:  IRBT
+loading:  IRC
+too short:  37  -  IRC
+skipping:  IRDM
+loading:  IRG
+
+1 Failed download:
+- IRG: No data found for this date range, symbol may be delisted
+too short:  0  -  IRG
+skipping:  IRIX
+skipping:  IRM
+skipping:  IROQ
+skipping:  IRT
+skipping:  IRWD
+loading:  ISCA
+
+1 Failed download:
+- ISCA: No data found, symbol may be delisted
+too short:  0  -  ISCA
+loading:  ISH
+
+1 Failed download:
+- ISH: No data found for this date range, symbol may be delisted
+too short:  0  -  ISH
+skipping:  ISIG
+loading:  ISIS
+
+1 Failed download:
+- ISIS: No data found for this date range, symbol may be delisted
+too short:  0  -  ISIS
+loading:  ISLE
+
+1 Failed download:
+- ISLE: No data found for this date range, symbol may be delisted
+too short:  0  -  ISLE
+skipping:  ISNS
+skipping:  ISRG
+loading:  ISRL
+
+1 Failed download:
+- ISRL: No data found, symbol may be delisted
+too short:  0  -  ISRL
+skipping:  ISSC
+skipping:  IT
+skipping:  ITC
+loading:  ITG
+
+1 Failed download:
+- ITG: No data found, symbol may be delisted
+too short:  0  -  ITG
+skipping:  ITI
+skipping:  ITIC
+skipping:  ITRI
+skipping:  ITT
+skipping:  IVAC
+skipping:  IVC
+skipping:  IVR
+skipping:  IVZ
+loading:  IYSA
+
+1 Failed download:
+- IYSA: No data found for this date range, symbol may be delisted
+too short:  0  -  IYSA
+loading:  JAH
+
+1 Failed download:
+- JAH: No data found for this date range, symbol may be delisted
+too short:  0  -  JAH
+skipping:  JAKK
+skipping:  JAZZ
+skipping:  JBHT
+skipping:  JBL
+skipping:  JBLU
+skipping:  JBT
+skipping:  JCI
+skipping:  JCOM
+loading:  JCP
+
+1 Failed download:
+- JCP: No data found, symbol may be delisted
+too short:  0  -  JCP
+skipping:  JCS
+skipping:  JCTCF
+loading:  JDSU
+
+1 Failed download:
+- JDSU: No data found for this date range, symbol may be delisted
+too short:  0  -  JDSU
+loading:  JEC
+
+1 Failed download:
+- JEC: No data found, symbol may be delisted
+too short:  0  -  JEC
+loading:  JGW
+
+1 Failed download:
+- JGW: No data found for this date range, symbol may be delisted
+too short:  0  -  JGW
+loading:  JIVE
+
+1 Failed download:
+- JIVE: No data found for this date range, symbol may be delisted
+too short:  0  -  JIVE
+skipping:  JJSF
+skipping:  JKHY
+skipping:  JLL
+skipping:  JMBA
+skipping:  JNJ
+skipping:  JNPR
+loading:  JNS
+
+1 Failed download:
+- JNS: No data found for this date range, symbol may be delisted
+too short:  0  -  JNS
+skipping:  JOE
+loading:  JOEZ
+
+1 Failed download:
+- JOEZ: No data found for this date range, symbol may be delisted
+too short:  0  -  JOEZ
+skipping:  JOUT
+skipping:  JPM
+skipping:  JVA
+skipping:  JWN
+skipping:  JXSB
+skipping:  K
+skipping:  KAI
+skipping:  KALU
+skipping:  KAMN
+skipping:  KAR
+loading:  KBALB
+
+1 Failed download:
+- KBALB: No data found for this date range, symbol may be delisted
+too short:  0  -  KBALB
+skipping:  KBH
+loading:  KBIO
+
+1 Failed download:
+- KBIO: No data found for this date range, symbol may be delisted
+too short:  0  -  KBIO
+skipping:  KBR
+loading:  KCG
+
+1 Failed download:
+- KCG: No data found for this date range, symbol may be delisted
+too short:  0  -  KCG
+loading:  KEM
+
+1 Failed download:
+- KEM: No data found, symbol may be delisted
+too short:  0  -  KEM
+skipping:  KEQU
+skipping:  KERX
+skipping:  KEX
+skipping:  KEY
+skipping:  KEYW
+skipping:  KFFB
+skipping:  KFRC
+skipping:  KFS
+skipping:  KFY
+skipping:  KIM
+skipping:  KIN
+skipping:  KINS
+skipping:  KIRK
+loading:  KKD
+
+1 Failed download:
+- KKD: No data found for this date range, symbol may be delisted
+too short:  0  -  KKD
+skipping:  KKR
+skipping:  KLAC
+skipping:  KLIC
+skipping:  KMB
+skipping:  KMG
+skipping:  KMI
+skipping:  KMPR
+skipping:  KMT
+skipping:  KND
+skipping:  KNDI
+skipping:  KNL
+skipping:  KNX
+skipping:  KO
+loading:  KONA
+
+1 Failed download:
+- KONA: No data found for this date range, symbol may be delisted
+too short:  0  -  KONA
+loading:  KOOL
+
+1 Failed download:
+- KOOL: No data found, symbol may be delisted
+too short:  0  -  KOOL
+skipping:  KOP
+skipping:  KOPN
+loading:  KORS
+
+1 Failed download:
+- KORS: No data found for this date range, symbol may be delisted
+too short:  0  -  KORS
+skipping:  KOSS
+skipping:  KPTI
+skipping:  KRA
+skipping:  KRC
+skipping:  KRG
+skipping:  KRO
+skipping:  KSU
+skipping:  KTCC
+skipping:  KTEC
+skipping:  KTOS
+skipping:  KVHI
+skipping:  KW
+skipping:  KWR
+skipping:  L
+loading:  LABL
+
+1 Failed download:
+- LABL: No data found, symbol may be delisted
+too short:  0  -  LABL
+loading:  LACO
+
+1 Failed download:
+- LACO: No data found for this date range, symbol may be delisted
+too short:  0  -  LACO
+skipping:  LAD
+skipping:  LAKE
+skipping:  LAMR
+skipping:  LANC
+skipping:  LAND
+skipping:  LAWS
+skipping:  LAYN
+skipping:  LAZ
+skipping:  LBAI
+loading:  LBY
+
+1 Failed download:
+- LBY: No data found, symbol may be delisted
+too short:  0  -  LBY
+skipping:  LCI
+skipping:  LCUT
+skipping:  LDL
+skipping:  LDOS
+loading:  LDR
+
+1 Failed download:
+- LDR: No data found for this date range, symbol may be delisted
+too short:  0  -  LDR
+skipping:  LEA
+skipping:  LEAF
+skipping:  LECO
+loading:  LECT
+
+1 Failed download:
+- LECT: No data found for this date range, symbol may be delisted
+too short:  0  -  LECT
+skipping:  LEDS
+skipping:  LEG
+loading:  LEI
+
+1 Failed download:
+- LEI: No data found for this date range, symbol may be delisted
+too short:  0  -  LEI
+skipping:  LEN
+loading:  LF
+
+1 Failed download:
+- LF: No data found for this date range, symbol may be delisted
+too short:  0  -  LF
+skipping:  LFUS
+skipping:  LFVN
+loading:  LG
+
+1 Failed download:
+- LG: No data found for this date range, symbol may be delisted
+too short:  0  -  LG
+loading:  LGCY
+too short:  5  -  LGCY
+loading:  LGF
+
+1 Failed download:
+- LGF: No data found for this date range, symbol may be delisted
+too short:  0  -  LGF
+skipping:  LGIH
+skipping:  LGL
+skipping:  LGND
+skipping:  LH
+skipping:  LHCG
+skipping:  LHO
+skipping:  LII
+skipping:  LIME
+skipping:  LINC
+loading:  LINTA
+
+1 Failed download:
+- LINTA: No data found for this date range, symbol may be delisted
+too short:  0  -  LINTA
+loading:  LION
+
+1 Failed download:
+- LION: No data found, symbol may be delisted
+too short:  0  -  LION
+loading:  LIOX
+
+1 Failed download:
+- LIOX: No data found for this date range, symbol may be delisted
+too short:  0  -  LIOX
+skipping:  LIVE
+skipping:  LKFN
+skipping:  LKQ
+loading:  LLL
+
+1 Failed download:
+- LLL: No data found, symbol may be delisted
+too short:  0  -  LLL
+loading:  LLTC
+
+1 Failed download:
+- LLTC: No data found for this date range, symbol may be delisted
+too short:  0  -  LLTC
+skipping:  LLY
+skipping:  LMAT
+loading:  LMIA
+
+1 Failed download:
+- LMIA: No data found for this date range, symbol may be delisted
+too short:  0  -  LMIA
+skipping:  LMNR
+skipping:  LMNX
+loading:  LMOS
+
+1 Failed download:
+- LMOS: No data found for this date range, symbol may be delisted
+too short:  0  -  LMOS
+skipping:  LMT
+skipping:  LNC
+skipping:  LNCE
+skipping:  LNDC
+skipping:  LNG
+loading:  LNKD
+
+1 Failed download:
+- LNKD: No data found for this date range, symbol may be delisted
+too short:  0  -  LNKD
+skipping:  LNN
+skipping:  LNT
+loading:  LOCK
+
+1 Failed download:
+- LOCK: No data found for this date range, symbol may be delisted
+too short:  0  -  LOCK
+skipping:  LODE
+skipping:  LOGI
+skipping:  LOGM
+loading:  LOJN
+
+1 Failed download:
+- LOJN: No data found for this date range, symbol may be delisted
+too short:  0  -  LOJN
+skipping:  LORL
+skipping:  LOW
+skipping:  LPI
+skipping:  LPLA
+skipping:  LPNT
+skipping:  LPTH
+loading:  LPTN
+
+1 Failed download:
+- LPTN: No data found for this date range, symbol may be delisted
+too short:  0  -  LPTN
+skipping:  LQDT
+skipping:  LRCX
+skipping:  LRN
+skipping:  LSBK
+skipping:  LSCC
+skipping:  LSTR
+skipping:  LTBR
+skipping:  LTC
+loading:  LTD
+
+1 Failed download:
+- LTD: No data found for this date range, symbol may be delisted
+too short:  0  -  LTD
+skipping:  LTRE
+skipping:  LTRX
+loading:  LTS
+
+1 Failed download:
+- LTS: No data found, symbol may be delisted
+too short:  0  -  LTS
+loading:  LUK
+
+1 Failed download:
+- LUK: No data found for this date range, symbol may be delisted
+too short:  0  -  LUK
+skipping:  LULU
+skipping:  LUNA
+skipping:  LUV
+skipping:  LVS
+skipping:  LWAY
+loading:  LXK
+
+1 Failed download:
+- LXK: No data found for this date range, symbol may be delisted
+too short:  0  -  LXK
+skipping:  LXP
+skipping:  LXU
+skipping:  LYB
+skipping:  LYV
+skipping:  LZB
+skipping:  MA
+loading:  MAMS
+
+1 Failed download:
+- MAMS: No data found, symbol may be delisted
+too short:  0  -  MAMS
+skipping:  MAN
+skipping:  MANH
+skipping:  MANT
+skipping:  MAR
+skipping:  MAS
+skipping:  MASI
+skipping:  MAT
+skipping:  MATR
+skipping:  MATW
+skipping:  MATX
+skipping:  MBFI
+skipping:  MBI
+skipping:  MBII
+loading:  MBRG
+
+1 Failed download:
+- MBRG: No data found for this date range, symbol may be delisted
+too short:  0  -  MBRG
+loading:  MBVT
+
+1 Failed download:
+- MBVT: No data found for this date range, symbol may be delisted
+too short:  0  -  MBVT
+skipping:  MBWM
+skipping:  MCBC
+skipping:  MCD
+skipping:  MCEP
+skipping:  MCHP
+skipping:  MCHX
+skipping:  MCK
+skipping:  MCO
+skipping:  MCS
+skipping:  MCY
+loading:  MCZ
+too short:  1  -  MCZ
+skipping:  MDC
+skipping:  MDCA
+loading:  MDCO
+
+1 Failed download:
+- MDCO: No data found, symbol may be delisted
+too short:  0  -  MDCO
+loading:  MDGN
+
+1 Failed download:
+- MDGN: No data found for this date range, symbol may be delisted
+too short:  0  -  MDGN
+skipping:  MDH
+skipping:  MDLZ
+skipping:  MDP
+loading:  MDR
+
+1 Failed download:
+- MDR: No data found, symbol may be delisted
+too short:  0  -  MDR
+skipping:  MDRX
+loading:  MDSO
+
+1 Failed download:
+- MDSO: No data found, symbol may be delisted
+too short:  0  -  MDSO
+skipping:  MDU
+loading:  MDVN
+
+1 Failed download:
+- MDVN: No data found for this date range, symbol may be delisted
+too short:  0  -  MDVN
+skipping:  MDXG
+skipping:  MED
+loading:  MEG
+too short:  98  -  MEG
+loading:  MELA
+
+1 Failed download:
+- MELA: No data found for this date range, symbol may be delisted
+too short:  0  -  MELA
+skipping:  MELI
+loading:  MENT
+
+1 Failed download:
+- MENT: No data found for this date range, symbol may be delisted
+too short:  0  -  MENT
+skipping:  MERC
+skipping:  MET
+loading:  METH
+
+1 Failed download:
+- METH: No data found for this date range, symbol may be delisted
+too short:  0  -  METH
+skipping:  MFA
+loading:  MFLX
+
+1 Failed download:
+- MFLX: No data found for this date range, symbol may be delisted
+too short:  0  -  MFLX
+skipping:  MFNC
+loading:  MFRI
+
+1 Failed download:
+- MFRI: No data found for this date range, symbol may be delisted
+too short:  0  -  MFRI
+loading:  MFRM
+
+1 Failed download:
+- MFRM: No data found for this date range, symbol may be delisted
+too short:  0  -  MFRM
+loading:  MFSF
+
+1 Failed download:
+- MFSF: No data found, symbol may be delisted
+too short:  0  -  MFSF
+skipping:  MGEE
+skipping:  MGLN
+skipping:  MGM
+loading:  MGN
+
+1 Failed download:
+- MGN: No data found for this date range, symbol may be delisted
+too short:  0  -  MGN
+skipping:  MGPI
+skipping:  MGRC
+skipping:  MGYR
+skipping:  MHH
+skipping:  MHK
+skipping:  MHLD
+skipping:  MHO
+skipping:  MIC
+skipping:  MICT
+skipping:  MIDD
+loading:  MILB
+
+1 Failed download:
+- MILB: No data found for this date range, symbol may be delisted
+too short:  0  -  MILB
+skipping:  MIND
+skipping:  MITK
+skipping:  MITT
+loading:  MJN
+
+1 Failed download:
+- MJN: No data found for this date range, symbol may be delisted
+too short:  0  -  MJN
+skipping:  MKC
+skipping:  MKL
+skipping:  MKSI
+skipping:  MKTX
+skipping:  MLAB
+skipping:  MLHR
+skipping:  MLI
+skipping:  MLM
+loading:  MLNK
+
+1 Failed download:
+- MLNK: No data found for this date range, symbol may be delisted
+too short:  0  -  MLNK
+loading:  MLNX
+
+1 Failed download:
+- MLNX: No data found, symbol may be delisted
+too short:  0  -  MLNX
+skipping:  MLR
+skipping:  MLSS
+skipping:  MLVF
+skipping:  MMC
+skipping:  MMI
+skipping:  MMLP
+skipping:  MMM
+skipping:  MMS
+skipping:  MMSI
+skipping:  MN
+loading:  MNGA
+
+1 Failed download:
+- MNGA: No data found, symbol may be delisted
+too short:  0  -  MNGA
+loading:  MNI
+
+1 Failed download:
+- MNI: No data found, symbol may be delisted
+too short:  0  -  MNI
+skipping:  MNK
+skipping:  MNKD
+skipping:  MNOV
+skipping:  MNR
+loading:  MNRK
+
+1 Failed download:
+- MNRK: No data found for this date range, symbol may be delisted
+too short:  0  -  MNRK
+skipping:  MNRO
+skipping:  MNTA
+skipping:  MNTX
+skipping:  MO
+loading:  MOC
+
+1 Failed download:
+- MOC: No data found, symbol may be delisted
+too short:  0  -  MOC
+loading:  MOCO
+
+1 Failed download:
+- MOCO: No data found for this date range, symbol may be delisted
+too short:  0  -  MOCO
+skipping:  MOD
+skipping:  MODN
+skipping:  MOFG
+skipping:  MOH
+skipping:  MON
+skipping:  MORN
+skipping:  MOV
+skipping:  MPAA
+loading:  MPAQ
+
+1 Failed download:
+- MPAQ: No data found, symbol may be delisted
+too short:  0  -  MPAQ
+skipping:  MPB
+skipping:  MPC
+skipping:  MPLX
+skipping:  MPW
+skipping:  MPWR
+skipping:  MPX
+skipping:  MRC
+skipping:  MRCY
+skipping:  MRIN
+skipping:  MRK
+skipping:  MRLN
+skipping:  MRO
+skipping:  MRTN
+skipping:  MRTX
+skipping:  MRVL
+skipping:  MS
+skipping:  MSA
+skipping:  MSB
+skipping:  MSCC
+skipping:  MSCI
+skipping:  MSEX
+skipping:  MSFT
+loading:  MSG
+
+1 Failed download:
+- MSG: No data found, symbol may be delisted
+too short:  0  -  MSG
+skipping:  MSI
+loading:  MSL
+
+1 Failed download:
+- MSL: No data found, symbol may be delisted
+too short:  0  -  MSL
+skipping:  MSM
+skipping:  MSN
+skipping:  MSON
+skipping:  MSTR
+skipping:  MTB
+skipping:  MTD
+skipping:  MTDR
+skipping:  MTEX
+skipping:  MTG
+skipping:  MTGE
+skipping:  MTH
+skipping:  MTN
+skipping:  MTOR
+skipping:  MTRN
+skipping:  MTRX
+skipping:  MTSC
+skipping:  MTSI
+loading:  MTSN
+
+1 Failed download:
+- MTSN: No data found for this date range, symbol may be delisted
+too short:  0  -  MTSN
+skipping:  MTW
+skipping:  MTX
+skipping:  MTZ
+skipping:  MU
+skipping:  MUR
+skipping:  MUSA
+skipping:  MVIS
+loading:  MW
+
+1 Failed download:
+- MW: No data found for this date range, symbol may be delisted
+too short:  0  -  MW
+skipping:  MWA
+loading:  MWW
+
+1 Failed download:
+- MWW: No data found for this date range, symbol may be delisted
+too short:  0  -  MWW
+skipping:  MX
+skipping:  MXC
+skipping:  MXIM
+skipping:  MXL
+loading:  MXWL
+
+1 Failed download:
+- MXWL: No data found, symbol may be delisted
+too short:  0  -  MXWL
+loading:  MYCC
+
+1 Failed download:
+- MYCC: No data found for this date range, symbol may be delisted
+too short:  0  -  MYCC
+skipping:  MYE
+skipping:  MYGN
+skipping:  MYRG
+skipping:  NAII
+loading:  NANO
+
+1 Failed download:
+- NANO: No data found, symbol may be delisted
+too short:  0  -  NANO
+skipping:  NAQ
+skipping:  NATH
+skipping:  NATI
+loading:  NATL
+
+1 Failed download:
+- NATL: No data found for this date range, symbol may be delisted
+too short:  0  -  NATL
+skipping:  NATR
+skipping:  NAUH
+skipping:  NAV
+skipping:  NAVB
+loading:  NAVG
+
+1 Failed download:
+- NAVG: No data found, symbol may be delisted
+too short:  0  -  NAVG
+skipping:  NBHC
+skipping:  NBIX
+skipping:  NBL
+skipping:  NBR
+skipping:  NBS
+skipping:  NBTB
+skipping:  NBY
+skipping:  NC
+loading:  NCBC
+
+1 Failed download:
+- NCBC: No data found for this date range, symbol may be delisted
+too short:  0  -  NCBC
+loading:  NCI
+
+1 Failed download:
+- NCI: No data found, symbol may be delisted
+too short:  0  -  NCI
+loading:  NCIT
+
+1 Failed download:
+- NCIT: No data found for this date range, symbol may be delisted
+too short:  0  -  NCIT
+skipping:  NCLH
+skipping:  NCR
+loading:  NCS
+
+1 Failed download:
+- NCS: No data found, symbol may be delisted
+too short:  0  -  NCS
+skipping:  NCT
+skipping:  NDAQ
+skipping:  NDLS
+skipping:  NDSN
+skipping:  NE
+skipping:  NEE
+skipping:  NEM
+skipping:  NEO
+skipping:  NEOG
+skipping:  NEON
+skipping:  NETE
+skipping:  NFBK
+loading:  NFEC
+
+1 Failed download:
+- NFEC: No data found for this date range, symbol may be delisted
+too short:  0  -  NFEC
+skipping:  NFG
+skipping:  NFLX
+skipping:  NG
+skipping:  NGL
+loading:  NGLS
+
+1 Failed download:
+- NGLS: No data found for this date range, symbol may be delisted
+too short:  0  -  NGLS
+skipping:  NGS
+skipping:  NHC
+skipping:  NHI
+loading:  NHTB
+
+1 Failed download:
+- NHTB: No data found for this date range, symbol may be delisted
+too short:  0  -  NHTB
+skipping:  NICK
+loading:  NILE
+
+1 Failed download:
+- NILE: No data found for this date range, symbol may be delisted
+too short:  0  -  NILE
+skipping:  NJR
+loading:  NKA
+
+1 Failed download:
+- NKA: No data found for this date range, symbol may be delisted
+too short:  0  -  NKA
+skipping:  NKE
+skipping:  NKSH
+skipping:  NKTR
+skipping:  NL
+loading:  NLNK
+
+1 Failed download:
+- NLNK: No data found, symbol may be delisted
+too short:  0  -  NLNK
+skipping:  NLS
+skipping:  NLSN
+skipping:  NLST
+skipping:  NLY
+skipping:  NMIH
+loading:  NMRX
+
+1 Failed download:
+- NMRX: No data found for this date range, symbol may be delisted
+too short:  0  -  NMRX
+skipping:  NNBR
+skipping:  NNI
+skipping:  NNN
+skipping:  NOG
+loading:  NOR
+
+1 Failed download:
+- NOR: No data found for this date range, symbol may be delisted
+too short:  0  -  NOR
+skipping:  NOV
+loading:  NOVS
+too short:  126  -  NOVS
+skipping:  NOW
+skipping:  NP
+loading:  NPBC
+
+1 Failed download:
+- NPBC: No data found for this date range, symbol may be delisted
+too short:  0  -  NPBC
+skipping:  NPK
+skipping:  NPO
+skipping:  NPTN
+skipping:  NR
+loading:  NRCIA
+
+1 Failed download:
+- NRCIA: No data found for this date range, symbol may be delisted
+too short:  0  -  NRCIA
+loading:  NRF
+
+1 Failed download:
+- NRF: No data found for this date range, symbol may be delisted
+too short:  0  -  NRF
+skipping:  NRG
+skipping:  NRZ
+skipping:  NS
+skipping:  NSC
+skipping:  NSEC
+loading:  NSH
+too short:  26  -  NSH
+skipping:  NSIT
+skipping:  NSM
+skipping:  NSP
+loading:  NSPH
+
+1 Failed download:
+- NSPH: No data found for this date range, symbol may be delisted
+too short:  0  -  NSPH
+loading:  NSR
+
+1 Failed download:
+- NSR: No data found for this date range, symbol may be delisted
+too short:  0  -  NSR
+skipping:  NSSC
+skipping:  NSTG
+skipping:  NSYS
+skipping:  NTAP
+skipping:  NTCT
+skipping:  NTGR
+loading:  NTI
+
+1 Failed download:
+- NTI: No data found for this date range, symbol may be delisted
+too short:  0  -  NTI
+loading:  NTK
+
+1 Failed download:
+- NTK: No data found for this date range, symbol may be delisted
+too short:  0  -  NTK
+loading:  NTLS
+
+1 Failed download:
+- NTLS: No data found for this date range, symbol may be delisted
+too short:  0  -  NTLS
+skipping:  NTN
+skipping:  NTRI
+skipping:  NTRS
+skipping:  NTWK
+loading:  NTY
+too short:  127  -  NTY
+loading:  NU
+
+1 Failed download:
+- NU: No data found for this date range, symbol may be delisted
+too short:  0  -  NU
+skipping:  NUAN
+skipping:  NUE
+skipping:  NURO
+skipping:  NUS
+loading:  NUTR
+
+1 Failed download:
+- NUTR: No data found for this date range, symbol may be delisted
+too short:  0  -  NUTR
+skipping:  NUVA
+skipping:  NVAX
+skipping:  NVDA
+skipping:  NVEC
+skipping:  NVL
+skipping:  NVR
+skipping:  NWBI
+loading:  NWBT
+
+1 Failed download:
+- NWBT: No data found for this date range, symbol may be delisted
+too short:  0  -  NWBT
+skipping:  NWFL
+skipping:  NWL
+skipping:  NWN
+skipping:  NWPX
+skipping:  NWS
+loading:  NWY
+
+1 Failed download:
+- NWY: No data found for this date range, symbol may be delisted
+too short:  0  -  NWY
+skipping:  NX
+skipping:  NXST
+loading:  NXTM
+
+1 Failed download:
+- NXTM: No data found, symbol may be delisted
+too short:  0  -  NXTM
+skipping:  NYCB
+skipping:  NYMT
+loading:  NYNY
+
+1 Failed download:
+- NYNY: No data found, symbol may be delisted
+too short:  0  -  NYNY
+skipping:  NYT
+skipping:  O
+loading:  OAK
+
+1 Failed download:
+- OAK: No data found, symbol may be delisted
+too short:  0  -  OAK
+skipping:  OAS
+skipping:  OBCI
+skipping:  OC
+skipping:  OCFC
+skipping:  OCLR
+loading:  OCLS
+
+1 Failed download:
+- OCLS: No data found for this date range, symbol may be delisted
+too short:  0  -  OCLS
+skipping:  OCN
+loading:  OCRX
+
+1 Failed download:
+- OCRX: No data found for this date range, symbol may be delisted
+too short:  0  -  OCRX
+skipping:  ODC
+skipping:  ODFL
+skipping:  ODP
+skipping:  OESX
+skipping:  OFC
+skipping:  OFED
+skipping:  OFG
+skipping:  OFIX
+skipping:  OFLX
+skipping:  OGE
+loading:  OHRP
+
+1 Failed download:
+- OHRP: No data found, symbol may be delisted
+too short:  0  -  OHRP
+skipping:  OI
+skipping:  OII
+skipping:  OIS
+skipping:  OKE
+loading:  OKSB
+
+1 Failed download:
+- OKSB: No data found for this date range, symbol may be delisted
+too short:  0  -  OKSB
+skipping:  OLBK
+skipping:  OLN
+skipping:  OLP
+skipping:  OMC
+skipping:  OMCL
+loading:  OME
+
+1 Failed download:
+- OME: No data found for this date range, symbol may be delisted
+too short:  0  -  OME
+skipping:  OMED
+skipping:  OMER
+skipping:  OMEX
+skipping:  OMI
+loading:  OMN
+
+1 Failed download:
+- OMN: No data found, symbol may be delisted
+too short:  0  -  OMN
+skipping:  ONB
+skipping:  ONE
+loading:  ONI
+
+1 Failed download:
+- ONI: No data found for this date range, symbol may be delisted
+too short:  0  -  ONI
+skipping:  ONTX
+loading:  ONTY
+
+1 Failed download:
+- ONTY: No data found for this date range, symbol may be delisted
+too short:  0  -  ONTY
+loading:  ONVI
+
+1 Failed download:
+- ONVI: No data found for this date range, symbol may be delisted
+too short:  0  -  ONVI
+skipping:  ONVO
+skipping:  OPHC
+loading:  OPHT
+
+1 Failed download:
+- OPHT: No data found for this date range, symbol may be delisted
+too short:  0  -  OPHT
+skipping:  OPOF
+skipping:  OPTT
+loading:  OPXA
+
+1 Failed download:
+- OPXA: No data found for this date range, symbol may be delisted
+too short:  0  -  OPXA
+skipping:  OPY
+skipping:  ORA
+skipping:  ORBC
+skipping:  ORC
+skipping:  ORCL
+loading:  OREX
+
+1 Failed download:
+- OREX: No data found for this date range, symbol may be delisted
+too short:  0  -  OREX
+loading:  ORIT
+
+1 Failed download:
+- ORIT: No data found, symbol may be delisted
+too short:  0  -  ORIT
+skipping:  ORLY
+loading:  ORM
+
+1 Failed download:
+- ORM: No data found, symbol may be delisted
+too short:  0  -  ORM
+skipping:  ORMP
+skipping:  ORN
+loading:  ORPN
+
+1 Failed download:
+- ORPN: No data found for this date range, symbol may be delisted
+too short:  0  -  ORPN
+skipping:  ORRF
+loading:  OSIR
+
+1 Failed download:
+- OSIR: No data found, symbol may be delisted
+too short:  0  -  OSIR
+skipping:  OSIS
+skipping:  OSUR
+loading:  OTIV
+
+1 Failed download:
+- OTIV: No data found for this date range, symbol may be delisted
+too short:  0  -  OTIV
+loading:  OTIX
+
+1 Failed download:
+- OTIX: No data found for this date range, symbol may be delisted
+too short:  0  -  OTIX
+skipping:  OTT
+skipping:  OTTR
+loading:  OUTR
+
+1 Failed download:
+- OUTR: No data found for this date range, symbol may be delisted
+too short:  0  -  OUTR
+loading:  OVAS
+
+1 Failed download:
+- OVAS: No data found for this date range, symbol may be delisted
+too short:  0  -  OVAS
+skipping:  OVLY
+loading:  OVTI
+
+1 Failed download:
+- OVTI: No data found for this date range, symbol may be delisted
+too short:  0  -  OVTI
+loading:  OXBT
+
+1 Failed download:
+- OXBT: No data found for this date range, symbol may be delisted
+too short:  0  -  OXBT
+skipping:  OXFD
+loading:  OXFV
+
+1 Failed download:
+- OXFV: No data found for this date range, symbol may be delisted
+too short:  0  -  OXFV
+loading:  OXGN
+
+1 Failed download:
+- OXGN: No data found for this date range, symbol may be delisted
+too short:  0  -  OXGN
+skipping:  OXM
+skipping:  OXY
+loading:  OZM
+
+1 Failed download:
+- OZM: No data found, symbol may be delisted
+too short:  0  -  OZM
+loading:  OZRK
+
+1 Failed download:
+- OZRK: No data found for this date range, symbol may be delisted
+too short:  0  -  OZRK
+skipping:  P
+skipping:  PAA
+skipping:  PACB
+skipping:  PACW
+skipping:  PAG
+loading:  PAMT
+
+1 Failed download:
+- PAMT: No data found for this date range, symbol may be delisted
+too short:  0  -  PAMT
+skipping:  PANW
+skipping:  PAR
+loading:  PASW
+
+1 Failed download:
+- PASW: No data found for this date range, symbol may be delisted
+too short:  0  -  PASW
+skipping:  PATK
+loading:  PATR
+
+1 Failed download:
+- PATR: No data found for this date range, symbol may be delisted
+too short:  0  -  PATR
+skipping:  PAY
+skipping:  PAYX
+skipping:  PBCT
+skipping:  PBF
+skipping:  PBI
+loading:  PBIB
+
+1 Failed download:
+- PBIB: No data found for this date range, symbol may be delisted
+too short:  0  -  PBIB
+skipping:  PBIP
+loading:  PBNY
+
+1 Failed download:
+- PBNY: No data found for this date range, symbol may be delisted
+too short:  0  -  PBNY
+skipping:  PBPB
+skipping:  PBSK
+skipping:  PBY
+skipping:  PBYI
+skipping:  PCAR
+loading:  PCBK
+too short:  4  -  PCBK
+skipping:  PCC
+loading:  PCCC
+
+1 Failed download:
+- PCCC: No data found for this date range, symbol may be delisted
+too short:  0  -  PCCC
+skipping:  PCG
+skipping:  PCH
+loading:  PCLN
+
+1 Failed download:
+- PCLN: No data found for this date range, symbol may be delisted
+too short:  0  -  PCLN
+loading:  PCO
+
+1 Failed download:
+- PCO: No data found for this date range, symbol may be delisted
+too short:  0  -  PCO
+skipping:  PCRX
+skipping:  PDCE
+skipping:  PDEX
+skipping:  PDFS
+loading:  PDII
+
+1 Failed download:
+- PDII: No data found for this date range, symbol may be delisted
+too short:  0  -  PDII
+skipping:  PDLI
+skipping:  PDM
+skipping:  PDO
+loading:  PDX
+
+1 Failed download:
+- PDX: No data found for this date range, symbol may be delisted
+too short:  0  -  PDX
+skipping:  PEB
+skipping:  PEBK
+skipping:  PEBO
+skipping:  PED
+skipping:  PEG
+skipping:  PEGA
+loading:  PEGI
+
+1 Failed download:
+- PEGI: No data found, symbol may be delisted
+too short:  0  -  PEGI
+skipping:  PEI
+skipping:  PEIX
+skipping:  PENN
+skipping:  PEP
+loading:  PERF
+too short:  38  -  PERF
+skipping:  PERY
+skipping:  PESI
+skipping:  PETS
+loading:  PETX
+
+1 Failed download:
+- PETX: No data found, symbol may be delisted
+too short:  0  -  PETX
+skipping:  PF
+skipping:  PFBI
+skipping:  PFBX
+skipping:  PFE
+skipping:  PFG
+skipping:  PFIN
+skipping:  PFMT
+skipping:  PFPT
+skipping:  PFS
+skipping:  PFSW
+skipping:  PG
+skipping:  PGC
+skipping:  PGEM
+skipping:  PGI
+skipping:  PGR
+skipping:  PGTI
+skipping:  PH
+skipping:  PHH
+loading:  PHII
+
+1 Failed download:
+- PHII: No data found for this date range, symbol may be delisted
+too short:  0  -  PHII
+loading:  PHMD
+
+1 Failed download:
+- PHMD: No data found for this date range, symbol may be delisted
+too short:  0  -  PHMD
+skipping:  PHX
+skipping:  PICO
+skipping:  PII
+loading:  PIP
+too short:  38  -  PIP
+loading:  PIR
+
+1 Failed download:
+- PIR: No data found, symbol may be delisted
+too short:  0  -  PIR
+loading:  PJC
+
+1 Failed download:
+- PJC: No data found, symbol may be delisted
+too short:  0  -  PJC
+skipping:  PKBK
+skipping:  PKE
+skipping:  PKG
+skipping:  PKI
+skipping:  PKOH
+skipping:  PKS
+loading:  PKY
+
+1 Failed download:
+- PKY: No data found for this date range, symbol may be delisted
+too short:  0  -  PKY
+skipping:  PLAB
+skipping:  PLBC
+skipping:  PLCE
+loading:  PLCM
+
+1 Failed download:
+- PLCM: No data found for this date range, symbol may be delisted
+too short:  0  -  PLCM
+skipping:  PLOW
+skipping:  PLPC
+loading:  PLPM
+
+1 Failed download:
+- PLPM: No data found for this date range, symbol may be delisted
+too short:  0  -  PLPM
+skipping:  PLT
+skipping:  PLUS
+skipping:  PLXS
+skipping:  PM
+skipping:  PMBC
+skipping:  PMD
+loading:  PMDX
+
+1 Failed download:
+- PMDX: No data found for this date range, symbol may be delisted
+too short:  0  -  PMDX
+skipping:  PMT
+skipping:  PNC
+skipping:  PNFP
+skipping:  PNK
+skipping:  PNM
+loading:  PNRA
+
+1 Failed download:
+- PNRA: No data found for this date range, symbol may be delisted
+too short:  0  -  PNRA
+skipping:  PNRG
+skipping:  PNW
+loading:  PNY
+
+1 Failed download:
+- PNY: No data found for this date range, symbol may be delisted
+too short:  0  -  PNY
+skipping:  PODD
+skipping:  POL
+skipping:  POM
+skipping:  POOL
+skipping:  POR
+skipping:  POST
+skipping:  POWI
+skipping:  POWL
+loading:  POWR
+
+1 Failed download:
+- POWR: No data found for this date range, symbol may be delisted
+too short:  0  -  POWR
+skipping:  PP
+skipping:  PPBI
+skipping:  PPC
+skipping:  PPG
+loading:  PPHM
+
+1 Failed download:
+- PPHM: No data found for this date range, symbol may be delisted
+too short:  0  -  PPHM
+skipping:  PPL
+loading:  PPS
+
+1 Failed download:
+- PPS: No data found for this date range, symbol may be delisted
+too short:  0  -  PPS
+skipping:  PPSI
+loading:  PQ
+
+1 Failed download:
+- PQ: No data found for this date range, symbol may be delisted
+too short:  0  -  PQ
+skipping:  PRA
+skipping:  PRAA
+loading:  PRE
+too short:  2  -  PRE
+skipping:  PRFT
+skipping:  PRGX
+skipping:  PRH
+skipping:  PRI
+skipping:  PRK
+skipping:  PRKR
+skipping:  PRLB
+loading:  PRMW
+too short:  196  -  PRMW
+skipping:  PROV
+skipping:  PRSC
+skipping:  PRSP
+skipping:  PRSS
+skipping:  PRTA
+skipping:  PRU
+loading:  PRXL
+
+1 Failed download:
+- PRXL: No data found for this date range, symbol may be delisted
+too short:  0  -  PRXL
+skipping:  PSA
+skipping:  PSB
+loading:  PSDV
+
+1 Failed download:
+- PSDV: No data found for this date range, symbol may be delisted
+too short:  0  -  PSDV
+skipping:  PSIX
+skipping:  PSMT
+skipping:  PSTI
+loading:  PSUN
+
+1 Failed download:
+- PSUN: No data found for this date range, symbol may be delisted
+too short:  0  -  PSUN
+skipping:  PSXP
+skipping:  PTC
+skipping:  PTCT
+skipping:  PTEN
+loading:  PTIE
+
+1 Failed download:
+- PTIE: No data found for this date range, symbol may be delisted
+too short:  0  -  PTIE
+skipping:  PTLA
+skipping:  PTN
+skipping:  PTSI
+loading:  PTSX
+
+1 Failed download:
+- PTSX: No data found for this date range, symbol may be delisted
+too short:  0  -  PTSX
+loading:  PTX
+too short:  68  -  PTX
+loading:  PULB
+
+1 Failed download:
+- PULB: No data found for this date range, symbol may be delisted
+too short:  0  -  PULB
+skipping:  PVH
+loading:  PVTB
+
+1 Failed download:
+- PVTB: No data found for this date range, symbol may be delisted
+too short:  0  -  PVTB
+skipping:  PW
+skipping:  PWOD
+skipping:  PWR
+loading:  PWX
+
+1 Failed download:
+- PWX: No data found for this date range, symbol may be delisted
+too short:  0  -  PWX
+loading:  PX
+too short:  37  -  PX
+skipping:  PXLW
+skipping:  PZN
+skipping:  PZZA
+loading:  Q
+
+1 Failed download:
+- Q: No data found for this date range, symbol may be delisted
+too short:  0  -  Q
+skipping:  QBAK
+skipping:  QCOM
+skipping:  QCRH
+skipping:  QEP
+loading:  QLGC
+
+1 Failed download:
+- QLGC: No data found for this date range, symbol may be delisted
+too short:  0  -  QLGC
+loading:  QLIK
+
+1 Failed download:
+- QLIK: No data found for this date range, symbol may be delisted
+too short:  0  -  QLIK
+skipping:  QLYS
+skipping:  QNST
+loading:  QSII
+
+1 Failed download:
+- QSII: No data found for this date range, symbol may be delisted
+too short:  0  -  QSII
+loading:  QTM
+
+1 Failed download:
+- QTM: No data found for this date range, symbol may be delisted
+too short:  0  -  QTM
+skipping:  QUAD
+skipping:  QUIK
+skipping:  R
+skipping:  RAD
+loading:  RAI
+
+1 Failed download:
+- RAI: No data found for this date range, symbol may be delisted
+too short:  0  -  RAI
+skipping:  RAIL
+skipping:  RARE
+loading:  RAS
+
+1 Failed download:
+- RAS: No data found for this date range, symbol may be delisted
+too short:  0  -  RAS
+loading:  RATE
+
+1 Failed download:
+- RATE: No data found for this date range, symbol may be delisted
+too short:  0  -  RATE
+loading:  RAX
+
+1 Failed download:
+- RAX: No data found for this date range, symbol may be delisted
+too short:  0  -  RAX
+skipping:  RBC
+skipping:  RBCAA
+skipping:  RBCN
+loading:  RBCV
+
+1 Failed download:
+- RBCV: No data found, symbol may be delisted
+too short:  0  -  RBCV
+loading:  RBPAA
+
+1 Failed download:
+- RBPAA: No data found for this date range, symbol may be delisted
+too short:  0  -  RBPAA
+skipping:  RCII
+loading:  RCKB
+
+1 Failed download:
+- RCKB: No data found for this date range, symbol may be delisted
+too short:  0  -  RCKB
+skipping:  RCMT
+loading:  RDC
+
+1 Failed download:
+- RDC: No data found, symbol may be delisted
+too short:  0  -  RDC
+loading:  RDEN
+
+1 Failed download:
+- RDEN: No data found for this date range, symbol may be delisted
+too short:  0  -  RDEN
+skipping:  RDI
+skipping:  RE
+loading:  RECN
+
+1 Failed download:
+- RECN: No data found, symbol may be delisted
+too short:  0  -  RECN
+skipping:  RECV
+skipping:  REE
+loading:  REEDR
+
+1 Failed download:
+- REEDR: No data found, symbol may be delisted
+too short:  0  -  REEDR
+skipping:  REFR
+skipping:  REGN
+skipping:  RELL
+skipping:  RELV
+loading:  REN
+
+1 Failed download:
+- REN: No data found, symbol may be delisted
+too short:  0  -  REN
+skipping:  RES
+skipping:  RESI
+skipping:  REV
+skipping:  REX
+loading:  REXI
+
+1 Failed download:
+- REXI: No data found for this date range, symbol may be delisted
+too short:  0  -  REXI
+loading:  REXX
+
+1 Failed download:
+- REXX: No data found for this date range, symbol may be delisted
+too short:  0  -  REXX
+skipping:  RF
+skipping:  RFIL
+skipping:  RGA
+skipping:  RGC
+skipping:  RGCO
+skipping:  RGEN
+skipping:  RGLD
+skipping:  RGLS
+skipping:  RGS
+skipping:  RH
+skipping:  RHI
+skipping:  RHP
+loading:  RHT
+
+1 Failed download:
+- RHT: No data found, symbol may be delisted
+too short:  0  -  RHT
+skipping:  RIBT
+skipping:  RICK
+skipping:  RIG
+skipping:  RIGL
+loading:  RJET
+
+1 Failed download:
+- RJET: No data found for this date range, symbol may be delisted
+too short:  0  -  RJET
+skipping:  RJF
+skipping:  RL
+loading:  RLD
+
+1 Failed download:
+- RLD: No data found for this date range, symbol may be delisted
+too short:  0  -  RLD
+skipping:  RLGT
+skipping:  RLGY
+skipping:  RLI
+skipping:  RLJ
+loading:  RLOC
+
+1 Failed download:
+- RLOC: No data found for this date range, symbol may be delisted
+too short:  0  -  RLOC
+loading:  RLOG
+
+1 Failed download:
+- RLOG: No data found for this date range, symbol may be delisted
+too short:  0  -  RLOG
+skipping:  RM
+skipping:  RMBS
+skipping:  RMD
+skipping:  RMTI
+skipping:  RNET
+loading:  RNF
+
+1 Failed download:
+- RNF: No data found for this date range, symbol may be delisted
+too short:  0  -  RNF
+skipping:  RNG
+loading:  RNN
+
+1 Failed download:
+- RNN: No data found, symbol may be delisted
+too short:  0  -  RNN
+loading:  RNO
+
+1 Failed download:
+- RNO: No data found for this date range, symbol may be delisted
+too short:  0  -  RNO
+skipping:  RNR
+skipping:  RNST
+skipping:  RNWK
+skipping:  ROCK
+skipping:  ROG
+loading:  ROIAK
+
+1 Failed download:
+- ROIAK: No data found for this date range, symbol may be delisted
+too short:  0  -  ROIAK
+skipping:  ROK
+skipping:  ROL
+skipping:  ROLL
+skipping:  ROP
+skipping:  ROST
+loading:  ROVI
+
+1 Failed download:
+- ROVI: No data found for this date range, symbol may be delisted
+too short:  0  -  ROVI
+loading:  ROX
+
+1 Failed download:
+- ROX: No data found, symbol may be delisted
+too short:  0  -  ROX
+skipping:  ROYL
+skipping:  RP
+loading:  RPI
+
+1 Failed download:
+- RPI: No data found for this date range, symbol may be delisted
+too short:  0  -  RPI
+skipping:  RPM
+loading:  RPRX
+too short:  124  -  RPRX
+skipping:  RPT
+loading:  RPTP
+
+1 Failed download:
+- RPTP: No data found for this date range, symbol may be delisted
+too short:  0  -  RPTP
+skipping:  RPXC
+skipping:  RRC
+skipping:  RRD
+loading:  RRMS
+
+1 Failed download:
+- RRMS: No data found for this date range, symbol may be delisted
+too short:  0  -  RRMS
+skipping:  RRTS
+skipping:  RS
+loading:  RSE
+
+1 Failed download:
+- RSE: No data found for this date range, symbol may be delisted
+too short:  0  -  RSE
+skipping:  RSG
+loading:  RSO
+
+1 Failed download:
+- RSO: No data found for this date range, symbol may be delisted
+too short:  0  -  RSO
+loading:  RSOL
+
+1 Failed download:
+- RSOL: No data found for this date range, symbol may be delisted
+too short:  0  -  RSOL
+skipping:  RSPI
+skipping:  RSPP
+skipping:  RST
+loading:  RSTI
+
+1 Failed download:
+- RSTI: No data found for this date range, symbol may be delisted
+too short:  0  -  RSTI
+skipping:  RSYS
+skipping:  RT
+loading:  RTEC
+
+1 Failed download:
+- RTEC: No data found, symbol may be delisted
+too short:  0  -  RTEC
+skipping:  RTIX
+loading:  RTK
+
+1 Failed download:
+- RTK: No data found for this date range, symbol may be delisted
+too short:  0  -  RTK
+loading:  RTN
+
+1 Failed download:
+- RTN: No data found, symbol may be delisted
+too short:  0  -  RTN
+skipping:  RVP
+skipping:  RWT
+skipping:  RYN
+loading:  SAAS
+
+1 Failed download:
+- SAAS: No data found for this date range, symbol may be delisted
+too short:  0  -  SAAS
+skipping:  SAEX
+skipping:  SAFM
+skipping:  SAFT
+skipping:  SAH
+skipping:  SAIC
+skipping:  SALM
+skipping:  SAM
+skipping:  SAMG
+skipping:  SANM
+skipping:  SANW
+skipping:  SASR
+skipping:  SATS
+skipping:  SAVE
+skipping:  SBAC
+skipping:  SBBX
+skipping:  SBCF
+skipping:  SBFG
+skipping:  SBGI
+skipping:  SBH
+skipping:  SBRA
+loading:  SBSA
+
+1 Failed download:
+- SBSA: No data found for this date range, symbol may be delisted
+too short:  0  -  SBSA
+skipping:  SBSI
+skipping:  SBUX
+loading:  SBY
+
+1 Failed download:
+- SBY: No data found for this date range, symbol may be delisted
+too short:  0  -  SBY
+skipping:  SC
+loading:  SCBT
+
+1 Failed download:
+- SCBT: No data found for this date range, symbol may be delisted
+too short:  0  -  SCBT
+skipping:  SCCO
+skipping:  SCG
+skipping:  SCHL
+skipping:  SCHN
+skipping:  SCHW
+skipping:  SCI
+skipping:  SCL
+loading:  SCLN
+
+1 Failed download:
+- SCLN: No data found for this date range, symbol may be delisted
+too short:  0  -  SCLN
+skipping:  SCMP
+skipping:  SCON
+skipping:  SCOR
+skipping:  SCS
+skipping:  SCSC
+loading:  SCSS
+
+1 Failed download:
+- SCSS: No data found for this date range, symbol may be delisted
+too short:  0  -  SCSS
+skipping:  SCTY
+skipping:  SCVL
+skipping:  SCX
+skipping:  SE
+skipping:  SEAC
+skipping:  SEAS
+skipping:  SEB
+skipping:  SEIC
+loading:  SEMG
+
+1 Failed download:
+- SEMG: No data found, symbol may be delisted
+too short:  0  -  SEMG
+skipping:  SENEA
+skipping:  SEP
+loading:  SEV
+
+1 Failed download:
+- SEV: No data found for this date range, symbol may be delisted
+too short:  0  -  SEV
+skipping:  SF
+skipping:  SFBC
+skipping:  SFE
+skipping:  SFG
+skipping:  SFI
+loading:  SFLY
+
+1 Failed download:
+- SFLY: No data found, symbol may be delisted
+too short:  0  -  SFLY
+skipping:  SFM
+skipping:  SFNC
+skipping:  SFST
+skipping:  SGA
+loading:  SGB
+
+1 Failed download:
+- SGB: No data found, symbol may be delisted
+too short:  0  -  SGB
+skipping:  SGC
+skipping:  SGEN
+skipping:  SGMA
+skipping:  SGMO
+loading:  SGNT
+
+1 Failed download:
+- SGNT: No data found for this date range, symbol may be delisted
+too short:  0  -  SGNT
+skipping:  SGRP
+skipping:  SGU
+loading:  SGYP
+
+1 Failed download:
+- SGYP: No data found for this date range, symbol may be delisted
+too short:  0  -  SGYP
+skipping:  SHEN
+loading:  SHLD
+
+1 Failed download:
+- SHLD: No data found for this date range, symbol may be delisted
+too short:  0  -  SHLD
+skipping:  SHLM
+skipping:  SHO
+skipping:  SHOO
+loading:  SHOR
+
+1 Failed download:
+- SHOR: No data found for this date range, symbol may be delisted
+too short:  0  -  SHOR
+loading:  SHOS
+
+1 Failed download:
+- SHOS: No data found, symbol may be delisted
+too short:  0  -  SHOS
+skipping:  SHW
+skipping:  SIEB
+skipping:  SIF
+loading:  SIFI
+
+1 Failed download:
+- SIFI: No data found, symbol may be delisted
+too short:  0  -  SIFI
+skipping:  SIG
+skipping:  SIGA
+skipping:  SIGI
+skipping:  SINO
+skipping:  SIR
+skipping:  SIRI
+loading:  SIRO
+
+1 Failed download:
+- SIRO: No data found for this date range, symbol may be delisted
+too short:  0  -  SIRO
+skipping:  SIVB
+skipping:  SJI
+skipping:  SJM
+skipping:  SJW
+loading:  SKH
+
+1 Failed download:
+- SKH: No data found for this date range, symbol may be delisted
+too short:  0  -  SKH
+loading:  SKUL
+
+1 Failed download:
+- SKUL: No data found for this date range, symbol may be delisted
+too short:  0  -  SKUL
+skipping:  SKX
+skipping:  SKY
+skipping:  SKYW
+skipping:  SLAB
+skipping:  SLB
+skipping:  SLCA
+skipping:  SLG
+skipping:  SLGN
+loading:  SLH
+
+1 Failed download:
+- SLH: No data found for this date range, symbol may be delisted
+too short:  0  -  SLH
+loading:  SLI
+too short:  110  -  SLI
+skipping:  SLM
+skipping:  SLP
+loading:  SLTC
+
+1 Failed download:
+- SLTC: No data found for this date range, symbol may be delisted
+too short:  0  -  SLTC
+skipping:  SM
+skipping:  SMBC
+skipping:  SMCI
+skipping:  SMED
+skipping:  SMG
+skipping:  SMIT
+skipping:  SMLP
+skipping:  SMMF
+skipping:  SMP
+skipping:  SMRT
+skipping:  SMSI
+skipping:  SMTC
+skipping:  SMTX
+loading:  SN
+
+1 Failed download:
+- SN: No data found, symbol may be delisted
+too short:  0  -  SN
+skipping:  SNA
+loading:  SNAK
+
+1 Failed download:
+- SNAK: No data found for this date range, symbol may be delisted
+too short:  0  -  SNAK
+loading:  SNBC
+
+1 Failed download:
+- SNBC: No data found for this date range, symbol may be delisted
+too short:  0  -  SNBC
+skipping:  SNCR
+loading:  SNDK
+
+1 Failed download:
+- SNDK: No data found for this date range, symbol may be delisted
+too short:  0  -  SNDK
+skipping:  SNFCA
+loading:  SNH
+
+1 Failed download:
+- SNH: No data found, symbol may be delisted
+too short:  0  -  SNH
+loading:  SNHY
+
+1 Failed download:
+- SNHY: No data found, symbol may be delisted
+too short:  0  -  SNHY
+skipping:  SNI
+skipping:  SNMX
+skipping:  SNPS
+loading:  SNT
+too short:  1  -  SNT
+loading:  SNTA
+
+1 Failed download:
+- SNTA: No data found for this date range, symbol may be delisted
+too short:  0  -  SNTA
+skipping:  SNV
+skipping:  SNX
+loading:  SOCB
+
+1 Failed download:
+- SOCB: No data found for this date range, symbol may be delisted
+too short:  0  -  SOCB
+skipping:  SOFO
+skipping:  SOHU
+skipping:  SON
+skipping:  SONA
+skipping:  SONC
+loading:  SONS
+
+1 Failed download:
+- SONS: No data found for this date range, symbol may be delisted
+too short:  0  -  SONS
+skipping:  SOV
+loading:  SPA
+
+1 Failed download:
+- SPA: No data found, symbol may be delisted
+too short:  0  -  SPA
+loading:  SPAN
+
+1 Failed download:
+- SPAN: No data found for this date range, symbol may be delisted
+too short:  0  -  SPAN
+loading:  SPAR
+
+1 Failed download:
+- SPAR: No data found, symbol may be delisted
+too short:  0  -  SPAR
+loading:  SPEX
+
+1 Failed download:
+- SPEX: No data found, symbol may be delisted
+too short:  0  -  SPEX
+loading:  SPF
+
+1 Failed download:
+- SPF: No data found for this date range, symbol may be delisted
+too short:  0  -  SPF
+skipping:  SPG
+skipping:  SPH
+skipping:  SPHS
+skipping:  SPLK
+loading:  SPLS
+
+1 Failed download:
+- SPLS: No data found for this date range, symbol may be delisted
+too short:  0  -  SPLS
+skipping:  SPN
+loading:  SPNC
+
+1 Failed download:
+- SPNC: No data found for this date range, symbol may be delisted
+too short:  0  -  SPNC
+loading:  SPNHU
+
+1 Failed download:
+- SPNHU: No data found, symbol may be delisted
+too short:  0  -  SPNHU
+skipping:  SPPI
+loading:  SPPR
+
+1 Failed download:
+- SPPR: No data found for this date range, symbol may be delisted
+too short:  0  -  SPPR
+skipping:  SPR
+skipping:  SPRT
+skipping:  SPSC
+loading:  SPU
+
+1 Failed download:
+- SPU: No data found for this date range, symbol may be delisted
+too short:  0  -  SPU
+loading:  SPW
+
+1 Failed download:
+- SPW: No data found for this date range, symbol may be delisted
+too short:  0  -  SPW
+skipping:  SPWR
+loading:  SQI
+
+1 Failed download:
+- SQI: No data found for this date range, symbol may be delisted
+too short:  0  -  SQI
+loading:  SQNM
+
+1 Failed download:
+- SQNM: No data found for this date range, symbol may be delisted
+too short:  0  -  SQNM
+skipping:  SRC
+skipping:  SRCE
+skipping:  SRCL
+skipping:  SRDX
+skipping:  SRE
+skipping:  SREV
+skipping:  SRI
+skipping:  SRLP
+skipping:  SRNE
+skipping:  SRPT
+skipping:  SRT
+skipping:  SSD
+loading:  SSFN
+
+1 Failed download:
+- SSFN: No data found, symbol may be delisted
+too short:  0  -  SSFN
+loading:  SSH
+
+1 Failed download:
+- SSH: No data found for this date range, symbol may be delisted
+too short:  0  -  SSH
+loading:  SSI
+
+1 Failed download:
+- SSI: No data found, symbol may be delisted
+too short:  0  -  SSI
+skipping:  SSNC
+loading:  SSNI
+
+1 Failed download:
+- SSNI: No data found for this date range, symbol may be delisted
+too short:  0  -  SSNI
+skipping:  SSP
+loading:  SSS
+
+1 Failed download:
+- SSS: No data found for this date range, symbol may be delisted
+too short:  0  -  SSS
+skipping:  SSTK
+skipping:  SSY
+skipping:  ST
+skipping:  STAA
+skipping:  STAG
+skipping:  STAN
+skipping:  STAY
+skipping:  STBZ
+skipping:  STC
+loading:  STCK
+
+1 Failed download:
+- STCK: No data found for this date range, symbol may be delisted
+too short:  0  -  STCK
+skipping:  STFC
+skipping:  STI
+loading:  STJ
+
+1 Failed download:
+- STJ: No data found for this date range, symbol may be delisted
+too short:  0  -  STJ
+skipping:  STKL
+skipping:  STLD
+skipping:  STMP
+skipping:  STON
+skipping:  STR
+skipping:  STRA
+skipping:  STRL
+skipping:  STRM
+skipping:  STRP
+skipping:  STRT
+loading:  STRZA
+
+1 Failed download:
+- STRZA: No data found for this date range, symbol may be delisted
+too short:  0  -  STRZA
+skipping:  STT
+skipping:  STWD
+skipping:  STX
+skipping:  STXS
+skipping:  STZ
+loading:  SUBK
+
+1 Failed download:
+- SUBK: No data found for this date range, symbol may be delisted
+too short:  0  -  SUBK
+skipping:  SUI
+skipping:  SUMR
+skipping:  SUP
+skipping:  SUPN
+skipping:  SVBI
+skipping:  SVT
+skipping:  SWC
+loading:  SWFT
+
+1 Failed download:
+- SWFT: No data found for this date range, symbol may be delisted
+too short:  0  -  SWFT
+loading:  SWHC
+
+1 Failed download:
+- SWHC: No data found for this date range, symbol may be delisted
+too short:  0  -  SWHC
+skipping:  SWK
+skipping:  SWM
+skipping:  SWN
+skipping:  SWX
+skipping:  SXC
+loading:  SXE
+
+1 Failed download:
+- SXE: No data found, symbol may be delisted
+too short:  0  -  SXE
+skipping:  SXI
+skipping:  SXT
+skipping:  SYBT
+skipping:  SYK
+skipping:  SYKE
+loading:  SYMC
+
+1 Failed download:
+- SYMC: No data found, symbol may be delisted
+too short:  0  -  SYMC
+loading:  SYMX
+
+1 Failed download:
+- SYMX: No data found for this date range, symbol may be delisted
+too short:  0  -  SYMX
+skipping:  SYNA
+skipping:  SYNC
+skipping:  SYNT
+skipping:  SYPR
+loading:  SYRG
+
+1 Failed download:
+- SYRG: No data found for this date range, symbol may be delisted
+too short:  0  -  SYRG
+skipping:  SYX
+skipping:  SYY
+loading:  SZYM
+
+1 Failed download:
+- SZYM: No data found for this date range, symbol may be delisted
+too short:  0  -  SZYM
+skipping:  TA
+skipping:  TACT
+skipping:  TAIT
+skipping:  TAL
+skipping:  TAP
+loading:  TASR
+
+1 Failed download:
+- TASR: No data found for this date range, symbol may be delisted
+too short:  0  -  TASR
+skipping:  TAT
+skipping:  TAX
+skipping:  TBBK
+skipping:  TBI
+loading:  TBLC
+
+1 Failed download:
+- TBLC: No data found for this date range, symbol may be delisted
+too short:  0  -  TBLC
+skipping:  TBNK
+skipping:  TC
+skipping:  TCB
+skipping:  TCBK
+skipping:  TCCO
+skipping:  TCFC
+skipping:  TCO
+skipping:  TCX
+skipping:  TDC
+skipping:  TDG
+skipping:  TDS
+skipping:  TDY
+loading:  TE
+
+1 Failed download:
+- TE: No data found for this date range, symbol may be delisted
+too short:  0  -  TE
+skipping:  TECD
+skipping:  TEL
+loading:  TELK
+
+1 Failed download:
+- TELK: No data found for this date range, symbol may be delisted
+too short:  0  -  TELK
+skipping:  TEN
+skipping:  TEP
+skipping:  TER
+loading:  TESO
+
+1 Failed download:
+- TESO: No data found for this date range, symbol may be delisted
+too short:  0  -  TESO
+skipping:  TEX
+loading:  TFM
+
+1 Failed download:
+- TFM: No data found for this date range, symbol may be delisted
+too short:  0  -  TFM
+skipping:  TFSL
+skipping:  TFX
+skipping:  TGC
+loading:  TGE
+
+1 Failed download:
+- TGE: No data found, symbol may be delisted
+too short:  0  -  TGE
+skipping:  TGEN
+skipping:  TGLS
+skipping:  TGT
+skipping:  TGTX
+skipping:  THC
+skipping:  THFF
+skipping:  THG
+skipping:  THK
+loading:  THLD
+
+1 Failed download:
+- THLD: No data found for this date range, symbol may be delisted
+too short:  0  -  THLD
+loading:  THRX
+
+1 Failed download:
+- THRX: No data found for this date range, symbol may be delisted
+too short:  0  -  THRX
+skipping:  THS
+skipping:  THTI
+skipping:  TIF
+skipping:  TIGR
+loading:  TIK
+
+1 Failed download:
+- TIK: No data found, symbol may be delisted
+too short:  0  -  TIK
+skipping:  TILE
+loading:  TIS
+
+1 Failed download:
+- TIS: No data found, symbol may be delisted
+too short:  0  -  TIS
+skipping:  TISI
+skipping:  TITN
+loading:  TIVO
+
+1 Failed download:
+- TIVO: No data found, symbol may be delisted
+too short:  0  -  TIVO
+skipping:  TJX
+skipping:  TKR
+loading:  TLLP
+
+1 Failed download:
+- TLLP: No data found for this date range, symbol may be delisted
+too short:  0  -  TLLP
+loading:  TLP
+
+1 Failed download:
+- TLP: No data found, symbol may be delisted
+too short:  0  -  TLP
+skipping:  TLYS
+loading:  TMK
+
+1 Failed download:
+- TMK: No data found, symbol may be delisted
+too short:  0  -  TMK
+loading:  TMNG
+
+1 Failed download:
+- TMNG: No data found for this date range, symbol may be delisted
+too short:  0  -  TMNG
+skipping:  TMO
+skipping:  TMP
+skipping:  TMUS
+skipping:  TNAV
+skipping:  TNC
+skipping:  TNDM
+loading:  TOF
+
+1 Failed download:
+- TOF: No data found for this date range, symbol may be delisted
+too short:  0  -  TOF
+skipping:  TOL
+loading:  TOWR
+
+1 Failed download:
+- TOWR: No data found, symbol may be delisted
+too short:  0  -  TOWR
+skipping:  TPC
+skipping:  TPH
+skipping:  TPL
+loading:  TPLM
+
+1 Failed download:
+- TPLM: No data found, symbol may be delisted
+too short:  0  -  TPLM
+skipping:  TPRE
+skipping:  TPX
+skipping:  TR
+skipping:  TRC
+loading:  TRCB
+
+1 Failed download:
+- TRCB: No data found, symbol may be delisted
+too short:  0  -  TRCB
+skipping:  TRCH
+skipping:  TREE
+skipping:  TREX
+skipping:  TRGP
+loading:  TRGT
+
+1 Failed download:
+- TRGT: No data found for this date range, symbol may be delisted
+too short:  0  -  TRGT
+skipping:  TRIP
+loading:  TRK
+
+1 Failed download:
+- TRK: No data found, symbol may be delisted
+too short:  0  -  TRK
+skipping:  TRMB
+skipping:  TRMK
+loading:  TRMR
+
+1 Failed download:
+- TRMR: No data found for this date range, symbol may be delisted
+too short:  0  -  TRMR
+skipping:  TRNO
+skipping:  TRNS
+skipping:  TRNX
+loading:  TROV
+
+1 Failed download:
+- TROV: No data found, symbol may be delisted
+too short:  0  -  TROV
+skipping:  TROW
+loading:  TRR
+
+1 Failed download:
+- TRR: No data found for this date range, symbol may be delisted
+too short:  0  -  TRR
+skipping:  TRS
+skipping:  TRST
+skipping:  TRT
+skipping:  TRV
+skipping:  TRVN
+skipping:  TSBK
+skipping:  TSC
+skipping:  TSCO
+loading:  TSET
+
+1 Failed download:
+- TSET: No data found for this date range, symbol may be delisted
+too short:  0  -  TSET
+skipping:  TSLA
+loading:  TSLU
+
+1 Failed download:
+- TSLU: No data found for this date range, symbol may be delisted
+too short:  0  -  TSLU
+skipping:  TSN
+loading:  TSO
+
+1 Failed download:
+- TSO: No data found for this date range, symbol may be delisted
+too short:  0  -  TSO
+loading:  TSPT
+
+1 Failed download:
+- TSPT: No data found for this date range, symbol may be delisted
+too short:  0  -  TSPT
+loading:  TSRA
+
+1 Failed download:
+- TSRA: No data found for this date range, symbol may be delisted
+too short:  0  -  TSRA
+skipping:  TSRI
+skipping:  TSRO
+loading:  TSS
+
+1 Failed download:
+- TSS: No data found, symbol may be delisted
+too short:  0  -  TSS
+loading:  TST
+
+1 Failed download:
+- TST: No data found, symbol may be delisted
+too short:  0  -  TST
+skipping:  TTC
+skipping:  TTEC
+skipping:  TTEK
+skipping:  TTGT
+skipping:  TTMI
+skipping:  TTPH
+loading:  TTS
+
+1 Failed download:
+- TTS: No data found for this date range, symbol may be delisted
+too short:  0  -  TTS
+skipping:  TTWO
+loading:  TUES
+
+1 Failed download:
+- TUES: No data found, symbol may be delisted
+too short:  0  -  TUES
+loading:  TUMI
+
+1 Failed download:
+- TUMI: No data found for this date range, symbol may be delisted
+too short:  0  -  TUMI
+skipping:  TUP
+loading:  TWC
+
+1 Failed download:
+- TWC: No data found for this date range, symbol may be delisted
+too short:  0  -  TWC
+skipping:  TWER
+skipping:  TWI
+skipping:  TWIN
+skipping:  TWMC
+loading:  TWRT
+
+1 Failed download:
+- TWRT: No data found, symbol may be delisted
+too short:  0  -  TWRT
+skipping:  TWTR
+skipping:  TWX
+skipping:  TXMD
+skipping:  TXN
+skipping:  TXRH
+skipping:  TXT
+loading:  TXU
+
+1 Failed download:
+- TXU: No data found for this date range, symbol may be delisted
+too short:  0  -  TXU
+loading:  TYC
+
+1 Failed download:
+- TYC: No data found for this date range, symbol may be delisted
+too short:  0  -  TYC
+skipping:  TYL
+loading:  TYPE
+
+1 Failed download:
+- TYPE: No data found, symbol may be delisted
+too short:  0  -  TYPE
+skipping:  TZOO
+skipping:  UAL
+loading:  UAM
+too short:  39  -  UAM
+skipping:  UAN
+skipping:  UBA
+skipping:  UBCP
+skipping:  UBFO
+skipping:  UBOH
+loading:  UBSH
+
+1 Failed download:
+- UBSH: No data found, symbol may be delisted
+too short:  0  -  UBSH
+skipping:  UBSI
+skipping:  UCBA
+skipping:  UCBI
+loading:  UCFC
+
+1 Failed download:
+- UCFC: No data found, symbol may be delisted
+too short:  0  -  UCFC
+skipping:  UCTT
+skipping:  UDR
+skipping:  UEIC
+skipping:  UEPS
+skipping:  UFCS
+skipping:  UFI
+skipping:  UFPI
+skipping:  UFPT
+skipping:  UFS
+skipping:  UG
+skipping:  UGA
+skipping:  UGI
+skipping:  UHAL
+skipping:  UHN
+skipping:  UHS
+skipping:  UHT
+skipping:  UIS
+skipping:  ULBI
+skipping:  ULTA
+loading:  ULTI
+
+1 Failed download:
+- ULTI: No data found, symbol may be delisted
+too short:  0  -  ULTI
+skipping:  UMBF
+skipping:  UMH
+skipping:  UMPQ
+skipping:  UNAM
+skipping:  UNB
+skipping:  UNF
+skipping:  UNFI
+skipping:  UNH
+loading:  UNIS
+
+1 Failed download:
+- UNIS: No data found for this date range, symbol may be delisted
+too short:  0  -  UNIS
+skipping:  UNL
+skipping:  UNM
+skipping:  UNP
+loading:  UNT
+
+1 Failed download:
+- UNT: No data found, symbol may be delisted
+too short:  0  -  UNT
+loading:  UNTD
+
+1 Failed download:
+- UNTD: No data found for this date range, symbol may be delisted
+too short:  0  -  UNTD
+skipping:  UNTY
+loading:  UNXL
+
+1 Failed download:
+- UNXL: No data found for this date range, symbol may be delisted
+too short:  0  -  UNXL
+loading:  UPIP
+
+1 Failed download:
+- UPIP: No data found for this date range, symbol may be delisted
+too short:  0  -  UPIP
+skipping:  UPL
+skipping:  UPS
+loading:  UQM
+
+1 Failed download:
+- UQM: No data found, symbol may be delisted
+too short:  0  -  UQM
+skipping:  URBN
+skipping:  URG
+skipping:  URI
+loading:  URRE
+
+1 Failed download:
+- URRE: No data found for this date range, symbol may be delisted
+too short:  0  -  URRE
+skipping:  USAK
+skipping:  USAP
+skipping:  USAT
+skipping:  USB
+loading:  USBI
+
+1 Failed download:
+- USBI: No data found for this date range, symbol may be delisted
+too short:  0  -  USBI
+skipping:  USCR
+skipping:  USEG
+loading:  USG
+
+1 Failed download:
+- USG: No data found, symbol may be delisted
+too short:  0  -  USG
+loading:  USGL
+
+1 Failed download:
+- USGL: No data found for this date range, symbol may be delisted
+too short:  0  -  USGL
+skipping:  USL
+skipping:  USLM
+skipping:  USM
+loading:  USMO
+
+1 Failed download:
+- USMO: No data found for this date range, symbol may be delisted
+too short:  0  -  USMO
+skipping:  USNA
+skipping:  USO
+skipping:  USPH
+loading:  USTR
+
+1 Failed download:
+- USTR: No data found for this date range, symbol may be delisted
+too short:  0  -  USTR
+loading:  UTEK
+
+1 Failed download:
+- UTEK: No data found for this date range, symbol may be delisted
+too short:  0  -  UTEK
+skipping:  UTHR
+skipping:  UTI
+loading:  UTIW
+
+1 Failed download:
+- UTIW: No data found for this date range, symbol may be delisted
+too short:  0  -  UTIW
+skipping:  UTL
+loading:  UTX
+
+1 Failed download:
+- UTX: No data found, symbol may be delisted
+too short:  0  -  UTX
+skipping:  UUU
+skipping:  UVE
+skipping:  UVSP
+skipping:  UVV
+skipping:  V
+skipping:  VAC
+skipping:  VAL
+skipping:  VALU
+skipping:  VAR
+loading:  VASC
+
+1 Failed download:
+- VASC: No data found for this date range, symbol may be delisted
+too short:  0  -  VASC
+skipping:  VBFC
+skipping:  VC
+skipping:  VCG
+skipping:  VCRA
+skipping:  VCYT
+loading:  VDSI
+
+1 Failed download:
+- VDSI: No data found for this date range, symbol may be delisted
+too short:  0  -  VDSI
+skipping:  VEEV
+skipping:  VFC
+skipping:  VG
+skipping:  VGR
+skipping:  VGZ
+skipping:  VHI
+loading:  VIA
+
+1 Failed download:
+- VIA: No data found, symbol may be delisted
+too short:  0  -  VIA
+loading:  VICL
+
+1 Failed download:
+- VICL: No data found, symbol may be delisted
+too short:  0  -  VICL
+skipping:  VICR
+skipping:  VIDE
+loading:  VII
+
+1 Failed download:
+- VII: No data found for this date range, symbol may be delisted
+too short:  0  -  VII
+skipping:  VIRC
+skipping:  VIVO
+skipping:  VLGEA
+skipping:  VLO
+skipping:  VLP
+skipping:  VMC
+skipping:  VMI
+skipping:  VNCE
+skipping:  VNDA
+loading:  VNTV
+
+1 Failed download:
+- VNTV: No data found for this date range, symbol may be delisted
+too short:  0  -  VNTV
+skipping:  VNX
+skipping:  VOXX
+skipping:  VOYA
+loading:  VPFG
+
+1 Failed download:
+- VPFG: No data found for this date range, symbol may be delisted
+too short:  0  -  VPFG
+skipping:  VPG
+loading:  VPRT
+
+1 Failed download:
+- VPRT: No data found for this date range, symbol may be delisted
+too short:  0  -  VPRT
+skipping:  VR
+skipping:  VRA
+loading:  VRML
+
+1 Failed download:
+- VRML: No data found, symbol may be delisted
+too short:  0  -  VRML
+loading:  VRNG
+
+1 Failed download:
+- VRNG: No data found for this date range, symbol may be delisted
+too short:  0  -  VRNG
+skipping:  VRNT
+skipping:  VRSK
+skipping:  VRSN
+skipping:  VRTB
+skipping:  VRTS
+skipping:  VRTX
+loading:  VRX
+
+1 Failed download:
+- VRX: No data found for this date range, symbol may be delisted
+too short:  0  -  VRX
+skipping:  VSAT
+loading:  VSCI
+
+1 Failed download:
+- VSCI: No data found for this date range, symbol may be delisted
+too short:  0  -  VSCI
+loading:  VSCP
+
+1 Failed download:
+- VSCP: No data found for this date range, symbol may be delisted
+too short:  0  -  VSCP
+skipping:  VSEC
+skipping:  VSH
+loading:  VSI
+
+1 Failed download:
+- VSI: No data found, symbol may be delisted
+too short:  0  -  VSI
+loading:  VSR
+
+1 Failed download:
+- VSR: No data found for this date range, symbol may be delisted
+too short:  0  -  VSR
+skipping:  VSTM
+skipping:  VTR
+loading:  VTUS
+
+1 Failed download:
+- VTUS: No data found, symbol may be delisted
+too short:  0  -  VTUS
+skipping:  VVC
+skipping:  VVI
+loading:  VVIN
+
+1 Failed download:
+- VVIN: No data found for this date range, symbol may be delisted
+too short:  0  -  VVIN
+skipping:  VVUS
+skipping:  VZ
+skipping:  WAB
+skipping:  WABC
+skipping:  WAFD
+loading:  WAGE
+
+1 Failed download:
+- WAGE: No data found, symbol may be delisted
+too short:  0  -  WAGE
+loading:  WAIR
+
+1 Failed download:
+- WAIR: No data found, symbol may be delisted
+too short:  0  -  WAIR
+skipping:  WAL
+skipping:  WASH
+skipping:  WAYN
+loading:  WBB
+
+1 Failed download:
+- WBB: No data found for this date range, symbol may be delisted
+too short:  0  -  WBB
+loading:  WBC
+
+1 Failed download:
+- WBC: No data found, symbol may be delisted
+too short:  0  -  WBC
+loading:  WBMD
+
+1 Failed download:
+- WBMD: No data found for this date range, symbol may be delisted
+too short:  0  -  WBMD
+skipping:  WBS
+skipping:  WCC
+loading:  WCG
+
+1 Failed download:
+- WCG: No data found, symbol may be delisted
+too short:  0  -  WCG
+skipping:  WCN
+skipping:  WD
+skipping:  WDAY
+skipping:  WDC
+skipping:  WDFC
+loading:  WDPT
+
+1 Failed download:
+- WDPT: No data found for this date range, symbol may be delisted
+too short:  0  -  WDPT
+skipping:  WDR
+loading:  WDWT
+
+1 Failed download:
+- WDWT: No data found for this date range, symbol may be delisted
+too short:  0  -  WDWT
+loading:  WEBK
+
+1 Failed download:
+- WEBK: No data found, symbol may be delisted
+too short:  0  -  WEBK
+skipping:  WEC
+skipping:  WERN
+skipping:  WES
+skipping:  WETF
+skipping:  WEX
+skipping:  WEYS
+loading:  WFBI
+
+1 Failed download:
+- WFBI: No data found for this date range, symbol may be delisted
+too short:  0  -  WFBI
+skipping:  WFC
+loading:  WFD
+
+1 Failed download:
+- WFD: No data found for this date range, symbol may be delisted
+too short:  0  -  WFD
+loading:  WG
+
+1 Failed download:
+- WG: No data found for this date range, symbol may be delisted
+too short:  0  -  WG
+loading:  WGA
+
+1 Failed download:
+- WGA: No data found for this date range, symbol may be delisted
+too short:  0  -  WGA
+loading:  WGP
+
+1 Failed download:
+- WGP: No data found, symbol may be delisted
+too short:  0  -  WGP
+skipping:  WHG
+skipping:  WHLR
+skipping:  WHR
+loading:  WIBC
+
+1 Failed download:
+- WIBC: No data found for this date range, symbol may be delisted
+too short:  0  -  WIBC
+skipping:  WIFI
+skipping:  WINA
+skipping:  WIRE
+loading:  WLB
+
+1 Failed download:
+- WLB: No data found for this date range, symbol may be delisted
+too short:  0  -  WLB
+skipping:  WLDN
+skipping:  WLFC
+skipping:  WLK
+skipping:  WLL
+loading:  WLP
+
+1 Failed download:
+- WLP: No data found for this date range, symbol may be delisted
+too short:  0  -  WLP
+skipping:  WM
+skipping:  WMB
+skipping:  WMK
+skipping:  WMT
+skipping:  WNC
+loading:  WNR
+
+1 Failed download:
+- WNR: No data found for this date range, symbol may be delisted
+too short:  0  -  WNR
+loading:  WNRL
+
+1 Failed download:
+- WNRL: No data found for this date range, symbol may be delisted
+too short:  0  -  WNRL
+loading:  WOOF
+
+1 Failed download:
+- WOOF: No data found for this date range, symbol may be delisted
+too short:  0  -  WOOF
+skipping:  WOR
+skipping:  WPC
+loading:  WPO
+
+1 Failed download:
+- WPO: No data found for this date range, symbol may be delisted
+too short:  0  -  WPO
+skipping:  WPX
+loading:  WR
+
+1 Failed download:
+- WR: No data found for this date range, symbol may be delisted
+too short:  0  -  WR
+skipping:  WRE
+skipping:  WRI
+skipping:  WRLD
+skipping:  WRP
+skipping:  WSBF
+skipping:  WSCI
+skipping:  WSFS
+loading:  WSH
+
+1 Failed download:
+- WSH: No data found for this date range, symbol may be delisted
+too short:  0  -  WSH
+skipping:  WSM
+skipping:  WSO
+skipping:  WST
+loading:  WSTC
+
+1 Failed download:
+- WSTC: No data found for this date range, symbol may be delisted
+too short:  0  -  WSTC
+skipping:  WSTG
+skipping:  WSTL
+skipping:  WTBA
+skipping:  WTFC
+skipping:  WTI
+loading:  WTR
+
+1 Failed download:
+- WTR: No data found, symbol may be delisted
+too short:  0  -  WTR
+skipping:  WTS
+skipping:  WTT
+loading:  WTW
+
+1 Failed download:
+- WTW: No data found, symbol may be delisted
+too short:  0  -  WTW
+skipping:  WU
+skipping:  WVFC
+skipping:  WVVI
+loading:  WWAV
+
+1 Failed download:
+- WWAV: No data found for this date range, symbol may be delisted
+too short:  0  -  WWAV
+skipping:  WWD
+skipping:  WWE
+skipping:  WWW
+skipping:  WY
+loading:  WYN
+
+1 Failed download:
+- WYN: No data found for this date range, symbol may be delisted
+too short:  0  -  WYN
+skipping:  WYNN
+loading:  XBKS
+
+1 Failed download:
+- XBKS: No data found for this date range, symbol may be delisted
+too short:  0  -  XBKS
+loading:  XCO
+
+1 Failed download:
+- XCO: No data found for this date range, symbol may be delisted
+too short:  0  -  XCO
+skipping:  XEC
+skipping:  XEL
+loading:  XGTI
+
+1 Failed download:
+- XGTI: No data found for this date range, symbol may be delisted
+too short:  0  -  XGTI
+skipping:  XL
+skipping:  XLNX
+skipping:  XLRN
+loading:  XLRT
+
+1 Failed download:
+- XLRT: No data found for this date range, symbol may be delisted
+too short:  0  -  XLRT
+loading:  XNPT
+
+1 Failed download:
+- XNPT: No data found for this date range, symbol may be delisted
+too short:  0  -  XNPT
+loading:  XNWK
+
+1 Failed download:
+- XNWK: No data found for this date range, symbol may be delisted
+too short:  0  -  XNWK
+skipping:  XOM
+skipping:  XOMA
+loading:  XON
+
+1 Failed download:
+- XON: No data found, symbol may be delisted
+too short:  0  -  XON
+skipping:  XONE
+skipping:  XOXO
+skipping:  XPO
+skipping:  XRAY
+skipping:  XRM
+loading:  XTEX
+
+1 Failed download:
+- XTEX: No data found for this date range, symbol may be delisted
+too short:  0  -  XTEX
+loading:  XXIA
+
+1 Failed download:
+- XXIA: No data found for this date range, symbol may be delisted
+too short:  0  -  XXIA
+skipping:  XYL
+skipping:  Y
+loading:  YDKN
+
+1 Failed download:
+- YDKN: No data found for this date range, symbol may be delisted
+too short:  0  -  YDKN
+skipping:  YELP
+loading:  YHOO
+
+1 Failed download:
+- YHOO: No data found for this date range, symbol may be delisted
+too short:  0  -  YHOO
+loading:  YOD
+
+1 Failed download:
+- YOD: No data found for this date range, symbol may be delisted
+too short:  0  -  YOD
+skipping:  YORW
+skipping:  YRCW
+loading:  YUME
+
+1 Failed download:
+- YUME: No data found for this date range, symbol may be delisted
+too short:  0  -  YUME
+skipping:  ZAGG
+loading:  ZBB
+
+1 Failed download:
+- ZBB: No data found for this date range, symbol may be delisted
+too short:  0  -  ZBB
+skipping:  ZEUS
+loading:  ZFC
+
+1 Failed download:
+- ZFC: No data found for this date range, symbol may be delisted
+too short:  0  -  ZFC
+skipping:  ZGNX
+loading:  ZHNE
+
+1 Failed download:
+- ZHNE: No data found for this date range, symbol may be delisted
+too short:  0  -  ZHNE
+loading:  ZINC
+
+1 Failed download:
+- ZINC: No data found for this date range, symbol may be delisted
+too short:  0  -  ZINC
+skipping:  ZION
+skipping:  ZIXI
+loading:  ZLCS
+
+1 Failed download:
+- ZLCS: No data found for this date range, symbol may be delisted
+too short:  0  -  ZLCS
+loading:  ZLTQ
+
+1 Failed download:
+- ZLTQ: No data found for this date range, symbol may be delisted
+too short:  0  -  ZLTQ
+loading:  ZMH
+
+1 Failed download:
+- ZMH: No data found for this date range, symbol may be delisted
+too short:  0  -  ZMH
+skipping:  ZNGA
+loading:  ZP
+
+1 Failed download:
+- ZP: No data found for this date range, symbol may be delisted
+too short:  0  -  ZP
+loading:  ZTM
+
+1 Failed download:
+- ZTM: No data found for this date range, symbol may be delisted
+too short:  0  -  ZTM
+skipping:  ZTS
+skipping:  ZUMZ
+count of missing:     757
+count of downloaded:  2293
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;AAC&#39;,
+ &#39;AAN&#39;,
+ &#39;ABFS&#39;,
+ &#39;ABTL&#39;,
+ &#39;ACAT&#39;,
+ &#39;ACHN&#39;,
+ &#39;ACPW&#39;,
+ &#39;ACXM&#39;,
+ &#39;ADAT&#39;,
+ &#39;ADGE&#39;,
+ &#39;ADK&#39;,
+ &#39;AEGR&#39;,
+ &#39;AEPI&#39;,
+ &#39;AETI&#39;,
+ &#39;AFOP&#39;,
+ &#39;AGII&#39;,
+ &#39;AH&#39;,
+ &#39;AHP&#39;,
+ &#39;AHS&#39;,
+ &#39;AIRM&#39;,
+ &#39;AKS&#39;,
+ &#39;ALJ&#39;,
+ &#39;ALN&#39;,
+ &#39;ALR&#39;,
+ &#39;ALXA&#39;,
+ &#39;AMB&#39;,
+ &#39;AMCC&#39;,
+ &#39;AMIC&#39;,
+ &#39;AMID&#39;,
+ &#39;AMRI&#39;,
+ &#39;AMSG&#39;,
+ &#39;ANAC&#39;,
+ &#39;ANAD&#39;,
+ &#39;ANX&#39;,
+ &#39;APC&#39;,
+ &#39;APNB&#39;,
+ &#39;APOL&#39;,
+ &#39;APU&#39;,
+ &#39;ARCI&#39;,
+ &#39;ARCP&#39;,
+ &#39;ARCX&#39;,
+ &#39;AREX&#39;,
+ &#39;ARG&#39;,
+ &#39;ARIA&#39;,
+ &#39;ARIS&#39;,
+ &#39;ARO&#39;,
+ &#39;ARQL&#39;,
+ &#39;ARSD&#39;,
+ &#39;ARTX&#39;,
+ &#39;ARVT&#39;,
+ &#39;ASBB&#39;,
+ &#39;ASBC&#39;,
+ &#39;ASEI&#39;,
+ &#39;ASHN&#39;,
+ &#39;ASTM&#39;,
+ &#39;ASXHTW&#39;,
+ &#39;ATML&#39;,
+ &#39;ATRM&#39;,
+ &#39;ATU&#39;,
+ &#39;AV&#39;,
+ &#39;AVCA&#39;,
+ &#39;AVP&#39;,
+ &#39;AVX&#39;,
+ &#39;AWLD&#39;,
+ &#39;AXLL&#39;,
+ &#39;BABY&#39;,
+ &#39;BAMM&#39;,
+ &#39;BBCN&#39;,
+ &#39;BBG&#39;,
+ &#39;BBT&#39;,
+ &#39;BCR&#39;,
+ &#39;BEAV&#39;,
+ &#39;BGF&#39;,
+ &#39;BHI&#39;,
+ &#39;BID&#39;,
+ &#39;BIOA&#39;,
+ &#39;BIOD&#39;,
+ &#39;BIOF&#39;,
+ &#39;BIOS&#39;,
+ &#39;BKJ&#39;,
+ &#39;BKMU&#39;,
+ &#39;BKS&#39;,
+ &#39;BLOX&#39;,
+ &#39;BLT&#39;,
+ &#39;BMOM&#39;,
+ &#39;BNCN&#39;,
+ &#39;BOBE&#39;,
+ &#39;BOFI&#39;,
+ &#39;BOJF&#39;,
+ &#39;BONE&#39;,
+ &#39;BONT&#39;,
+ &#39;BOTA&#39;,
+ &#39;BPI&#39;,
+ &#39;BRCD&#39;,
+ &#39;BRS&#39;,
+ &#39;BRSS&#39;,
+ &#39;BSFT&#39;,
+ &#39;BSIC&#39;,
+ &#39;BTX&#39;,
+ &#39;BVSN&#39;,
+ &#39;BVX&#39;,
+ &#39;BWC&#39;,
+ &#39;BWINB&#39;,
+ &#39;BWLD&#39;,
+ &#39;BWS&#39;,
+ &#39;BYLK&#39;,
+ &#39;CAB&#39;,
+ &#39;CACB&#39;,
+ &#39;CADC&#39;,
+ &#39;CAM&#39;,
+ &#39;CARB&#39;,
+ &#39;CAXG&#39;,
+ &#39;CBAK&#39;,
+ &#39;CBF&#39;,
+ &#39;CBG&#39;,
+ &#39;CBIN&#39;,
+ &#39;CBK&#39;,
+ &#39;CBM&#39;,
+ &#39;CBMX&#39;,
+ &#39;CBNJ&#39;,
+ &#39;CBR&#39;,
+ &#39;CBS&#39;,
+ &#39;CCCR&#39;,
+ &#39;CCE&#39;,
+ &#39;CCFI&#39;,
+ &#39;CDI&#39;,
+ &#39;CDIS&#39;,
+ &#39;CECO&#39;,
+ &#39;CELG&#39;,
+ &#39;CEMP&#39;,
+ &#39;CERE&#39;,
+ &#39;CFD&#39;,
+ &#39;CFNL&#39;,
+ &#39;CGAG&#39;,
+ &#39;CGEIU&#39;,
+ &#39;CGI&#39;,
+ &#39;CHFC&#39;,
+ &#39;CHMT&#39;,
+ &#39;CHSP&#39;,
+ &#39;CIE&#39;,
+ &#39;CKP&#39;,
+ &#39;CLBH&#39;,
+ &#39;CLGY&#39;,
+ &#39;CLMS&#39;,
+ &#39;CLRS&#39;,
+ &#39;CLRX&#39;,
+ &#39;CMN&#39;,
+ &#39;CNAT&#39;,
+ &#39;CNBC&#39;,
+ &#39;CNDO&#39;,
+ &#39;COB&#39;,
+ &#39;COH&#39;,
+ &#39;COOL&#39;,
+ &#39;COSI&#39;,
+ &#39;COT&#39;,
+ &#39;CPHD&#39;,
+ &#39;CRAY&#39;,
+ &#39;CRCM&#39;,
+ &#39;CRDC&#39;,
+ &#39;CRDS&#39;,
+ &#39;CRR&#39;,
+ &#39;CSCD&#39;,
+ &#39;CSFL&#39;,
+ &#39;CSG&#39;,
+ &#39;CSH&#39;,
+ &#39;CSS&#39;,
+ &#39;CST&#39;,
+ &#39;CSUH&#39;,
+ &#39;CTCM&#39;,
+ &#39;CTRL&#39;,
+ &#39;CTWS&#39;,
+ &#39;CUNB&#39;,
+ &#39;CUO&#39;,
+ &#39;CUR&#39;,
+ &#39;CVC&#39;,
+ &#39;CVO&#39;,
+ &#39;CWEI&#39;,
+ &#39;CY&#39;,
+ &#39;CYNO&#39;,
+ &#39;CYTX&#39;,
+ &#39;CZFC&#39;,
+ &#39;DATA&#39;,
+ &#39;DAVE&#39;,
+ &#39;DCT&#39;,
+ &#39;DDE&#39;,
+ &#39;DEPO&#39;,
+ &#39;DEST&#39;,
+ &#39;DF&#39;,
+ &#39;DFRG&#39;,
+ &#39;DFT&#39;,
+ &#39;DGAS&#39;,
+ &#39;DGI&#39;,
+ &#39;DGSE&#39;,
+ &#39;DMD&#39;,
+ &#39;DMND&#39;,
+ &#39;DNB&#39;,
+ &#39;DNBF&#39;,
+ &#39;DO&#39;,
+ &#39;DPS&#39;,
+ &#39;DRAM&#39;,
+ &#39;DSCI&#39;,
+ &#39;DSFX&#39;,
+ &#39;DSKX&#39;,
+ &#39;DTLA&#39;,
+ &#39;DTLK&#39;,
+ &#39;DTSI&#39;,
+ &#39;DV&#39;,
+ &#39;DW&#39;,
+ &#39;DWA&#39;,
+ &#39;DWRE&#39;,
+ &#39;EAC&#39;,
+ &#39;EDE&#39;,
+ &#39;EDR&#39;,
+ &#39;EEI&#39;,
+ &#39;EFII&#39;,
+ &#39;ELLI&#39;,
+ &#39;ELNK&#39;,
+ &#39;ELRC&#39;,
+ &#39;EMCI&#39;,
+ &#39;ENH&#39;,
+ &#39;ENMD&#39;,
+ &#39;ENOC&#39;,
+ &#39;EONC&#39;,
+ &#39;EPE&#39;,
+ &#39;EPIQ&#39;,
+ &#39;EQM&#39;,
+ &#39;EQY&#39;,
+ &#39;ERA&#39;,
+ &#39;ERS&#39;,
+ &#39;ETAK&#39;,
+ &#39;ETE&#39;,
+ &#39;ETRM&#39;,
+ &#39;EVBS&#39;,
+ &#39;EXA&#39;,
+ &#39;EXAM&#39;,
+ &#39;EXAR&#39;,
+ &#39;EXBD&#39;,
+ &#39;EXH&#39;,
+ &#39;EXLP&#39;,
+ &#39;EXXI&#39;,
+ &#39;FBNK&#39;,
+ &#39;FBRC&#39;,
+ &#39;FCH&#39;,
+ &#39;FCLF&#39;,
+ &#39;FCS&#39;,
+ &#39;FCTY&#39;,
+ &#39;FCZA&#39;,
+ &#39;FDML&#39;,
+ &#39;FEIC&#39;,
+ &#39;FFBH&#39;,
+ &#39;FGL&#39;,
+ &#39;FGP&#39;,
+ &#39;FHCO&#39;,
+ &#39;FIDM&#39;,
+ &#39;FIG&#39;,
+ &#39;FII&#39;,
+ &#39;FLML&#39;,
+ &#39;FMD&#39;,
+ &#39;FNP&#39;,
+ &#39;FPO&#39;,
+ &#39;FPP&#39;,
+ &#39;FRED&#39;,
+ &#39;FSBK&#39;,
+ &#39;FST&#39;,
+ &#39;FSYS&#39;,
+ &#39;FTD&#39;,
+ &#39;FTR&#39;,
+ &#39;FUEL&#39;,
+ &#39;FXCB&#39;,
+ &#39;FXCM&#39;,
+ &#39;GB&#39;,
+ &#39;GCA&#39;,
+ &#39;GGOX&#39;,
+ &#39;GGP&#39;,
+ &#39;GIMO&#39;,
+ &#39;GK&#39;,
+ &#39;GLDC&#39;,
+ &#39;GLOWE&#39;,
+ &#39;GLPW&#39;,
+ &#39;GMCR&#39;,
+ &#39;GNVC&#39;,
+ &#39;GOV&#39;,
+ &#39;GPIC&#39;,
+ &#39;GSCP&#39;,
+ &#39;GSHO&#39;,
+ &#39;GSIG&#39;,
+ &#39;GST&#39;,
+ &#39;GTWN&#39;,
+ &#39;GTXI&#39;,
+ &#39;GUID&#39;,
+ &#39;GWR&#39;,
+ &#39;GY&#39;,
+ &#39;HART&#39;,
+ &#39;HBHC&#39;,
+ &#39;HBK&#39;,
+ &#39;HCN&#39;,
+ &#39;HCP&#39;,
+ &#39;HDY&#39;,
+ &#39;HEOP&#39;,
+ &#39;HF&#39;,
+ &#39;HFBC&#39;,
+ &#39;HFFC&#39;,
+ &#39;HGG&#39;,
+ &#39;HGR&#39;,
+ &#39;HH&#39;,
+ &#39;HIIQ&#39;,
+ &#39;HLS&#39;,
+ &#39;HMPR&#39;,
+ &#39;HNSN&#39;,
+ &#39;HNT&#39;,
+ &#39;HOS&#39;,
+ &#39;HOTR&#39;,
+ &#39;HPJ&#39;,
+ &#39;HPT&#39;,
+ &#39;HRG&#39;,
+ &#39;HRS&#39;,
+ &#39;HRT&#39;,
+ &#39;HSFC&#39;,
+ &#39;HSNI&#39;,
+ &#39;HSWI&#39;,
+ &#39;HTCH&#39;,
+ &#39;HTS&#39;,
+ &#39;HTWO&#39;,
+ &#39;HUSI&#39;,
+ &#39;HW&#39;,
+ &#39;HYNI&#39;,
+ &#39;HYTM&#39;,
+ &#39;IACI&#39;,
+ &#39;ICGE&#39;,
+ &#39;IDSY&#39;,
+ &#39;IFMI&#39;,
+ &#39;IHS&#39;,
+ &#39;IILG&#39;,
+ &#39;IL&#39;,
+ &#39;ILGN&#39;,
+ &#39;IM&#39;,
+ &#39;IMI&#39;,
+ &#39;IMMY&#39;,
+ &#39;IMN&#39;,
+ &#39;INAP&#39;,
+ &#39;ININ&#39;,
+ &#39;INSY&#39;,
+ &#39;INVN&#39;,
+ &#39;IQNT&#39;,
+ &#39;IRC&#39;,
+ &#39;IRG&#39;,
+ &#39;ISCA&#39;,
+ &#39;ISH&#39;,
+ &#39;ISIS&#39;,
+ &#39;ISLE&#39;,
+ &#39;ISRL&#39;,
+ &#39;ITG&#39;,
+ &#39;IYSA&#39;,
+ &#39;JAH&#39;,
+ &#39;JCP&#39;,
+ &#39;JDSU&#39;,
+ &#39;JEC&#39;,
+ &#39;JGW&#39;,
+ &#39;JIVE&#39;,
+ &#39;JNS&#39;,
+ &#39;JOEZ&#39;,
+ &#39;KBALB&#39;,
+ &#39;KBIO&#39;,
+ &#39;KCG&#39;,
+ &#39;KEM&#39;,
+ &#39;KKD&#39;,
+ &#39;KONA&#39;,
+ &#39;KOOL&#39;,
+ &#39;KORS&#39;,
+ &#39;LABL&#39;,
+ &#39;LACO&#39;,
+ &#39;LBY&#39;,
+ &#39;LDR&#39;,
+ &#39;LECT&#39;,
+ &#39;LEI&#39;,
+ &#39;LF&#39;,
+ &#39;LG&#39;,
+ &#39;LGCY&#39;,
+ &#39;LGF&#39;,
+ &#39;LINTA&#39;,
+ &#39;LION&#39;,
+ &#39;LIOX&#39;,
+ &#39;LLL&#39;,
+ &#39;LLTC&#39;,
+ &#39;LMIA&#39;,
+ &#39;LMOS&#39;,
+ &#39;LNKD&#39;,
+ &#39;LOCK&#39;,
+ &#39;LOJN&#39;,
+ &#39;LPTN&#39;,
+ &#39;LTD&#39;,
+ &#39;LTS&#39;,
+ &#39;LUK&#39;,
+ &#39;LXK&#39;,
+ &#39;MAMS&#39;,
+ &#39;MBRG&#39;,
+ &#39;MBVT&#39;,
+ &#39;MCZ&#39;,
+ &#39;MDCO&#39;,
+ &#39;MDGN&#39;,
+ &#39;MDR&#39;,
+ &#39;MDSO&#39;,
+ &#39;MDVN&#39;,
+ &#39;MEG&#39;,
+ &#39;MELA&#39;,
+ &#39;MENT&#39;,
+ &#39;METH&#39;,
+ &#39;MFLX&#39;,
+ &#39;MFRI&#39;,
+ &#39;MFRM&#39;,
+ &#39;MFSF&#39;,
+ &#39;MGN&#39;,
+ &#39;MILB&#39;,
+ &#39;MJN&#39;,
+ &#39;MLNK&#39;,
+ &#39;MLNX&#39;,
+ &#39;MNGA&#39;,
+ &#39;MNI&#39;,
+ &#39;MNRK&#39;,
+ &#39;MOC&#39;,
+ &#39;MOCO&#39;,
+ &#39;MPAQ&#39;,
+ &#39;MSG&#39;,
+ &#39;MSL&#39;,
+ &#39;MTSN&#39;,
+ &#39;MW&#39;,
+ &#39;MWW&#39;,
+ &#39;MXWL&#39;,
+ &#39;MYCC&#39;,
+ &#39;NANO&#39;,
+ &#39;NATL&#39;,
+ &#39;NAVG&#39;,
+ &#39;NCBC&#39;,
+ &#39;NCI&#39;,
+ &#39;NCIT&#39;,
+ &#39;NCS&#39;,
+ &#39;NFEC&#39;,
+ &#39;NGLS&#39;,
+ &#39;NHTB&#39;,
+ &#39;NILE&#39;,
+ &#39;NKA&#39;,
+ &#39;NLNK&#39;,
+ &#39;NMRX&#39;,
+ &#39;NOR&#39;,
+ &#39;NOVS&#39;,
+ &#39;NPBC&#39;,
+ &#39;NRCIA&#39;,
+ &#39;NRF&#39;,
+ &#39;NSH&#39;,
+ &#39;NSPH&#39;,
+ &#39;NSR&#39;,
+ &#39;NTI&#39;,
+ &#39;NTK&#39;,
+ &#39;NTLS&#39;,
+ &#39;NTY&#39;,
+ &#39;NU&#39;,
+ &#39;NUTR&#39;,
+ &#39;NWBT&#39;,
+ &#39;NWY&#39;,
+ &#39;NXTM&#39;,
+ &#39;NYNY&#39;,
+ &#39;OAK&#39;,
+ &#39;OCLS&#39;,
+ &#39;OCRX&#39;,
+ &#39;OHRP&#39;,
+ &#39;OKSB&#39;,
+ &#39;OME&#39;,
+ &#39;OMN&#39;,
+ &#39;ONI&#39;,
+ &#39;ONTY&#39;,
+ &#39;ONVI&#39;,
+ &#39;OPHT&#39;,
+ &#39;OPXA&#39;,
+ &#39;OREX&#39;,
+ &#39;ORIT&#39;,
+ &#39;ORM&#39;,
+ &#39;ORPN&#39;,
+ &#39;OSIR&#39;,
+ &#39;OTIV&#39;,
+ &#39;OTIX&#39;,
+ &#39;OUTR&#39;,
+ &#39;OVAS&#39;,
+ &#39;OVTI&#39;,
+ &#39;OXBT&#39;,
+ &#39;OXFV&#39;,
+ &#39;OXGN&#39;,
+ &#39;OZM&#39;,
+ &#39;OZRK&#39;,
+ &#39;PAMT&#39;,
+ &#39;PASW&#39;,
+ &#39;PATR&#39;,
+ &#39;PBIB&#39;,
+ &#39;PBNY&#39;,
+ &#39;PCBK&#39;,
+ &#39;PCCC&#39;,
+ &#39;PCLN&#39;,
+ &#39;PCO&#39;,
+ &#39;PDII&#39;,
+ &#39;PDX&#39;,
+ &#39;PEGI&#39;,
+ &#39;PERF&#39;,
+ &#39;PETX&#39;,
+ &#39;PHII&#39;,
+ &#39;PHMD&#39;,
+ &#39;PIP&#39;,
+ &#39;PIR&#39;,
+ &#39;PJC&#39;,
+ &#39;PKY&#39;,
+ &#39;PLCM&#39;,
+ &#39;PLPM&#39;,
+ &#39;PMDX&#39;,
+ &#39;PNRA&#39;,
+ &#39;PNY&#39;,
+ &#39;POWR&#39;,
+ &#39;PPHM&#39;,
+ &#39;PPS&#39;,
+ &#39;PQ&#39;,
+ &#39;PRE&#39;,
+ &#39;PRMW&#39;,
+ &#39;PRXL&#39;,
+ &#39;PSDV&#39;,
+ &#39;PSUN&#39;,
+ &#39;PTIE&#39;,
+ &#39;PTSX&#39;,
+ &#39;PTX&#39;,
+ &#39;PULB&#39;,
+ &#39;PVTB&#39;,
+ &#39;PWX&#39;,
+ &#39;PX&#39;,
+ &#39;Q&#39;,
+ &#39;QLGC&#39;,
+ &#39;QLIK&#39;,
+ &#39;QSII&#39;,
+ &#39;QTM&#39;,
+ &#39;RAI&#39;,
+ &#39;RAS&#39;,
+ &#39;RATE&#39;,
+ &#39;RAX&#39;,
+ &#39;RBCV&#39;,
+ &#39;RBPAA&#39;,
+ &#39;RCKB&#39;,
+ &#39;RDC&#39;,
+ &#39;RDEN&#39;,
+ &#39;RECN&#39;,
+ &#39;REEDR&#39;,
+ &#39;REN&#39;,
+ &#39;REXI&#39;,
+ &#39;REXX&#39;,
+ &#39;RHT&#39;,
+ &#39;RJET&#39;,
+ &#39;RLD&#39;,
+ &#39;RLOC&#39;,
+ &#39;RLOG&#39;,
+ &#39;RNF&#39;,
+ &#39;RNN&#39;,
+ &#39;RNO&#39;,
+ &#39;ROIAK&#39;,
+ &#39;ROVI&#39;,
+ &#39;ROX&#39;,
+ &#39;RPI&#39;,
+ &#39;RPRX&#39;,
+ &#39;RPTP&#39;,
+ &#39;RRMS&#39;,
+ &#39;RSE&#39;,
+ &#39;RSO&#39;,
+ &#39;RSOL&#39;,
+ &#39;RSTI&#39;,
+ &#39;RTEC&#39;,
+ &#39;RTK&#39;,
+ &#39;RTN&#39;,
+ &#39;SAAS&#39;,
+ &#39;SBSA&#39;,
+ &#39;SBY&#39;,
+ &#39;SCBT&#39;,
+ &#39;SCLN&#39;,
+ &#39;SCSS&#39;,
+ &#39;SEMG&#39;,
+ &#39;SEV&#39;,
+ &#39;SFLY&#39;,
+ &#39;SGB&#39;,
+ &#39;SGNT&#39;,
+ &#39;SGYP&#39;,
+ &#39;SHLD&#39;,
+ &#39;SHOR&#39;,
+ &#39;SHOS&#39;,
+ &#39;SIFI&#39;,
+ &#39;SIRO&#39;,
+ &#39;SKH&#39;,
+ &#39;SKUL&#39;,
+ &#39;SLH&#39;,
+ &#39;SLI&#39;,
+ &#39;SLTC&#39;,
+ &#39;SN&#39;,
+ &#39;SNAK&#39;,
+ &#39;SNBC&#39;,
+ &#39;SNDK&#39;,
+ &#39;SNH&#39;,
+ &#39;SNHY&#39;,
+ &#39;SNT&#39;,
+ &#39;SNTA&#39;,
+ &#39;SOCB&#39;,
+ &#39;SONS&#39;,
+ &#39;SPA&#39;,
+ &#39;SPAN&#39;,
+ &#39;SPAR&#39;,
+ &#39;SPEX&#39;,
+ &#39;SPF&#39;,
+ &#39;SPLS&#39;,
+ &#39;SPNC&#39;,
+ &#39;SPNHU&#39;,
+ &#39;SPPR&#39;,
+ &#39;SPU&#39;,
+ &#39;SPW&#39;,
+ &#39;SQI&#39;,
+ &#39;SQNM&#39;,
+ &#39;SSFN&#39;,
+ &#39;SSH&#39;,
+ &#39;SSI&#39;,
+ &#39;SSNI&#39;,
+ &#39;SSS&#39;,
+ &#39;STCK&#39;,
+ &#39;STJ&#39;,
+ &#39;STRZA&#39;,
+ &#39;SUBK&#39;,
+ &#39;SWFT&#39;,
+ &#39;SWHC&#39;,
+ &#39;SXE&#39;,
+ &#39;SYMC&#39;,
+ &#39;SYMX&#39;,
+ &#39;SYRG&#39;,
+ &#39;SZYM&#39;,
+ &#39;TASR&#39;,
+ &#39;TBLC&#39;,
+ &#39;TE&#39;,
+ &#39;TELK&#39;,
+ &#39;TESO&#39;,
+ &#39;TFM&#39;,
+ &#39;TGE&#39;,
+ &#39;THLD&#39;,
+ &#39;THRX&#39;,
+ &#39;TIK&#39;,
+ &#39;TIS&#39;,
+ &#39;TIVO&#39;,
+ &#39;TLLP&#39;,
+ &#39;TLP&#39;,
+ &#39;TMK&#39;,
+ &#39;TMNG&#39;,
+ &#39;TOF&#39;,
+ &#39;TOWR&#39;,
+ &#39;TPLM&#39;,
+ &#39;TRCB&#39;,
+ &#39;TRGT&#39;,
+ &#39;TRK&#39;,
+ &#39;TRMR&#39;,
+ &#39;TROV&#39;,
+ &#39;TRR&#39;,
+ &#39;TSET&#39;,
+ &#39;TSLU&#39;,
+ &#39;TSO&#39;,
+ &#39;TSPT&#39;,
+ &#39;TSRA&#39;,
+ &#39;TSS&#39;,
+ &#39;TST&#39;,
+ &#39;TTS&#39;,
+ &#39;TUES&#39;,
+ &#39;TUMI&#39;,
+ &#39;TWC&#39;,
+ &#39;TWRT&#39;,
+ &#39;TXU&#39;,
+ &#39;TYC&#39;,
+ &#39;TYPE&#39;,
+ &#39;UAM&#39;,
+ &#39;UBSH&#39;,
+ &#39;UCFC&#39;,
+ &#39;ULTI&#39;,
+ &#39;UNIS&#39;,
+ &#39;UNT&#39;,
+ &#39;UNTD&#39;,
+ &#39;UNXL&#39;,
+ &#39;UPIP&#39;,
+ &#39;UQM&#39;,
+ &#39;URRE&#39;,
+ &#39;USBI&#39;,
+ &#39;USG&#39;,
+ &#39;USGL&#39;,
+ &#39;USMO&#39;,
+ &#39;USTR&#39;,
+ &#39;UTEK&#39;,
+ &#39;UTIW&#39;,
+ &#39;UTX&#39;,
+ &#39;VASC&#39;,
+ &#39;VDSI&#39;,
+ &#39;VIA&#39;,
+ &#39;VICL&#39;,
+ &#39;VII&#39;,
+ &#39;VNTV&#39;,
+ &#39;VPFG&#39;,
+ &#39;VPRT&#39;,
+ &#39;VRML&#39;,
+ &#39;VRNG&#39;,
+ &#39;VRX&#39;,
+ &#39;VSCI&#39;,
+ &#39;VSCP&#39;,
+ &#39;VSI&#39;,
+ &#39;VSR&#39;,
+ &#39;VTUS&#39;,
+ &#39;VVIN&#39;,
+ &#39;WAGE&#39;,
+ &#39;WAIR&#39;,
+ &#39;WBB&#39;,
+ &#39;WBC&#39;,
+ &#39;WBMD&#39;,
+ &#39;WCG&#39;,
+ &#39;WDPT&#39;,
+ &#39;WDWT&#39;,
+ &#39;WEBK&#39;,
+ &#39;WFBI&#39;,
+ &#39;WFD&#39;,
+ &#39;WG&#39;,
+ &#39;WGA&#39;,
+ &#39;WGP&#39;,
+ &#39;WIBC&#39;,
+ &#39;WLB&#39;,
+ &#39;WLP&#39;,
+ &#39;WNR&#39;,
+ &#39;WNRL&#39;,
+ &#39;WOOF&#39;,
+ &#39;WPO&#39;,
+ &#39;WR&#39;,
+ &#39;WSH&#39;,
+ &#39;WSTC&#39;,
+ &#39;WTR&#39;,
+ &#39;WTW&#39;,
+ &#39;WWAV&#39;,
+ &#39;WYN&#39;,
+ &#39;XBKS&#39;,
+ &#39;XCO&#39;,
+ &#39;XGTI&#39;,
+ &#39;XLRT&#39;,
+ &#39;XNPT&#39;,
+ &#39;XNWK&#39;,
+ &#39;XON&#39;,
+ &#39;XTEX&#39;,
+ &#39;XXIA&#39;,
+ &#39;YDKN&#39;,
+ &#39;YHOO&#39;,
+ &#39;YOD&#39;,
+ &#39;YUME&#39;,
+ &#39;ZBB&#39;,
+ &#39;ZFC&#39;,
+ &#39;ZHNE&#39;,
+ &#39;ZINC&#39;,
+ &#39;ZLCS&#39;,
+ &#39;ZLTQ&#39;,
+ &#39;ZMH&#39;,
+ &#39;ZP&#39;,
+ &#39;ZTM&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
     {% endraw %}
 
@@ -488,7 +7344,7 @@ sidebar: home_sidebar
     
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="c1"># read the old data</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;add_ticker_info.csv&quot;</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span>
     <span class="n">current</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># figure out, which ticker information hasn&#39;t been downloaded already</span>
@@ -513,7 +7369,7 @@ sidebar: home_sidebar
     <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;duration: &quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
 
-    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -530,10 +7386,26 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_add_info</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_add_info</span><span class="p">(</span><span class="n">tickers</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>new entries:  0
+(3053, 6)
+duration:  0.049045562744140625
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -614,7 +7486,7 @@ sidebar: home_sidebar
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_additional_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -731,6 +7603,13 @@ sidebar: home_sidebar
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process_stock_data</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">df_add_info</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
     <span class="n">ticker</span> <span class="o">=</span> <span class="n">get_ticker_from_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">new_file</span> <span class="o">=</span> <span class="n">stock_data_folder</span> <span class="o">+</span> <span class="n">ticker</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">ticker</span> <span class="o">+</span> <span class="s2">&quot;_processed.csv&quot;</span>
+    
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">new_file</span><span class="p">):</span>
+        <span class="k">return</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;process: &quot;</span><span class="p">,</span> <span class="n">ticker</span><span class="p">)</span>
+
     <span class="n">df_stock</span> <span class="o">=</span> <span class="n">read_stockdata</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">df_stock_add_info</span> <span class="o">=</span> <span class="n">df_add_info</span><span class="p">[</span><span class="n">df_add_info</span><span class="o">.</span><span class="n">ticker</span> <span class="o">==</span> <span class="n">ticker</span><span class="p">]</span>
     
@@ -738,7 +7617,7 @@ sidebar: home_sidebar
     <span class="n">norm_historical_data</span><span class="p">(</span><span class="n">df_stock</span><span class="p">,</span> <span class="n">sharesOutstanding</span><span class="p">)</span>
     <span class="n">create_features_from_historical_data</span><span class="p">(</span><span class="n">df_stock</span><span class="p">)</span>
     
-    <span class="n">df_stock</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="n">ticker</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">ticker</span> <span class="o">+</span> <span class="s2">&quot;_processed.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">df_stock</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">new_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -775,8 +7654,7 @@ sidebar: home_sidebar
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_add_info</span> <span class="o">=</span> <span class="n">read_additional_info</span><span class="p">()</span>
 <span class="n">files</span> <span class="o">=</span> <span class="n">get_data_files</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-    <span class="k">pass</span>
-    <span class="c1"># process_stock_data(filename, df_add_info)</span>
+    <span class="n">process_stock_data</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">df_add_info</span><span class="p">)</span>
 </pre></div>
 
     </div>
