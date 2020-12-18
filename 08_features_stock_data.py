@@ -23,7 +23,7 @@ def read_stockdata(filename: str) -> pd.DataFrame:
 
 
 def read_additional_info() -> pd.DataFrame:
-    return pd.read_csv(stock_data_folder + "add_ticker_info.csv", sep=',', encoding='utf-8', header=0)
+    return pd.read_csv(all_data_local_folder + "08_add_ticker_info.csv", sep=',', encoding='utf-8', header=0)
 
 
 def get_ticker_from_filename(filename: str) -> str:
@@ -64,6 +64,7 @@ def create_features_from_historical_data(df: pd.DataFrame):
 
 def process_stock_data(filename: str, df_add_info: pd.DataFrame):
     ticker = get_ticker_from_filename(filename)
+
     print("process: ", ticker)
     df_stock = read_stockdata(filename)
     df_stock_add_info = df_add_info[df_add_info.ticker == ticker]
@@ -72,6 +73,7 @@ def process_stock_data(filename: str, df_add_info: pd.DataFrame):
     norm_historical_data(df_stock, sharesOutstanding)
     create_features_from_historical_data(df_stock)
 
+    df_stock['ticker'] = ticker # add a ticker column
     df_stock.to_csv(stock_data_folder + ticker[0] + "/" + ticker + "_processed.csv", sep=',', encoding='utf-8',
                     index=False)
 
