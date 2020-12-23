@@ -21,11 +21,12 @@ def calculate_growth(all_df: pd.DataFrame, grouped_df: pd.DataFrame, data_cols:L
         col_name_p = new_col_prefix + "_p"
         col_name_n = new_col_prefix + "_n"
 
-        all_df.loc[grouped_df.index[0], col_name_p] = 1.0
+        all_df.loc[grouped_df.index[0], col_name_p] = 0.0
         all_df.loc[grouped_df.index[0], col_name_n] = 0.0
 
         is_positiv_arr = (grouped_df[data_col] > 0.0).to_numpy()
         is_negativ_arr = (grouped_df[data_col] < 0.0).to_numpy()
+
         data_arr = all_df.loc[grouped_df.index, data_col].to_numpy()
 
         change_arr = ((data_arr[1:] - data_arr[:-1]) / data_arr[:-1])
@@ -45,13 +46,13 @@ def load_data() -> pd.DataFrame:
     return df
 
 
-df = load_data()
-
-
-def call_function(x):
-    print(x[0])
-    list_data_cols, list_new_cols = create_growth_rate_lists()
-    calculate_growth(df, x[1], list_data_cols, list_new_cols)
+# df = load_data()
+# list_data_cols, list_new_cols = create_growth_rate_lists()
+#
+# def call_function(x):
+#     print(x[0])
+#
+#     calculate_growth(df, x[1], list_data_cols, list_new_cols)
 
 
 if __name__ ==  '__main__':
@@ -59,10 +60,29 @@ if __name__ ==  '__main__':
     import numpy as np
     np.seterr(all='ignore')
 
+    df = load_data()
+    list_data_cols, list_new_cols = create_growth_rate_lists()
+
+    for newCol in list_new_cols:
+        col_name_p = newCol + "_p"
+        col_name_n = newCol + "_n"
+        df[col_name_n] = 0.0
+        df[col_name_p] = 0.0
+
     start = time.time()
-    pool = Pool(7)
-    pool.map(call_function, df.groupby(['cik', 'fp']))
-    pool.close()
-    pool.join()
+    groupList = list(df.groupby(['cik', 'fp']))
+    print(len(groupList))
+    counter = 0
+    for group in groupList:
+        counter += 1
+        if (counter % 500) == 0:
+            print(".", end="")
+        calculate_growth(df, group[1], list_data_cols, list_new_cols)
+
+    # pool = Pool(7)
+    # pool.map(call_function, groupList[:10])
+    # pool.close()
+    # pool.join()
+
     print("duration: ", time.time() - start)
     df.to_csv("./data/07_all_features_complete.csv", index=False)
