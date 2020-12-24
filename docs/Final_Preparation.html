@@ -248,7 +248,7 @@ number of unique industries:  142
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;industry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;industry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&amp;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
-<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;industry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;—&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;industry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;�&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -997,7 +997,7 @@ Sice we don't know how we will use them, we store the data with spark as a parqu
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>12
-29
+142
 </pre>
 </div>
 </div>
@@ -1516,7 +1516,7 @@ Name: sector, dtype: int64</pre>
     </tr>
   </tbody>
 </table>
-<p>14 rows × 56 columns</p>
+<p>14 rows � 56 columns</p>
 </div>
 </div>
 
@@ -1535,7 +1535,52 @@ Name: sector, dtype: int64</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">industries</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reit_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="s1">&#39;REIT&#39;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">,</span> <span class="n">industries</span><span class="p">))</span>
+<span class="n">real_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="s1">&#39;RealEstate&#39;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">,</span> <span class="n">industries</span><span class="p">))</span>
+<span class="n">gasoil_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="s1">&#39;Gas&#39;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">,</span> <span class="n">industries</span><span class="p">))</span>
+<span class="n">health_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="s1">&#39;Health&#39;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">,</span> <span class="n">industries</span><span class="p">))</span>
+<span class="n">insurance_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="s1">&#39;Insurance&#39;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">,</span> <span class="n">industries</span><span class="p">))</span>
+<span class="n">rest</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">industries</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">reit_list</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">gasoil_list</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">real_list</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">health_list</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">insurance_list</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reit_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gasoil_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">real_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">health_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">insurance_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rest</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1547,70 +1592,16 @@ Name: sector, dtype: int64</pre>
 
 <div class="output_area">
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([&#39;Airlines&#39;, &#39;Semiconductors&#39;, &#39;Consumer Electronics&#39;,
-       &#39;Insurance—Life&#39;, &#39;Specialty Retail&#39;,
-       &#39;Building Products &amp; Equipment&#39;, &#39;Aluminum&#39;, &#39;REIT—Diversified&#39;,
-       &#39;Diagnostics &amp; Research&#39;, &#39;Banks—Regional&#39;,
-       &#39;Specialty Business Services&#39;, &#39;Auto &amp; Truck Dealerships&#39;,
-       &#39;Asset Management&#39;, &#39;Medical Devices&#39;, &#39;REIT—Mortgage&#39;,
-       &#39;Medical Distribution&#39;, &#39;Scientific &amp; Technical Instruments&#39;,
-       &#39;Drug Manufacturers—General&#39;, &#39;Biotechnology&#39;, &#39;REIT—Residential&#39;,
-       &#39;Information Technology Services&#39;, &#39;Electronic Components&#39;,
-       &#39;Specialty Industrial Machinery&#39;, &#39;Oil &amp; Gas Equipment &amp; Services&#39;,
-       &#39;Travel Services&#39;, &#39;Electrical Equipment &amp; Parts&#39;,
-       &#39;Other Industrial Metals &amp; Mining&#39;, &#39;Packaged Foods&#39;,
-       &#39;Security &amp; Protection Services&#39;, &#39;Apparel Manufacturing&#39;,
-       &#39;Credit Services&#39;, &#39;Oil &amp; Gas E&amp;P&#39;, &#39;Oil &amp; Gas Midstream&#39;,
-       &#39;Medical Instruments &amp; Supplies&#39;, &#39;Insurance—Property &amp; Casualty&#39;,
-       &#39;Software—Infrastructure&#39;, &#39;Paper &amp; Paper Products&#39;,
-       &#39;Building Materials&#39;, &#39;Education &amp; Training Services&#39;,
-       &#39;Engineering &amp; Construction&#39;, &#39;Trucking&#39;, &#39;Recreational Vehicles&#39;,
-       &#39;REIT—Retail&#39;, &#39;Staffing &amp; Employment Services&#39;, &#39;Conglomerates&#39;,
-       &#39;Rental &amp; Leasing Services&#39;, &#39;Internet Content &amp; Information&#39;,
-       &#39;Capital Markets&#39;, &#39;Thermal Coal&#39;, &#39;Utilities—Diversified&#39;,
-       &#39;Residential Construction&#39;, &#39;Software—Application&#39;, &#39;Copper&#39;,
-       &#39;Steel&#39;, &#39;Utilities—Regulated Water&#39;,
-       &#39;Household &amp; Personal Products&#39;, &#39;Telecom Services&#39;, &#39;Auto Parts&#39;,
-       &#39;Computer Hardware&#39;, &#39;Textile Manufacturing&#39;, &#39;Railroads&#39;,
-       &#39;Lumber &amp; Wood Production&#39;, &#39;Beverages—Non-Alcoholic&#39;,
-       &#39;Tools &amp; Accessories&#39;, &#39;Semiconductor Equipment &amp; Materials&#39;,
-       &#39;Utilities—Regulated Electric&#39;, &#39;Apparel Retail&#39;, &#39;Restaurants&#39;,
-       &#39;Discount Stores&#39;, &#39;Aerospace &amp; Defense&#39;, &#39;REIT—Specialty&#39;,
-       &#39;Luxury Goods&#39;, &#39;Internet Retail&#39;, &#39;Communication Equipment&#39;,
-       &#39;Agricultural Inputs&#39;, &#39;REIT—Office&#39;, &#39;Insurance Brokers&#39;,
-       &#39;Waste Management&#39;, &#39;Drug Manufacturers—Specialty &amp; Generic&#39;,
-       &#39;Grocery Stores&#39;, &#39;Leisure&#39;, &#39;Pollution &amp; Treatment Controls&#39;,
-       &#39;Personal Services&#39;, &#39;Furnishings, Fixtures &amp; Appliances&#39;,
-       &#39;Business Equipment &amp; Supplies&#39;, &#39;Pharmaceutical Retailers&#39;,
-       &#39;Chemicals&#39;, &#39;Mortgage Finance&#39;, &#39;Industrial Distribution&#39;,
-       &#39;Advertising Agencies&#39;, &#39;Insurance—Specialty&#39;, &#39;Healthcare Plans&#39;,
-       &#39;Entertainment&#39;, &#39;REIT—Healthcare Facilities&#39;,
-       &#39;Home Improvement Retail&#39;, &#39;Department Stores&#39;, &#39;Solar&#39;,
-       &#39;Specialty Chemicals&#39;, &#39;Medical Care Facilities&#39;,
-       &#39;Oil &amp; Gas Refining &amp; Marketing&#39;, &#39;Integrated Freight &amp; Logistics&#39;,
-       &#39;Consulting Services&#39;, &#39;Electronics &amp; Computer Distribution&#39;,
-       &#39;Real Estate Services&#39;, &#39;Insurance—Diversified&#39;, &#39;REIT—Industrial&#39;,
-       &#39;Farm Products&#39;, &#39;Resorts &amp; Casinos&#39;, &#39;Marine Shipping&#39;,
-       &#39;Health Information Services&#39;, &#39;Confectioners&#39;, &#39;Publishing&#39;,
-       &#39;Insurance—Reinsurance&#39;, &#39;Oil &amp; Gas Drilling&#39;,
-       &#39;Financial Data &amp; Stock Exchanges&#39;, &#39;Gold&#39;,
-       &#39;Farm &amp; Heavy Construction Machinery&#39;,
-       &#39;Electronic Gaming &amp; Multimedia&#39;, &#39;REIT—Hotel &amp; Motel&#39;,
-       &#39;Broadcasting&#39;, &#39;Metal Fabrication&#39;, &#39;Packaging &amp; Containers&#39;,
-       &#39;Shell Companies&#39;, &#39;Banks—Diversified&#39;,
-       &#39;Utilities—Independent Power Producers&#39;, &#39;Utilities—Regulated Gas&#39;,
-       &#39;Tobacco&#39;, &#39;Footwear &amp; Accessories&#39;, &#39;Diversified Machinery&#39;,
-       &#39;Lodging&#39;, &#39;Beverages—Wineries &amp; Distilleries&#39;,
-       &#39;Food Distribution&#39;, &#39;Auto Manufacturers&#39;, &#39;Utilities—Renewable&#39;,
-       &#39;Real Estate—Diversified&#39;, nan, &#39;Beverages—Brewers&#39;,
-       &#39;Oil &amp; Gas Integrated&#39;, &#39;Airports &amp; Air Services&#39;, &#39;Coking Coal&#39;,
-       &#39;Financial Conglomerates&#39;, &#39;Real Estate—Development&#39;, &#39;Uranium&#39;],
-      dtype=object)</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>9
+7
+3
+3
+6
+115
+{&#39;CapitalMarkets&#39;, &#39;ApparelManufacturing&#39;, &#39;FoodDistribution&#39;, &#39;Airlines&#39;, &#39;AutoTruckDealerships&#39;, &#39;DiversifiedMachinery&#39;, &#39;BuildingProductsEquipment&#39;, &#39;Semiconductors&#39;, &#39;LumberWoodProduction&#39;, &#39;Entertainment&#39;, &#39;ResidentialConstruction&#39;, &#39;Lodging&#39;, &#39;Tobacco&#39;, &#39;DrugManufacturersSpecialtyGeneric&#39;, &#39;RecreationalVehicles&#39;, &#39;MortgageFinance&#39;, &#39;InformationTechnologyServices&#39;, &#39;AgriculturalInputs&#39;, &#39;Steel&#39;, &#39;MedicalCareFacilities&#39;, &#39;ElectronicComponents&#39;, &#39;Gold&#39;, &#39;SoftwareApplication&#39;, &#39;UtilitiesRegulatedWater&#39;, &#39;Leisure&#39;, &#39;MarineShipping&#39;, &#39;TravelServices&#39;, &#39;SpecialtyRetail&#39;, &#39;FarmHeavyConstructionMachinery&#39;, &#39;AutoParts&#39;, &#39;ApparelRetail&#39;, &#39;FinancialConglomerates&#39;, &#39;SpecialtyIndustrialMachinery&#39;, &#39;Railroads&#39;, &#39;BeveragesBrewers&#39;, &#39;AirportsAirServices&#39;, &#39;Confectioners&#39;, &#39;TelecomServices&#39;, &#39;Chemicals&#39;, &#39;AssetManagement&#39;, &#39;InternetContentInformation&#39;, &#39;Broadcasting&#39;, &#39;HomeImprovementRetail&#39;, &#39;WasteManagement&#39;, &#39;PaperPaperProducts&#39;, &#39;ShellCompanies&#39;, &#39;LuxuryGoods&#39;, &#39;UtilitiesIndependentPowerProducers&#39;, &#39;CreditServices&#39;, &#39;OtherIndustrialMetalsMining&#39;, &#39;ConsumerElectronics&#39;, &#39;Conglomerates&#39;, &#39;PackagedFoods&#39;, &#39;Restaurants&#39;, &#39;SpecialtyBusinessServices&#39;, &#39;ComputerHardware&#39;, &#39;ElectronicsComputerDistribution&#39;, &#39;AdvertisingAgencies&#39;, &#39;ToolsAccessories&#39;, &#39;ScientificTechnicalInstruments&#39;, &#39;FootwearAccessories&#39;, &#39;ThermalCoal&#39;, &#39;DiagnosticsResearch&#39;, &#39;PharmaceuticalRetailers&#39;, &#39;PackagingContainers&#39;, &#39;SecurityProtectionServices&#39;, &#39;Publishing&#39;, &#39;Trucking&#39;, &#39;DrugManufacturersGeneral&#39;, &#39;ElectricalEquipmentParts&#39;, &#39;Furnishings,FixturesAppliances&#39;, &#39;InternetRetail&#39;, &#39;CommunicationEquipment&#39;, &#39;GroceryStores&#39;, &#39;TextileManufacturing&#39;, &#39;RentalLeasingServices&#39;, &#39;BusinessEquipmentSupplies&#39;, &#39;AutoManufacturers&#39;, &#39;PersonalServices&#39;, &#39;HouseholdPersonalProducts&#39;, &#39;BeveragesWineriesDistilleries&#39;, &#39;Biotechnology&#39;, &#39;StaffingEmploymentServices&#39;, &#39;SemiconductorEquipmentMaterials&#39;, &#39;Solar&#39;, &#39;MetalFabrication&#39;, &#39;CokingCoal&#39;, &#39;ConsultingServices&#39;, &#39;ElectronicGamingMultimedia&#39;, &#39;UtilitiesDiversified&#39;, &#39;IntegratedFreightLogistics&#39;, &#39;UtilitiesRegulatedElectric&#39;, &#39;DiscountStores&#39;, &#39;BeveragesNon-Alcoholic&#39;, &#39;EducationTrainingServices&#39;, &#39;MedicalInstrumentsSupplies&#39;, &#39;Copper&#39;, &#39;DepartmentStores&#39;, &#39;PollutionTreatmentControls&#39;, &#39;BuildingMaterials&#39;, &#39;AerospaceDefense&#39;, &#39;Aluminum&#39;, &#39;BanksRegional&#39;, &#39;EngineeringConstruction&#39;, &#39;UtilitiesRenewable&#39;, &#39;Uranium&#39;, &#39;SoftwareInfrastructure&#39;, &#39;SpecialtyChemicals&#39;, &#39;MedicalDevices&#39;, &#39;MedicalDistribution&#39;, &#39;FarmProducts&#39;, &#39;FinancialDataStockExchanges&#39;, &#39;IndustrialDistribution&#39;, &#39;BanksDiversified&#39;, &#39;ResortsCasinos&#39;}
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -1699,7 +1690,7 @@ Name: sector, dtype: int64</pre>
       <th>3</th>
       <td>AAME</td>
       <td>Financial Services</td>
-      <td>Insurance—Life</td>
+      <td>Insurance�Life</td>
       <td>4.634046e+07</td>
       <td>2.041430e+07</td>
       <td>NaN</td>
@@ -1753,7 +1744,7 @@ Name: sector, dtype: int64</pre>
       <th>3044</th>
       <td>GILD</td>
       <td>Healthcare</td>
-      <td>Drug Manufacturers—General</td>
+      <td>Drug Manufacturers�General</td>
       <td>7.616448e+10</td>
       <td>1.253530e+09</td>
       <td>NaN</td>
@@ -1769,7 +1760,7 @@ Name: sector, dtype: int64</pre>
     </tr>
   </tbody>
 </table>
-<p>2060 rows × 6 columns</p>
+<p>2060 rows � 6 columns</p>
 </div>
 </div>
 

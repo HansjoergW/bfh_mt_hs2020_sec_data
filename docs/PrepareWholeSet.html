@@ -70,10 +70,10 @@ sidebar: home_sidebar
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Basic Definitions</span>
-<span class="n">all_zip_folder</span> <span class="o">=</span> <span class="s2">&quot;d:/data/sec_zips/&quot;</span>
-<span class="n">target_csv_folder</span> <span class="o">=</span> <span class="s2">&quot;d:/data/zip_joined/&quot;</span>
-<span class="n">extract_temp_folder</span> <span class="o">=</span> <span class="s2">&quot;d:/data/tmp/&quot;</span>
-<span class="n">all_parquet_folder</span> <span class="o">=</span> <span class="s2">&quot;d:/data/parquet/&quot;</span>
+<span class="n">all_zip_folder</span>      <span class="o">=</span> <span class="s2">&quot;d:/data_mt/01_1_sec_zips/&quot;</span>
+<span class="n">target_csv_folder</span>   <span class="o">=</span> <span class="s2">&quot;d:/data_mt/01_2_zip_joined/&quot;</span>
+<span class="n">all_parquet_folder</span>  <span class="o">=</span> <span class="s2">&quot;d:/data_mt/01_3_all_parquet/&quot;</span>
+<span class="n">extract_temp_folder</span> <span class="o">=</span> <span class="s2">&quot;d:/data_mt/01_x_tmp/&quot;</span>
 </pre></div>
 
     </div>
@@ -132,7 +132,7 @@ sidebar: home_sidebar
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://192.168.0.163:4041">Spark UI</a></p>
+            <p><a href="http://192.168.0.163:4040">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -551,7 +551,7 @@ sidebar: home_sidebar
     <span class="n">df_all</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">target_csv_folder</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dateFormat</span><span class="o">=</span><span class="s2">&quot;yyyyMMdd&quot;</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
     
     <span class="c1"># prepare cik_ticker data</span>
-    <span class="n">df_cik_ticker</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;./data/cik_ticker.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)[[</span><span class="s1">&#39;CIK&#39;</span><span class="p">,</span><span class="s1">&#39;Ticker&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span><span class="s1">&#39;Exchange&#39;</span><span class="p">]]</span>
+    <span class="n">df_cik_ticker</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;./data_mt/cik_ticker.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)[[</span><span class="s1">&#39;CIK&#39;</span><span class="p">,</span><span class="s1">&#39;Ticker&#39;</span><span class="p">,</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span><span class="s1">&#39;Exchange&#39;</span><span class="p">]]</span>
     <span class="n">df_cik_ticker</span> <span class="o">=</span> <span class="n">df_cik_ticker</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s2">&quot;name_cik_tic&quot;</span><span class="p">)</span> \
                                 <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">&#39;Ticker&#39;</span><span class="p">,</span> <span class="s2">&quot;ticker&quot;</span><span class="p">)</span> \
                                 <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">&#39;Exchange&#39;</span><span class="p">,</span> <span class="s2">&quot;exchange&quot;</span><span class="p">)</span> \
@@ -747,7 +747,9 @@ duration:  0.01799941062927246
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># clean up temp folder and stop spark</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">extract_temp_folder</span><span class="p">,</span>  <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </pre></div>
 
     </div>
