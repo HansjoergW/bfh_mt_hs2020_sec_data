@@ -1,16 +1,20 @@
 from multiprocessing import Pool
 from typing import List, Tuple
 import pandas as pd
+import shutil
+
+all_features_folder   = "D:/data_mt/07_features/"
+all_data_local_folder = "./data/"
 
 def create_growth_rate_lists() -> Tuple[List[str], List[str]]:
-    list_data_cols = ['Revenues_hj', 'GrossProfit', 'OperatingIncomeLoss_hj', 'NetIncomeLoss_hj', 'RetainedEarnings_hj', 'Equity_hj']
-    list_new_cols  = ['gr_revenue' , 'gr_grosspr' , 'gr_opiincome',           'gr_netincome',     'gr_earnings',         'gr_equity']
+    list_data_cols = ['c_Revenues', 'GrossProfit', 'c_OperatingIncomeLoss', 'c_NetIncomeLoss', 'c_RetainedEarnings', 'c_Equity']
+    list_new_cols  = ['gr_revenue', 'gr_grosspr' , 'gr_opiincome',          'gr_netincome',    'gr_earnings',        'gr_equity']
 
     list_data_cols.extend(['AssetsCurrent', 'AssetsNoncurrent', 'LiabilitiesCurrent', 'LiabilitiesNoncurrent'])
     list_new_cols.extend( ['gr_asscur',     'gr_assnoncur',     'gr_liabcur',         'gr_liabnoncur'        ])
 
-    list_data_cols.extend(['CashFromInvesting', 'CashFromFinancing', 'CashFromOperating', 'PaymentsOfDividendsTotal_hj'])
-    list_new_cols.extend( ['gr_cashfrominv',    'gr_cashfromfin',    'gr_cashfromope',    'gr_dividends'])
+    list_data_cols.extend(['c_CashFromInvesting', 'c_CashFromFinancing', 'c_CashFromOperating', 'c_PaymentsOfDividendsTotal'])
+    list_new_cols.extend( ['gr_cashfrominv',      'gr_cashfromfin',      'gr_cashfromope',       'gr_dividends'])
 
     return list_data_cols, list_new_cols
 
@@ -36,7 +40,7 @@ def calculate_growth(all_df: pd.DataFrame, grouped_df: pd.DataFrame, data_cols:L
 
 
 def load_data() -> pd.DataFrame:
-    df = pd.read_csv("./data/07_all_features_ratios.csv")
+    df = pd.read_csv(all_features_folder + "07_01_features_ratios.csv")
 
     df.period = pd.to_datetime(df.period)
     df.filed = pd.to_datetime(df.filed)
@@ -85,4 +89,7 @@ if __name__ ==  '__main__':
     # pool.join()
 
     print("duration: ", time.time() - start)
-    df.to_csv("./data/07_all_features_complete.csv", index=False)
+    df.to_csv(all_features_folder + "07_02_features_growth.csv", index=False)
+    
+    # make copy to directory under git control
+    shutil.copy(all_features_folder + "07_02_features_growth.csv", all_data_local_folder + "07_02_features_growth.csv")
