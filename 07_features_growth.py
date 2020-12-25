@@ -47,6 +47,7 @@ def load_data() -> pd.DataFrame:
 
     df.sort_values('period', inplace = True)
     df.reset_index(inplace = True)
+    df = df.drop(['index'], axis=1)
     return df
 
 
