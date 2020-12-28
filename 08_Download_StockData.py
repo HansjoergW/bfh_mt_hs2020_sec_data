@@ -6,12 +6,15 @@ from typing import List, Dict
 from multiprocessing import Pool
 import time
 
+mt_folder             = "D:/data_mt/"
+all_features_folder   = "D:/data_mt/07_features/"
+stock_data_folder     = "D:/data_mt/08_stock_data/"
+
 all_data_local_folder = "./data/"
-stock_data_folder = "D:/data/stocks/sec/"
 
 
 def load_data() -> pd.DataFrame:
-    df = pd.read_csv(all_data_local_folder + "07_all_features_complete_corrected.csv")
+    df = pd.read_csv(all_features_folder + "07_03_features_growth_corrected.csv")
 
     df.period = pd.to_datetime(df.period)
     df.filed = pd.to_datetime(df.filed)
@@ -120,7 +123,7 @@ def get_add_data(ticker:str) -> Dict[str,str]:
 
 
 def parallel_download_add_info(tickers: List[str]):
-    filename = all_data_local_folder + "08_add_ticker_info.csv"
+    filename = stock_data_folder + "08_add_ticker_info.csv"
     current = pd.read_csv(filename, sep=',', encoding='utf-8', header=0)
 
     current_tickers = current.ticker.to_list()
@@ -146,9 +149,11 @@ def parallel_download_add_info(tickers: List[str]):
     print(data.shape)
     print("duration: ", time.time() - start)
 
-    data.to_csv(all_data_local_folder + "08_add_ticker_info.csv", sep=',', encoding='utf-8', index=False)
+    data.to_csv(stock_data_folder + "08_add_ticker_info.csv", sep=',', encoding='utf-8', index=False)
+    # make copy to directory under git control
+    shutil.copy(stock_data_folder + "08_add_ticker_info.csv", all_data_local_folder + "08_add_ticker_info.csv")
 
-
+    
 def download_add_info(tickers: List[str]):
     data = pd.DataFrame(columns=['ticker', 'sector', 'industry','marketCap', 'sharesOutstanding'])
 

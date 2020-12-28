@@ -15,7 +15,7 @@ sidebar: home_sidebar
 #################################################
 # file to edit: 08_Download_StockData.ipynb
 # command to build the docs after a change: nbdev_build_docs
- 
+
 -->
 
 <div class="container" id="notebook-container">
@@ -67,10 +67,11 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">all_data_local_folder</span> <span class="o">=</span> <span class="s2">&quot;./data/&quot;</span>
-<span class="n">stock_data_folder</span> <span class="o">=</span> <span class="s2">&quot;D:/data/stocks/sec/&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mt_folder</span>             <span class="o">=</span> <span class="s2">&quot;D:/data_mt/&quot;</span>
+<span class="n">all_features_folder</span>   <span class="o">=</span> <span class="s2">&quot;D:/data_mt/07_features/&quot;</span>
+<span class="n">stock_data_folder</span>     <span class="o">=</span> <span class="s2">&quot;D:/data_mt/08_stock_data/&quot;</span>
 
-<span class="n">join_group</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cik&quot;</span><span class="p">,</span><span class="s2">&quot;ticker&quot;</span><span class="p">,</span><span class="s2">&quot;adsh&quot;</span><span class="p">,</span><span class="s2">&quot;period&quot;</span><span class="p">,</span><span class="s2">&quot;filed&quot;</span><span class="p">,</span><span class="s2">&quot;form&quot;</span><span class="p">,</span><span class="s2">&quot;fp&quot;</span><span class="p">]</span>
+<span class="n">all_data_local_folder</span> <span class="o">=</span> <span class="s2">&quot;./data/&quot;</span>
 </pre></div>
 
     </div>
@@ -103,7 +104,7 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_cik_ticker_old</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_cik_ticker_old</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">mt_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_cik_ticker_old</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
 <span class="n">df_cik_ticker_new</span> <span class="o">=</span> <span class="n">df_cik_ticker_old</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -115,7 +116,10 @@ sidebar: home_sidebar
 <span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">CIK</span> <span class="o">==</span> <span class="mi">708821</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PAR&quot;</span>
 <span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">CIK</span> <span class="o">==</span> <span class="mi">921114</span><span class="p">,</span> <span class="s1">&#39;Ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ARMP&quot;</span>
 
-<span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker_corrected.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df_cik_ticker_new</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">mt_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker_corrected.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># make copy to directory under git control</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">mt_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker_corrected.csv&quot;</span><span class="p">,</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;cik_ticker_corrected.csv&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -133,6 +137,16 @@ sidebar: home_sidebar
 </div>
 </div>
 
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;./data/cik_ticker_corrected.csv&#39;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -146,7 +160,7 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;07_all_features_complete.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_03_features_growth.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;ATLS&#39;</span><span class="p">,</span><span class="s1">&#39;IFT&#39;</span><span class="p">])]</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">1117106</span><span class="p">,</span><span class="mi">1308161</span><span class="p">])]</span>
 
@@ -157,12 +171,29 @@ sidebar: home_sidebar
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">708821</span><span class="p">,</span>  <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PAR&quot;</span>
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">921114</span><span class="p">,</span>  <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ARMP&quot;</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="s1">&#39;level_0&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_03_features_growth_corrected.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;07_all_features_complete_corrected.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># make copy to directory under git control</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_03_features_growth_corrected.csv&quot;</span><span class="p">,</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;07_03_features_growth_corrected.csv&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;./data/07_03_features_growth_corrected.csv&#39;</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -183,13 +214,16 @@ sidebar: home_sidebar
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">load_data</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;07_all_features_complete_corrected.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_03_features_growth_corrected.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="n">df</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
     <span class="n">df</span><span class="o">.</span><span class="n">filed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">filed</span><span class="p">)</span>
     
     <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
     <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;index&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
     <span class="k">return</span> <span class="n">df</span>
 </pre></div>
 
@@ -7369,7 +7403,10 @@ count of downloaded:  2293
     <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;duration: &quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
 
-    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="c1"># make copy to directory under git control</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -8162,7 +8199,7 @@ duration:  0.049045562744140625
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Technology
-Software?Infrastructure
+Software—Infrastructure
 1612352192512
 7560500224
 </pre>
@@ -8455,7 +8492,7 @@ Software?Infrastructure
     </tr>
   </tbody>
 </table>
-<p>81 rows ?12 columns</p>
+<p>81 rows × 12 columns</p>
 </div>
 </div>
 

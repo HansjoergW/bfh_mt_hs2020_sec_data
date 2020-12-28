@@ -6,8 +6,8 @@ import glob
 from multiprocessing import Pool
 
 
+stock_data_folder     = "D:/data_mt/08_stock_data/"
 all_data_local_folder = "./data/"
-stock_data_folder = "D:/data/stocks/sec/"
 
 join_group = ["cik", "ticker", "adsh", "period", "filed", "form", "fp"]
 
@@ -23,7 +23,7 @@ def read_stockdata(filename: str) -> pd.DataFrame:
 
 
 def read_additional_info() -> pd.DataFrame:
-    return pd.read_csv(all_data_local_folder + "08_add_ticker_info.csv", sep=',', encoding='utf-8', header=0)
+    return pd.read_csv(stock_data_folder + "08_add_ticker_info.csv", sep=',', encoding='utf-8', header=0)
 
 
 def get_ticker_from_filename(filename: str) -> str:
