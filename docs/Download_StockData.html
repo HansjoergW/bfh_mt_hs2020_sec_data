@@ -160,7 +160,7 @@ sidebar: home_sidebar
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_03_features_growth.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_04_features_fp.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;ATLS&#39;</span><span class="p">,</span><span class="s1">&#39;IFT&#39;</span><span class="p">])]</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">1117106</span><span class="p">,</span><span class="mi">1308161</span><span class="p">])]</span>
 
@@ -171,10 +171,10 @@ sidebar: home_sidebar
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">708821</span><span class="p">,</span>  <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PAR&quot;</span>
 <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cik</span> <span class="o">==</span> <span class="mi">921114</span><span class="p">,</span>  <span class="s1">&#39;ticker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ARMP&quot;</span>
 
-<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_03_features_growth_corrected.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_04_features_fp_corrected.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># make copy to directory under git control</span>
-<span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_03_features_growth_corrected.csv&quot;</span><span class="p">,</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;07_03_features_growth_corrected.csv&quot;</span><span class="p">)</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">all_features_folder</span> <span class="o">+</span> <span class="s2">&quot;07_04_features_fp_corrected.csv&quot;</span><span class="p">,</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;07_04_features_fp_corrected.csv&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -189,7 +189,7 @@ sidebar: home_sidebar
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;./data/07_03_features_growth_corrected.csv&#39;</pre>
+<pre>&#39;./data/07_04_features_fp_corrected.csv&#39;</pre>
 </div>
 
 </div>
@@ -363,7 +363,447 @@ sidebar: home_sidebar
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="03_Download-historical-data">03_Download historical data<a class="anchor-link" href="#03_Download-historical-data"> </a></h2><p>Unfortuantely, it is not that easy to get historical data of of companies that are no longer listed or went out of business for what reason ever. So we will only be able to work with companies, which are still in business. That is a problem, since a serious "survivor" bias is introduced in the data. It would be important to also have data of "failed" companies.</p>
+<h2 id="03_Download-Additional-Company-Data">03_Download Additional Company Data<a class="anchor-link" href="#03_Download-Additional-Company-Data"> </a></h2><p>There are some important information which are not available from the SEC data. These are mainly the sector, industry the company is in, as well as the marketCap and the sharesOutstanding. These attributes are downloaded into a separate file.</p>
+<p>The code in a Jupyter Notebook cannot be parallelized that easily, therefore there is the "08_Download_StodkData.py" Script that implements a parallelized version.</p>
+<p>The data is downloaded from Yahoo Finance. However, Yahoo Finance restricts the number of calls that can be made from one computer within a certain amount of time. If there are too many requests from the same computer, yahoo answers with a HTTP Error 404.  Therefore the code has to be able to be started multiple times and has to keep track of the data that already has been downloaded successfully.</p>
+<p>In the script "08_Download_StockData.py" there is a also a parallelized version of the code</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_add_data</span><span class="p">(</span><span class="n">ticker</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    get some additional info using yfinance libary.</span>
+<span class="sd">    if too many requests are made during a certain time, yahoo finance will block and start to answer with a 404.</span>
+<span class="sd">    so it is necessary to keep track of the sucessfully or missing entries</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">Ticker</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ticker&#39;</span>            <span class="p">:</span> <span class="n">ticker</span><span class="p">,</span>
+                <span class="s1">&#39;sector&#39;</span>            <span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;industry&#39;</span>          <span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;industry&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;marketCap&#39;</span>         <span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;marketCap&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;sharesOutstanding&#39;</span> <span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sharesOutstanding&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;message&#39;</span>           <span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+    
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;404&quot;</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># ticker information was not found on yahoo, very likely because the company is not listed anymore</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ticker&#39;</span>            <span class="p">:</span> <span class="n">ticker</span><span class="p">,</span>
+                <span class="s1">&#39;sector&#39;</span>            <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s1">&#39;industry&#39;</span>          <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s1">&#39;marketCap&#39;</span>         <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s1">&#39;sharesOutstanding&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s1">&#39;message&#39;</span>           <span class="p">:</span> <span class="n">msg</span><span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">download_add_info</span><span class="p">(</span><span class="n">tickers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot; serial version of downloading the additional information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># read the old data</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># figure out, which ticker information hasn&#39;t been downloaded already</span>
+    <span class="n">current_tickers</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">tickers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tickers</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">current_tickers</span><span class="p">))</span>
+    
+    <span class="c1"># create now</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ticker&#39;</span><span class="p">,</span> <span class="s1">&#39;sector&#39;</span><span class="p">,</span> <span class="s1">&#39;industry&#39;</span><span class="p">,</span><span class="s1">&#39;marketCap&#39;</span><span class="p">,</span> <span class="s1">&#39;sharesOutstanding&#39;</span><span class="p">,</span><span class="s1">&#39;message&#39;</span><span class="p">],)</span>
+
+    <span class="n">list_infos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ticker</span> <span class="ow">in</span> <span class="n">tickers</span><span class="p">:</span>
+        <span class="n">list_infos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_add_data</span><span class="p">(</span><span class="n">ticker</span><span class="p">))</span>
+
+    <span class="n">entries</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">list_infos</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new entries: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">current</span><span class="p">,</span> <span class="n">data</span><span class="p">])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;duration: &quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+
+    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="c1"># make copy to directory under git control</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_add_info</span><span class="p">(</span><span class="n">tickers</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>new entries:  0
+(3053, 6)
+duration:  0.049045562744140625
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="04_Additional-company-data-feature-engineering">04_Additional company data feature engineering<a class="anchor-link" href="#04_Additional-company-data-feature-engineering"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_additional_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span>  <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span>  <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span> <span class="c1"># only use the entries for which we have data</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sector-and-Industries">Sector and Industries<a class="anchor-link" href="#Sector-and-Industries"> </a></h3><p>Important features are the industry and the sector a company works in and in order to use these during training, wie have to one-hot-encode them.
+There are about 12 different sectors and about 142 different industries in the data.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span> <span class="o">=</span> <span class="n">read_additional_info</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;length of dataset:           &quot;</span><span class="p">,</span> <span class="n">add_info</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of unique sectors:    &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">add_info</span><span class="o">.</span><span class="n">sector</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of unique industries: &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>length of dataset:            2065
+number of unique sectors:     12
+number of unique industries:  142
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">sector</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">add_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">add_info</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">add_info</span><span class="o">.</span><span class="n">sector</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;sec_&#39;</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>it doesn't make sense to hot encode all 140 industries, we will only use industries which appear more than 20 times in the data (at least in one percent of the data). Othe industries will be set to "other"</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;industry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;industry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&amp;&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;industry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;—&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_industries</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">df_relevant_industries</span> <span class="o">=</span> <span class="n">df_industries</span><span class="p">[</span><span class="n">df_industries</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="c1"># create a list with industries that appear at least 20 times in the data</span>
+<span class="n">add_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">df_relevant_industries</span><span class="p">),</span><span class="s1">&#39;industry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Other&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">add_info</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">add_info</span><span class="o">.</span><span class="n">industry</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;ind_&#39;</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">add_info</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(2065, 47)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Market-Capitalization">Market Capitalization<a class="anchor-link" href="#Market-Capitalization"> </a></h3><p>We will use the Market Capitalization to rank the companies and then create features like top 10, top 100, top 200, ...</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;marketCap_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">marketCap</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;mc_top10&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;mc_top20&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;mc_top30&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;mc_top50&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;mc_top100&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;mc_top200&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;mc_top500&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">add_info</span><span class="p">[</span><span class="s1">&#39;mc_top1000&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">add_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">add_info</span><span class="o">.</span><span class="n">marketCap_rank</span> <span class="o">&lt;=</span>   <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;mc_top10&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">add_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">add_info</span><span class="o">.</span><span class="n">marketCap_rank</span> <span class="o">&lt;=</span>   <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;mc_top20&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">add_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">add_info</span><span class="o">.</span><span class="n">marketCap_rank</span> <span class="o">&lt;=</span>   <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;mc_top30&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">add_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">add_info</span><span class="o">.</span><span class="n">marketCap_rank</span> <span class="o">&lt;=</span>   <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;mc_top50&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">add_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">add_info</span><span class="o">.</span><span class="n">marketCap_rank</span> <span class="o">&lt;=</span>  <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;mc_top100&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">add_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">add_info</span><span class="o">.</span><span class="n">marketCap_rank</span> <span class="o">&lt;=</span>  <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;mc_top200&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">add_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">add_info</span><span class="o">.</span><span class="n">marketCap_rank</span> <span class="o">&lt;=</span>  <span class="mi">500</span><span class="p">,</span> <span class="s1">&#39;mc_top500&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">add_info</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">add_info</span><span class="o">.</span><span class="n">marketCap_rank</span> <span class="o">&lt;=</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;mc_top1000&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">add_info</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(2065, 56)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Drop-unnecessary-columns-and-save">Drop unnecessary columns and save<a class="anchor-link" href="#Drop-unnecessary-columns-and-save"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span> <span class="o">=</span> <span class="n">add_info</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="s1">&#39;marketCap_rank&#39;</span><span class="p">,</span> <span class="s1">&#39;sector&#39;</span><span class="p">,</span> <span class="s1">&#39;industry&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_info</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s1">&#39;08_add_ticker_info_features.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># make copy to directory under git control</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info_features.csv&quot;</span><span class="p">,</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info_features.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;./data/09_add_ticker_info_features.csv&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="05_Download-historical-data">05_Download historical data<a class="anchor-link" href="#05_Download-historical-data"> </a></h2><p>Unfortuantely, it is not that easy to get historical data of of companies that are no longer listed or went out of business for what reason ever. So we will only be able to work with companies, which are still in business. That is a problem, since a serious "survivor" bias is introduced in the data. It would be important to also have data of "failed" companies.</p>
 <p>We will be using two different libraries to download: yahoo-historical and yfinance. yfinance has the advantage that Open, High, Low and Close can be download "adjusted" meaning that splits and payed dividends are taken into consideration. The standard Open, High, Low and Close from yahoo is only adjusted for splits.</p>
 <p>The code in a Jupyter Notebook cannot be parallelized that easily, therefore there is the "08_Download_StodkData.py" Script that implements a parallelized version.</p>
 
@@ -7312,146 +7752,7 @@ count of downloaded:  2293
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="04_Download-Additional-Data">04_Download Additional Data<a class="anchor-link" href="#04_Download-Additional-Data"> </a></h2><p>There are some important information which are not available from the SEC data. These are mainly the sector, industry the company is in, as well as the marketCap and the sharesOutstanding. These attributes are downloaded into a separate file.</p>
-<p>The code in a Jupyter Notebook cannot be parallelized that easily, therefore there is the "08_Download_StodkData.py" Script that implements a parallelized version.</p>
-<p>The data is downloaded from Yahoo Finance. However, Yahoo Finance restricts the number of calls that can be made from one computer within a certain amount of time. If there are too many requests from the same computer, yahoo answers with a HTTP Error 404.  Therefore the code has to be able to be started multiple times and has to keep track of the data that already has been downloaded successfully.</p>
-<p>In the script "08_Download_StockData.py" there is a also a parallelized version of the code</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_add_data</span><span class="p">(</span><span class="n">ticker</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    get some additional info using yfinance libary.</span>
-<span class="sd">    if too many requests are made during a certain time, yahoo finance will block and start to answer with a 404.</span>
-<span class="sd">    so it is necessary to keep track of the sucessfully or missing entries</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="k">try</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
-        <span class="n">info</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">Ticker</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ticker&#39;</span>            <span class="p">:</span> <span class="n">ticker</span><span class="p">,</span>
-                <span class="s1">&#39;sector&#39;</span>            <span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;industry&#39;</span>          <span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;industry&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;marketCap&#39;</span>         <span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;marketCap&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;sharesOutstanding&#39;</span> <span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sharesOutstanding&#39;</span><span class="p">],</span>
-                <span class="s1">&#39;message&#39;</span>           <span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
-    
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s2">&quot;404&quot;</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-
-        <span class="c1"># ticker information was not found on yahoo, very likely because the company is not listed anymore</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;ticker&#39;</span>            <span class="p">:</span> <span class="n">ticker</span><span class="p">,</span>
-                <span class="s1">&#39;sector&#39;</span>            <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="s1">&#39;industry&#39;</span>          <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="s1">&#39;marketCap&#39;</span>         <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="s1">&#39;sharesOutstanding&#39;</span> <span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="s1">&#39;message&#39;</span>           <span class="p">:</span> <span class="n">msg</span><span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">download_add_info</span><span class="p">(</span><span class="n">tickers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot; serial version of downloading the additional information.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="c1"># read the old data</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span>
-    <span class="n">current</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="c1"># figure out, which ticker information hasn&#39;t been downloaded already</span>
-    <span class="n">current_tickers</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-    <span class="n">tickers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tickers</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">current_tickers</span><span class="p">))</span>
-    
-    <span class="c1"># create now</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ticker&#39;</span><span class="p">,</span> <span class="s1">&#39;sector&#39;</span><span class="p">,</span> <span class="s1">&#39;industry&#39;</span><span class="p">,</span><span class="s1">&#39;marketCap&#39;</span><span class="p">,</span> <span class="s1">&#39;sharesOutstanding&#39;</span><span class="p">,</span><span class="s1">&#39;message&#39;</span><span class="p">],)</span>
-
-    <span class="n">list_infos</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">ticker</span> <span class="ow">in</span> <span class="n">tickers</span><span class="p">:</span>
-        <span class="n">list_infos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_add_data</span><span class="p">(</span><span class="n">ticker</span><span class="p">))</span>
-
-    <span class="n">entries</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">list_infos</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new entries: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">entries</span><span class="p">))</span>
-
-    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">current</span><span class="p">,</span> <span class="n">data</span><span class="p">])</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;duration: &quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
-
-    <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    
-    <span class="c1"># make copy to directory under git control</span>
-    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">stock_data_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">,</span> <span class="n">all_data_local_folder</span> <span class="o">+</span> <span class="s2">&quot;08_add_ticker_info.csv&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_add_info</span><span class="p">(</span><span class="n">tickers</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>new entries:  0
-(3053, 6)
-duration:  0.049045562744140625
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="05_Normalization-and-feature-generation-of-historical-data">05_Normalization and feature generation of historical data<a class="anchor-link" href="#05_Normalization-and-feature-generation-of-historical-data"> </a></h2><p>In order to be able to compare the historical stock price data of different companies, they have to be normalized.</p>
+<h2 id="06_Normalization-and-feature-generation-of-historical-data">06_Normalization and feature generation of historical data<a class="anchor-link" href="#06_Normalization-and-feature-generation-of-historical-data"> </a></h2><p>In order to be able to compare the historical stock price data of different companies, they have to be normalized.</p>
 <ul>
 <li>First, Open, High, and Low are compared with the Close price.</li>
 <li>Second, the Close price is normalized (divided by) the last Close Price</li>
@@ -8199,7 +8500,7 @@ duration:  0.049045562744140625
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Technology
-Software?Infrastructure
+Software—Infrastructure
 1612352192512
 7560500224
 </pre>
@@ -8492,7 +8793,7 @@ Software?Infrastructure
     </tr>
   </tbody>
 </table>
-<p>81 rows ?12 columns</p>
+<p>81 rows × 12 columns</p>
 </div>
 </div>
 
